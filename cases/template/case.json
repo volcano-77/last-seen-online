@@ -11,7 +11,9 @@
       "kind": "search",
       "title": "搜索首页",
       "url": "trace://search",
-      "body": ["搜索归档页面。"]
+      "body": [
+        "搜索归档页面。"
+      ]
     },
     {
       "id": "forum-post",
@@ -21,10 +23,22 @@
       "author": "匿名用户",
       "date": "2026-01-01",
       "subtitle": "搜索结果摘要",
-      "tags": ["关键词"],
-      "body": ["帖子正文。"],
-      "links": [{ "label": "查看个人主页", "pageId": "profile" }],
-      "clueIds": ["first-clue"]
+      "tags": [
+        "关键词"
+      ],
+      "body": [
+        "帖子正文。"
+      ],
+      "links": [
+        {
+          "label": "查看个人主页",
+          "pageId": "profile"
+        }
+      ],
+      "details": {
+        "section": "城市闲谈",
+        "floor": "1#"
+      }
     },
     {
       "id": "profile",
@@ -34,10 +48,23 @@
       "author": "人物姓名",
       "date": "2026-01-02",
       "subtitle": "人物简介",
-      "tags": ["人物姓名"],
-      "body": ["个人主页动态。"],
-      "links": [{ "label": "阅读博客", "pageId": "blog" }],
-      "clueIds": []
+      "tags": [
+        "人物姓名"
+      ],
+      "body": [
+        "个人主页动态。"
+      ],
+      "links": [
+        {
+          "label": "阅读博客",
+          "pageId": "blog"
+        }
+      ],
+      "details": {
+        "registeredAt": "2005-01-01",
+        "lastOnline": "未记录",
+        "signature": "个人签名示例"
+      }
     },
     {
       "id": "blog",
@@ -47,19 +74,15 @@
       "author": "人物姓名",
       "date": "2026-01-03",
       "subtitle": "文章摘要",
-      "tags": ["关键词"],
-      "body": ["第一段。", "第二段。"],
-      "links": [],
-      "clueIds": []
+      "tags": [
+        "关键词"
+      ],
+      "body": [
+        "第一段。",
+        "第二段。"
+      ],
+      "links": []
     }
   ],
-  "clues": [
-    {
-      "id": "first-clue",
-      "title": "一条示例线索",
-      "description": "这里描述玩家从页面中得知的信息。",
-      "sourcePageId": "forum-post",
-      "category": "timeline"
-    }
-  ]
+  "status": "ready"
 }

@@ -1,2 +1,9 @@
-:root{font-family:'Segoe UI','Microsoft YaHei',system-ui,sans-serif;color:#263049;background:#f3f5f8;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
-*{box-sizing:border-box}body{margin:0;min-width:320px}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #6b79e9;outline-offset:2px}h1,h2,h3,p{margin-top:0}#root{min-height:100vh}
+:root{font-family:'Microsoft YaHei','Segoe UI',Arial,sans-serif;color:#293b59;background:#dce5f0;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+*{box-sizing:border-box}
+body{margin:0;min-width:320px}
+button,input,textarea{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #a14926;outline-offset:2px}
+p{margin-top:0}
+#root{min-height:100vh}

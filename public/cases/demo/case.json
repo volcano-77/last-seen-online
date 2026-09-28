@@ -1,9 +1,9 @@
 {
   "id": "demo-001",
-  "title": "林夏的最后一条动态",
-  "subtitle": "一场关于消失、误读与数字足迹的小型调查",
-  "briefing": "摄影师林夏在周五夜里发布了一条含糊的动态，随后失去联系。她的朋友担心发生了意外，委托你从公开的网络档案中还原她最后的行动。所有站点均为离线模拟。",
-  "objective": "找到林夏最后前往的地点、她为何突然离开，以及能够证明她安全的证据。浏览搜索结果与关联页面，收集全部线索，再用调查笔记整理结论。",
+  "title": "旧演示案件（待替换）",
+  "subtitle": "仅供页面和交互验证",
+  "briefing": "这是 v0.1 的旧演示内容，案件文本将在下一阶段单独重写。",
+  "objective": "自由浏览、搜索、摘录并写下推测；当前旧案例不提供正式结论。",
   "startPageId": "search-home",
   "pages": [
     {
@@ -11,7 +11,9 @@
       "kind": "search",
       "title": "Trace 搜索",
       "url": "trace://search",
-      "body": ["在归档网络中搜索线索。"]
+      "body": [
+        "在归档网络中搜索网页。"
+      ]
     },
     {
       "id": "forum-last-seen",
@@ -21,16 +23,29 @@
       "author": "纸船",
       "date": "2026-06-14 09:12",
       "subtitle": "她周五说要去旧港拍最后一组照片，之后就没有回消息。",
-      "tags": ["林夏", "旧港", "摄影"],
+      "tags": [
+        "林夏",
+        "旧港",
+        "摄影"
+      ],
       "body": [
         "我是林夏的朋友。周五傍晚她说想去旧港拍照，还提到“今晚要把事情说清楚”。她平时会回复消息，这次却一直没有回应。",
         "更新：有网友说她可能去了灯塔，也有人提到她在找一间叫蓝窗的店。请不要散布未经核实的消息。"
       ],
       "links": [
-        { "label": "林夏的个人主页", "pageId": "profile-linxia" },
-        { "label": "关于蓝窗咖啡的旧帖", "pageId": "forum-blue-window" }
+        {
+          "label": "林夏的个人主页",
+          "pageId": "profile-linxia"
+        },
+        {
+          "label": "关于蓝窗咖啡的旧帖",
+          "pageId": "forum-blue-window"
+        }
       ],
-      "clueIds": ["last-plan"]
+      "details": {
+        "section": "城市闲谈",
+        "floor": "1#"
+      }
     },
     {
       "id": "forum-blue-window",
@@ -40,16 +55,29 @@
       "author": "潮汐刻度",
       "date": "2026-06-10 18:40",
       "subtitle": "店主搬走了，门上贴着新的地址。",
-      "tags": ["旧港", "蓝窗咖啡", "栖岸"],
+      "tags": [
+        "旧港",
+        "蓝窗咖啡",
+        "栖岸"
+      ],
       "body": [
         "上周路过旧港，蓝窗咖啡已经关门。玻璃门上贴着手写便条：“我们搬到栖岸路 17 号，周六重新开门。”",
         "那地方不在旧港景区里，从灯塔坐末班 21:40 的渡车过去大约二十分钟。"
       ],
       "links": [
-        { "label": "返回寻人讨论", "pageId": "forum-last-seen" },
-        { "label": "蓝窗的故事", "pageId": "blog-blue-window" }
+        {
+          "label": "返回寻人讨论",
+          "pageId": "forum-last-seen"
+        },
+        {
+          "label": "蓝窗的故事",
+          "pageId": "blog-blue-window"
+        }
       ],
-      "clueIds": ["new-address", "last-bus"]
+      "details": {
+        "section": "城市闲谈",
+        "floor": "1#"
+      }
     },
     {
       "id": "profile-linxia",
@@ -59,16 +87,25 @@
       "author": "林夏",
       "date": "最后更新：2026-06-13 20:58",
       "subtitle": "独立摄影师。收集海风、旧街道和那些没说出口的话。",
-      "tags": ["摄影师", "林夏", "旧港"],
+      "tags": [
+        "摄影师",
+        "林夏",
+        "旧港"
+      ],
       "body": [
         "最新动态：有些话，应该在故事开始的地方讲完。今晚去看最后一次灯塔的灯。",
         "置顶：三年前，我在蓝窗遇见了一个愿意让我重新拿起相机的人。谢谢你，阿澈。"
       ],
       "links": [
-        { "label": "灯塔夜拍随笔", "pageId": "blog-lighthouse" },
-        { "label": "朋友的寻人帖", "pageId": "forum-last-seen" }
-      ],
-      "clueIds": ["last-post", "connection-ache"]
+        {
+          "label": "灯塔夜拍随笔",
+          "pageId": "blog-lighthouse"
+        },
+        {
+          "label": "朋友的寻人帖",
+          "pageId": "forum-last-seen"
+        }
+      ]
     },
     {
       "id": "blog-lighthouse",
@@ -78,16 +115,25 @@
       "author": "林夏",
       "date": "2026-06-12",
       "subtitle": "关于一个迟到了很久的决定。",
-      "tags": ["旧港", "灯塔", "蓝窗"],
+      "tags": [
+        "旧港",
+        "灯塔",
+        "蓝窗"
+      ],
       "body": [
         "这周末我会离开旧港。不是逃走，只是要去新的地方开始一份工作。我还没告诉所有人，想先和阿澈当面说。",
         "我答应他周五在灯塔下见。若是错过末班渡车，就沿海堤步行去栖岸路。以后还会写信，也会继续拍照。"
       ],
       "links": [
-        { "label": "蓝窗的故事", "pageId": "blog-blue-window" },
-        { "label": "林夏的个人主页", "pageId": "profile-linxia" }
-      ],
-      "clueIds": ["reason-leave", "meeting-plan"]
+        {
+          "label": "蓝窗的故事",
+          "pageId": "blog-blue-window"
+        },
+        {
+          "label": "林夏的个人主页",
+          "pageId": "profile-linxia"
+        }
+      ]
     },
     {
       "id": "blog-blue-window",
@@ -97,25 +143,22 @@
       "author": "阿澈",
       "date": "2026-06-14 08:15",
       "subtitle": "蓝窗咖啡重新营业前的一个早晨。",
-      "tags": ["蓝窗咖啡", "栖岸路", "林夏"],
+      "tags": [
+        "蓝窗咖啡",
+        "栖岸路",
+        "林夏"
+      ],
       "body": [
         "昨夜林夏终于到了。末班渡车已经走了，她背着相机沿海堤走过来，鞋子全是沙。我们聊到天亮。",
         "她的新工作下周开始。现在她在楼上睡觉，手机没电了。等她醒来，我们会一起给朋友们报平安。蓝窗的新地址是栖岸路 17 号。"
       ],
       "links": [
-        { "label": "旧港的蓝窗咖啡还在营业吗？", "pageId": "forum-blue-window" }
-      ],
-      "clueIds": ["safe-confirmation"]
+        {
+          "label": "旧港的蓝窗咖啡还在营业吗？",
+          "pageId": "forum-blue-window"
+        }
+      ]
     }
   ],
-  "clues": [
-    { "id": "last-plan", "title": "周五的旧港计划", "description": "朋友证实林夏周五傍晚打算去旧港拍照。", "sourcePageId": "forum-last-seen", "category": "timeline" },
-    { "id": "new-address", "title": "蓝窗的新地址", "description": "蓝窗咖啡已搬至栖岸路 17 号。", "sourcePageId": "forum-blue-window", "category": "location" },
-    { "id": "last-bus", "title": "21:40 末班渡车", "description": "从灯塔前往栖岸路的末班渡车在 21:40 离开。", "sourcePageId": "forum-blue-window", "category": "timeline" },
-    { "id": "last-post", "title": "最后一条动态", "description": "林夏在 20:58 提到要看灯塔的灯。", "sourcePageId": "profile-linxia", "category": "timeline" },
-    { "id": "connection-ache", "title": "林夏与阿澈", "description": "阿澈是林夏多年前在蓝窗认识的人。", "sourcePageId": "profile-linxia", "category": "connection" },
-    { "id": "reason-leave", "title": "离开的原因", "description": "林夏计划离开旧港，去新的地方工作。", "sourcePageId": "blog-lighthouse", "category": "identity" },
-    { "id": "meeting-plan", "title": "灯塔之约", "description": "林夏约阿澈周五在灯塔见面，错过渡车会步行去栖岸路。", "sourcePageId": "blog-lighthouse", "category": "location" },
-    { "id": "safe-confirmation", "title": "平安的证据", "description": "阿澈周六早晨确认林夏已到蓝窗，手机没电，正在休息。", "sourcePageId": "blog-blue-window", "category": "identity" }
-  ]
+  "status": "placeholder"
 }

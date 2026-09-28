@@ -1,11 +1,11 @@
-# Case 格式
+# v0.2 Case 格式
 
-复制 `case.json`，改写内容后在应用的「案件档案」中导入。文件仅在浏览器本地读取，当前存档会被新 Case 替换。建议为不同案件使用不同的 `id`。
+复制 `case.json`，修改内容后在「案件资料」中导入。Case 只定义可浏览的网页，不预设玩家必须找到的线索。玩家的摘录和结论独立保存在浏览器本地。
 
-必填顶层字段：`id`、`title`、`subtitle`、`briefing`、`objective`、`startPageId`、`pages`、`clues`。
+顶层必填：`id`、`title`、`subtitle`、`briefing`、`objective`、`startPageId`、`pages`。可选 `status` 为 `ready` 或 `placeholder`，默认 `ready`。待重写的内容可标为 `placeholder`。
 
-每个页面需要唯一的 `id`、`kind`（`search`、`forum`、`profile`、`blog`）、`title`、`url` 和非空字符串数组 `body`。可选字段包括 `author`、`date`、`subtitle`、`tags`、`links`、`clueIds`。一个 Case 应包含一个搜索页面；`startPageId` 通常指向它。
+每个页面必填唯一 `id`、`kind`、`title`、`url` 和正文段落数组 `body`。`kind` 可为 `search`、`forum`、`profile`、`blog`；一个 Case 至少需要一个搜索页。`startPageId` 必须指向现有页面。
 
-`links` 中的 `pageId` 必须指向现有页面。每条线索需要唯一的 `id`、`title`、`description`、`sourcePageId` 和 `category`；类别可选 `identity`、`timeline`、`location`、`connection`。线索来源页面的 `clueIds` 必须包含该线索 ID。
+可选页面字段：`author`、`date`、`subtitle`、`siteName`、`tags`、`links` 和 `details`。`links` 中的 `pageId` 必须指向现有页面。`details` 支持 `section`、`floor`、`registeredAt`、`lastOnline`、`signature`、`views`、`replies`，按页面需要填写即可。
 
-页面 URL 是虚构地址，仅用于虚拟浏览器内部导航，不会发出网络请求。导入 JSON 时会校验 ID 唯一性与引用关系。
+虚构 URL 只用于内部导航，不会发起真实网页请求。导入时会校验页面 ID 与链接关系。旧 v0.1 Case 中的 `clues` 和 `clueIds` 会被忽略。
