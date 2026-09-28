@@ -1,0 +1,65 @@
+{
+  "id": "my-case-001",
+  "title": "你的案件标题",
+  "subtitle": "一句话描述案件",
+  "briefing": "玩家进入案件时看到的背景信息。",
+  "objective": "玩家需要查明什么？",
+  "startPageId": "search",
+  "pages": [
+    {
+      "id": "search",
+      "kind": "search",
+      "title": "搜索首页",
+      "url": "trace://search",
+      "body": ["搜索归档页面。"]
+    },
+    {
+      "id": "forum-post",
+      "kind": "forum",
+      "title": "论坛帖子标题",
+      "url": "echo://forum/posts/1",
+      "author": "匿名用户",
+      "date": "2026-01-01",
+      "subtitle": "搜索结果摘要",
+      "tags": ["关键词"],
+      "body": ["帖子正文。"],
+      "links": [{ "label": "查看个人主页", "pageId": "profile" }],
+      "clueIds": ["first-clue"]
+    },
+    {
+      "id": "profile",
+      "kind": "profile",
+      "title": "人物姓名 / @handle",
+      "url": "memento://people/example",
+      "author": "人物姓名",
+      "date": "2026-01-02",
+      "subtitle": "人物简介",
+      "tags": ["人物姓名"],
+      "body": ["个人主页动态。"],
+      "links": [{ "label": "阅读博客", "pageId": "blog" }],
+      "clueIds": []
+    },
+    {
+      "id": "blog",
+      "kind": "blog",
+      "title": "博客文章标题",
+      "url": "slowlight://journal/example",
+      "author": "人物姓名",
+      "date": "2026-01-03",
+      "subtitle": "文章摘要",
+      "tags": ["关键词"],
+      "body": ["第一段。", "第二段。"],
+      "links": [],
+      "clueIds": []
+    }
+  ],
+  "clues": [
+    {
+      "id": "first-clue",
+      "title": "一条示例线索",
+      "description": "这里描述玩家从页面中得知的信息。",
+      "sourcePageId": "forum-post",
+      "category": "timeline"
+    }
+  ]
+}
