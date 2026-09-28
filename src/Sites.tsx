@@ -4,6 +4,8 @@ import './Sites.css'
 interface SiteProps {
   page: CasePage
   onNavigate: (id: string) => void
+  onDiscover?: (id: string) => void
+  discoveredEvidenceIds?: string[]
 }
 
 interface SearchProps {
@@ -24,7 +26,8 @@ function RelatedLinks({ page, onNavigate, heading = '相关链接' }: SiteProps 
 export function SearchSite({ pages, query, onQueryChange, onNavigate }: SearchProps) {
   const terms = query.trim().toLowerCase().split(/\s+/).filter(Boolean)
   const results = pages.filter((page) => page.kind !== 'search').filter((page) => {
-    const content = [page.title, page.url, page.subtitle, page.author, ...page.body, ...(page.tags || [])].join(' ').toLowerCase()
+    const content = [page.title, page.url, page.subtitle, page.author, ...page.body,
+      ...(page.tags || []), ...(page.objects || []).flatMap((item) => [item.title, ...(item.body || [])])].join(' ').toLowerCase()
     return terms.every((term) => content.includes(term))
   })
 
@@ -34,12 +37,12 @@ export function SearchSite({ pages, query, onQueryChange, onNavigate }: SearchPr
       <div className="search-wordmark"><span>寻</span><span>迹</span><span>搜</span><small>网页存档检索</small></div>
       <form onSubmit={(event) => event.preventDefault()}>
         <label htmlFor="archive-search">在旧网页中查找</label>
-        <div className="old-search-row"><input id="archive-search" value={query} onChange={(event) => onQueryChange(event.target.value)} placeholder="输入人物、网名、地点或一句话" /><button type="submit">搜 索</button></div>
+        <div className="old-search-row"><input id="archive-search" value={query} maxLength={60} onChange={(event) => onQueryChange(event.target.value)} placeholder="输入短关键词或文件名" /><button type="submit">搜 索</button></div>
         <small>仅检索当前 Case 的离线归档，不连接真实互联网。</small>
       </form>
     </div>
     <div className="search-tabs"><strong>网页</strong><span>论坛</span><span>个人空间</span><span>日志</span></div>
-    {!query.trim() ? <div className="search-idle"><strong>从一个词开始。</strong><p>试试你在页面里见过的名字、日期或句子。搜索结果不会替你判断哪些信息重要。</p><div>已索引 {pages.filter((page) => page.kind !== 'search').length} 个归档页面</div></div>
+    {!query.trim() ? <div className="search-idle"><strong>从一个词或一个站点开始。</strong><p>输入短关键词，也可以直接打开以下归档入口。</p><div className="search-directory">{pages.filter((page) => page.kind !== 'search').map((page) => <button key={page.id} onClick={() => onNavigate(page.id)}>{page.title}</button>)}</div></div>
       : <div className="old-results"><div className="result-count">找到相关网页 {results.length} 个　｜　关键词：<b>{query}</b></div>
         {results.length ? results.map((page) => <article key={page.id}>
           <button className="result-title" onClick={() => onNavigate(page.id)}>{page.title}</button>
@@ -85,11 +88,39 @@ export function ProfileSite({ page, onNavigate }: SiteProps) {
   </div>
 }
 
-export function SiteView({ page, onNavigate }: SiteProps) {
+export function ArchiveSite({ page, onNavigate, onDiscover, discoveredEvidenceIds = [] }: SiteProps) {
+  const theme = ['forum-thread', 'forum-reply'].includes(page.kind) ? 'forum' :
+    ['email', 'attachment'].includes(page.kind) ? 'mail' :
+      ['spreadsheet', 'sd-card', 'file-metadata', 'print-log'].includes(page.kind) ? 'file' : 'web'
+  return <div className={`archive-site archive-theme-${theme}`}>
+    <div className="archive-site-top"><strong>{page.siteName || '离线网页档案'}</strong><span>{page.kind} · 只读快照</span></div>
+    <div className="archive-site-path">首页 » {page.title}</div>
+    <h2>{page.title}</h2>
+    {page.subtitle && <p className="archive-subtitle">{page.subtitle}</p>}
+    {page.date && <div className="archive-date">页面日期：{page.date}</div>}
+    <div className="archive-body">{page.body.map((paragraph, index) => <p key={index}>{paragraph}</p>)}</div>
+    {page.metadata && <dl className="archive-metadata">{Object.entries(page.metadata).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>}
+    {page.objects?.map((item) => <section className="archive-object" key={item.id}>
+      <div className="archive-object-head"><strong>{item.title}</strong><small>{item.type}</small></div>
+      {item.timestamp && <time>{item.timestamp}</time>}
+      {item.body?.map((paragraph, index) => <p key={index}>{paragraph}</p>)}
+      {item.metadata && <dl className="archive-metadata">{Object.entries(item.metadata).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl>}
+      {item.evidenceId && <button className="archive-object-action" onClick={() => onDiscover?.(item.evidenceId!)}>
+        {discoveredEvidenceIds.includes(item.evidenceId) ? '已查看 · 在发现夹中' : '查看这项记录'}
+      </button>}
+      {item.links?.map((link) => <button className="archive-inline-link" key={link.pageId} onClick={() => onNavigate(link.pageId)}>› {link.label}</button>)}
+    </section>)}
+    <RelatedLinks page={page} onNavigate={onNavigate} heading="站内链接 / 相关归档" />
+  </div>
+}
+
+export function SiteView(props: SiteProps) {
+  const { page, onNavigate } = props
   switch (page.kind) {
     case 'forum': return <ForumSite page={page} onNavigate={onNavigate} />
     case 'blog': return <BlogSite page={page} onNavigate={onNavigate} />
     case 'profile': return <ProfileSite page={page} onNavigate={onNavigate} />
     case 'search': return null
+    default: return <ArchiveSite {...props} />
   }
 }

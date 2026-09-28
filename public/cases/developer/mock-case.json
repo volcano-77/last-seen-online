@@ -1,0 +1,72 @@
+{
+  "schemaVersion": 2,
+  "id": "developer-mock-001",
+  "status": "developer-mock",
+  "title": "开发者测试档案",
+  "subtitle": "非《寻人启事》剧情，仅用于验证调查机制",
+  "briefing": "这里的 A、B、C 记录都是中性的开发者测试材料，不代表正式案件事实。",
+  "objective": "点击页面中的记录，收藏证据，再试试关联、排序与短输入。",
+  "startPageId": "search",
+  "pages": [
+    { "id": "search", "kind": "search", "title": "档案检索", "url": "mock://search", "body": ["检索开发者测试页面。"] },
+    {
+      "id": "notice", "kind": "website", "title": "资料室公告", "url": "mock://archive/notice",
+      "siteName": "资料室旧站（测试）", "date": "2008-05-03", "body": ["下列记录仅演示点击发现证据。"],
+      "objects": [
+        { "id": "notice-date", "type": "timestamp", "title": "公告时间", "body": ["网页显示的公告时间。"], "timestamp": "2008-05-03", "evidenceId": "ev-notice-date" }
+      ],
+      "links": [{ "label": "查看网页快照", "pageId": "snapshot" }, { "label": "查看文件属性", "pageId": "file" }]
+    },
+    {
+      "id": "snapshot", "kind": "snapshot", "title": "资料室网页快照", "url": "mock://cache/snapshot",
+      "siteName": "旧网页快照（测试）", "body": ["这是独立保存的快照，不包含案件剧情。"],
+      "objects": [
+        { "id": "snapshot-date", "type": "timestamp", "title": "快照时间", "body": ["快照页面标注的日期。"], "timestamp": "2008-05-01", "evidenceId": "ev-snapshot-date" }
+      ]
+    },
+    {
+      "id": "file", "kind": "file-metadata", "title": "INDEX.TXT 文件属性", "url": "mock://files/index.txt",
+      "siteName": "文件属性（测试）", "body": ["归档编号可用于短输入演示。"],
+      "objects": [
+        { "id": "file-date", "type": "property", "title": "文件修改日期与编号", "timestamp": "2008-05-02", "metadata": { "文件名": "INDEX.TXT", "归档编号": "042" }, "evidenceId": "ev-file-date" }
+      ],
+      "links": [{ "label": "查看缓存条目", "pageId": "cache" }]
+    },
+    {
+      "id": "cache", "kind": "cache", "title": "缓存条目：INDEX.TXT", "url": "mock://cache/index.txt",
+      "siteName": "缓存查看器（测试）", "body": ["短输入正确后显示的示例缓存。没有正式案件信息。"],
+      "unlockConditions": { "puzzleIds": ["short-code"] }
+    },
+    {
+      "id": "forum", "kind": "forum-thread", "title": "测试论坛主题", "url": "mock://bbs/thread/1",
+      "siteName": "测试讨论区", "body": ["主题与回复的结构展示。"],
+      "objects": [
+        { "id": "post", "type": "post", "title": "楼主 · 1#", "body": ["这里是非剧情占位帖。"] },
+        { "id": "reply", "type": "reply", "title": "访客 · 2#", "body": ["这里是非剧情占位回复。"] }
+      ]
+    },
+    {
+      "id": "mail", "kind": "email", "title": "测试邮件", "url": "mock://mail/1",
+      "siteName": "离线邮箱（测试）", "body": ["邮件载体结构展示，不涉及案件人物。"],
+      "objects": [
+        { "id": "message", "type": "message", "title": "邮件正文", "body": ["附件可作为独立内容对象或链接页面。"] }
+      ]
+    }
+  ],
+  "evidence": [
+    { "id": "ev-notice-date", "type": "timestamp", "sourcePageId": "notice", "sourceObjectId": "notice-date", "title": "公告日期", "summary": "公告页显示 2008-05-03。", "timestamp": "2008-05-03", "metadata": { "载体": "旧网页" }, "relatedEvidenceIds": ["ev-snapshot-date"] },
+    { "id": "ev-snapshot-date", "type": "timestamp", "sourcePageId": "snapshot", "sourceObjectId": "snapshot-date", "title": "快照日期", "summary": "快照标注 2008-05-01。", "timestamp": "2008-05-01", "metadata": { "载体": "网页快照" }, "relatedEvidenceIds": ["ev-notice-date"] },
+    { "id": "ev-file-date", "type": "file-property", "sourcePageId": "file", "sourceObjectId": "file-date", "title": "INDEX.TXT 属性", "summary": "文件修改于 2008-05-02，归档编号为 042。", "timestamp": "2008-05-02", "metadata": { "归档编号": "042" } }
+  ],
+  "relations": [
+    { "id": "date-pair", "evidenceIds": ["ev-notice-date", "ev-snapshot-date"], "title": "两份记录的日期关系", "summary": "测试快照日期早于测试公告日期。", "unlocks": { "factIds": ["date-order"] } }
+  ],
+  "facts": [
+    { "id": "date-order", "title": "日期可比对", "summary": "两条独立记录显示了明确的先后顺序。" },
+    { "id": "timeline-order", "title": "三项记录已排序", "summary": "测试记录依次为快照、文件属性、公告。" }
+  ],
+  "puzzles": [
+    { "id": "timeline", "type": "timeline", "title": "排列三条测试记录", "evidenceIds": ["ev-notice-date", "ev-snapshot-date", "ev-file-date"], "expectedOrder": ["ev-snapshot-date", "ev-file-date", "ev-notice-date"], "unlocks": { "factIds": ["timeline-order"] } },
+    { "id": "short-code", "type": "short-input", "title": "输入归档编号", "prompt": "在文件属性中找到三位归档编号。", "evidenceIds": ["ev-file-date"], "answer": "042", "unlocks": { "pageIds": ["cache"] } }
+  ]
+}
