@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "case-01-missing-person",
   "status": "ready",
-  "phaseId": "phase_01_early_notices",
+  "phaseId": "phase_01_investigation_v05",
   "checkpoints": [
     "checkpoint_pattern_01",
     "checkpoint_pattern_02",
@@ -43,13 +43,27 @@
     "chenDate": "2009-04-18",
     "chenNoticeTime": "18:31",
     "chenModerationTime": "19:42",
-    "chenReplyTime": "19:47"
+    "chenReplyTime": "19:47",
+    "liuPhotoTime": "15:27",
+    "summerAlbumUploadDate": "2009-04-07",
+    "summerAlbumUploadTime": "00:18",
+    "summerAlbumPostTime": "00:24",
+    "summerOrdinaryPhotoDate": "2009-04-02",
+    "summerBlogPostDate": "2009-04-04",
+    "zhaoCatPostDate": "2008-10-12",
+    "zhaoMealPostDate": "2008-10-25",
+    "echoSnapshotDate": "2009-04-19",
+    "echoSnapshotTime": "08:10",
+    "zhaoSnapshotTime": "16:20",
+    "albumAnswer": "二食堂",
+    "zhaoCatName": "豆包",
+    "zhaoOldMailbox": "zhaoyan@oldmail.example"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
   "briefing": "浏览旧网页，核对时间与来源。",
   "objective": "从公开记录中找出可以相互验证的事实。",
-  "startPageId": "portal_home",
+  "startPageId": "forum_liujia_missing",
   "pages": [
     {
       "id": "portal_home",
@@ -58,10 +72,7 @@
       "title": "旧浏览器主页",
       "siteName": "{{cityName}}",
       "url": "archive://home",
-      "body": [
-        "网络档案浏览器收录了一批旧论坛、资讯页和个人空间。站点保持原貌，链接与搜索仅在本地归档中生效。"
-      ],
-      "bookmark": true,
+      "body": [],
       "searchable": false,
       "links": [
         {
@@ -75,26 +86,26 @@
         {
           "label": "{{cityName}}大学 BBS",
           "pageId": "bbs_index"
-        },
-        {
-          "label": "网页存档搜索",
-          "pageId": "search_home"
         }
       ],
       "metadata": {
         "最近访问": "{{cityName}}生活论坛"
-      }
+      },
+      "siteId": "navigation",
+      "directory": true
     },
     {
       "id": "search_home",
       "kind": "search",
-      "title": "寻迹搜 · 网页档案",
-      "url": "archive://search",
+      "title": "{{cityName}}搜索",
+      "url": "ncitysearch://search",
       "body": [
         "搜索当前离线档案。"
       ],
-      "bookmark": true,
-      "searchable": false
+      "searchable": false,
+      "siteId": "search",
+      "directory": true,
+      "siteName": "{{cityName}}搜索"
     },
     {
       "id": "life_forum_index",
@@ -106,7 +117,6 @@
       "body": [
         "城市闲谈、校园互助、寻人寻物和二手转让。旧帖只读，部分外链可能失效。"
       ],
-      "bookmark": true,
       "searchable": true,
       "objects": [
         {
@@ -114,9 +124,7 @@
           "type": "post",
           "title": "[寻人启事] 寻找刘佳，家人十分着急",
           "metadata": {
-            "版块": "寻人寻物",
-            "回复": "9",
-            "最后更新": "{{liuNoticeDate}} 17:21"
+            "版块": "寻人寻物"
           },
           "links": [
             {
@@ -130,38 +138,61 @@
           "type": "post",
           "title": "周末去老书市的人多吗",
           "metadata": {
-            "版块": "城市闲谈",
-            "回复": "12"
-          }
+            "版块": "城市闲谈"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "life_forum_index_ordinary_1"
+            }
+          ]
         },
         {
           "id": "life-3",
           "type": "post",
           "title": "二手自行车，车况还行",
           "metadata": {
-            "版块": "闲置转让",
-            "回复": "5"
-          }
+            "版块": "闲置转让"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "life_forum_index_ordinary_2"
+            }
+          ]
         },
         {
           "id": "life-4",
           "type": "post",
           "title": "西路公交改线通知有人看到吗",
           "metadata": {
-            "版块": "出行交流",
-            "回复": "18"
-          }
+            "版块": "出行交流"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "life_forum_index_ordinary_3"
+            }
+          ]
         },
         {
           "id": "life-5",
           "type": "post",
           "title": "求推荐修卡片机的地方",
           "metadata": {
-            "版块": "生活求助",
-            "回复": "7"
-          }
+            "版块": "生活求助"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "life_forum_index_ordinary_4"
+            }
+          ]
         }
-      ]
+      ],
+      "siteId": "life",
+      "skin": "life",
+      "directory": true
     },
     {
       "id": "forum_liujia_missing",
@@ -181,7 +212,6 @@
       "details": {
         "section": "寻人寻物",
         "views": "1834",
-        "replies": "9",
         "registeredAt": "{{echoAccountRegisteredAt}}",
         "lastOnline": "{{liuNoticeDate}}",
         "signature": "请提供可靠目击信息，勿公布未经核实的私人住址。"
@@ -193,7 +223,9 @@
         "filename": "liujia_01.jpg",
         "width": "1448",
         "height": "1086",
-        "uploadedAt": "{{liuNoticeDate}} 09:12"
+        "uploadedAt": "{{liuNoticeDate}} 09:12",
+        "id": "portrait-liu",
+        "identityId": "liu"
       },
       "body": [
         "寻人启事：刘佳，女，{{liuAge}}，{{cityName}}大学在校学生，身高{{liuHeight}}。近日常穿浅色外套、深色长裤，随身带米色帆布包。家属这两天一直无法通过电话取得联系，很担心她独自在外遇到困难。照片是她平日上学时拍的，看到相似的人请先核对身份，不要打扰无关同学。",
@@ -244,12 +276,6 @@
           "timestamp": "{{liuNoticeDate}} 15:16",
           "body": [
             "她没失踪吧？我下午还在二食堂看到她。人挺正常的，跟几个同学一起往教学楼那边走。"
-          ],
-          "links": [
-            {
-              "label": "查看夏天不喝冰的资料",
-              "pageId": "profile_summer_no_ice"
-            }
           ]
         },
         {
@@ -321,22 +347,20 @@
       ],
       "links": [
         {
-          "label": "来源账号：回声寻人网",
-          "pageId": "echo_account_posts"
-        },
-        {
-          "label": "查看网页快照与编辑记录",
-          "pageId": "cache_liujia_notice"
+          "label": "来源：回声寻人网",
+          "pageId": "echo_unavailable"
         }
-      ]
+      ],
+      "siteId": "life",
+      "skin": "life"
     },
     {
       "id": "profile_summer_no_ice",
       "kind": "profile",
       "layout": "profile",
       "title": "夏天不喝冰的个人资料",
-      "url": "ncu://bbs/user/summer_no_ice",
-      "siteName": "{{cityName}}大学 BBS",
+      "url": "nclife://bbs/user/summer_no_ice",
+      "siteName": "{{cityName}}生活论坛",
       "author": "夏天不喝冰",
       "date": "{{liuNoticeDate}}",
       "subtitle": "普通会员 · 最近发言",
@@ -346,56 +370,26 @@
         "signature": "冷饮留给夏天，热水留给考试周。"
       },
       "metadata": {
-        "所在地": "{{cityName}}",
-        "发帖数": "214"
+        "所在地": "{{cityName}}"
       },
       "body": [
-        "这里保存了该用户近期公开发言的标题。查看帖子可以核对她说过的话。"
+        "最近可读取的公开发帖与回复。"
       ],
-      "objects": [
+      "objects": [],
+      "siteId": "life",
+      "skin": "life",
+      "links": [
         {
-          "id": "s-post-1",
-          "type": "post",
-          "title": "选修课教室换了吗",
-          "timestamp": "{{liuNoticeDate}} 13:38",
-          "links": [
-            {
-              "label": "查看旧帖",
-              "pageId": "forum_course_room"
-            }
-          ]
-        },
-        {
-          "id": "s-post-2",
-          "type": "post",
-          "title": "二食堂今天人也太多了",
-          "timestamp": "{{liuNoticeDate}} 12:10"
-        },
-        {
-          "id": "s-post-3",
-          "type": "post",
-          "title": "有人捡到学生卡吗",
-          "timestamp": "{{summerCardPostDate}} 18:20"
-        },
-        {
-          "id": "s-post-4",
-          "type": "post",
-          "title": "求二手六级资料",
-          "timestamp": "{{summerBookPostDate}} 16:05"
-        },
-        {
-          "id": "s-post-5",
-          "type": "post",
-          "title": "周末羽毛球",
-          "timestamp": "{{incidentalAprilSecondDate}} 20:11"
-        },
-        {
-          "id": "s-post-6",
-          "type": "post",
-          "title": "校门口新开的面馆",
-          "timestamp": "{{summerFoodPostDate}} 11:04"
+          "label": "个人网站：夏天的小本子",
+          "pageId": "blog_summer_home"
         }
-      ]
+      ],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "summer_no_ice"
+        ]
+      }
     },
     {
       "id": "forum_course_room",
@@ -410,7 +404,6 @@
       "details": {
         "section": "校园生活",
         "views": "187",
-        "replies": "4",
         "registeredAt": "{{summerJoinedMonth}}",
         "signature": "考试周请让我先消失三天。"
       },
@@ -462,7 +455,9 @@
             "刚路过办公室问了，今天不换。"
           ]
         }
-      ]
+      ],
+      "siteId": "campus",
+      "skin": "campus"
     },
     {
       "id": "news_index",
@@ -472,7 +467,6 @@
       "url": "ncitynews://home",
       "siteName": "{{cityName}}资讯网",
       "date": "{{liuNewsDate}}",
-      "bookmark": true,
       "body": [
         "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，稿件正文可通过站内标题和全网搜索进入。"
       ],
@@ -480,7 +474,7 @@
         {
           "id": "news-list-1",
           "type": "text",
-          "title": "大学女生离校后失联 家属已报警寻人",
+          "title": "{{cityName}}大学女生离校后失联 家属已报警寻人",
           "links": [
             {
               "label": "阅读报道",
@@ -491,7 +485,7 @@
         {
           "id": "news-list-2",
           "type": "text",
-          "title": "{{cityName}}大学春季志愿活动报名开启",
+          "title": "春季志愿活动报名开启",
           "links": [
             {
               "label": "阅读报道",
@@ -513,15 +507,32 @@
         {
           "id": "news-list-4",
           "type": "text",
-          "title": "校园演讲比赛名单公布",
+          "title": "{{cityName}}大学校园演讲比赛名单公布",
           "links": [
             {
               "label": "阅读报道",
               "pageId": "news_speech"
             }
           ]
+        },
+        {
+          "id": "news-list-zhao",
+          "type": "text",
+          "title": "{{cityName}}一公司职员未到岗 家人寻找赵妍",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_zhaoyan_missing"
+            }
+          ]
         }
-      ]
+      ],
+      "siteId": "news",
+      "skin": "news",
+      "directory": true,
+      "details": {
+        "section": "新闻列表"
+      }
     },
     {
       "id": "news_speech",
@@ -536,7 +547,12 @@
       ],
       "body": [
         "本周校园演讲比赛公布报名名单，外院的刘佳与其他同学进入复赛。活动将于下月在校礼堂举行，主办方提醒参赛者提前核对入场时间。"
-      ]
+      ],
+      "siteId": "news",
+      "skin": "news",
+      "details": {
+        "section": "校园"
+      }
     },
     {
       "id": "news_volunteer",
@@ -551,7 +567,12 @@
       ],
       "body": [
         "春季志愿活动开放报名，{{cityName}}大学多名学生参加了现场说明会。报名表上有刘佳等志愿者的名字，正式值班安排仍需等待组织方通知。"
-      ]
+      ],
+      "siteId": "news",
+      "skin": "news",
+      "details": {
+        "section": "校园"
+      }
     },
     {
       "id": "news_jobfair",
@@ -566,7 +587,12 @@
       ],
       "body": [
         "市内数十家单位将在{{cityName}}大学体育馆设展位。外院学生会工作人员刘佳提醒同学们带好学生证，现场也有公益咨询台。"
-      ]
+      ],
+      "siteId": "news",
+      "skin": "news",
+      "details": {
+        "section": "本地"
+      }
     },
     {
       "id": "news_liujia_missing",
@@ -588,7 +614,12 @@
         "家属告诉记者，他们此前也有过电话未接通的时候，但通常过一段时间就能收到回复。这一次连续拨打电话、发送短信均无回应，家人便赶到学校。辅导员表示，学院已与同班同学和宿舍管理人员核对近期出入情况，并配合警方了解她最后的活动路线。",
         "有同学提到，刘佳当晚曾带着平时使用的帆布包离开宿舍楼；也有人说在校门附近见过相似身影。上述说法尚未得到警方确认。学校提醒同学，如有可靠信息，应直接联系家属或警方，不要在网络上公布个人住址、随意转发未核实照片。",
         "家属希望知情人提供具体时间和地点，尤其是{{liuLostDate|zh}}晚之后的目击信息。警方已接收相关材料。学校的失物招领处也留下了转交信息的方式，方便不愿在网上公开留言的同学联系工作人员。记者将继续关注后续进展；本页为当日网络版稿件，转载时请保留发布日期。"
-      ]
+      ],
+      "siteId": "news",
+      "skin": "news",
+      "details": {
+        "section": "校园"
+      }
     },
     {
       "id": "cache_liujia_notice",
@@ -630,8 +661,17 @@
         {
           "label": "返回论坛原帖",
           "pageId": "forum_liujia_missing"
+        },
+        {
+          "label": "回到回声寻人网列表",
+          "pageId": "echo_archive_index"
         }
-      ]
+      ],
+      "snapshot": {
+        "originalUrl": "nclife://bbs/thread/40612",
+        "capturedAt": "{{liuNoticeDate}} 10:03"
+      },
+      "siteId": "archive"
     },
     {
       "id": "bbs_index",
@@ -640,7 +680,6 @@
       "title": "{{cityName}}大学 BBS",
       "url": "ncu://bbs/home",
       "siteName": "{{cityName}}大学 BBS",
-      "bookmark": true,
       "body": [
         "教学讨论、校园生活、失物招领。版主：陈雨、木棉。旧站部分管理记录可由站内搜索找到。"
       ],
@@ -650,8 +689,7 @@
           "type": "post",
           "title": "选修课教室换了吗",
           "metadata": {
-            "版块": "校园生活",
-            "回复": "4"
+            "版块": "校园生活"
           },
           "links": [
             {
@@ -665,33 +703,57 @@
           "type": "post",
           "title": "图书馆临时闭馆通知",
           "metadata": {
-            "版块": "校园公告",
-            "回复": "11"
-          }
+            "版块": "校园公告"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "bbs_index_ordinary_1"
+            }
+          ]
         },
         {
           "id": "bbs-list-3",
           "type": "post",
           "title": "有人捡到蓝色水杯吗",
           "metadata": {
-            "版块": "失物招领",
-            "回复": "6"
-          }
+            "版块": "失物招领"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "bbs_index_ordinary_2"
+            }
+          ]
         },
         {
           "id": "bbs-list-4",
           "type": "post",
           "title": "二手教材交换",
           "metadata": {
-            "版块": "闲置交流",
-            "回复": "23"
-          }
+            "版块": "闲置交流"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "bbs_index_ordinary_3"
+            }
+          ]
+        }
+      ],
+      "siteId": "campus",
+      "skin": "campus",
+      "directory": true,
+      "links": [
+        {
+          "label": "版主管理记录",
+          "pageId": "bbs_moderation_log_chenyu"
         }
       ]
     },
     {
       "id": "echo_account_posts",
-      "kind": "website",
+      "kind": "profile",
       "layout": "index",
       "title": "回声寻人网 · 论坛账号发帖记录",
       "url": "nclife://bbs/user/echo_find/posts",
@@ -703,78 +765,28 @@
       "body": [
         "以下为论坛账号的公开主题记录。旧站的附件状态来自服务器索引，不代表附件内容仍可恢复。"
       ],
-      "objects": [
+      "objects": [],
+      "siteId": "life",
+      "skin": "life",
+      "links": [
         {
-          "id": "account-1",
-          "type": "post",
-          "title": "寻找刘佳，家人十分着急",
-          "timestamp": "{{liuNoticeDate}}",
-          "links": [
-            {
-              "label": "查看帖子",
-              "pageId": "forum_liujia_missing"
-            }
-          ]
-        },
-        {
-          "id": "account-2",
-          "type": "post",
-          "title": "帮王阿姨寻找走失的父亲",
-          "timestamp": "{{accountMarchPostDate}}"
-        },
-        {
-          "id": "account-3",
-          "type": "post",
-          "title": "小区门口捡到一只灰猫",
-          "timestamp": "{{accountFebruaryPostDate}}"
-        },
-        {
-          "id": "account-4",
-          "type": "post",
-          "title": "儿童寻人信息转发，家属已确认平安",
-          "timestamp": "{{accountJanuaryPostDate}}"
-        },
-        {
-          "id": "account-5",
-          "type": "post",
-          "title": "[寻人启事] 寻找赵妍",
-          "timestamp": "{{zhaoNoticeDate}}",
-          "metadata": {
-            "附件状态": "附件已删除"
-          },
-          "links": [
-            {
-              "label": "查看帖子",
-              "pageId": "forum_zhaoyan_missing"
-            }
-          ]
-        },
-        {
-          "id": "account-6",
-          "type": "post",
-          "title": "找回遗失的公交月票",
-          "timestamp": "{{accountOctoberPostDate}}"
-        },
-        {
-          "id": "account-7",
-          "type": "post",
-          "title": "老人已安全回家，感谢帮忙",
-          "timestamp": "{{accountSeptemberPostDate}}"
-        },
-        {
-          "id": "account-8",
-          "type": "post",
-          "title": "社区寻物公告：一串钥匙",
-          "timestamp": "{{accountAugustPostDate}}"
+          "label": "个人网站：回声寻人网",
+          "pageId": "echo_unavailable"
         }
-      ]
+      ],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "posts"
+        ]
+      }
     },
     {
       "id": "forum_zhaoyan_missing",
-      "kind": "forum-thread",
-      "layout": "forum",
-      "title": "[寻人启事] 寻找赵妍",
-      "url": "nclife://bbs/thread/81102",
+      "kind": "snapshot",
+      "layout": "echo",
+      "title": "寻找赵妍 / 转载副本",
+      "url": "archive://echo/mirror/zhaoyan",
       "siteName": "{{cityName}}生活论坛",
       "author": "回声寻人网",
       "date": "{{zhaoNoticeDate}} 10:08",
@@ -786,18 +798,8 @@
       "details": {
         "section": "寻人寻物",
         "views": "962",
-        "replies": "7",
         "registeredAt": "{{echoAccountRegisteredAt}}",
         "signature": "请提供可靠目击信息，勿公布未经核实的私人住址。"
-      },
-      "media": {
-        "src": "cases/missing-person/images/zhao-yan.jpg",
-        "alt": "赵妍在室内咖啡馆的普通生活照",
-        "caption": "发布人提供的生活照（网页归档）",
-        "filename": "zy_old.jpg",
-        "width": "1448",
-        "height": "1086",
-        "uploadedAt": "{{zhaoNoticeDate}} 10:08"
       },
       "body": [
         "寻人启事：赵妍，女，{{zhaoAge}}，在{{cityName}}工作，身高{{zhaoHeight}}。照片拍于今年秋天，深色外套，长发。家属最近联系不上她，担心她独自在外遇到困难，请知情的朋友帮忙留意。若只凭照片不能确定身份，请不要在公开回帖中猜测具体住处。",
@@ -817,95 +819,38 @@
           "evidenceId": "F05"
         },
         {
-          "id": "zy-r1",
-          "type": "reply",
-          "title": "帮转",
-          "author": "胡桃",
-          "floor": "2#",
-          "timestamp": "{{zhaoNoticeDate}} 10:40",
+          "id": "zhao-attachment",
+          "type": "attachment",
+          "title": "zy_old.jpg（附件未完整保存）",
           "body": [
-            "帮转，希望尽快联系上。"
-          ]
-        },
-        {
-          "id": "zy-r2",
-          "type": "reply",
-          "title": "照片有点旧",
-          "author": "路过的人",
-          "floor": "3#",
-          "timestamp": "{{zhaoNoticeDate}} 11:21",
-          "body": [
-            "这照片像是前阵子拍的，最好补一张最近的吧。"
-          ]
-        },
-        {
-          "id": "zy-r3",
-          "type": "reply",
-          "title": "问一个链接",
-          "author": "汽水玻璃瓶",
-          "floor": "4#",
-          "timestamp": "{{zhaoNoticeDate}} 12:03",
-          "body": [
-            "这是她以前那个博客吗？我记得头像和昵称差不多。"
+            "图片请求失败。原记录保留的个人链接如下。"
           ],
+          "metadata": {
+            "原文件名": "zy_old.jpg",
+            "邮箱": "{{zhaoOldMailbox}}",
+            "个人主页": "oldblog://zhaoyan/home"
+          },
           "links": [
             {
-              "label": "赵妍的旧博客",
-              "pageId": "blog_zhaoyan"
+              "label": "oldblog://zhaoyan/home",
+              "pageId": "blog_zhao_home"
             }
-          ]
-        },
-        {
-          "id": "zy-r4",
-          "type": "reply",
-          "title": "请私信线索",
-          "author": "回声寻人网",
-          "floor": "5#",
-          "timestamp": "{{zhaoNoticeDate}} 13:18",
-          "body": [
-            "如有确认过的消息请发站内信，感谢。"
-          ]
-        },
-        {
-          "id": "zy-r5",
-          "type": "reply",
-          "title": "咖啡馆好像见过",
-          "author": "晚风",
-          "floor": "6#",
-          "timestamp": "{{zhaoNoticeDate}} 15:46",
-          "body": [
-            "照片背景那家店我去过，不过不能确定是不是本人。"
-          ]
-        },
-        {
-          "id": "zy-r6",
-          "type": "reply",
-          "title": "顶一下",
-          "author": "小舟",
-          "floor": "7#",
-          "timestamp": "{{zhaoReplyDate}} 08:05",
-          "body": [
-            "顶帖，让更多人看到。"
-          ]
-        },
-        {
-          "id": "zy-r7",
-          "type": "reply",
-          "title": "别乱传地址",
-          "author": "木棉",
-          "floor": "8#",
-          "timestamp": "{{zhaoReplyDate}} 11:20",
-          "body": [
-            "先核实再转具体信息，别在帖子里写别人的住处。"
           ]
         }
       ],
       "links": [
         {
-          "label": "来源账号发帖记录",
-          "pageId": "echo_account_posts"
+          "label": "回到历史列表",
+          "pageId": "echo_archive_index"
         }
-      ]
+      ],
+      "siteId": "echo",
+      "skin": "echo",
+      "snapshot": {
+        "originalUrl": "nclife://bbs/thread/81102",
+        "capturedAt": "{{zhaoReplyDate}} {{zhaoSnapshotTime}}"
+      },
+      "searchable": false
     },
     {
       "id": "blog_zhaoyan",
@@ -983,7 +928,12 @@
             "那家店有时会进旧版，我也常去。"
           ]
         }
-      ]
+      ],
+      "skin": "zhao",
+      "siteId": "zhao",
+      "accessPuzzleId": "P_zhao",
+      "searchable": false,
+      "links": []
     },
     {
       "id": "news_zhaoyan_missing",
@@ -1005,25 +955,29 @@
         "家属核对电话和住处情况后表示，赵妍自{{zhaoLostDate|zh}}起未再出现，也没有按约到岗。朋友尝试通过她平时使用的网络账号留言，暂时没有得到新的回应。警方已接收家属提供的近期照片和最后联系时间，正在进一步核实线索。",
         "报道发出后，有网友在不同论坛转发了早前的寻人帖。记者提醒，旧帖与新报道的时间、来源可能不同；看到相似照片时应先确认身份，不要把未经核实的目击说法写成确定事实。",
         "家属表示，最希望得到的是{{zhaoLostDate|zh}}以后可核实的行踪信息。若有人保留通话、邮件或当日见面的具体时间，可向警方提供。公司同事正在整理可能有用的值班表和联络记录，相关材料会通过正式渠道交给家属。对赵妍此前的正常工作和生活，不应仅因后来的失联而任意猜测。"
-      ]
+      ],
+      "siteId": "news",
+      "skin": "news",
+      "details": {
+        "section": "本地"
+      }
     },
     {
       "id": "echo_home",
-      "kind": "website",
+      "kind": "snapshot",
       "layout": "echo",
       "title": "回声寻人网",
-      "url": "echo://home",
+      "url": "archive://echo/home",
       "siteName": "回声寻人网",
       "subtitle": "多一个人看见，多一分回家的希望",
-      "bookmark": true,
       "body": [
-        "这是回声寻人网保存于旧网页档案中的首页。网站公开提供寻人信息发布、回访和志愿转发服务。页面中的成功寻回与咨询内容为正常公益业务。"
+        "帮助家属发布信息，也请网友提供可以核实的消息。请保留原帖来源，及时通知我们已寻回的情况。"
       ],
       "objects": [
         {
           "id": "echo-module-1",
           "type": "text",
-          "title": "最新寻人",
+          "title": "寻人信息 / 历史列表",
           "body": [
             "按地区与发布时间浏览家属提交的信息。"
           ],
@@ -1035,33 +989,9 @@
           ]
         },
         {
-          "id": "echo-module-2",
-          "type": "text",
-          "title": "成功寻回",
-          "body": [
-            "家属报平安与撤帖申请。"
-          ]
-        },
-        {
-          "id": "echo-module-3",
-          "type": "text",
-          "title": "我要发布",
-          "body": [
-            "准备照片、基本信息和有效联系方式。"
-          ]
-        },
-        {
-          "id": "echo-module-4",
-          "type": "text",
-          "title": "志愿者",
-          "body": [
-            "转发寻人消息，帮助核实公开信息。"
-          ]
-        },
-        {
           "id": "echo-module-5",
           "type": "text",
-          "title": "寻人须知",
+          "title": "寻人信息发布须知",
           "body": [
             "发布前请先阅读公开规则。"
           ],
@@ -1073,22 +1003,6 @@
           ]
         },
         {
-          "id": "echo-module-6",
-          "type": "text",
-          "title": "联系我们",
-          "body": [
-            "咨询通过站内留言提交；旧联系电话不在归档中显示。"
-          ]
-        },
-        {
-          "id": "echo-module-7",
-          "type": "text",
-          "title": "留言回访",
-          "body": [
-            "部分家属同意公开寻回消息。"
-          ]
-        },
-        {
           "id": "echo-module-8",
           "type": "text",
           "title": "网站公告",
@@ -1096,14 +1010,22 @@
             "请勿在公开评论中张贴他人身份证号或住址。"
           ]
         }
-      ]
+      ],
+      "siteId": "echo",
+      "skin": "echo",
+      "directory": true,
+      "learnsTool": "archive",
+      "snapshot": {
+        "originalUrl": "echo://home",
+        "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
+      }
     },
     {
       "id": "echo_submission_rules",
       "kind": "website",
       "layout": "echo",
       "title": "寻人信息发布须知",
-      "url": "echo://rules/submission",
+      "url": "archive://echo/rules",
       "siteName": "回声寻人网",
       "subtitle": "公开发布规则",
       "body": [
@@ -1118,30 +1040,32 @@
           "label": "返回回声寻人网首页",
           "pageId": "echo_home"
         }
-      ]
+      ],
+      "siteId": "echo",
+      "skin": "echo",
+      "directory": true,
+      "snapshot": {
+        "originalUrl": "echo://rules/submission",
+        "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
+      }
     },
     {
       "id": "echo_archive_index",
       "kind": "snapshot",
       "layout": "index",
-      "title": "回声寻人网 · 历史来源索引",
-      "url": "archive://echo/history",
-      "siteName": "网页存档服务",
+      "title": "寻人信息 / 历史列表",
+      "url": "archive://echo/list",
+      "siteName": "回声寻人网",
       "subtitle": "公开来源与转载版本",
       "searchable": false,
-      "unlockConditions": {
-        "factIds": [
-          "C03"
-        ]
-      },
       "body": [
-        "此索引汇总回声寻人网旧站与外部论坛转载页面。不同条目可能由同一账号发布，页面时间以各站当时公开的创建记录为准。"
+        "公开寻人信息按原网站列表保存。较早页面可能只有文字副本。"
       ],
       "objects": [
         {
           "id": "hist-1",
           "type": "cache-entry",
-          "title": "刘佳：{{cityName}}生活论坛转载",
+          "title": "[寻人启事] 寻找刘佳，家人十分着急",
           "timestamp": "{{liuNoticeDate}}",
           "links": [
             {
@@ -1153,7 +1077,7 @@
         {
           "id": "hist-2",
           "type": "cache-entry",
-          "title": "赵妍：{{cityName}}生活论坛转载",
+          "title": "寻找赵妍 / 转载副本",
           "timestamp": "{{zhaoNoticeDate}}",
           "links": [
             {
@@ -1165,7 +1089,7 @@
         {
           "id": "hist-3",
           "type": "cache-entry",
-          "title": "陈雨：回声寻人网旧站条目",
+          "title": "寻找陈雨",
           "timestamp": "{{chenDate}} {{chenNoticeTime}}",
           "links": [
             {
@@ -1179,8 +1103,25 @@
           "type": "cache-entry",
           "title": "其他公开寻人条目",
           "body": [
-            "若干普通业务记录，未纳入本段调查。"
+            "发布人的更新与撤帖申请以网站收到的回访为准。"
           ]
+        }
+      ],
+      "directory": true,
+      "skin": "echo",
+      "siteId": "echo",
+      "snapshot": {
+        "originalUrl": "echo://list",
+        "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
+      },
+      "links": [
+        {
+          "label": "回声寻人网首页",
+          "pageId": "echo_home"
+        },
+        {
+          "label": "论坛转载的早期副本",
+          "pageId": "cache_liujia_notice"
         }
       ]
     },
@@ -1189,7 +1130,7 @@
       "kind": "website",
       "layout": "echo",
       "title": "寻找陈雨",
-      "url": "echo://notice/chenyu",
+      "url": "archive://echo/notice/chenyu",
       "siteName": "回声寻人网",
       "author": "回声寻人网",
       "date": "{{chenDate}} {{chenNoticeTime}}",
@@ -1198,11 +1139,6 @@
         "陈雨",
         "{{cityName}}大学"
       ],
-      "unlockConditions": {
-        "factIds": [
-          "C04"
-        ]
-      },
       "media": {
         "src": "cases/missing-person/images/chen-yu.jpg",
         "alt": "陈雨在校园楼前身穿灰色连帽衫的生活照",
@@ -1210,7 +1146,9 @@
         "filename": "chenyu_01.jpg",
         "width": "1448",
         "height": "1086",
-        "uploadedAt": "{{chenDate}} {{chenNoticeTime}}"
+        "uploadedAt": "{{chenDate}} {{chenNoticeTime}}",
+        "id": "portrait-chen",
+        "identityId": "chen"
       },
       "body": [
         "寻人信息：陈雨，女，{{cityName}}大学学生。照片中穿灰色连帽衫、黑色帆布鞋。发布人称暂时无法通过常用联系方式找到她，希望认识陈雨的同学帮助核实是否平安。",
@@ -1245,7 +1183,13 @@
           "label": "返回历史来源索引",
           "pageId": "echo_archive_index"
         }
-      ]
+      ],
+      "siteId": "echo",
+      "skin": "echo",
+      "snapshot": {
+        "originalUrl": "echo://notice/chenyu",
+        "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
+      }
     },
     {
       "id": "bbs_moderation_log_chenyu",
@@ -1260,11 +1204,6 @@
         "陈雨",
         "版主"
       ],
-      "unlockConditions": {
-        "factIds": [
-          "C04"
-        ]
-      },
       "body": [
         "旧站保留的版主管理操作与公开回复。时间由论坛服务器显示，账号与页面来源可逐项查看。"
       ],
@@ -1301,7 +1240,884 @@
           "evidenceId": "F10",
           "detailLabel": "查看回复详情"
         }
+      ],
+      "siteId": "campus",
+      "skin": "campus"
+    },
+    {
+      "id": "blog_summer_home",
+      "kind": "blog",
+      "layout": "blog",
+      "skin": "summer",
+      "siteId": "summer",
+      "directory": true,
+      "title": "最近写的",
+      "siteName": "夏天的小本子",
+      "author": "夏天不喝冰",
+      "url": "oldblog://summer/home",
+      "subtitle": "不喝冰的，也不早睡。",
+      "date": "{{summerAlbumUploadDate}}",
+      "details": {
+        "signature": "这里放日记、照片和没想好的事。",
+        "views": "006214"
+      },
+      "body": [
+        "换了一个页面背景，还是这个颜色看着舒服。照片都放在相册里，留言晚点回。"
+      ],
+      "objects": [
+        {
+          "id": "summer-comment",
+          "type": "reply",
+          "title": "留言",
+          "author": "隔壁桌",
+          "timestamp": "{{summerAlbumUploadDate}} 08:36",
+          "body": [
+            "你们几个天天二食堂，还能拍这么多照片。下回叫我。"
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "四月随手拍",
+          "pageId": "summer_album"
+        },
+        {
+          "label": "回论坛资料",
+          "pageId": "profile_summer_no_ice"
+        }
       ]
+    },
+    {
+      "id": "summer_album",
+      "kind": "image",
+      "layout": "blog",
+      "skin": "summer",
+      "siteId": "summer",
+      "title": "四月随手拍",
+      "siteName": "夏天的小本子",
+      "author": "夏天不喝冰",
+      "url": "oldblog://summer/album/april",
+      "date": "{{summerAlbumUploadDate}}",
+      "searchable": false,
+      "accessPuzzleId": "P_album",
+      "subtitle": "相册 / 几张随手拍",
+      "body": [
+        "卡片机里的照片倒出来了。没有整理，先按文件顺序放着。"
+      ],
+      "objects": [
+        {
+          "id": "album-meal",
+          "type": "photo",
+          "title": "晚饭",
+          "body": [],
+          "media": {
+            "id": "album-meal",
+            "src": "cases/missing-person/images/album-meal.png",
+            "alt": "晚饭",
+            "caption": "没有想象中好吃。",
+            "filename": "IMG_0401.JPG",
+            "width": "1448",
+            "height": "1086",
+            "takenAt": "{{summerOrdinaryPhotoDate}} 18:12",
+            "uploadedAt": "{{summerAlbumUploadDate}} {{summerAlbumUploadTime}}"
+          }
+        },
+        {
+          "id": "album-tree",
+          "type": "photo",
+          "title": "树开花了",
+          "body": [],
+          "media": {
+            "id": "album-tree",
+            "src": "cases/missing-person/images/album-tree.png",
+            "alt": "树开花了",
+            "caption": "比上周绿多了。",
+            "filename": "IMG_0402.JPG",
+            "width": "1448",
+            "height": "1086",
+            "takenAt": "{{summerOrdinaryPhotoDate}} 16:30",
+            "uploadedAt": "{{summerAlbumUploadDate}} {{summerAlbumUploadTime}}"
+          }
+        },
+        {
+          "id": "album-campus",
+          "type": "photo",
+          "title": "回教学楼的路上",
+          "body": [],
+          "evidenceId": "F02",
+          "media": {
+            "id": "album-campus",
+            "src": "cases/missing-person/images/album-campus-background.png",
+            "alt": "回教学楼的路上",
+            "caption": "佳佳走在后面，我喊她的时候只回头了一下。",
+            "filename": "IMG_0406.JPG",
+            "width": "1448",
+            "height": "1086",
+            "takenAt": "{{liuNoticeDate}} {{liuPhotoTime}}",
+            "uploadedAt": "{{summerAlbumUploadDate}} {{summerAlbumUploadTime}}",
+            "identityId": "liu"
+          }
+        },
+        {
+          "id": "album-dorm",
+          "type": "photo",
+          "title": "桌子",
+          "body": [],
+          "media": {
+            "id": "album-dorm",
+            "src": "cases/missing-person/images/album-dorm.png",
+            "alt": "桌子",
+            "caption": "收拾完又乱了。",
+            "filename": "IMG_0408.JPG",
+            "width": "1448",
+            "height": "1086",
+            "takenAt": "{{summerOrdinaryPhotoDate}} 21:06",
+            "uploadedAt": "{{summerAlbumUploadDate}} {{summerAlbumUploadTime}}"
+          }
+        },
+        {
+          "id": "album-friends",
+          "type": "photo",
+          "title": "草地上坐一会儿",
+          "body": [],
+          "media": {
+            "id": "album-friends",
+            "src": "cases/missing-person/images/album-friends.png",
+            "alt": "草地上坐一会儿",
+            "caption": "还没坐多久就有人喊饿。",
+            "filename": "IMG_0409.JPG",
+            "width": "1448",
+            "height": "1086",
+            "takenAt": "{{summerOrdinaryPhotoDate}} 16:58",
+            "uploadedAt": "{{summerAlbumUploadDate}} {{summerAlbumUploadTime}}",
+            "identityId": "liu"
+          }
+        },
+        {
+          "id": "album-library",
+          "type": "photo",
+          "title": "门口的车",
+          "body": [],
+          "media": {
+            "id": "album-library",
+            "src": "cases/missing-person/images/album-library.png",
+            "alt": "门口的车",
+            "caption": "每次都找不到停车的空位。",
+            "filename": "IMG_0410.JPG",
+            "width": "1448",
+            "height": "1086",
+            "takenAt": "{{summerOrdinaryPhotoDate}} 17:20",
+            "uploadedAt": "{{summerAlbumUploadDate}} {{summerAlbumUploadTime}}"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "日志首页",
+          "pageId": "blog_summer_home"
+        },
+        {
+          "label": "论坛资料",
+          "pageId": "profile_summer_no_ice"
+        }
+      ]
+    },
+    {
+      "id": "echo_unavailable",
+      "kind": "website",
+      "title": "回声寻人网",
+      "url": "echo://home",
+      "body": [],
+      "searchable": false,
+      "offlinePageId": "echo_home"
+    },
+    {
+      "id": "archive_service",
+      "kind": "website",
+      "skin": "archive",
+      "title": "网页存档服务",
+      "url": "archive://lookup",
+      "searchable": false,
+      "body": [
+        "部分图片和附件未能保留；抓取时间与原网页的发布时间分别显示。"
+      ],
+      "siteId": "archive",
+      "siteName": "网页存档服务",
+      "directory": true
+    },
+    {
+      "id": "blog_zhao_home",
+      "kind": "blog",
+      "skin": "zhao",
+      "siteId": "zhao",
+      "directory": true,
+      "title": "最近的日志",
+      "siteName": "赵妍的小屋",
+      "author": "赵妍",
+      "url": "oldblog://zhaoyan/home",
+      "date": "{{zhaoBlogDate}}",
+      "subtitle": "听听歌，养养猫，别的慢慢来。",
+      "details": {
+        "signature": "赵妍 / 有留言周末一起回。"
+      },
+      "body": [
+        "工作之后写得少了，一些生活琐事还是想留在这里。"
+      ],
+      "objects": [],
+      "links": []
+    },
+    {
+      "id": "blog_zhao_cat",
+      "kind": "blog",
+      "skin": "zhao",
+      "siteId": "zhao",
+      "title": "阳台上的新住客",
+      "siteName": "赵妍的小屋",
+      "author": "赵妍",
+      "url": "oldblog://zhaoyan/{{zhaoCatPostDate|path}}/cat",
+      "date": "{{zhaoCatPostDate}} 19:40",
+      "subtitle": "生活 / 十月",
+      "body": [
+        "给猫换了一个纸箱，它绕了两圈才进去。最后还是抱着旧毛巾睡。",
+        "我家这只叫{{zhaoCatName}}，不是因为颜色，就是随口喊出来的，居然也答应了。今天又把阳台的花盆推歪，收拾了半天。",
+        "这周末想去买点猫粮，顺便把坏耳机的线换掉。"
+      ],
+      "objects": [
+        {
+          "id": "cat-comment",
+          "type": "reply",
+          "title": "留言",
+          "author": "蜜柑",
+          "timestamp": "{{zhaoCatPostDate}} 21:18",
+          "body": [
+            "{{zhaoCatName}}看着乖，干的都是大事。"
+          ]
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "member_1",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "落叶知秋的个人资料",
+      "author": "落叶知秋",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/1",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "1"
+        ]
+      }
+    },
+    {
+      "id": "member_2",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "小树的个人资料",
+      "author": "小树",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/2",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "2"
+        ]
+      }
+    },
+    {
+      "id": "member_3",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "北门小陈的个人资料",
+      "author": "北门小陈",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/3",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "3"
+        ]
+      }
+    },
+    {
+      "id": "member_4",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "隔壁桌的个人资料",
+      "author": "隔壁桌",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/4",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "4"
+        ]
+      }
+    },
+    {
+      "id": "member_5",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "榕树的个人资料",
+      "author": "榕树",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/5",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "5"
+        ]
+      }
+    },
+    {
+      "id": "member_6",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "小猫搬家的个人资料",
+      "author": "小猫搬家",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/6",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "6"
+        ]
+      }
+    },
+    {
+      "id": "member_7",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "life",
+      "siteId": "life",
+      "title": "水杯忘带了的个人资料",
+      "author": "水杯忘带了",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/member/7",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "7"
+        ]
+      }
+    },
+    {
+      "id": "member_8",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "campus",
+      "siteId": "campus",
+      "title": "纸飞机的个人资料",
+      "author": "纸飞机",
+      "siteName": "{{cityName}}大学 BBS",
+      "url": "ncu://bbs/member/8",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "8"
+        ]
+      }
+    },
+    {
+      "id": "member_9",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "campus",
+      "siteId": "campus",
+      "title": "阿路的个人资料",
+      "author": "阿路",
+      "siteName": "{{cityName}}大学 BBS",
+      "url": "ncu://bbs/member/9",
+      "searchable": false,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "9"
+        ]
+      }
+    },
+    {
+      "id": "member_10",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "zhao",
+      "siteId": "zhao",
+      "title": "蜜柑的个人资料",
+      "author": "蜜柑",
+      "siteName": "赵妍的小屋",
+      "url": "oldblog://zhaoyan/visitor/member_10",
+      "searchable": true,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "member_10"
+        ]
+      }
+    },
+    {
+      "id": "member_11",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "zhao",
+      "siteId": "zhao",
+      "title": "阿青的个人资料",
+      "author": "阿青",
+      "siteName": "赵妍的小屋",
+      "url": "oldblog://zhaoyan/visitor/member_11",
+      "searchable": true,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "member_11"
+        ]
+      }
+    },
+    {
+      "id": "member_12",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "zhao",
+      "siteId": "zhao",
+      "title": "晴天豆的个人资料",
+      "author": "晴天豆",
+      "siteName": "赵妍的小屋",
+      "url": "oldblog://zhaoyan/visitor/member_12",
+      "searchable": true,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "member_12"
+        ]
+      }
+    },
+    {
+      "id": "member_13",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "echo",
+      "siteId": "echo",
+      "title": "路过的个人资料",
+      "author": "路过",
+      "siteName": "回声寻人网",
+      "url": "echo://user/member_13",
+      "searchable": true,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "该用户允许公开的资料。"
+      ],
+      "objects": [],
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "member_13"
+        ]
+      }
+    },
+    {
+      "id": "member_14",
+      "kind": "profile",
+      "layout": "profile",
+      "skin": "campus",
+      "siteId": "campus",
+      "title": "陈雨的个人资料",
+      "author": "陈雨",
+      "siteName": "{{cityName}}大学 BBS",
+      "url": "nclife://bbs/member/14",
+      "searchable": true,
+      "details": {
+        "registeredAt": "旧站会员",
+        "signature": "这个人很懒，什么也没有留下。"
+      },
+      "body": [
+        "校园生活区版主。"
+      ],
+      "objects": [],
+      "links": [
+        {
+          "label": "公开管理记录",
+          "pageId": "bbs_moderation_log_chenyu"
+        }
+      ],
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "14"
+        ]
+      }
+    },
+    {
+      "id": "life_forum_index_ordinary_1",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "life",
+      "siteId": "life",
+      "title": "周末去老书市的人多吗",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/home/topic/1",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+      ],
+      "details": {
+        "section": "城市闲谈"
+      },
+      "objects": []
+    },
+    {
+      "id": "life_forum_index_ordinary_2",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "life",
+      "siteId": "life",
+      "title": "二手自行车，车况还行",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/home/topic/2",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+      ],
+      "details": {
+        "section": "闲置转让"
+      },
+      "objects": []
+    },
+    {
+      "id": "life_forum_index_ordinary_3",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "life",
+      "siteId": "life",
+      "title": "西路公交改线通知有人看到吗",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/home/topic/3",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+      ],
+      "details": {
+        "section": "出行交流"
+      },
+      "objects": []
+    },
+    {
+      "id": "life_forum_index_ordinary_4",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "life",
+      "siteId": "life",
+      "title": "求推荐修卡片机的地方",
+      "siteName": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/home/topic/4",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+      ],
+      "details": {
+        "section": "生活求助"
+      },
+      "objects": []
+    },
+    {
+      "id": "bbs_index_ordinary_1",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "title": "图书馆临时闭馆通知",
+      "siteName": "{{cityName}}大学 BBS",
+      "url": "ncu://bbs/home/topic/1",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+      ],
+      "details": {
+        "section": "校园公告"
+      },
+      "objects": []
+    },
+    {
+      "id": "bbs_index_ordinary_2",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "title": "有人捡到蓝色水杯吗",
+      "siteName": "{{cityName}}大学 BBS",
+      "url": "ncu://bbs/home/topic/2",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "蓝色的，装水时放在走廊窗台上了。找到的话请交失物招领。"
+      ],
+      "details": {
+        "section": "失物招领"
+      },
+      "objects": []
+    },
+    {
+      "id": "bbs_index_ordinary_3",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "title": "二手教材交换",
+      "siteName": "{{cityName}}大学 BBS",
+      "url": "ncu://bbs/home/topic/3",
+      "author": "纸飞机",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchable": true,
+      "body": [
+        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+      ],
+      "details": {
+        "section": "闲置交流"
+      },
+      "objects": []
+    },
+    {
+      "id": "forum_summer-1",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "title": "求二手六级资料",
+      "url": "nclife://bbs/thread/summer-1",
+      "siteName": "{{cityName}}生活论坛",
+      "siteId": "life",
+      "skin": "life",
+      "author": "夏天不喝冰",
+      "date": "{{summerBookPostDate}} 16:05",
+      "body": [
+        "谁的旧书不用了？有笔记也没关系。"
+      ],
+      "links": [],
+      "details": {
+        "section": "校园闲谈"
+      },
+      "objects": []
+    },
+    {
+      "id": "forum_summer-2",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "title": "有人捡到学生卡吗",
+      "url": "nclife://bbs/thread/summer-2",
+      "siteName": "{{cityName}}生活论坛",
+      "siteId": "life",
+      "skin": "life",
+      "author": "夏天不喝冰",
+      "date": "{{summerCardPostDate}} 18:20",
+      "body": [
+        "帮同寝问的，蓝色卡套。已经去失物招领登记了。"
+      ],
+      "links": [],
+      "details": {
+        "section": "校园闲谈"
+      },
+      "objects": []
+    },
+    {
+      "id": "forum_summer-3",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "title": "昨天照片传好了",
+      "url": "nclife://bbs/thread/summer-3",
+      "siteName": "{{cityName}}生活论坛",
+      "siteId": "life",
+      "skin": "life",
+      "author": "夏天不喝冰",
+      "date": "{{summerAlbumUploadDate}} {{summerAlbumPostTime}}",
+      "body": [
+        "还是放老地方，密码没改。传完都快一点了，剩下的以后再弄。"
+      ],
+      "links": [
+        {
+          "label": "我的小本子",
+          "pageId": "blog_summer_home"
+        }
+      ],
+      "details": {
+        "section": "校园闲谈"
+      },
+      "objects": []
+    },
+    {
+      "id": "blog_zhao_meal",
+      "kind": "blog",
+      "title": "又煮多了",
+      "url": "oldblog://zhaoyan/{{zhaoMealPostDate|path}}/meal",
+      "siteId": "zhao",
+      "siteName": "赵妍的小屋",
+      "skin": "zhao",
+      "author": "赵妍",
+      "date": "{{zhaoMealPostDate}} 20:06",
+      "body": [
+        "一人份的饭总是估不准，下回拿小碗量米。"
+      ],
+      "objects": [],
+      "links": []
+    },
+    {
+      "id": "blog_summer_wind",
+      "kind": "blog",
+      "title": "风有点大",
+      "url": "oldblog://summer/{{summerBlogPostDate|path}}/wind",
+      "siteId": "summer",
+      "siteName": "夏天的小本子",
+      "skin": "summer",
+      "author": "夏天不喝冰",
+      "date": "{{summerBlogPostDate}} 21:03",
+      "body": [
+        "晾在阳台的衣服差点掉下去。下午写完作业又去打了一会儿球，手腕有点酸。"
+      ],
+      "objects": [],
+      "links": []
+    },
+    {
+      "id": "blog_summer_desk",
+      "kind": "blog",
+      "title": "桌面终于收拾了",
+      "url": "oldblog://summer/{{incidentalAprilSecondDate|path}}/desk",
+      "siteId": "summer",
+      "siteName": "夏天的小本子",
+      "skin": "summer",
+      "author": "夏天不喝冰",
+      "date": "{{incidentalAprilSecondDate}} 23:11",
+      "body": [
+        "旧票根夹在书里面，找耳机时掉出来一堆。以后还是少往桌上堆东西。"
+      ],
+      "objects": [],
+      "links": []
     }
   ],
   "evidence": [
@@ -1317,16 +2133,13 @@
     },
     {
       "id": "F02",
-      "type": "reply",
-      "sourcePageId": "forum_course_room",
-      "title": "刘佳｜{{liuNoticeDate|short}} 下午仍在学校活动",
-      "summary": "旧论坛对话提到刘佳当天下午与同学在二食堂，之后去上课。",
-      "timestamp": "{{liuNoticeDate}} 14:06",
-      "discovery": "selection",
-      "selectionTexts": [
-        "你下午不是跟刘佳她们在二食堂吗",
-        "她们去上课了，我忘记问了"
-      ]
+      "type": "photo",
+      "sourcePageId": "summer_album",
+      "title": "刘佳｜{{liuNoticeDate|short}} {{liuPhotoTime}} 仍在校园",
+      "summary": "相册原图与寻人帖近照中的人物吻合；文件拍摄时间为 {{liuNoticeDate}} {{liuPhotoTime}}。",
+      "timestamp": "{{liuNoticeDate}} {{liuPhotoTime}}",
+      "discovery": "detail",
+      "sourceObjectId": "album-campus"
     },
     {
       "id": "F03",
@@ -1418,7 +2231,7 @@
     {
       "id": "C01",
       "title": "刘佳寻人帖早于真实失联",
-      "summary": "发帖、在校活动、失联报道与早期网页快照之间的日期关系一致。"
+      "summary": "发帖、相册照片与失联报道之间的日期关系一致。"
     },
     {
       "id": "C02",
@@ -1447,11 +2260,10 @@
       "evidenceIds": [
         "F01",
         "F02",
-        "F03",
-        "F04"
+        "F03"
       ],
       "title": "核对刘佳记录",
-      "summary": "四份记录的时间顺序可以相互验证。",
+      "summary": "寻人帖、相册中的在校照片和后来的失联报道形成明确先后关系。",
       "unlocks": {
         "factIds": [
           "C01"
@@ -1485,9 +2297,6 @@
       "unlocks": {
         "factIds": [
           "C03"
-        ],
-        "pageIds": [
-          "echo_archive_index"
         ]
       },
       "checkpointId": "checkpoint_pattern_02"
@@ -1505,9 +2314,6 @@
       "unlocks": {
         "factIds": [
           "C04"
-        ],
-        "pageIds": [
-          "echo_chenyu_notice"
         ]
       }
     },
@@ -1527,13 +2333,75 @@
       "checkpointId": "checkpoint_chenyu_notice"
     }
   ],
-  "puzzles": [],
+  "puzzles": [
+    {
+      "id": "P_album",
+      "type": "short-input",
+      "title": "相册访问问题",
+      "evidenceIds": [],
+      "sourcePageId": "summer_album",
+      "prompt": "我们第一次一起吃饭的地方？",
+      "answer": "{{albumAnswer}}",
+      "answerSourcePageIds": [
+        "forum_liujia_missing",
+        "blog_summer_home"
+      ]
+    },
+    {
+      "id": "P_photo",
+      "type": "image-match",
+      "title": "原图人物对照",
+      "evidenceIds": [],
+      "sourcePageId": "summer_album",
+      "sourceObjectId": "album-campus",
+      "referenceMediaId": "portrait-liu",
+      "unlocks": {
+        "evidenceIds": [
+          "F02"
+        ]
+      }
+    },
+    {
+      "id": "P_zhao",
+      "type": "short-input",
+      "title": "好友日志访问问题",
+      "evidenceIds": [],
+      "sourcePageId": "blog_zhaoyan",
+      "prompt": "我家那只猫叫什么？",
+      "answer": "{{zhaoCatName}}",
+      "answerSourcePageIds": [
+        "blog_zhao_cat"
+      ]
+    }
+  ],
   "provisional": {
     "status": "development-only",
     "scope": [
       "calendar dates",
       "city",
-      "character ages and heights"
+      "character ages and heights",
+      "supporting blog posts, access questions and album scenes"
     ]
+  },
+  "homePageId": "portal_home",
+  "archivePageId": "archive_service",
+  "userProfiles": {
+    "夏天不喝冰": "profile_summer_no_ice",
+    "回声寻人网": "echo_account_posts",
+    "落叶知秋": "member_1",
+    "小树": "member_2",
+    "北门小陈": "member_3",
+    "隔壁桌": "member_4",
+    "榕树": "member_5",
+    "小猫搬家": "member_6",
+    "水杯忘带了": "member_7",
+    "纸飞机": "member_8",
+    "阿路": "member_9",
+    "蜜柑": "member_10",
+    "阿青": "member_11",
+    "晴天豆": "member_12",
+    "路过": "member_13",
+    "陈雨": "member_14",
+    "赵妍": "blog_zhao_home"
   }
 }

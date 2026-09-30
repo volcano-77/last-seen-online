@@ -18,6 +18,7 @@ export interface PageDetails {
 export interface CaseMedia {
   src: string; alt: string; caption?: string; filename?: string
   width?: string; height?: string; uploadedAt?: string
+  id?: string; identityId?: string; takenAt?: string
 }
 export interface PageObject {
   id: string; type: ObjectKind; title: string; body?: string[]; timestamp?: string
@@ -33,6 +34,10 @@ export interface CasePage {
   layout?: 'portal' | 'forum' | 'news' | 'blog' | 'profile' | 'echo' | 'index' | 'generic'
   media?: CaseMedia; searchable?: boolean; searchTerms?: string[]
   directory?: boolean; bookmark?: boolean
+  siteId?: string; skin?: 'life' | 'campus' | 'summer' | 'zhao' | 'echo' | 'news' | 'archive'
+  accessPuzzleId?: string; learnsTool?: 'archive'; offlinePageId?: string
+  snapshot?: { originalUrl: string; capturedAt: string }
+  searchIndex?: { status: 'current' | 'orphan' | 'legacy'; aliases?: string[] }
 }
 export interface EvidenceDefinition {
   id: string; type: EvidenceType; sourcePageId: string; sourceObjectId?: string
@@ -46,8 +51,9 @@ export interface RelationDefinition {
 }
 export interface FactDefinition { id: string; title: string; summary: string }
 export interface PuzzleDefinition {
-  id: string; type: 'timeline' | 'short-input'; title: string; evidenceIds: string[]
+  id: string; type: 'timeline' | 'short-input' | 'image-match'; title: string; evidenceIds: string[]
   expectedOrder?: string[]; answer?: string; prompt?: string; unlocks?: Unlocks
+  sourcePageId?: string; sourceObjectId?: string; referenceMediaId?: string; answerSourcePageIds?: string[]
 }
 export interface GameCase {
   schemaVersion: 2 | 3; id: string; title: string; subtitle: string; briefing: string
@@ -57,6 +63,7 @@ export interface GameCase {
   facts: FactDefinition[]; puzzles: PuzzleDefinition[]
   phaseId?: string; checkpoints: string[]; variables: Record<string, string>
   provisional?: { status: 'development-only'; scope: string[] }
+  homePageId?: string; archivePageId?: string; userProfiles: Record<string, string>
 }
 
 const pageKinds = new Set<PageKind>(['portal', 'search', 'forum', 'forum-thread', 'forum-reply',
@@ -97,7 +104,7 @@ function unlocks(value: unknown): value is Unlocks {
 }
 function media(value: unknown): value is CaseMedia {
   return record(value) && nonEmpty(value.src) && nonEmpty(value.alt) &&
-    ['caption', 'filename', 'width', 'height', 'uploadedAt']
+    ['caption', 'filename', 'width', 'height', 'uploadedAt', 'id', 'identityId', 'takenAt']
       .every((key) => value[key] === undefined || nonEmpty(value[key]))
 }
 function formatVariable(value: string, format?: string): string {
@@ -153,10 +160,16 @@ export function parseCase(input: unknown): GameCase {
       (raw.layout !== undefined && !['portal','forum','news','blog','profile','echo','index','generic'].includes(String(raw.layout))) ||
       (raw.media !== undefined && !media(raw.media)) ||
       (raw.searchable !== undefined && typeof raw.searchable !== 'boolean') ||
+      (raw.searchIndex !== undefined && (!record(raw.searchIndex) || !['current','orphan','legacy'].includes(String(raw.searchIndex.status)) ||
+        (raw.searchIndex.aliases !== undefined && !strings(raw.searchIndex.aliases)))) ||
       (raw.directory !== undefined && typeof raw.directory !== 'boolean') ||
       (raw.bookmark !== undefined && typeof raw.bookmark !== 'boolean') ||
       (raw.searchTerms !== undefined && !strings(raw.searchTerms)) ||
       (raw.unlockConditions !== undefined && !gate(raw.unlockConditions)) ||
+      ['siteId', 'accessPuzzleId', 'offlinePageId'].some((key) => raw[key] !== undefined && !nonEmpty(raw[key])) ||
+      (raw.skin !== undefined && !['life','campus','summer','zhao','echo','news','archive'].includes(String(raw.skin))) ||
+      (raw.learnsTool !== undefined && raw.learnsTool !== 'archive') ||
+      (raw.snapshot !== undefined && (!record(raw.snapshot) || !nonEmpty(raw.snapshot.originalUrl) || !nonEmpty(raw.snapshot.capturedAt))) ||
       (raw.details !== undefined && (!record(raw.details) ||
         Object.values(raw.details).some((item) => !nonEmpty(item))))) {
       throw new Error(`第 ${index + 1} 个页面格式无效。`)
@@ -208,10 +221,13 @@ export function parseCase(input: unknown): GameCase {
   if (!facts.every((item) => record(item) && nonEmpty(item.id) &&
     nonEmpty(item.title) && nonEmpty(item.summary))) throw new Error('事实格式无效。')
   if (!puzzles.every((item) => record(item) && nonEmpty(item.id) && nonEmpty(item.title) &&
-    (item.type === 'timeline' || item.type === 'short-input') && strings(item.evidenceIds) &&
+    (item.type === 'timeline' || item.type === 'short-input' || item.type === 'image-match') && strings(item.evidenceIds) &&
     (item.type !== 'timeline' || (strings(item.expectedOrder) && item.expectedOrder.length === item.evidenceIds.length)) &&
     (item.type !== 'short-input' || (nonEmpty(item.answer) && item.answer.length <= 32)) &&
     (item.prompt === undefined || nonEmpty(item.prompt)) &&
+    ['sourcePageId', 'sourceObjectId', 'referenceMediaId'].every((key) => item[key] === undefined || nonEmpty(item[key])) &&
+    (item.answerSourcePageIds === undefined || strings(item.answerSourcePageIds)) &&
+    (item.type !== 'image-match' || (nonEmpty(item.sourcePageId) && nonEmpty(item.sourceObjectId) && nonEmpty(item.referenceMediaId))) &&
     (item.unlocks === undefined || unlocks(item.unlocks)))) throw new Error('谜题格式无效。')
 
   const pageIds = new Set(pages.map((item) => item.id))
@@ -220,6 +236,11 @@ export function parseCase(input: unknown): GameCase {
   const factIds = new Set((facts as FactDefinition[]).map((item) => item.id))
   const puzzleIds = new Set((puzzles as PuzzleDefinition[]).map((item) => item.id))
   const checkpoints = (value.checkpoints || []) as string[]
+  const userProfiles = value.userProfiles || {}
+  const allMedia = pages.flatMap((page) => [page.media, ...(page.objects || []).map((item) => item.media)]).filter((item): item is CaseMedia => Boolean(item))
+  const mediaIds = allMedia.flatMap((item) => item.id ? [item.id] : [])
+  if (!unique(mediaIds) || !metadata(userProfiles) || !Object.values(userProfiles).every((id) => pageIds.has(id)) ||
+    ['homePageId', 'archivePageId'].some((key) => value[key] !== undefined && (!nonEmpty(value[key]) || !pageIds.has(value[key])))) throw new Error('站点导航或图片引用无效。')
   if (!unique(pages.map((item) => item.id)) || !unique(evidence.map((item) => item.id)) ||
     !unique(relations.map((item) => item.id)) || !unique(facts.map((item) => item.id)) ||
     !unique(puzzles.map((item) => item.id)) || !unique(checkpoints) || !pageIds.has(value.startPageId) ||
@@ -231,7 +252,9 @@ export function parseCase(input: unknown): GameCase {
     subset(item.evidenceIds, evidenceIds) && subset(item.pageIds, pageIds) &&
     subset(item.factIds, factIds)
   for (const page of pages) {
-    if (!subset(page.links?.map((item) => item.pageId), pageIds) || !validGate(page.unlockConditions) ||
+    if ((page.offlinePageId && !pageIds.has(page.offlinePageId)) ||
+      (page.accessPuzzleId && !puzzleIds.has(page.accessPuzzleId)) ||
+      !subset(page.links?.map((item) => item.pageId), pageIds) || !validGate(page.unlockConditions) ||
       page.objects?.some((item) => (item.evidenceId && !evidenceIds.has(item.evidenceId)) ||
         !subset(item.links?.map((link) => link.pageId), pageIds))) throw new Error(`页面 ${page.id} 的引用无效。`)
   }
@@ -249,7 +272,11 @@ export function parseCase(input: unknown): GameCase {
       !validUnlocks(item.unlocks)) throw new Error(`关联 ${item.id} 的引用无效。`)
   }
   for (const item of puzzles as PuzzleDefinition[]) {
-    if (!subset(item.evidenceIds, evidenceIds) || !subset(item.expectedOrder, evidenceIds) ||
+    if ((item.sourcePageId && !pageIds.has(item.sourcePageId)) ||
+      (item.sourceObjectId && !pages.find((page) => page.id === item.sourcePageId)?.objects?.some((object) => object.id === item.sourceObjectId)) ||
+      (item.referenceMediaId && !mediaIds.includes(item.referenceMediaId)) ||
+      !subset(item.answerSourcePageIds, pageIds) ||
+      !subset(item.evidenceIds, evidenceIds) || !subset(item.expectedOrder, evidenceIds) ||
       (item.expectedOrder && (!unique(item.expectedOrder) ||
         !item.expectedOrder.every((id) => item.evidenceIds.includes(id)))) || !validUnlocks(item.unlocks)) {
       throw new Error(`谜题 ${item.id} 的引用无效。`)
@@ -268,6 +295,8 @@ export function parseCase(input: unknown): GameCase {
     facts: facts as FactDefinition[], puzzles: puzzles as PuzzleDefinition[],
     phaseId: value.phaseId as string | undefined, checkpoints, variables,
     provisional: value.provisional as GameCase['provisional'],
+    homePageId: value.homePageId as string | undefined, archivePageId: value.archivePageId as string | undefined,
+    userProfiles: userProfiles as Record<string, string>,
   }
 }
 

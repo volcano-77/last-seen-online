@@ -1,4 +1,4 @@
-:root{font-family:'Microsoft YaHei','Segoe UI',Arial,sans-serif;color:#293b59;background:#dce5f0;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+:root{font-family:'Microsoft YaHei','Segoe UI',Arial,sans-serif;color:#333;background:#e7e7e2;font-size:16px;font-synthesis:none;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 *{box-sizing:border-box}
 body{margin:0;min-width:320px}
 button,input,textarea{font:inherit}
