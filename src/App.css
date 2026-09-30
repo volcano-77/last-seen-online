@@ -14,3 +14,45 @@
 .compact-document{max-width:1120px}.collection-ledger,.compare-sheet{border:1px solid #9bacbf;background:#fffef8;box-shadow:2px 2px #b7c6d9;padding:20px 24px}.collection-ledger{max-width:790px}.collection-ledger article{padding:15px 0;border-bottom:1px dotted #b6c6d6}.collection-ledger article:first-child{padding-top:0}.collection-ledger h2{font-size:15px;color:#275181;margin:0 0 7px}.collection-ledger p,.compare-sheet p{font-size:12px;line-height:1.7;color:#667386;margin:6px 0}.collection-ledger time{font:11px 'Courier New',monospace;color:#8a7258}.collection-ledger article div{margin-top:9px;display:flex;gap:12px}.collection-ledger button{border:0;background:none;color:#2c5d99;text-decoration:underline;padding:0;font-size:11px}
 .compare-layout{display:grid;grid-template-columns:1fr 1fr;gap:17px;align-items:start}.compare-sheet{min-height:360px}.compare-sheet h2{margin:0 0 10px;color:#305681;font-size:16px;border-bottom:1px solid #d1dce8;padding-bottom:9px}.compare-sheet>button,.puzzle-block>button,.short-input button{border:1px solid #8da6c5;background:linear-gradient(#fff,#dbe9f8);padding:7px 12px;color:#2d5686;font-size:11px;margin-top:10px}.compare-sheet button:disabled{opacity:.5}.compare-options{border-top:1px dotted #d4dfe9;margin-top:15px}.compare-options label{display:flex;align-items:center;gap:10px;border-bottom:1px dotted #d4dfe9;padding:11px 5px;font-size:12px;color:#3b5575}.compare-options label input{accent-color:#4771a5}.compare-options label small{display:block;font:10px 'Courier New',monospace;color:#939dad;margin-top:4px}.confirmed-relation,.unlocked-facts{margin-top:22px;border-left:3px solid #889e8b;background:#f1f5ee;padding:10px 12px;font-size:11px;color:#416047}.confirmed-relation p,.unlocked-facts p{margin:5px 0;color:#5a6f5c}.puzzle-block{border-bottom:1px dashed #c6d3e0;padding:12px 0 18px}.puzzle-block h3{margin:0 0 8px;font-size:13px;color:#496185}.timeline-order{padding-left:25px}.timeline-order li{display:flex;align-items:center;gap:6px;border:1px solid #ccd7e4;background:#f8fafc;margin:6px 0;padding:6px 8px;font-size:11px}.timeline-order li span{flex:1}.timeline-order li small{display:block;color:#8a94a3;font:10px 'Courier New',monospace;margin-top:3px}.timeline-order li button{border:1px solid #b4c5d8;background:#fff;color:#3d6595}.short-input{display:flex;gap:6px}.short-input input{width:130px;max-width:60%;border:1px solid #94a7bd;padding:6px 8px;font:12px 'Courier New',monospace}.short-input button{margin:0}.legacy-notice{border:1px solid #c8b68a;background:#fff9e8;padding:10px 13px;font-size:11px;line-height:1.7;color:#766346}.case-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.case-actions button{border:1px solid #a7b9ce;background:#f4f7fa;color:#315b8b;font-size:11px;padding:8px 11px}
 @media(max-width:760px){.compare-layout{grid-template-columns:1fr}.compare-sheet,.collection-ledger{padding:17px}.evidence-pocket{margin-top:12px}}
+
+.history-strip{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:8px 11px;background:#fffdf2;border-bottom:1px solid #c8c2aa;font-size:11px}.history-strip b{color:#70633e}.history-strip button{border:0;background:none;color:#315c9a;text-decoration:underline;padding:2px;font-size:11px}
+.selection-tip{position:fixed;z-index:30;background:#fff8de;border:1px solid #a9945e;box-shadow:2px 2px 0 #8c806a;color:#70512a;font-size:11px;padding:6px 10px}
+.pocket-record{border-bottom:1px dotted #c9c0a6;padding:7px 0}.pocket-record button{border:0;background:none;text-decoration:underline;color:#3b6092;font-size:11px;padding:0;text-align:left}.pocket-record small{display:block;font-size:10px;line-height:1.5;color:#786f5a;margin-top:3px}.pocket-fact{font-size:11px;color:#546d4d;border-bottom:1px dotted #c9c0a6;padding:5px 0}
+.record-layout{display:grid;grid-template-columns:1fr 1fr;gap:15px}.record-ledger{background:#fffdf4;border:1px solid #a4b4c4;box-shadow:2px 2px #bdcad8;padding:16px 19px;align-self:start}.record-ledger h2{font-size:15px;color:#305681;margin:0 0 12px;border-bottom:2px solid #d2dbe5;padding-bottom:8px}.record-ledger>p{font-size:12px;color:#667386;line-height:1.7}.record-line{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dotted #bdc9d5;padding:10px 2px}.record-line b{font-size:12px;color:#355a83}.record-line p{font-size:11px;line-height:1.6;color:#667386;margin:5px 0}.record-line small{display:block;color:#8d846f;font:10px 'Courier New',monospace}.record-line button:not(.record-select){border:0;background:none;padding:3px 0;text-decoration:underline;color:#315c9a;font-size:11px}.record-select,.relation-desk button{height:27px;border:1px solid #9badbe;background:linear-gradient(#fff,#e0e8f1);color:#305681;font-size:11px;padding:3px 9px;white-space:nowrap}.record-select:disabled,.relation-desk button:disabled{opacity:.38}.relation-desk{border-top:2px solid #a1b5ca;margin-top:22px;padding:12px 2px}.relation-desk h3{font-size:13px;color:#31547c;margin:0}.relation-desk p{font-size:11px;line-height:1.7;min-height:30px;color:#566b7c}.relation-desk button{margin-right:7px}.record-ledger .puzzle-block{border-top:1px dashed #b7c8d8;margin-top:10px}.record-ledger .puzzle-block>button{border:1px solid #9badbe;background:#e5edf7;padding:6px 10px;font-size:11px}.record-ledger .puzzle-block input{border:1px solid #9badbe;padding:5px;max-width:180px}.collection-ledger>p{font-size:12px;line-height:1.8}
+@media(max-width:900px){.record-layout{grid-template-columns:1fr}}@media(max-width:760px){.browser-layout{grid-template-columns:1fr}.browser-toolbar>button span{display:none}.browser-favorites{flex-wrap:wrap}}
+
+/* Readable browser chrome; the old-web character comes from borders and layout. */
+.brand small,.header-right,.browser-title,.browser-menu,.browser-status,.browser-favorites,
+.app-nav button,.browser-toolbar>button,.browser-toolbar label,.browser-toolbar input,
+.browser-toolbar form button,.placeholder-flag{font-size:13px}
+.app-nav button{min-height:38px;padding:9px 18px}
+.browser-title{height:32px}
+.browser-menu{height:auto;min-height:28px;padding:6px 11px}
+.browser-toolbar{min-height:47px;gap:5px}
+.browser-toolbar input{height:32px}
+.browser-toolbar form button{padding:6px 10px}
+.browser-toolbar .toolbar-records{border:1px solid #91a4ba;background:linear-gradient(#fffef8,#e3e8ee);color:#314e72;font-weight:bold;margin-left:5px}
+.browser-toolbar .toolbar-records[aria-expanded="true"]{background:#fff8df;border-color:#aa9b74}
+.browser-favorites{gap:15px;min-height:33px}
+.browser-favorites button,.history-strip,.history-strip button{font-size:13px}
+.browser-status{min-height:28px;height:auto;padding-block:5px}
+.browser-layout{display:grid;grid-template-columns:minmax(0,1fr);max-width:1560px;gap:16px}
+.browser-layout.records-open{grid-template-columns:minmax(0,1fr) 320px}
+.browser-layout.records-open .evidence-pocket{max-height:min(70vh,650px);overflow-y:auto;align-self:start}
+.pocket-close{float:right;border:1px solid #b5a777;background:#fff9df;color:#655438;font-size:20px;line-height:1;padding:0 6px}
+.notebook-title{font-size:16px}.notebook-title small{font-size:12px}
+.notebook-hint,.pocket-record small,.pocket-empty,.pocket-fact{font-size:13px;line-height:1.6}
+.pocket-list-title,.pocket-record button,.compare-shortcut{font-size:14px}
+.record-feedback{position:fixed;z-index:35;pointer-events:none;max-width:min(350px,calc(100vw - 16px));padding:7px 11px;border:1px solid #9dba94;background:#f1faed;color:#365e39;box-shadow:2px 2px 0 #a7b9a1;font-size:14px;line-height:1.4;animation:record-feedback-out 1.8s ease-out forwards}
+@keyframes record-feedback-out{0%,68%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-5px)}}
+.selection-tip{font-size:13px;padding:7px 11px}
+.document-title small,.document-title p,.collection-ledger p,.record-ledger>p,.record-line p,.record-line small,
+.record-line button:not(.record-select),.relation-desk p,.puzzle-block h3,.timeline-order li,
+.timeline-order li small,.collection-ledger button,.case-actions button,.toast{font-size:14px}
+.document-title h1{font-size:28px}.record-ledger h2,.collection-ledger h2{font-size:18px}
+.record-line b,.relation-desk h3{font-size:16px}
+.record-select,.relation-desk button,.record-ledger .puzzle-block>button{height:auto;min-height:34px;font-size:13px}
+.record-ledger .puzzle-block input{font-size:14px}
+@media(max-width:1280px){.browser-layout.records-open .browser-toolbar{flex-wrap:wrap}.browser-layout.records-open .browser-toolbar form{order:2;flex-basis:100%;margin-left:0}}
+@media(max-width:900px){.browser-layout.records-open{grid-template-columns:minmax(0,1fr)}.browser-layout.records-open .evidence-pocket{max-width:none}}
+@media(max-width:760px){.app-nav button{font-size:13px}.browser-title,.browser-menu,.browser-toolbar>button,.browser-toolbar label,.browser-toolbar input,.browser-toolbar form button,.browser-favorites{font-size:12px}.browser-layout.records-open .evidence-pocket{margin-top:0}}

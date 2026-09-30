@@ -1,4 +1,4 @@
-export type PageKind = 'search' | 'forum' | 'forum-thread' | 'forum-reply' | 'website' |
+export type PageKind = 'portal' | 'search' | 'forum' | 'forum-thread' | 'forum-reply' | 'website' |
   'blog' | 'profile' | 'email' | 'attachment' | 'spreadsheet' | 'image' |
   'file-metadata' | 'cache' | 'sd-card' | 'print-log' | 'snapshot'
 export type ObjectKind = 'post' | 'reply' | 'timestamp' | 'message' | 'attachment' |
@@ -15,9 +15,14 @@ export interface PageDetails {
   section?: string; floor?: string; registeredAt?: string; lastOnline?: string
   signature?: string; views?: string; replies?: string
 }
+export interface CaseMedia {
+  src: string; alt: string; caption?: string; filename?: string
+  width?: string; height?: string; uploadedAt?: string
+}
 export interface PageObject {
   id: string; type: ObjectKind; title: string; body?: string[]; timestamp?: string
   metadata?: Record<string, string>; evidenceId?: string; links?: CaseLink[]
+  author?: string; floor?: string; media?: CaseMedia; detailLabel?: string
 }
 export interface CasePage {
   id: string; kind: PageKind; title: string; url: string; body: string[]
@@ -25,14 +30,19 @@ export interface CasePage {
   tags?: string[]; links?: CaseLink[]; details?: PageDetails
   objects?: PageObject[]; metadata?: Record<string, string>
   unlockConditions?: UnlockConditions
+  layout?: 'portal' | 'forum' | 'news' | 'blog' | 'profile' | 'echo' | 'index' | 'generic'
+  media?: CaseMedia; searchable?: boolean; searchTerms?: string[]
+  directory?: boolean; bookmark?: boolean
 }
 export interface EvidenceDefinition {
   id: string; type: EvidenceType; sourcePageId: string; sourceObjectId?: string
   title: string; summary: string; timestamp?: string; metadata?: Record<string, string>
   relatedEvidenceIds?: string[]; unlockConditions?: UnlockConditions
+  discovery?: 'detail' | 'selection'; selectionTexts?: string[]
 }
 export interface RelationDefinition {
-  id: string; evidenceIds: string[]; title: string; summary: string; unlocks?: Unlocks
+  id: string; evidenceIds?: string[]; factIds?: string[]
+  title: string; summary: string; unlocks?: Unlocks; checkpointId?: string
 }
 export interface FactDefinition { id: string; title: string; summary: string }
 export interface PuzzleDefinition {
@@ -40,14 +50,16 @@ export interface PuzzleDefinition {
   expectedOrder?: string[]; answer?: string; prompt?: string; unlocks?: Unlocks
 }
 export interface GameCase {
-  schemaVersion: 2; id: string; title: string; subtitle: string; briefing: string
+  schemaVersion: 2 | 3; id: string; title: string; subtitle: string; briefing: string
   objective: string; startPageId: string
   status: 'placeholder' | 'ready' | 'developer-mock'
   pages: CasePage[]; evidence: EvidenceDefinition[]; relations: RelationDefinition[]
   facts: FactDefinition[]; puzzles: PuzzleDefinition[]
+  phaseId?: string; checkpoints: string[]; variables: Record<string, string>
+  provisional?: { status: 'development-only'; scope: string[] }
 }
 
-const pageKinds = new Set<PageKind>(['search', 'forum', 'forum-thread', 'forum-reply',
+const pageKinds = new Set<PageKind>(['portal', 'search', 'forum', 'forum-thread', 'forum-reply',
   'website', 'blog', 'profile', 'email', 'attachment', 'spreadsheet', 'image',
   'file-metadata', 'cache', 'sd-card', 'print-log', 'snapshot'])
 const objectKinds = new Set<ObjectKind>(['post', 'reply', 'timestamp', 'message',
@@ -83,12 +95,51 @@ function unlocks(value: unknown): value is Unlocks {
   return record(value) && ['evidenceIds', 'pageIds', 'factIds']
     .every((key) => value[key] === undefined || strings(value[key]))
 }
+function media(value: unknown): value is CaseMedia {
+  return record(value) && nonEmpty(value.src) && nonEmpty(value.alt) &&
+    ['caption', 'filename', 'width', 'height', 'uploadedAt']
+      .every((key) => value[key] === undefined || nonEmpty(value[key]))
+}
+function formatVariable(value: string, format?: string): string {
+  if (!format) return value
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value)
+  if (!match) throw new Error(`Case 日期变量 ${value} 不能使用 ${format} 格式。`)
+  const [, year, month, day] = match
+  switch (format) {
+    case 'short': return `${Number(month)}/${Number(day)}`
+    case 'zh': return `${Number(month)}月${Number(day)}日`
+    case 'zhSpaced': return `${Number(month)} 月 ${Number(day)} 日`
+    case 'compact': return `${year}${month}${day}`
+    case 'path': return `${year}/${month}/${day}`
+    case 'yearMonth': return `${year}-${month}`
+    default: throw new Error(`Case 日期格式 ${format} 不受支持。`)
+  }
+}
+function expandVariables(input: unknown, variables: Record<string, string>): unknown {
+  if (typeof input === 'string') return input.replace(/\{\{([a-zA-Z0-9_]+)(?:\|([a-zA-Z]+))?\}\}/g, (_, key: string, format?: string) => {
+    if (!(key in variables)) throw new Error(`Case 变量 ${key} 未定义。`)
+    return formatVariable(variables[key], format)
+  })
+  if (Array.isArray(input)) return input.map((item) => expandVariables(item, variables))
+  if (record(input)) return Object.fromEntries(Object.entries(input)
+    .map(([key, item]) => [key, expandVariables(item, variables)]))
+  return input
+}
 
-export function parseCase(value: unknown): GameCase {
+export function parseCase(input: unknown): GameCase {
+  if (!record(input) || (input.variables !== undefined && !metadata(input.variables))) {
+    throw new Error('Case 变量格式无效。')
+  }
+  const variables = (input.variables || {}) as Record<string, string>
+  const value = expandVariables(input, variables) as Record<string, unknown>
   if (!record(value) || !nonEmpty(value.id) || !nonEmpty(value.title) ||
     !nonEmpty(value.subtitle) || !nonEmpty(value.briefing) || !nonEmpty(value.objective) ||
     !nonEmpty(value.startPageId) || !Array.isArray(value.pages) ||
-    (value.schemaVersion !== undefined && value.schemaVersion !== 2) ||
+    (value.schemaVersion !== undefined && value.schemaVersion !== 2 && value.schemaVersion !== 3) ||
+    (value.phaseId !== undefined && !nonEmpty(value.phaseId)) ||
+    (value.checkpoints !== undefined && !strings(value.checkpoints)) ||
+    (value.provisional !== undefined && (!record(value.provisional) ||
+      value.provisional.status !== 'development-only' || !strings(value.provisional.scope))) ||
     (value.status !== undefined && !['placeholder', 'ready', 'developer-mock'].includes(String(value.status)))) {
     throw new Error('Case 文件缺少必要字段或版本不受支持。')
   }
@@ -99,6 +150,12 @@ export function parseCase(value: unknown): GameCase {
       (raw.tags !== undefined && !strings(raw.tags)) ||
       (raw.links !== undefined && !links(raw.links)) ||
       (raw.metadata !== undefined && !metadata(raw.metadata)) ||
+      (raw.layout !== undefined && !['portal','forum','news','blog','profile','echo','index','generic'].includes(String(raw.layout))) ||
+      (raw.media !== undefined && !media(raw.media)) ||
+      (raw.searchable !== undefined && typeof raw.searchable !== 'boolean') ||
+      (raw.directory !== undefined && typeof raw.directory !== 'boolean') ||
+      (raw.bookmark !== undefined && typeof raw.bookmark !== 'boolean') ||
+      (raw.searchTerms !== undefined && !strings(raw.searchTerms)) ||
       (raw.unlockConditions !== undefined && !gate(raw.unlockConditions)) ||
       (raw.details !== undefined && (!record(raw.details) ||
         Object.values(raw.details).some((item) => !nonEmpty(item))))) {
@@ -109,6 +166,10 @@ export function parseCase(value: unknown): GameCase {
       (item.body === undefined || strings(item.body)) &&
       (item.timestamp === undefined || nonEmpty(item.timestamp)) &&
       (item.evidenceId === undefined || nonEmpty(item.evidenceId)) &&
+      (item.author === undefined || nonEmpty(item.author)) &&
+      (item.floor === undefined || nonEmpty(item.floor)) &&
+      (item.detailLabel === undefined || nonEmpty(item.detailLabel)) &&
+      (item.media === undefined || media(item.media)) &&
       (item.metadata === undefined || metadata(item.metadata)) &&
       (item.links === undefined || links(item.links))))) {
       throw new Error(`页面 ${raw.id} 的内容对象格式无效。`)
@@ -132,10 +193,17 @@ export function parseCase(value: unknown): GameCase {
     (item.timestamp === undefined || nonEmpty(item.timestamp)) &&
     (item.metadata === undefined || metadata(item.metadata)) &&
     (item.relatedEvidenceIds === undefined || strings(item.relatedEvidenceIds)) &&
+    (item.discovery === undefined || item.discovery === 'detail' || item.discovery === 'selection') &&
+    (item.selectionTexts === undefined || strings(item.selectionTexts)) &&
+    (item.discovery !== 'selection' || strings(item.selectionTexts)) &&
     (item.unlockConditions === undefined || gate(item.unlockConditions)))) throw new Error('证据格式无效。')
-  if (!relations.every((item) => record(item) && nonEmpty(item.id) && strings(item.evidenceIds) &&
-    item.evidenceIds.length >= 2 && unique(item.evidenceIds) &&
+  if (!relations.every((item) => record(item) && nonEmpty(item.id) &&
+    (item.evidenceIds === undefined || strings(item.evidenceIds)) &&
+    (item.factIds === undefined || strings(item.factIds)) &&
+    (item.evidenceIds || []).length + (item.factIds || []).length >= 2 &&
+    unique(item.evidenceIds || []) && unique(item.factIds || []) &&
     nonEmpty(item.title) && nonEmpty(item.summary) &&
+    (item.checkpointId === undefined || nonEmpty(item.checkpointId)) &&
     (item.unlocks === undefined || unlocks(item.unlocks)))) throw new Error('证据关联格式无效。')
   if (!facts.every((item) => record(item) && nonEmpty(item.id) &&
     nonEmpty(item.title) && nonEmpty(item.summary))) throw new Error('事实格式无效。')
@@ -151,9 +219,10 @@ export function parseCase(value: unknown): GameCase {
   const relationIds = new Set((relations as RelationDefinition[]).map((item) => item.id))
   const factIds = new Set((facts as FactDefinition[]).map((item) => item.id))
   const puzzleIds = new Set((puzzles as PuzzleDefinition[]).map((item) => item.id))
+  const checkpoints = (value.checkpoints || []) as string[]
   if (!unique(pages.map((item) => item.id)) || !unique(evidence.map((item) => item.id)) ||
     !unique(relations.map((item) => item.id)) || !unique(facts.map((item) => item.id)) ||
-    !unique(puzzles.map((item) => item.id)) || !pageIds.has(value.startPageId) ||
+    !unique(puzzles.map((item) => item.id)) || !unique(checkpoints) || !pageIds.has(value.startPageId) ||
     !pages.some((item) => item.kind === 'search')) throw new Error('Case ID 重复或缺少搜索起始页。')
   const validGate = (item?: UnlockConditions) => !item ||
     subset(item.evidenceIds, evidenceIds) && subset(item.relationIds, relationIds) &&
@@ -175,7 +244,9 @@ export function parseCase(value: unknown): GameCase {
     }
   }
   for (const item of relations as RelationDefinition[]) {
-    if (!subset(item.evidenceIds, evidenceIds) || !validUnlocks(item.unlocks)) throw new Error(`关联 ${item.id} 的引用无效。`)
+    if (!subset(item.evidenceIds, evidenceIds) || !subset(item.factIds, factIds) ||
+      (item.checkpointId && !checkpoints.includes(item.checkpointId)) ||
+      !validUnlocks(item.unlocks)) throw new Error(`关联 ${item.id} 的引用无效。`)
   }
   for (const item of puzzles as PuzzleDefinition[]) {
     if (!subset(item.evidenceIds, evidenceIds) || !subset(item.expectedOrder, evidenceIds) ||
@@ -185,7 +256,7 @@ export function parseCase(value: unknown): GameCase {
     }
   }
   return {
-    schemaVersion: 2, id: value.id,
+    schemaVersion: value.schemaVersion === 3 ? 3 : 2, id: value.id,
     title: value.id === 'demo-001' ? '旧演示案件（待替换）' : value.title,
     subtitle: value.id === 'demo-001' ? '仅供旧页面验证' : value.subtitle,
     briefing: value.id === 'demo-001' ? 'v0.1 旧演示内容，不能作为《寻人启事》剧情。' : value.briefing,
@@ -195,6 +266,8 @@ export function parseCase(value: unknown): GameCase {
       value.status === 'placeholder' ? 'placeholder' : 'ready',
     pages, evidence: evidence as EvidenceDefinition[], relations: relations as RelationDefinition[],
     facts: facts as FactDefinition[], puzzles: puzzles as PuzzleDefinition[],
+    phaseId: value.phaseId as string | undefined, checkpoints, variables,
+    provisional: value.provisional as GameCase['provisional'],
   }
 }
 
@@ -203,5 +276,6 @@ async function fetchCase(path: string): Promise<GameCase> {
   if (!response.ok) throw new Error(`Case 加载失败：${response.status}`)
   return parseCase(await response.json())
 }
-export function loadDefaultCase(): Promise<GameCase> { return fetchCase('cases/developer/mock-case.json') }
+export function loadDefaultCase(): Promise<GameCase> { return fetchCase('cases/missing-person/phase-01.json') }
+export function loadMockCase(): Promise<GameCase> { return fetchCase('cases/developer/mock-case.json') }
 export function loadDemoCase(): Promise<GameCase> { return fetchCase('cases/demo/case.json') }

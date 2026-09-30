@@ -19,6 +19,7 @@
     {
       "id": "forum-post",
       "kind": "forum",
+      "bookmark": true,
       "title": "论坛帖子标题",
       "url": "echo://forum/posts/1",
       "author": "匿名用户",

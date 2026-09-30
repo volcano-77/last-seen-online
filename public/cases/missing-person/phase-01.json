@@ -1,0 +1,1539 @@
+{
+  "schemaVersion": 3,
+  "id": "case-01-missing-person",
+  "status": "ready",
+  "phaseId": "phase_01_early_notices",
+  "checkpoints": [
+    "checkpoint_pattern_01",
+    "checkpoint_pattern_02",
+    "checkpoint_chenyu_notice"
+  ],
+  "variables": {
+    "cityName": "南城",
+    "liuAge": "约二十岁",
+    "zhaoAge": "约二十四岁",
+    "chenAge": "约二十一至二十二岁",
+    "liuHeight": "约一米六二",
+    "zhaoHeight": "约一米六五",
+    "echoAccountRegisteredAt": "2006-08",
+    "summerRegisteredAt": "2007-09-18",
+    "summerJoinedMonth": "2007-09",
+    "liuNoticeDate": "2009-04-06",
+    "summerLastOnlineDate": "2009-04-07",
+    "summerCardPostDate": "2009-04-04",
+    "summerBookPostDate": "2009-04-03",
+    "incidentalAprilSecondDate": "2009-04-02",
+    "summerFoodPostDate": "2009-03-30",
+    "liuNewsDate": "2009-04-11",
+    "speechNewsDate": "2009-03-28",
+    "jobNewsDate": "2009-04-09",
+    "accountMarchPostDate": "2009-03-22",
+    "accountFebruaryPostDate": "2009-02-14",
+    "accountJanuaryPostDate": "2009-01-09",
+    "zhaoNoticeDate": "2008-11-02",
+    "accountOctoberPostDate": "2008-10-21",
+    "accountSeptemberPostDate": "2008-09-03",
+    "accountAugustPostDate": "2008-08-17",
+    "zhaoReplyDate": "2008-11-03",
+    "zhaoBlogDate": "2008-11-04",
+    "zhaoBlogCommentDate": "2008-11-05",
+    "zhaoNewsDate": "2008-11-08",
+    "liuLostDate": "2009-04-10",
+    "zhaoLostDate": "2008-11-07",
+    "chenDate": "2009-04-18",
+    "chenNoticeTime": "18:31",
+    "chenModerationTime": "19:42",
+    "chenReplyTime": "19:47"
+  },
+  "title": "寻人启事",
+  "subtitle": "旧网页档案",
+  "briefing": "浏览旧网页，核对时间与来源。",
+  "objective": "从公开记录中找出可以相互验证的事实。",
+  "startPageId": "portal_home",
+  "pages": [
+    {
+      "id": "portal_home",
+      "kind": "portal",
+      "layout": "portal",
+      "title": "旧浏览器主页",
+      "siteName": "{{cityName}}",
+      "url": "archive://home",
+      "body": [
+        "网络档案浏览器收录了一批旧论坛、资讯页和个人空间。站点保持原貌，链接与搜索仅在本地归档中生效。"
+      ],
+      "bookmark": true,
+      "searchable": false,
+      "links": [
+        {
+          "label": "{{cityName}}生活论坛",
+          "pageId": "life_forum_index"
+        },
+        {
+          "label": "{{cityName}}资讯网",
+          "pageId": "news_index"
+        },
+        {
+          "label": "{{cityName}}大学 BBS",
+          "pageId": "bbs_index"
+        },
+        {
+          "label": "网页存档搜索",
+          "pageId": "search_home"
+        }
+      ],
+      "metadata": {
+        "最近访问": "{{cityName}}生活论坛"
+      }
+    },
+    {
+      "id": "search_home",
+      "kind": "search",
+      "title": "寻迹搜 · 网页档案",
+      "url": "archive://search",
+      "body": [
+        "搜索当前离线档案。"
+      ],
+      "bookmark": true,
+      "searchable": false
+    },
+    {
+      "id": "life_forum_index",
+      "kind": "forum",
+      "layout": "index",
+      "title": "{{cityName}}生活论坛",
+      "url": "nclife://bbs/home",
+      "siteName": "{{cityName}}生活论坛",
+      "body": [
+        "城市闲谈、校园互助、寻人寻物和二手转让。旧帖只读，部分外链可能失效。"
+      ],
+      "bookmark": true,
+      "searchable": true,
+      "objects": [
+        {
+          "id": "life-1",
+          "type": "post",
+          "title": "[寻人启事] 寻找刘佳，家人十分着急",
+          "metadata": {
+            "版块": "寻人寻物",
+            "回复": "9",
+            "最后更新": "{{liuNoticeDate}} 17:21"
+          },
+          "links": [
+            {
+              "label": "打开帖子",
+              "pageId": "forum_liujia_missing"
+            }
+          ]
+        },
+        {
+          "id": "life-2",
+          "type": "post",
+          "title": "周末去老书市的人多吗",
+          "metadata": {
+            "版块": "城市闲谈",
+            "回复": "12"
+          }
+        },
+        {
+          "id": "life-3",
+          "type": "post",
+          "title": "二手自行车，车况还行",
+          "metadata": {
+            "版块": "闲置转让",
+            "回复": "5"
+          }
+        },
+        {
+          "id": "life-4",
+          "type": "post",
+          "title": "西路公交改线通知有人看到吗",
+          "metadata": {
+            "版块": "出行交流",
+            "回复": "18"
+          }
+        },
+        {
+          "id": "life-5",
+          "type": "post",
+          "title": "求推荐修卡片机的地方",
+          "metadata": {
+            "版块": "生活求助",
+            "回复": "7"
+          }
+        }
+      ]
+    },
+    {
+      "id": "forum_liujia_missing",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "title": "[寻人启事] 寻找刘佳，家人十分着急",
+      "url": "nclife://bbs/thread/40612",
+      "siteName": "{{cityName}}生活论坛",
+      "author": "回声寻人网",
+      "date": "{{liuNoticeDate}} 09:12",
+      "subtitle": "寻人寻物版 · 原帖快照",
+      "tags": [
+        "刘佳",
+        "寻人",
+        "{{cityName}}大学"
+      ],
+      "details": {
+        "section": "寻人寻物",
+        "views": "1834",
+        "replies": "9",
+        "registeredAt": "{{echoAccountRegisteredAt}}",
+        "lastOnline": "{{liuNoticeDate}}",
+        "signature": "请提供可靠目击信息，勿公布未经核实的私人住址。"
+      },
+      "media": {
+        "src": "cases/missing-person/images/liu-jia.jpg",
+        "alt": "刘佳在校园路边的普通生活照",
+        "caption": "家属提供的近照（网页归档）",
+        "filename": "liujia_01.jpg",
+        "width": "1448",
+        "height": "1086",
+        "uploadedAt": "{{liuNoticeDate}} 09:12"
+      },
+      "body": [
+        "寻人启事：刘佳，女，{{liuAge}}，{{cityName}}大学在校学生，身高{{liuHeight}}。近日常穿浅色外套、深色长裤，随身带米色帆布包。家属这两天一直无法通过电话取得联系，很担心她独自在外遇到困难。照片是她平日上学时拍的，看到相似的人请先核对身份，不要打扰无关同学。",
+        "如果有朋友知道她近几天的去向，或在学校、车站及附近街区见过她，请尽快通过回声寻人网的站内留言与发布人联系。原帖所附联系电话在归档中已遮蔽，现请勿拨打网络转载的旧号码。",
+        "拜托看到帖子的同学和邻居帮忙转发。家里只希望确认她是否平安，不想让不实猜测影响本人。提供消息时请说明大致时间和地点，便于家属核实。来源：回声寻人网。"
+      ],
+      "objects": [
+        {
+          "id": "liujia-post-time",
+          "type": "timestamp",
+          "title": "发帖时间详情",
+          "timestamp": "{{liuNoticeDate}} 09:12",
+          "metadata": {
+            "创建": "{{liuNoticeDate}} 09:12",
+            "来源账号": "回声寻人网",
+            "版块": "寻人寻物"
+          },
+          "evidenceId": "F01"
+        },
+        {
+          "id": "lj-reply-1",
+          "type": "reply",
+          "title": "帮顶",
+          "author": "落叶知秋",
+          "floor": "2#",
+          "timestamp": "{{liuNoticeDate}} 09:36",
+          "body": [
+            "帮顶。希望人没事，家里也别太着急。"
+          ]
+        },
+        {
+          "id": "lj-reply-2",
+          "type": "reply",
+          "title": "已经转给校友群",
+          "author": "小树",
+          "floor": "3#",
+          "timestamp": "{{liuNoticeDate}} 10:08",
+          "body": [
+            "我把帖子转到校友群了，有消息会回来更新。"
+          ]
+        },
+        {
+          "id": "lj-reply-3",
+          "type": "reply",
+          "title": "下午还看见她",
+          "author": "夏天不喝冰",
+          "floor": "4#",
+          "timestamp": "{{liuNoticeDate}} 15:16",
+          "body": [
+            "她没失踪吧？我下午还在二食堂看到她。人挺正常的，跟几个同学一起往教学楼那边走。"
+          ],
+          "links": [
+            {
+              "label": "查看夏天不喝冰的资料",
+              "pageId": "profile_summer_no_ice"
+            }
+          ]
+        },
+        {
+          "id": "lj-reply-4",
+          "type": "reply",
+          "title": "是不是外院同学",
+          "author": "北门小陈",
+          "floor": "5#",
+          "timestamp": "{{liuNoticeDate}} 15:42",
+          "body": [
+            "是外院那个刘佳吗？同名的人不少，最好说清楚一点。"
+          ]
+        },
+        {
+          "id": "lj-reply-5",
+          "type": "reply",
+          "title": "楼主确认",
+          "author": "回声寻人网",
+          "floor": "6#",
+          "timestamp": "{{liuNoticeDate}} 15:59",
+          "body": [
+            "是{{cityName}}大学外院的刘佳。感谢大家帮忙，请把确定的消息发站内信，不要在回帖里留具体住处。"
+          ]
+        },
+        {
+          "id": "lj-reply-6",
+          "type": "reply",
+          "title": "联系不上多久",
+          "author": "隔壁桌",
+          "floor": "7#",
+          "timestamp": "{{liuNoticeDate}} 16:12",
+          "body": [
+            "家里联系不到多久了？要是同学今天还见到她，或许先请学校帮着确认比较稳妥。"
+          ]
+        },
+        {
+          "id": "lj-reply-7",
+          "type": "reply",
+          "title": "昨晚群里还在说话",
+          "author": "榕树",
+          "floor": "8#",
+          "timestamp": "{{liuNoticeDate}} 16:34",
+          "body": [
+            "昨天她还在群里问社团报名的事。手机没电也说不定，先别传一些吓人的话。"
+          ]
+        },
+        {
+          "id": "lj-reply-8",
+          "type": "reply",
+          "title": "再帮顶",
+          "author": "小猫搬家",
+          "floor": "9#",
+          "timestamp": "{{liuNoticeDate}} 16:58",
+          "body": [
+            "帮顶，楼主有新情况记得更新。"
+          ]
+        },
+        {
+          "id": "lj-reply-9",
+          "type": "reply",
+          "title": "已转发",
+          "author": "水杯忘带了",
+          "floor": "10#",
+          "timestamp": "{{liuNoticeDate}} 17:21",
+          "body": [
+            "转给在校的朋友了，希望尽快联系上。"
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "来源账号：回声寻人网",
+          "pageId": "echo_account_posts"
+        },
+        {
+          "label": "查看网页快照与编辑记录",
+          "pageId": "cache_liujia_notice"
+        }
+      ]
+    },
+    {
+      "id": "profile_summer_no_ice",
+      "kind": "profile",
+      "layout": "profile",
+      "title": "夏天不喝冰的个人资料",
+      "url": "ncu://bbs/user/summer_no_ice",
+      "siteName": "{{cityName}}大学 BBS",
+      "author": "夏天不喝冰",
+      "date": "{{liuNoticeDate}}",
+      "subtitle": "普通会员 · 最近发言",
+      "details": {
+        "registeredAt": "{{summerRegisteredAt}}",
+        "lastOnline": "{{summerLastOnlineDate}} 08:22",
+        "signature": "冷饮留给夏天，热水留给考试周。"
+      },
+      "metadata": {
+        "所在地": "{{cityName}}",
+        "发帖数": "214"
+      },
+      "body": [
+        "这里保存了该用户近期公开发言的标题。查看帖子可以核对她说过的话。"
+      ],
+      "objects": [
+        {
+          "id": "s-post-1",
+          "type": "post",
+          "title": "选修课教室换了吗",
+          "timestamp": "{{liuNoticeDate}} 13:38",
+          "links": [
+            {
+              "label": "查看旧帖",
+              "pageId": "forum_course_room"
+            }
+          ]
+        },
+        {
+          "id": "s-post-2",
+          "type": "post",
+          "title": "二食堂今天人也太多了",
+          "timestamp": "{{liuNoticeDate}} 12:10"
+        },
+        {
+          "id": "s-post-3",
+          "type": "post",
+          "title": "有人捡到学生卡吗",
+          "timestamp": "{{summerCardPostDate}} 18:20"
+        },
+        {
+          "id": "s-post-4",
+          "type": "post",
+          "title": "求二手六级资料",
+          "timestamp": "{{summerBookPostDate}} 16:05"
+        },
+        {
+          "id": "s-post-5",
+          "type": "post",
+          "title": "周末羽毛球",
+          "timestamp": "{{incidentalAprilSecondDate}} 20:11"
+        },
+        {
+          "id": "s-post-6",
+          "type": "post",
+          "title": "校门口新开的面馆",
+          "timestamp": "{{summerFoodPostDate}} 11:04"
+        }
+      ]
+    },
+    {
+      "id": "forum_course_room",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "title": "选修课教室换了吗",
+      "url": "ncu://bbs/thread/8832",
+      "siteName": "{{cityName}}大学 BBS",
+      "author": "夏天不喝冰",
+      "date": "{{liuNoticeDate}} 13:38",
+      "subtitle": "校园生活版 · 旧帖",
+      "details": {
+        "section": "校园生活",
+        "views": "187",
+        "replies": "4",
+        "registeredAt": "{{summerJoinedMonth}}",
+        "signature": "考试周请让我先消失三天。"
+      },
+      "body": [
+        "今天公共选修是不是换到三教了？群里没人回。我刚从食堂出来，课表也忘在宿舍，怕走错楼。有没有同一节课的同学看见通知？"
+      ],
+      "objects": [
+        {
+          "id": "course-r1",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "floor": "2#",
+          "timestamp": "{{liuNoticeDate}} 13:45",
+          "body": [
+            "群公告说还是原来的教室，老师下午再确认。"
+          ]
+        },
+        {
+          "id": "course-r2",
+          "type": "reply",
+          "title": "直接问她们",
+          "author": "阿路",
+          "floor": "3#",
+          "timestamp": "{{liuNoticeDate}} 14:02",
+          "body": [
+            "你下午不是跟刘佳她们在二食堂吗？直接问她啊。"
+          ]
+        },
+        {
+          "id": "course-r3",
+          "type": "reply",
+          "title": "忘记问了",
+          "author": "夏天不喝冰",
+          "floor": "4#",
+          "timestamp": "{{liuNoticeDate}} 14:06",
+          "body": [
+            "她们去上课了，我忘记问了。刚好看见这个回复才想起来。"
+          ]
+        },
+        {
+          "id": "course-r4",
+          "type": "reply",
+          "title": "教室没换",
+          "author": "纸飞机",
+          "floor": "5#",
+          "timestamp": "{{liuNoticeDate}} 14:28",
+          "body": [
+            "刚路过办公室问了，今天不换。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "news_index",
+      "kind": "website",
+      "layout": "news",
+      "title": "{{cityName}}资讯网",
+      "url": "ncitynews://home",
+      "siteName": "{{cityName}}资讯网",
+      "date": "{{liuNewsDate}}",
+      "bookmark": true,
+      "body": [
+        "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，稿件正文可通过站内标题和全网搜索进入。"
+      ],
+      "objects": [
+        {
+          "id": "news-list-1",
+          "type": "text",
+          "title": "大学女生离校后失联 家属已报警寻人",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_liujia_missing"
+            }
+          ]
+        },
+        {
+          "id": "news-list-2",
+          "type": "text",
+          "title": "{{cityName}}大学春季志愿活动报名开启",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_volunteer"
+            }
+          ]
+        },
+        {
+          "id": "news-list-3",
+          "type": "text",
+          "title": "春季招聘会下周举行",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_jobfair"
+            }
+          ]
+        },
+        {
+          "id": "news-list-4",
+          "type": "text",
+          "title": "校园演讲比赛名单公布",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_speech"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "news_speech",
+      "kind": "website",
+      "layout": "news",
+      "title": "{{cityName}}大学校园演讲比赛名单公布",
+      "url": "ncitynews://campus/speech",
+      "siteName": "{{cityName}}资讯网",
+      "date": "{{speechNewsDate}}",
+      "searchTerms": [
+        "刘佳"
+      ],
+      "body": [
+        "本周校园演讲比赛公布报名名单，外院的刘佳与其他同学进入复赛。活动将于下月在校礼堂举行，主办方提醒参赛者提前核对入场时间。"
+      ]
+    },
+    {
+      "id": "news_volunteer",
+      "kind": "website",
+      "layout": "news",
+      "title": "春季志愿活动报名开启",
+      "url": "ncitynews://campus/volunteer",
+      "siteName": "{{cityName}}资讯网",
+      "date": "{{incidentalAprilSecondDate}}",
+      "searchTerms": [
+        "刘佳"
+      ],
+      "body": [
+        "春季志愿活动开放报名，{{cityName}}大学多名学生参加了现场说明会。报名表上有刘佳等志愿者的名字，正式值班安排仍需等待组织方通知。"
+      ]
+    },
+    {
+      "id": "news_jobfair",
+      "kind": "website",
+      "layout": "news",
+      "title": "春季招聘会下周举行",
+      "url": "ncitynews://campus/jobfair",
+      "siteName": "{{cityName}}资讯网",
+      "date": "{{jobNewsDate}}",
+      "searchTerms": [
+        "刘佳"
+      ],
+      "body": [
+        "市内数十家单位将在{{cityName}}大学体育馆设展位。外院学生会工作人员刘佳提醒同学们带好学生证，现场也有公益咨询台。"
+      ]
+    },
+    {
+      "id": "news_liujia_missing",
+      "kind": "website",
+      "layout": "news",
+      "title": "{{cityName}}大学女生离校后失联 家属已报警寻人",
+      "url": "ncitynews://local/{{liuNewsDate|compact}}/2718",
+      "siteName": "{{cityName}}资讯网",
+      "author": "本报记者",
+      "date": "{{liuNewsDate}}",
+      "subtitle": "本地 · 社会",
+      "tags": [
+        "刘佳",
+        "{{cityName}}大学"
+      ],
+      "body": [
+        "本报讯　{{cityName}}大学一名在校女生近日与家人失去联系。记者昨日从校方和家属处获悉，家属已向辖区警方报案，并向学校请求协助寻找。校方表示，相关情况正在核实，暂不宜根据网络上的零散传言推断去向。",
+        "失联学生名叫刘佳，是外院学生。室友说，刘佳上周仍正常上课，也曾参加社团活动，平时出门会把课程安排告诉同寝同学。刘佳于{{liuLostDate|zh}}晚离开宿舍后未再返回，室友起初以为她去同学处借住，直到次日早晨仍联系不上，才向辅导员反映。",
+        "家属告诉记者，他们此前也有过电话未接通的时候，但通常过一段时间就能收到回复。这一次连续拨打电话、发送短信均无回应，家人便赶到学校。辅导员表示，学院已与同班同学和宿舍管理人员核对近期出入情况，并配合警方了解她最后的活动路线。",
+        "有同学提到，刘佳当晚曾带着平时使用的帆布包离开宿舍楼；也有人说在校门附近见过相似身影。上述说法尚未得到警方确认。学校提醒同学，如有可靠信息，应直接联系家属或警方，不要在网络上公布个人住址、随意转发未核实照片。",
+        "家属希望知情人提供具体时间和地点，尤其是{{liuLostDate|zh}}晚之后的目击信息。警方已接收相关材料。学校的失物招领处也留下了转交信息的方式，方便不愿在网上公开留言的同学联系工作人员。记者将继续关注后续进展；本页为当日网络版稿件，转载时请保留发布日期。"
+      ]
+    },
+    {
+      "id": "cache_liujia_notice",
+      "kind": "cache",
+      "layout": "generic",
+      "title": "刘佳寻人帖 · 网页快照",
+      "url": "archive://snapshot/nclife/40612",
+      "siteName": "网页存档服务",
+      "date": "{{liuNoticeDate}} 10:03",
+      "subtitle": "抓取页面与编辑记录",
+      "searchable": false,
+      "body": [
+        "此页保存了{{cityName}}生活论坛帖子的早期版本。抓取时间由归档服务记录，原帖链接和发帖人未变。页面主体在后续编辑中没有修改。"
+      ],
+      "objects": [
+        {
+          "id": "cache-lj-fetch",
+          "type": "cache-entry",
+          "title": "抓取时间详情",
+          "timestamp": "{{liuNoticeDate}} 10:03",
+          "metadata": {
+            "抓取时间": "{{liuNoticeDate}} 10:03",
+            "原帖创建": "{{liuNoticeDate}} 09:12",
+            "原帖地址": "nclife://bbs/thread/40612"
+          },
+          "evidenceId": "F04"
+        },
+        {
+          "id": "cache-lj-edit",
+          "type": "log-entry",
+          "title": "编辑记录",
+          "body": [
+            "{{liuNoticeDate}} 09:12 创建。{{liuNoticeDate}} 10:27 修改联系电话；正文主体无修改。"
+          ],
+          "detailLabel": "查看编辑记录"
+        }
+      ],
+      "links": [
+        {
+          "label": "返回论坛原帖",
+          "pageId": "forum_liujia_missing"
+        }
+      ]
+    },
+    {
+      "id": "bbs_index",
+      "kind": "forum",
+      "layout": "index",
+      "title": "{{cityName}}大学 BBS",
+      "url": "ncu://bbs/home",
+      "siteName": "{{cityName}}大学 BBS",
+      "bookmark": true,
+      "body": [
+        "教学讨论、校园生活、失物招领。版主：陈雨、木棉。旧站部分管理记录可由站内搜索找到。"
+      ],
+      "objects": [
+        {
+          "id": "bbs-list-1",
+          "type": "post",
+          "title": "选修课教室换了吗",
+          "metadata": {
+            "版块": "校园生活",
+            "回复": "4"
+          },
+          "links": [
+            {
+              "label": "查看帖子",
+              "pageId": "forum_course_room"
+            }
+          ]
+        },
+        {
+          "id": "bbs-list-2",
+          "type": "post",
+          "title": "图书馆临时闭馆通知",
+          "metadata": {
+            "版块": "校园公告",
+            "回复": "11"
+          }
+        },
+        {
+          "id": "bbs-list-3",
+          "type": "post",
+          "title": "有人捡到蓝色水杯吗",
+          "metadata": {
+            "版块": "失物招领",
+            "回复": "6"
+          }
+        },
+        {
+          "id": "bbs-list-4",
+          "type": "post",
+          "title": "二手教材交换",
+          "metadata": {
+            "版块": "闲置交流",
+            "回复": "23"
+          }
+        }
+      ]
+    },
+    {
+      "id": "echo_account_posts",
+      "kind": "website",
+      "layout": "index",
+      "title": "回声寻人网 · 论坛账号发帖记录",
+      "url": "nclife://bbs/user/echo_find/posts",
+      "siteName": "{{cityName}}生活论坛",
+      "author": "回声寻人网",
+      "date": "{{liuNoticeDate}}",
+      "subtitle": "公开历史发帖",
+      "searchable": false,
+      "body": [
+        "以下为论坛账号的公开主题记录。旧站的附件状态来自服务器索引，不代表附件内容仍可恢复。"
+      ],
+      "objects": [
+        {
+          "id": "account-1",
+          "type": "post",
+          "title": "寻找刘佳，家人十分着急",
+          "timestamp": "{{liuNoticeDate}}",
+          "links": [
+            {
+              "label": "查看帖子",
+              "pageId": "forum_liujia_missing"
+            }
+          ]
+        },
+        {
+          "id": "account-2",
+          "type": "post",
+          "title": "帮王阿姨寻找走失的父亲",
+          "timestamp": "{{accountMarchPostDate}}"
+        },
+        {
+          "id": "account-3",
+          "type": "post",
+          "title": "小区门口捡到一只灰猫",
+          "timestamp": "{{accountFebruaryPostDate}}"
+        },
+        {
+          "id": "account-4",
+          "type": "post",
+          "title": "儿童寻人信息转发，家属已确认平安",
+          "timestamp": "{{accountJanuaryPostDate}}"
+        },
+        {
+          "id": "account-5",
+          "type": "post",
+          "title": "[寻人启事] 寻找赵妍",
+          "timestamp": "{{zhaoNoticeDate}}",
+          "metadata": {
+            "附件状态": "附件已删除"
+          },
+          "links": [
+            {
+              "label": "查看帖子",
+              "pageId": "forum_zhaoyan_missing"
+            }
+          ]
+        },
+        {
+          "id": "account-6",
+          "type": "post",
+          "title": "找回遗失的公交月票",
+          "timestamp": "{{accountOctoberPostDate}}"
+        },
+        {
+          "id": "account-7",
+          "type": "post",
+          "title": "老人已安全回家，感谢帮忙",
+          "timestamp": "{{accountSeptemberPostDate}}"
+        },
+        {
+          "id": "account-8",
+          "type": "post",
+          "title": "社区寻物公告：一串钥匙",
+          "timestamp": "{{accountAugustPostDate}}"
+        }
+      ]
+    },
+    {
+      "id": "forum_zhaoyan_missing",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "title": "[寻人启事] 寻找赵妍",
+      "url": "nclife://bbs/thread/81102",
+      "siteName": "{{cityName}}生活论坛",
+      "author": "回声寻人网",
+      "date": "{{zhaoNoticeDate}} 10:08",
+      "subtitle": "寻人寻物版 · 旧帖",
+      "tags": [
+        "赵妍",
+        "寻人"
+      ],
+      "details": {
+        "section": "寻人寻物",
+        "views": "962",
+        "replies": "7",
+        "registeredAt": "{{echoAccountRegisteredAt}}",
+        "signature": "请提供可靠目击信息，勿公布未经核实的私人住址。"
+      },
+      "media": {
+        "src": "cases/missing-person/images/zhao-yan.jpg",
+        "alt": "赵妍在室内咖啡馆的普通生活照",
+        "caption": "发布人提供的生活照（网页归档）",
+        "filename": "zy_old.jpg",
+        "width": "1448",
+        "height": "1086",
+        "uploadedAt": "{{zhaoNoticeDate}} 10:08"
+      },
+      "body": [
+        "寻人启事：赵妍，女，{{zhaoAge}}，在{{cityName}}工作，身高{{zhaoHeight}}。照片拍于今年秋天，深色外套，长发。家属最近联系不上她，担心她独自在外遇到困难，请知情的朋友帮忙留意。若只凭照片不能确定身份，请不要在公开回帖中猜测具体住处。",
+        "有近期见到她的朋友，请通过回声寻人网站内留言说明时间与大致地点。原帖上的联系电话在归档时已遮蔽。发布人会先与家属核对消息，再决定是否公开更新。",
+        "感谢转发。网络寻人最需要准确的信息，不希望转帖时添上未经核实的传闻。若本人已与家属联系，也请知情人提醒家属回帖，以免继续打扰。来源：回声寻人网。"
+      ],
+      "objects": [
+        {
+          "id": "zhao-post-time",
+          "type": "timestamp",
+          "title": "发帖时间详情",
+          "timestamp": "{{zhaoNoticeDate}} 10:08",
+          "metadata": {
+            "创建": "{{zhaoNoticeDate}} 10:08",
+            "来源账号": "回声寻人网"
+          },
+          "evidenceId": "F05"
+        },
+        {
+          "id": "zy-r1",
+          "type": "reply",
+          "title": "帮转",
+          "author": "胡桃",
+          "floor": "2#",
+          "timestamp": "{{zhaoNoticeDate}} 10:40",
+          "body": [
+            "帮转，希望尽快联系上。"
+          ]
+        },
+        {
+          "id": "zy-r2",
+          "type": "reply",
+          "title": "照片有点旧",
+          "author": "路过的人",
+          "floor": "3#",
+          "timestamp": "{{zhaoNoticeDate}} 11:21",
+          "body": [
+            "这照片像是前阵子拍的，最好补一张最近的吧。"
+          ]
+        },
+        {
+          "id": "zy-r3",
+          "type": "reply",
+          "title": "问一个链接",
+          "author": "汽水玻璃瓶",
+          "floor": "4#",
+          "timestamp": "{{zhaoNoticeDate}} 12:03",
+          "body": [
+            "这是她以前那个博客吗？我记得头像和昵称差不多。"
+          ],
+          "links": [
+            {
+              "label": "赵妍的旧博客",
+              "pageId": "blog_zhaoyan"
+            }
+          ]
+        },
+        {
+          "id": "zy-r4",
+          "type": "reply",
+          "title": "请私信线索",
+          "author": "回声寻人网",
+          "floor": "5#",
+          "timestamp": "{{zhaoNoticeDate}} 13:18",
+          "body": [
+            "如有确认过的消息请发站内信，感谢。"
+          ]
+        },
+        {
+          "id": "zy-r5",
+          "type": "reply",
+          "title": "咖啡馆好像见过",
+          "author": "晚风",
+          "floor": "6#",
+          "timestamp": "{{zhaoNoticeDate}} 15:46",
+          "body": [
+            "照片背景那家店我去过，不过不能确定是不是本人。"
+          ]
+        },
+        {
+          "id": "zy-r6",
+          "type": "reply",
+          "title": "顶一下",
+          "author": "小舟",
+          "floor": "7#",
+          "timestamp": "{{zhaoReplyDate}} 08:05",
+          "body": [
+            "顶帖，让更多人看到。"
+          ]
+        },
+        {
+          "id": "zy-r7",
+          "type": "reply",
+          "title": "别乱传地址",
+          "author": "木棉",
+          "floor": "8#",
+          "timestamp": "{{zhaoReplyDate}} 11:20",
+          "body": [
+            "先核实再转具体信息，别在帖子里写别人的住处。"
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "来源账号发帖记录",
+          "pageId": "echo_account_posts"
+        }
+      ]
+    },
+    {
+      "id": "blog_zhaoyan",
+      "kind": "blog",
+      "layout": "blog",
+      "title": "终于买到了",
+      "url": "oldblog://zhaoyan/{{zhaoBlogDate|path}}/cd",
+      "siteName": "赵妍的小屋",
+      "author": "赵妍",
+      "date": "{{zhaoBlogDate}} 22:17",
+      "subtitle": "生活日记 · 旧博客",
+      "tags": [
+        "生活",
+        "音乐"
+      ],
+      "body": [
+        "下班的时候本来只想直接回家，走到路口又想起周末在唱片店看到的那张 CD。第一家店已经卖完，我有点不甘心，坐了两站公交去另一家。店员从最下面的架子里翻出来一张，盒角还有点磨损，不过能听就好。",
+        "买完出来天已经黑了，旁边面包店正准备关门。我拎着袋子在站台等车，忽然觉得为了这样一件小东西绕远路也挺好笑。回家把旧机器翻出来试，第一首前奏还没放完就接到同事电话，问我明天那份表格改好了没有。",
+        "明天可能还要加班，桌上那摞资料我只整理到一半。先把唱片收好，等周末有空再从头听。旧耳机一边接触不好，声音忽大忽小，看来又得去电子市场买根线。最近博客更新得慢，留言我都看见了，不用担心我是不是又把密码忘了。上周答应发的歌单还存在电脑桌面上，等整理好再贴出来。"
+      ],
+      "objects": [
+        {
+          "id": "zhao-blog-publish",
+          "type": "timestamp",
+          "title": "文章发布信息",
+          "timestamp": "{{zhaoBlogDate}} 22:17",
+          "metadata": {
+            "发布": "{{zhaoBlogDate}} 22:17",
+            "作者": "赵妍",
+            "最后修改": "无"
+          },
+          "evidenceId": "F06"
+        },
+        {
+          "id": "zb-c1",
+          "type": "reply",
+          "title": "评论",
+          "author": "蜜柑",
+          "floor": "1#",
+          "timestamp": "{{zhaoBlogDate}} 22:38",
+          "body": [
+            "你昨晚不是还说不买吗哈哈。"
+          ]
+        },
+        {
+          "id": "zb-c2",
+          "type": "reply",
+          "title": "博主回复",
+          "author": "赵妍",
+          "floor": "2#",
+          "timestamp": "{{zhaoBlogDate}} 22:45",
+          "body": [
+            "控制不住。"
+          ]
+        },
+        {
+          "id": "zb-c3",
+          "type": "reply",
+          "title": "听完借我",
+          "author": "阿青",
+          "floor": "3#",
+          "timestamp": "{{zhaoBlogCommentDate}} 09:10",
+          "body": [
+            "听完借我一周，我也想听这一版。"
+          ]
+        },
+        {
+          "id": "zb-c4",
+          "type": "reply",
+          "title": "路过",
+          "author": "晴天豆",
+          "floor": "4#",
+          "timestamp": "{{zhaoBlogCommentDate}} 12:02",
+          "body": [
+            "那家店有时会进旧版，我也常去。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "news_zhaoyan_missing",
+      "kind": "website",
+      "layout": "news",
+      "title": "{{cityName}}一公司职员未到岗 家人寻找赵妍",
+      "url": "ncitynews://local/{{zhaoNewsDate|compact}}/1044",
+      "siteName": "{{cityName}}资讯网",
+      "author": "本报记者",
+      "date": "{{zhaoNewsDate}}",
+      "subtitle": "本地 · 社会",
+      "tags": [
+        "赵妍",
+        "失联"
+      ],
+      "body": [
+        "本报讯　{{cityName}}一家公司员工赵妍近日未按时到岗，家人和同事正在寻找。记者昨日向公司了解情况，对方表示已经同家属取得联系，并将掌握的出勤记录提供给有关部门。家属称此前联系中断过短暂时间，但这次持续无法接通电话，因此希望知情者及时提供可靠消息。",
+        "据同事介绍，赵妍本周前几天仍处理日常工作，也在下班后与朋友有过联系。她平时负责整理资料，偶尔因加班较晚第二天晚到，但一般会提前发短信说明。公司目前没有收到请假申请。",
+        "家属核对电话和住处情况后表示，赵妍自{{zhaoLostDate|zh}}起未再出现，也没有按约到岗。朋友尝试通过她平时使用的网络账号留言，暂时没有得到新的回应。警方已接收家属提供的近期照片和最后联系时间，正在进一步核实线索。",
+        "报道发出后，有网友在不同论坛转发了早前的寻人帖。记者提醒，旧帖与新报道的时间、来源可能不同；看到相似照片时应先确认身份，不要把未经核实的目击说法写成确定事实。",
+        "家属表示，最希望得到的是{{zhaoLostDate|zh}}以后可核实的行踪信息。若有人保留通话、邮件或当日见面的具体时间，可向警方提供。公司同事正在整理可能有用的值班表和联络记录，相关材料会通过正式渠道交给家属。对赵妍此前的正常工作和生活，不应仅因后来的失联而任意猜测。"
+      ]
+    },
+    {
+      "id": "echo_home",
+      "kind": "website",
+      "layout": "echo",
+      "title": "回声寻人网",
+      "url": "echo://home",
+      "siteName": "回声寻人网",
+      "subtitle": "多一个人看见，多一分回家的希望",
+      "bookmark": true,
+      "body": [
+        "这是回声寻人网保存于旧网页档案中的首页。网站公开提供寻人信息发布、回访和志愿转发服务。页面中的成功寻回与咨询内容为正常公益业务。"
+      ],
+      "objects": [
+        {
+          "id": "echo-module-1",
+          "type": "text",
+          "title": "最新寻人",
+          "body": [
+            "按地区与发布时间浏览家属提交的信息。"
+          ],
+          "links": [
+            {
+              "label": "浏览历史来源",
+              "pageId": "echo_archive_index"
+            }
+          ]
+        },
+        {
+          "id": "echo-module-2",
+          "type": "text",
+          "title": "成功寻回",
+          "body": [
+            "家属报平安与撤帖申请。"
+          ]
+        },
+        {
+          "id": "echo-module-3",
+          "type": "text",
+          "title": "我要发布",
+          "body": [
+            "准备照片、基本信息和有效联系方式。"
+          ]
+        },
+        {
+          "id": "echo-module-4",
+          "type": "text",
+          "title": "志愿者",
+          "body": [
+            "转发寻人消息，帮助核实公开信息。"
+          ]
+        },
+        {
+          "id": "echo-module-5",
+          "type": "text",
+          "title": "寻人须知",
+          "body": [
+            "发布前请先阅读公开规则。"
+          ],
+          "links": [
+            {
+              "label": "阅读发布规则",
+              "pageId": "echo_submission_rules"
+            }
+          ]
+        },
+        {
+          "id": "echo-module-6",
+          "type": "text",
+          "title": "联系我们",
+          "body": [
+            "咨询通过站内留言提交；旧联系电话不在归档中显示。"
+          ]
+        },
+        {
+          "id": "echo-module-7",
+          "type": "text",
+          "title": "留言回访",
+          "body": [
+            "部分家属同意公开寻回消息。"
+          ]
+        },
+        {
+          "id": "echo-module-8",
+          "type": "text",
+          "title": "网站公告",
+          "body": [
+            "请勿在公开评论中张贴他人身份证号或住址。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "echo_submission_rules",
+      "kind": "website",
+      "layout": "echo",
+      "title": "寻人信息发布须知",
+      "url": "echo://rules/submission",
+      "siteName": "回声寻人网",
+      "subtitle": "公开发布规则",
+      "body": [
+        "欢迎使用回声寻人网。本站为家属和志愿者提供公开信息发布、转发与回访服务。请确保提交内容真实，避免重复发布；工作人员可能联系发布人核对资料。",
+        "原则上请确认当事人已无法通过正常方式取得联系后再提交寻人信息。若本人已与家属取得联系，请尽快申请更新或撤下帖子，减少不必要的打扰。",
+        "发布内容建议包括近期照片、最后可靠联系时间、常用称呼、衣着特征及可联系的家属方式。请勿上传身份证件完整号码、住址门牌或未经本人同意的私人通信。",
+        "网友提供线索时，请注明目击的日期、时间和大致区域；无法确认身份的猜测不要写成确定信息。涉及未成年人或其他敏感情况，请优先联系当地警方。",
+        "本站会保留必要的发布时间和修改记录，以便家属核对转发版本。站内消息可能因旧网页服务迁移而无法继续使用；离线档案中的电话和邮箱不作为现时联系方式。"
+      ],
+      "links": [
+        {
+          "label": "返回回声寻人网首页",
+          "pageId": "echo_home"
+        }
+      ]
+    },
+    {
+      "id": "echo_archive_index",
+      "kind": "snapshot",
+      "layout": "index",
+      "title": "回声寻人网 · 历史来源索引",
+      "url": "archive://echo/history",
+      "siteName": "网页存档服务",
+      "subtitle": "公开来源与转载版本",
+      "searchable": false,
+      "unlockConditions": {
+        "factIds": [
+          "C03"
+        ]
+      },
+      "body": [
+        "此索引汇总回声寻人网旧站与外部论坛转载页面。不同条目可能由同一账号发布，页面时间以各站当时公开的创建记录为准。"
+      ],
+      "objects": [
+        {
+          "id": "hist-1",
+          "type": "cache-entry",
+          "title": "刘佳：{{cityName}}生活论坛转载",
+          "timestamp": "{{liuNoticeDate}}",
+          "links": [
+            {
+              "label": "查看原帖",
+              "pageId": "forum_liujia_missing"
+            }
+          ]
+        },
+        {
+          "id": "hist-2",
+          "type": "cache-entry",
+          "title": "赵妍：{{cityName}}生活论坛转载",
+          "timestamp": "{{zhaoNoticeDate}}",
+          "links": [
+            {
+              "label": "查看原帖",
+              "pageId": "forum_zhaoyan_missing"
+            }
+          ]
+        },
+        {
+          "id": "hist-3",
+          "type": "cache-entry",
+          "title": "陈雨：回声寻人网旧站条目",
+          "timestamp": "{{chenDate}} {{chenNoticeTime}}",
+          "links": [
+            {
+              "label": "打开条目",
+              "pageId": "echo_chenyu_notice"
+            }
+          ]
+        },
+        {
+          "id": "hist-4",
+          "type": "cache-entry",
+          "title": "其他公开寻人条目",
+          "body": [
+            "若干普通业务记录，未纳入本段调查。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "echo_chenyu_notice",
+      "kind": "website",
+      "layout": "echo",
+      "title": "寻找陈雨",
+      "url": "echo://notice/chenyu",
+      "siteName": "回声寻人网",
+      "author": "回声寻人网",
+      "date": "{{chenDate}} {{chenNoticeTime}}",
+      "subtitle": "旧站寻人条目",
+      "tags": [
+        "陈雨",
+        "{{cityName}}大学"
+      ],
+      "unlockConditions": {
+        "factIds": [
+          "C04"
+        ]
+      },
+      "media": {
+        "src": "cases/missing-person/images/chen-yu.jpg",
+        "alt": "陈雨在校园楼前身穿灰色连帽衫的生活照",
+        "caption": "寻人条目所附照片（旧网页归档）",
+        "filename": "chenyu_01.jpg",
+        "width": "1448",
+        "height": "1086",
+        "uploadedAt": "{{chenDate}} {{chenNoticeTime}}"
+      },
+      "body": [
+        "寻人信息：陈雨，女，{{cityName}}大学学生。照片中穿灰色连帽衫、黑色帆布鞋。发布人称暂时无法通过常用联系方式找到她，希望认识陈雨的同学帮助核实是否平安。",
+        "看到相似的人请先确认身份；如有可靠消息，可通过网站站内留言告知发布时间和大致区域。旧站公开联系方式已在归档中遮蔽。请勿在评论中填写宿舍门牌或其他私人资料。"
+      ],
+      "objects": [
+        {
+          "id": "chen-notice-time",
+          "type": "timestamp",
+          "title": "条目发布时间详情",
+          "timestamp": "{{chenDate}} {{chenNoticeTime}}",
+          "metadata": {
+            "发布": "{{chenDate}} {{chenNoticeTime}}",
+            "来源": "回声寻人网旧站"
+          },
+          "evidenceId": "F09"
+        },
+        {
+          "id": "chen-comment-1",
+          "type": "reply",
+          "title": "转给同学",
+          "author": "路过",
+          "floor": "1#",
+          "timestamp": "{{chenDate}} 18:45",
+          "body": [
+            "已转给学校的朋友，希望尽快联系上。"
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "返回历史来源索引",
+          "pageId": "echo_archive_index"
+        }
+      ]
+    },
+    {
+      "id": "bbs_moderation_log_chenyu",
+      "kind": "website",
+      "layout": "index",
+      "title": "校园 BBS · 版主管理记录",
+      "url": "ncu://bbs/modlog/chenyu",
+      "siteName": "{{cityName}}大学 BBS",
+      "date": "{{chenDate}}",
+      "subtitle": "公开管理操作与帖子回复",
+      "tags": [
+        "陈雨",
+        "版主"
+      ],
+      "unlockConditions": {
+        "factIds": [
+          "C04"
+        ]
+      },
+      "body": [
+        "旧站保留的版主管理操作与公开回复。时间由论坛服务器显示，账号与页面来源可逐项查看。"
+      ],
+      "objects": [
+        {
+          "id": "chen-move-log",
+          "type": "log-entry",
+          "title": "移动重复帖",
+          "timestamp": "{{chenDate}} {{chenModerationTime}}",
+          "body": [
+            "版主 陈雨 将某重复帖移动至校园生活区。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "移动重复帖",
+            "时间": "{{chenDate}} {{chenModerationTime}}"
+          },
+          "detailLabel": "查看操作详情"
+        },
+        {
+          "id": "chen-reply-log",
+          "type": "reply",
+          "title": "陈雨的公开回复",
+          "author": "陈雨",
+          "timestamp": "{{chenDate}} {{chenReplyTime}}",
+          "body": [
+            "重复内容已经合并，有问题私信。"
+          ],
+          "metadata": {
+            "账号": "陈雨",
+            "回复时间": "{{chenDate}} {{chenReplyTime}}",
+            "帖子状态": "可见"
+          },
+          "evidenceId": "F10",
+          "detailLabel": "查看回复详情"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "F01",
+      "type": "timestamp",
+      "sourcePageId": "forum_liujia_missing",
+      "sourceObjectId": "liujia-post-time",
+      "title": "刘佳｜{{liuNoticeDate|short}} 09:12 寻人帖发布",
+      "summary": "{{cityName}}生活论坛创建记录为 {{liuNoticeDate}} 09:12。",
+      "timestamp": "{{liuNoticeDate}} 09:12",
+      "discovery": "detail"
+    },
+    {
+      "id": "F02",
+      "type": "reply",
+      "sourcePageId": "forum_course_room",
+      "title": "刘佳｜{{liuNoticeDate|short}} 下午仍在学校活动",
+      "summary": "旧论坛对话提到刘佳当天下午与同学在二食堂，之后去上课。",
+      "timestamp": "{{liuNoticeDate}} 14:06",
+      "discovery": "selection",
+      "selectionTexts": [
+        "你下午不是跟刘佳她们在二食堂吗",
+        "她们去上课了，我忘记问了"
+      ]
+    },
+    {
+      "id": "F03",
+      "type": "page",
+      "sourcePageId": "news_liujia_missing",
+      "title": "刘佳｜{{liuLostDate|short}} 晚后失联",
+      "summary": "{{liuNewsDate|zhSpaced}}报道：刘佳于 {{liuLostDate|zhSpaced}}晚离开宿舍后未再返回。",
+      "timestamp": "{{liuLostDate}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "刘佳于{{liuLostDate|zh}}晚离开宿舍后未再返回"
+      ]
+    },
+    {
+      "id": "F04",
+      "type": "cache",
+      "sourcePageId": "cache_liujia_notice",
+      "sourceObjectId": "cache-lj-fetch",
+      "title": "刘佳寻人帖｜{{liuNoticeDate|short}} 已有网页缓存",
+      "summary": "网页存档于 {{liuNoticeDate}} 10:03 抓取到寻人帖。",
+      "timestamp": "{{liuNoticeDate}} 10:03",
+      "discovery": "detail"
+    },
+    {
+      "id": "F05",
+      "type": "timestamp",
+      "sourcePageId": "forum_zhaoyan_missing",
+      "sourceObjectId": "zhao-post-time",
+      "title": "赵妍｜{{zhaoNoticeDate|short}} 寻人帖发布",
+      "summary": "{{cityName}}生活论坛创建记录为 {{zhaoNoticeDate}} 10:08。",
+      "timestamp": "{{zhaoNoticeDate}} 10:08",
+      "discovery": "detail"
+    },
+    {
+      "id": "F06",
+      "type": "timestamp",
+      "sourcePageId": "blog_zhaoyan",
+      "sourceObjectId": "zhao-blog-publish",
+      "title": "赵妍｜{{zhaoBlogDate|short}} 仍更新本人博客",
+      "summary": "博客于 {{zhaoBlogDate}} 22:17 发布，作者赵妍，最后修改记录为无。",
+      "timestamp": "{{zhaoBlogDate}} 22:17",
+      "discovery": "detail"
+    },
+    {
+      "id": "F07",
+      "type": "page",
+      "sourcePageId": "news_zhaoyan_missing",
+      "title": "赵妍｜{{zhaoLostDate|short}} 起失联",
+      "summary": "{{zhaoNewsDate|zhSpaced}}报道：赵妍自 {{zhaoLostDate|zhSpaced}}起未再出现，也未按约到岗。",
+      "timestamp": "{{zhaoLostDate}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "赵妍自{{zhaoLostDate|zh}}起未再出现，也没有按约到岗"
+      ]
+    },
+    {
+      "id": "F08",
+      "type": "page",
+      "sourcePageId": "echo_submission_rules",
+      "title": "回声寻人网｜公开发布规则",
+      "summary": "公开规则要求先确认当事人无法通过正常方式取得联系。",
+      "discovery": "selection",
+      "selectionTexts": [
+        "原则上请确认当事人已无法通过正常方式取得联系后再提交寻人信息"
+      ]
+    },
+    {
+      "id": "F09",
+      "type": "timestamp",
+      "sourcePageId": "echo_chenyu_notice",
+      "sourceObjectId": "chen-notice-time",
+      "title": "陈雨｜寻人帖于 {{chenNoticeTime}} 发布",
+      "summary": "回声寻人网旧站记录了陈雨寻人帖于 {{chenDate}} {{chenNoticeTime}} 发布。",
+      "timestamp": "{{chenDate}} {{chenNoticeTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F10",
+      "type": "log",
+      "sourcePageId": "bbs_moderation_log_chenyu",
+      "sourceObjectId": "chen-reply-log",
+      "title": "陈雨｜{{chenReplyTime}} 仍正常使用论坛",
+      "summary": "校园 BBS 记录显示陈雨当日 {{chenReplyTime}} 公开回复帖子。",
+      "timestamp": "{{chenDate}} {{chenReplyTime}}",
+      "discovery": "detail"
+    }
+  ],
+  "facts": [
+    {
+      "id": "C01",
+      "title": "刘佳寻人帖早于真实失联",
+      "summary": "发帖、在校活动、失联报道与早期网页快照之间的日期关系一致。"
+    },
+    {
+      "id": "C02",
+      "title": "赵妍存在相同异常",
+      "summary": "寻人帖之后，赵妍仍以本人账号更新博客，后来才被报道失联。"
+    },
+    {
+      "id": "C03",
+      "title": "至少两起提前寻人",
+      "summary": "刘佳和赵妍的寻人信息均早于后来公开确认的失联。"
+    },
+    {
+      "id": "C04",
+      "title": "异常帖子不符合网站公开规则",
+      "summary": "至少两篇提前发布的寻人帖与回声寻人网公开发布规则不符。"
+    },
+    {
+      "id": "C05",
+      "title": "陈雨被发布为寻人对象时仍正常活动",
+      "summary": "寻人帖发布后，同日校园 BBS 仍记录到陈雨本人公开回复。"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R01",
+      "evidenceIds": [
+        "F01",
+        "F02",
+        "F03",
+        "F04"
+      ],
+      "title": "核对刘佳记录",
+      "summary": "四份记录的时间顺序可以相互验证。",
+      "unlocks": {
+        "factIds": [
+          "C01"
+        ]
+      },
+      "checkpointId": "checkpoint_pattern_01"
+    },
+    {
+      "id": "R02",
+      "evidenceIds": [
+        "F05",
+        "F06",
+        "F07"
+      ],
+      "title": "核对赵妍记录",
+      "summary": "寻人帖、本人博客与失联报道形成明确先后关系。",
+      "unlocks": {
+        "factIds": [
+          "C02"
+        ]
+      }
+    },
+    {
+      "id": "R03",
+      "factIds": [
+        "C01",
+        "C02"
+      ],
+      "title": "对照两起记录",
+      "summary": "两份已确认的时间异常具有相同模式。",
+      "unlocks": {
+        "factIds": [
+          "C03"
+        ],
+        "pageIds": [
+          "echo_archive_index"
+        ]
+      },
+      "checkpointId": "checkpoint_pattern_02"
+    },
+    {
+      "id": "R04",
+      "factIds": [
+        "C03"
+      ],
+      "evidenceIds": [
+        "F08"
+      ],
+      "title": "对照网站发布规则",
+      "summary": "公开规则与两起提前寻人记录不符。",
+      "unlocks": {
+        "factIds": [
+          "C04"
+        ],
+        "pageIds": [
+          "echo_chenyu_notice"
+        ]
+      }
+    },
+    {
+      "id": "R05",
+      "evidenceIds": [
+        "F09",
+        "F10"
+      ],
+      "title": "对照陈雨当晚记录",
+      "summary": "寻人帖发布后，校园论坛仍有陈雨本人活动。",
+      "unlocks": {
+        "factIds": [
+          "C05"
+        ]
+      },
+      "checkpointId": "checkpoint_chenyu_notice"
+    }
+  ],
+  "puzzles": [],
+  "provisional": {
+    "status": "development-only",
+    "scope": [
+      "calendar dates",
+      "city",
+      "character ages and heights"
+    ]
+  }
+}

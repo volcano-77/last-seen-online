@@ -5,12 +5,12 @@
   "title": "开发者测试档案",
   "subtitle": "非《寻人启事》剧情，仅用于验证调查机制",
   "briefing": "这里的 A、B、C 记录都是中性的开发者测试材料，不代表正式案件事实。",
-  "objective": "点击页面中的记录，收藏证据，再试试关联、排序与短输入。",
+  "objective": "查看页面详情，记下短摘要，再试试关联、排序与短输入。",
   "startPageId": "search",
   "pages": [
     { "id": "search", "kind": "search", "title": "档案检索", "url": "mock://search", "body": ["检索开发者测试页面。"] },
     {
-      "id": "notice", "kind": "website", "title": "资料室公告", "url": "mock://archive/notice",
+      "id": "notice", "kind": "website", "title": "资料室公告", "url": "mock://archive/notice", "bookmark": true,
       "siteName": "资料室旧站（测试）", "date": "2008-05-03", "body": ["下列记录仅演示点击发现证据。"],
       "objects": [
         { "id": "notice-date", "type": "timestamp", "title": "公告时间", "body": ["网页显示的公告时间。"], "timestamp": "2008-05-03", "evidenceId": "ev-notice-date" }

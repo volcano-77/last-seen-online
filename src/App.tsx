@@ -1,300 +1,190 @@
 import { useEffect, useRef, useState } from 'react'
-import type { ChangeEvent, FormEvent } from 'react'
-import type { CasePage, GameCase, PuzzleDefinition, UnlockConditions, Unlocks } from './case'
-import { loadDefaultCase, loadDemoCase, parseCase } from './case'
+import type { ChangeEvent, FormEvent, MouseEvent } from 'react'
+import type { CasePage, GameCase, RelationDefinition, UnlockConditions, Unlocks } from './case'
+import { loadDefaultCase, loadDemoCase, loadMockCase, parseCase } from './case'
 import { SearchSite, SiteView } from './Sites'
 import type { SaveData } from './storage'
-import { clearCurrentSave, hasLegacySave, readSave, writeSave } from './storage'
+import { clearCurrentSave, hasLegacySave, loadCurrentSession, makeSave, writeCustomCase, writeSave } from './storage'
 import './App.css'
 
-type Panel = 'browser' | 'collection' | 'compare' | 'case'
-const kindNames: Partial<Record<CasePage['kind'], string>> = {
-  forum: '论坛', 'forum-thread': '论坛', profile: '个人空间', blog: '博客',
-  website: '旧网页', email: '邮箱', snapshot: '快照',
-}
-
-function makeSave(caseData: GameCase): SaveData {
-  return {
-    saveVersion: 3, caseData, currentPageId: caseData.startPageId,
-    history: [caseData.startPageId], historyIndex: 0,
-    visitedPageIds: [caseData.startPageId], discoveredEvidenceIds: [],
-    savedEvidenceIds: [], establishedRelationIds: [], unlockedFactIds: [],
-    completedPuzzleIds: [], timelineOrders: {},
-  }
-}
-function addIds(current: string[], incoming: string[] = []): string[] {
-  return [...new Set([...current, ...incoming])]
-}
+type Panel = 'browser' | 'records' | 'case'
+type SelectionTip = { id: string; x: number; y: number }
+type Feedback = { id: number; title: string; x: number; y: number }
+const addIds = (old: string[], next: string[] = []) => [...new Set([...old, ...next])]
+const normalize = (text: string) => text.replace(/[\s，。？！、：；,.?!:;“”‘’（）()]/g, '').toLowerCase()
+const relationIds = (relation: RelationDefinition) => [...(relation.evidenceIds || []), ...(relation.factIds || [])]
 function meetsGate(gate: UnlockConditions | undefined, save: SaveData): boolean {
-  return !gate || (
-    (gate.evidenceIds || []).every((id) => save.discoveredEvidenceIds.includes(id)) &&
+  return !gate || (gate.evidenceIds || []).every((id) => save.discoveredEvidenceIds.includes(id)) &&
     (gate.relationIds || []).every((id) => save.establishedRelationIds.includes(id)) &&
     (gate.factIds || []).every((id) => save.unlockedFactIds.includes(id)) &&
     (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id))
-  )
 }
-function applyUnlocks(old: SaveData, unlocks?: Unlocks): SaveData {
-  return unlocks ? { ...old, unlockedFactIds: addIds(old.unlockedFactIds, unlocks.factIds) } : old
+function applyUnlocks(save: SaveData, unlocks?: Unlocks): SaveData {
+  return unlocks ? { ...save, unlockedFactIds: addIds(save.unlockedFactIds, unlocks.factIds) } : save
 }
 
 function App() {
-  const [initialSave] = useState(readSave)
-  const [save, setSave] = useState<SaveData | null>(initialSave)
-  const [ready, setReady] = useState(Boolean(initialSave))
+  const [save, setSave] = useState<SaveData | null>(null)
+  const [caseData, setCaseData] = useState<GameCase | null>(null)
+  const [ready, setReady] = useState(false)
   const [error, setError] = useState('')
   const [panel, setPanel] = useState<Panel>('browser')
   const [query, setQuery] = useState('')
   const [address, setAddress] = useState<string | null>(null)
-  const [selectedEvidenceId, setSelectedEvidenceId] = useState<string | null>(null)
-  const [compareIds, setCompareIds] = useState<string[]>([])
+  const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const [selectionTip, setSelectionTip] = useState<SelectionTip | null>(null)
   const [shortAnswers, setShortAnswers] = useState<Record<string, string>>({})
   const [notice, setNotice] = useState('')
+  const [historyOpen, setHistoryOpen] = useState(false)
+  const [recordsOpen, setRecordsOpen] = useState(false)
+  const [feedback, setFeedback] = useState<Feedback | null>(null)
+  const [reloadKey, setReloadKey] = useState(0)
   const fileInput = useRef<HTMLInputElement>(null)
+  const pageRef = useRef<HTMLDivElement>(null)
+  const feedbackTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
   useEffect(() => {
-    if (initialSave) return
-    loadDefaultCase().then((caseData) => setSave(makeSave(caseData)))
+    loadCurrentSession().then((session) => { setCaseData(session.caseData); setSave(session.save) })
       .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : 'Case 加载失败。'))
       .finally(() => setReady(true))
-  }, [initialSave])
+  }, [])
   useEffect(() => { if (save && ready) writeSave(save) }, [save, ready])
+  useEffect(() => () => { if (feedbackTimer.current) clearTimeout(feedbackTimer.current) }, [])
 
-  const caseData = save?.caseData
   const page = caseData?.pages.find((item) => item.id === save?.currentPageId)
   const searchPage = caseData?.pages.find((item) => item.kind === 'search')
   const grantedPageIds = new Set(caseData ? [
-    ...caseData.relations.filter((item) => save?.establishedRelationIds.includes(item.id))
-      .flatMap((item) => item.unlocks?.pageIds || []),
-    ...caseData.puzzles.filter((item) => save?.completedPuzzleIds.includes(item.id))
-      .flatMap((item) => item.unlocks?.pageIds || []),
+    ...caseData.relations.filter((item) => save?.establishedRelationIds.includes(item.id)).flatMap((item) => item.unlocks?.pageIds || []),
+    ...caseData.puzzles.filter((item) => save?.completedPuzzleIds.includes(item.id)).flatMap((item) => item.unlocks?.pageIds || []),
   ] : [])
   const lockedPageIds = new Set(caseData ? [
     ...caseData.relations.flatMap((item) => item.unlocks?.pageIds || []),
     ...caseData.puzzles.flatMap((item) => item.unlocks?.pageIds || []),
-  ] : [])
-  const grantedEvidenceIds = new Set(caseData ? [
-    ...caseData.relations.filter((item) => save?.establishedRelationIds.includes(item.id))
-      .flatMap((item) => item.unlocks?.evidenceIds || []),
-    ...caseData.puzzles.filter((item) => save?.completedPuzzleIds.includes(item.id))
-      .flatMap((item) => item.unlocks?.evidenceIds || []),
-  ] : [])
-  const lockedEvidenceIds = new Set(caseData ? [
-    ...caseData.relations.flatMap((item) => item.unlocks?.evidenceIds || []),
-    ...caseData.puzzles.flatMap((item) => item.unlocks?.evidenceIds || []),
   ] : [])
   function canVisit(target: CasePage): boolean {
     return Boolean(save && meetsGate(target.unlockConditions, save) &&
       (!lockedPageIds.has(target.id) || grantedPageIds.has(target.id)))
   }
   const visiblePages = caseData?.pages.filter(canVisit) || []
-  const selectedEvidence = caseData?.evidence.find((item) => item.id === selectedEvidenceId)
-  const pageEvidence = caseData?.evidence.filter((item) => item.sourcePageId === page?.id &&
-    !item.sourceObjectId && save && meetsGate(item.unlockConditions, save) &&
-    (!lockedEvidenceIds.has(item.id) || grantedEvidenceIds.has(item.id))) || []
+  const visiblePageIds = new Set(visiblePages.map((item) => item.id))
+  const knownIds = new Set([...(save?.discoveredEvidenceIds || []), ...(save?.unlockedFactIds || [])])
+  const candidates = caseData?.relations.filter((item) => !save?.establishedRelationIds.includes(item.id) &&
+    selectedIds.every((id) => relationIds(item).includes(id))) || []
+  const possibleIds = new Set(candidates.flatMap(relationIds).filter((id) => knownIds.has(id)))
+  const exact = candidates.find((item) => relationIds(item).length === selectedIds.length &&
+    relationIds(item).every((id) => selectedIds.includes(id)))
 
   function navigate(id: string) {
     const target = caseData?.pages.find((item) => item.id === id)
-    if (!target) return
-    if (!canVisit(target)) { setNotice('这个页面尚未开放。继续查看已找到的材料。'); return }
+    if (!target || !canVisit(target)) return
     setSave((old) => old ? { ...old, currentPageId: id,
-      history: [...old.history.slice(0, old.historyIndex + 1), id],
-      historyIndex: old.historyIndex + 1,
+      history: [...old.history.slice(0, old.historyIndex + 1), id], historyIndex: old.historyIndex + 1,
       visitedPageIds: addIds(old.visitedPageIds, [id]) } : old)
-    setAddress(null)
-    setSelectedEvidenceId(null)
-    setPanel('browser')
+    setAddress(null); setSelectionTip(null); setHistoryOpen(false); setPanel('browser')
   }
   function goHistory(direction: -1 | 1) {
-    setSave((old) => {
-      if (!old) return old
-      const next = old.historyIndex + direction
-      return next < 0 || next >= old.history.length ? old :
-        { ...old, historyIndex: next, currentPageId: old.history[next],
-          visitedPageIds: addIds(old.visitedPageIds, [old.history[next]]) }
-    })
-    setAddress(null)
-    setSelectedEvidenceId(null)
+    setSave((old) => { if (!old) return old; const next = old.historyIndex + direction
+      return next < 0 || next >= old.history.length ? old : { ...old, historyIndex: next,
+        currentPageId: old.history[next], visitedPageIds: addIds(old.visitedPageIds, [old.history[next]]) } })
+    setAddress(null); setSelectionTip(null)
   }
   function submitAddress(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const entered = (address ?? page?.url ?? '').trim().slice(0, 100)
-    const target = caseData?.pages.find((item) => item.url.toLowerCase() === entered.toLowerCase())
-    if (target) { navigate(target.id); return }
-    setQuery(entered)
-    if (searchPage) navigate(searchPage.id)
+    const target = visiblePages.find((item) => item.url.toLowerCase() === entered.toLowerCase())
+    if (target) navigate(target.id)
+    else { setQuery(entered); if (searchPage) navigate(searchPage.id) }
   }
-  function discoverEvidence(id: string) {
+  function discover(id: string, anchor?: { x: number; y: number }) {
     const item = caseData?.evidence.find((entry) => entry.id === id)
-    if (!item || !save || !meetsGate(item.unlockConditions, save) ||
-      (lockedEvidenceIds.has(id) && !grantedEvidenceIds.has(id))) {
-      setNotice('这项记录目前无法查看。'); return
-    }
-    setSave((old) => old ? { ...old,
-      discoveredEvidenceIds: addIds(old.discoveredEvidenceIds, [id]) } : old)
-    setSelectedEvidenceId(id)
-    setNotice('已查看记录。可点击收藏，或继续浏览。')
+    if (!save || !item || item.sourcePageId !== save.currentPageId || !meetsGate(item.unlockConditions, save)) return
+    if (save.discoveredEvidenceIds.includes(id)) return
+    setSave((old) => old ? { ...old, discoveredEvidenceIds: addIds(old.discoveredEvidenceIds, [id]) } : old)
+    const point = anchor || (selectionTip ? { x: selectionTip.x, y: selectionTip.y + 34 } : { x: 20, y: 140 })
+    setFeedback({ id: Date.now(), title: item.title, x: Math.min(Math.max(8, point.x), Math.max(8, window.innerWidth - 370)),
+      y: Math.min(Math.max(8, point.y), Math.max(8, window.innerHeight - 65)) })
+    if (feedbackTimer.current) clearTimeout(feedbackTimer.current)
+    feedbackTimer.current = setTimeout(() => setFeedback(null), 1800)
+    setSelectionTip(null); window.getSelection()?.removeAllRanges()
   }
-  function toggleSaveEvidence(id: string) {
-    setSave((old) => old ? { ...old, savedEvidenceIds: old.savedEvidenceIds.includes(id) ?
-      old.savedEvidenceIds.filter((item) => item !== id) : addIds(old.savedEvidenceIds, [id]) } : old)
-  }
-  function toggleCompare(id: string) {
-    setCompareIds((old) => old.includes(id) ? old.filter((item) => item !== id) : [...old, id])
+  function inspectSelection(event: MouseEvent<HTMLDivElement>) {
+    if (!page || !caseData || !save || !pageRef.current || event.target instanceof HTMLInputElement) return
+    const selection = window.getSelection()
+    const range = selection?.rangeCount ? selection.getRangeAt(0) : null
+    if (!selection || !range || selection.isCollapsed || !pageRef.current.contains(range.commonAncestorContainer)) { setSelectionTip(null); return }
+    const chosen = normalize(selection.toString())
+    if (chosen.length < 6 || chosen.length > 90) { setSelectionTip(null); return }
+    const match = caseData.evidence.find((item) => item.sourcePageId === page.id && item.discovery === 'selection' &&
+      !save.discoveredEvidenceIds.includes(item.id) && meetsGate(item.unlockConditions, save) &&
+      item.selectionTexts?.some((text) => { const phrase = normalize(text); return chosen.includes(phrase) ||
+        (chosen.length >= 8 && phrase.includes(chosen)) }))
+    if (!match) { setSelectionTip(null); return }
+    const rect = range.getBoundingClientRect()
+    setSelectionTip({ id: match.id, x: Math.min(window.innerWidth - 115, Math.max(8, rect.left)), y: Math.max(8, rect.top - 42) })
   }
   function confirmRelation() {
-    const match = caseData?.relations.find((item) => item.evidenceIds.length === compareIds.length &&
-      item.evidenceIds.every((id) => compareIds.includes(id)))
-    if (!match || !save) { setNotice('这些记录尚不能建立已定义的关联。可以换一组再试。'); return }
+    if (!exact) return
     setSave((old) => old ? applyUnlocks({ ...old,
-      establishedRelationIds: addIds(old.establishedRelationIds, [match.id]) }, match.unlocks) : old)
-    setCompareIds([])
-    setNotice(`关联成立：${match.title}`)
+      establishedRelationIds: addIds(old.establishedRelationIds, [exact.id]),
+      checkpointIds: exact.checkpointId ? addIds(old.checkpointIds, [exact.checkpointId]) : old.checkpointIds,
+    }, exact.unlocks) : old)
+    setSelectedIds([]); setNotice('已保存')
   }
-  function currentOrder(puzzle: PuzzleDefinition): string[] {
-    return save?.timelineOrders[puzzle.id] || puzzle.evidenceIds
+  function checkPuzzle(id: string) {
+    const puzzle = caseData?.puzzles.find((item) => item.id === id)
+    if (!puzzle || !save) return
+    const order = save.timelineOrders[id] || puzzle.evidenceIds
+    const correct = puzzle.type === 'timeline' ? puzzle.expectedOrder?.every((item, index) => order[index] === item) :
+      normalize(shortAnswers[id] || '') === normalize(puzzle.answer || '')
+    if (!correct) { setNotice('请再核对原始日期或短答案。'); return }
+    setSave((old) => old ? applyUnlocks({ ...old, completedPuzzleIds: addIds(old.completedPuzzleIds, [id]) }, puzzle.unlocks) : old)
+    setNotice('已保存')
   }
-  function moveTimeline(puzzle: PuzzleDefinition, index: number, direction: -1 | 1) {
-    const order = [...currentOrder(puzzle)]
-    const next = index + direction
-    if (next < 0 || next >= order.length) return
-    ;[order[index], order[next]] = [order[next], order[index]]
-    setSave((old) => old ? { ...old, timelineOrders: { ...old.timelineOrders, [puzzle.id]: order } } : old)
+  function replaceCase(data: GameCase) {
+    setCaseData(data); setSave(makeSave(data)); setQuery(''); setAddress(null); setSelectedIds([]); setShortAnswers({}); setPanel('browser'); setRecordsOpen(false)
+    setNotice(`已载入“${data.title}”。`)
   }
-  function checkTimeline(puzzle: PuzzleDefinition) {
-    if (!puzzle.expectedOrder?.every((id, index) => currentOrder(puzzle)[index] === id)) {
-      setNotice('顺序还需核对。查看每项记录的日期后再试。'); return
-    }
-    setSave((old) => old ? applyUnlocks({ ...old,
-      completedPuzzleIds: addIds(old.completedPuzzleIds, [puzzle.id]) }, puzzle.unlocks) : old)
-    setNotice('日期顺序已确认。')
-  }
-  function checkShort(puzzle: PuzzleDefinition) {
-    if (shortAnswers[puzzle.id]?.trim().toLowerCase() !== puzzle.answer?.trim().toLowerCase()) {
-      setNotice('短输入不匹配。请回到来源页面核对。'); return
-    }
-    setSave((old) => old ? applyUnlocks({ ...old,
-      completedPuzzleIds: addIds(old.completedPuzzleIds, [puzzle.id]) }, puzzle.unlocks) : old)
-    setShortAnswers((old) => ({ ...old, [puzzle.id]: '' }))
-    setNotice('记录已核对，相关内容现在可以访问。')
-  }
-  function replaceCase(imported: GameCase) {
-    setSave(makeSave(imported))
-    setQuery(''); setAddress(null); setSelectedEvidenceId(null); setCompareIds([])
-    setShortAnswers({}); setPanel('browser')
-    setNotice(`已载入“${imported.title}”。`)
-  }
-  function confirmReplace(): boolean {
-    return !save || (!save.discoveredEvidenceIds.length && save.history.length <= 1) ||
-      window.confirm('载入其他 Case 会替换当前 v0.3 调查状态。继续吗？')
-  }
+  function confirmReplace() { return !save || (!save.discoveredEvidenceIds.length && save.history.length <= 1) ||
+    window.confirm('载入其他 Case 会替换当前调查状态。继续吗？') }
   async function importCase(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0]
-    if (!file) return
-    try {
-      const imported = parseCase(JSON.parse(await file.text()) as unknown)
-      if (confirmReplace()) replaceCase(imported)
-    } catch (reason) { setNotice(reason instanceof Error ? reason.message : '无法读取 Case 文件。') }
+    const file = event.target.files?.[0]; if (!file) return
+    try { const data = parseCase(JSON.parse(await file.text()) as unknown); if (confirmReplace()) { clearCurrentSave(); writeCustomCase(data); replaceCase(data) } }
+    catch (reason) { setNotice(reason instanceof Error ? reason.message : '无法读取 Case 文件。') }
     finally { event.target.value = '' }
   }
-  async function loadBuiltIn(which: 'mock' | 'legacy') {
+  async function loadBuiltIn(which: 'formal' | 'mock' | 'legacy') {
     if (!confirmReplace()) return
-    try {
-      const imported = which === 'mock' ? await loadDefaultCase() : await loadDemoCase()
-      clearCurrentSave()
-      replaceCase(imported)
-    } catch (reason) { setNotice(reason instanceof Error ? reason.message : 'Case 加载失败。') }
+    try { const data = which === 'formal' ? await loadDefaultCase() : which === 'mock' ? await loadMockCase() : await loadDemoCase()
+      clearCurrentSave(); replaceCase(data) }
+    catch (reason) { setNotice(reason instanceof Error ? reason.message : 'Case 加载失败。') }
   }
 
   if (!ready) return <div className="loading-screen">正在读取本地网页档案…</div>
   if (!save || !caseData || !page) return <main className="loading-screen"><p>{error || 'Case 加载失败。'}</p><button onClick={() => window.location.reload()}>重试</button></main>
-
+  const recordTitle = (id: string) => caseData.evidence.find((item) => item.id === id)?.title ||
+    caseData.facts.find((item) => item.id === id)?.title || id
   return <div className="app-shell">
-    <header className="app-header"><div className="brand"><span className="brand-symbol">▣</span><div><b>LAST SEEN ONLINE</b><small>网络档案浏览器 · 调查骨架</small></div></div><div className="header-right"><span>本地存档</span><span>｜</span><span>{caseData.id}</span></div></header>
-    <nav className="app-nav" aria-label="主导航">
-      <button className={panel === 'browser' ? 'selected' : ''} onClick={() => setPanel('browser')}>▤ 浏览网络</button>
-      <button className={panel === 'collection' ? 'selected' : ''} onClick={() => setPanel('collection')}>☆ 收藏夹</button>
-      <button className={panel === 'compare' ? 'selected' : ''} onClick={() => setPanel('compare')}>▦ 记录对照</button>
-      <button className={panel === 'case' ? 'selected' : ''} onClick={() => setPanel('case')}>◫ 案件资料</button>
-      {caseData.status !== 'ready' && <span className="placeholder-flag">{caseData.status === 'developer-mock' ? '开发者测试材料 · 非正式剧情' : '旧 Demo · 待替换'}</span>}
-    </nav>
+    <header className="app-header"><div className="brand"><span className="brand-symbol">▣</span><div><b>LAST SEEN ONLINE</b><small>旧网页存档浏览器</small></div></div><div className="header-right">本地存档　｜　{caseData.title}</div></header>
+    <nav className="app-nav" aria-label="主导航"><button className={panel === 'browser' ? 'selected' : ''} onClick={() => setPanel('browser')}>▤ 浏览网络</button><button className={panel === 'records' ? 'selected' : ''} onClick={() => setPanel('records')}>▦ 记录</button><button className={panel === 'case' ? 'selected' : ''} onClick={() => setPanel('case')}>◫ 案件资料</button>{caseData.status !== 'ready' && <span className="placeholder-flag">{caseData.status === 'developer-mock' ? '开发者测试材料 · 非正式剧情' : '旧 Demo · 待替换'}</span>}</nav>
 
-    {panel === 'browser' && <main className="browser-layout">
-      <section className="browser-window" aria-label="虚拟浏览器">
-        <div className="browser-title"><span>▣</span> 档案浏览器 — {page.title}<div className="window-controls"><i>＿</i><i>□</i><i>×</i></div></div>
-        <div className="browser-menu">文件(F)　编辑(E)　查看(V)　收藏(A)　工具(T)　帮助(H)</div>
-        <div className="browser-toolbar">
-          <button aria-label="后退" disabled={save.historyIndex === 0} onClick={() => goHistory(-1)}>◀ <span>后退</span></button>
-          <button aria-label="前进" disabled={save.historyIndex >= save.history.length - 1} onClick={() => goHistory(1)}>▶ <span>前进</span></button>
-          <button aria-label="回到搜索页" onClick={() => searchPage && navigate(searchPage.id)}>⌂ <span>主页</span></button>
-          <form onSubmit={submitAddress}><label htmlFor="browser-address">地址</label><input id="browser-address" maxLength={100} value={address ?? page.url} onChange={(event) => setAddress(event.target.value)} /><button type="submit">转到 →</button></form>
-        </div>
-        <div className="browser-favorites"><b>收藏夹</b>{searchPage && <button onClick={() => navigate(searchPage.id)}>搜索</button>}
-          {(['forum', 'forum-thread', 'profile', 'blog', 'website', 'email'] as const).map((kind) => visiblePages.filter((item) => item.kind === kind).slice(0, 1).map((item) =>
-            <button key={item.id} onClick={() => navigate(item.id)}>{kindNames[kind]}</button>))}<span>离线归档 · 只读</span></div>
-        <div className="browser-page">{page.kind === 'search' ?
-          <SearchSite pages={visiblePages} query={query} onQueryChange={setQuery} onNavigate={navigate} /> :
-          <SiteView page={page} onNavigate={navigate} onDiscover={discoverEvidence} discoveredEvidenceIds={save.discoveredEvidenceIds} />}</div>
-        {pageEvidence.length > 0 && <div className="page-evidence">本页可查看记录：{pageEvidence.map((item) =>
-          <button key={item.id} onClick={() => discoverEvidence(item.id)}>{item.title}</button>)}</div>}
-        <div className="browser-status"><span>✓ 离线归档 · 只读</span><span>{page.url}</span></div>
-      </section>
-      <aside className="notebook evidence-pocket" aria-label="发现夹">
-        <div className="notebook-title">☆ 发现夹 <small>点击网页中的记录进行查看</small></div>
-        <div className="notebook-paper">
-          {selectedEvidence ? <div className="inspected-evidence"><small>刚查看的记录</small><h2>{selectedEvidence.title}</h2><p>{selectedEvidence.summary}</p>{selectedEvidence.timestamp && <time>{selectedEvidence.timestamp}</time>}<button onClick={() => toggleSaveEvidence(selectedEvidence.id)}>{save.savedEvidenceIds.includes(selectedEvidence.id) ? '从收藏夹移除' : '☆ 收藏这项记录'}</button></div>
-            : <p className="notebook-hint">阅读网页，点击时间戳、回复、文件属性等可查看的对象。这里不会预先标出答案。</p>}
-          <div className="pocket-list-title">已收藏的来源</div>
-          {save.savedEvidenceIds.length ? save.savedEvidenceIds.map((id) => {
-            const item = caseData.evidence.find((entry) => entry.id === id)
-            return item ? <button className="pocket-item" key={id} onClick={() => { setSelectedEvidenceId(id); navigate(item.sourcePageId); setSelectedEvidenceId(id) }}>{item.title}</button> : null
-          }) : <p className="pocket-empty">尚未收藏。收藏只需点击，不必写笔记。</p>}
-        </div>
-        <button className="compare-shortcut" onClick={() => setPanel('compare')}>▦ 前往记录对照 →</button>
-      </aside>
+    {panel === 'browser' && <main className={`browser-layout${recordsOpen ? ' records-open' : ''}`}><section className="browser-window" aria-label="虚拟浏览器">
+      <div className="browser-title"><span>▣</span> 档案浏览器 — {page.title}<div className="window-controls"><i>＿</i><i>□</i><i>×</i></div></div>
+      <div className="browser-menu">文件(F)　编辑(E)　查看(V)　收藏(A)　工具(T)　帮助(H)</div>
+      <div className="browser-toolbar"><button aria-label="后退" disabled={save.historyIndex === 0} onClick={() => goHistory(-1)}>◀ <span>后退</span></button><button aria-label="前进" disabled={save.historyIndex >= save.history.length - 1} onClick={() => goHistory(1)}>▶ <span>前进</span></button><button aria-label="刷新" onClick={() => { setReloadKey((old) => old + 1); setSelectionTip(null) }}>⟳ <span>刷新</span></button><button aria-label="主页" onClick={() => navigate(caseData.startPageId)}>⌂ <span>主页</span></button><button aria-label="历史记录" onClick={() => setHistoryOpen(!historyOpen)}>▤ <span>历史</span></button><form onSubmit={submitAddress}><label htmlFor="browser-address">地址</label><input id="browser-address" maxLength={100} value={address ?? page.url} onChange={(event) => setAddress(event.target.value)} /><button type="submit">转到 →</button></form><button className="toolbar-records" aria-controls="browser-records" aria-expanded={recordsOpen} onClick={() => setRecordsOpen(!recordsOpen)}>▦ 记录 · {save.discoveredEvidenceIds.length}{recordsOpen ? ' ×' : ''}</button></div>
+      {historyOpen && <div className="history-strip"><b>最近访问</b>{[...save.visitedPageIds].reverse().slice(0, 10).map((id) => <button key={id} onClick={() => navigate(id)}>{caseData.pages.find((item) => item.id === id)?.title}</button>)}</div>}
+      <div className="browser-favorites"><b>收藏夹</b>{visiblePages.filter((item) => item.bookmark).map((item) => <button key={item.id} onClick={() => navigate(item.id)}>{item.title}</button>)}<span>离线归档 · 只读</span></div>
+      <div className="browser-page" ref={pageRef} onMouseUp={inspectSelection} key={`${page.id}-${reloadKey}`}>{page.kind === 'search' ? <SearchSite pages={visiblePages} query={query} onQueryChange={setQuery} onNavigate={navigate} /> : <SiteView page={page} pages={visiblePages} onNavigate={navigate} onDiscover={discover} discoveredEvidenceIds={save.discoveredEvidenceIds} visiblePageIds={visiblePageIds} />}</div>
+      <div className="browser-status"><span>✓ 离线归档 · 只读</span><span>{page.url}</span></div></section>
+      {recordsOpen && <aside id="browser-records" className="notebook evidence-pocket" aria-label="记录夹"><div className="notebook-title">☆ 记录夹 <button className="pocket-close" aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button><small>网页摘录 · 本地保存</small></div><div className="notebook-paper"><p className="notebook-hint">这里保留已查看内容的短摘要。</p><div className="pocket-list-title">最近记下</div>{save.discoveredEvidenceIds.length ? [...save.discoveredEvidenceIds].reverse().slice(0, 5).map((id) => { const item = caseData.evidence.find((entry) => entry.id === id); return item ? <div className="pocket-record" key={id}><button onClick={() => navigate(item.sourcePageId)}>{item.title}</button><small>{item.summary}</small></div> : null }) : <p className="pocket-empty">尚无记录。可查看网页时间、详情，或选中正文片段。</p>}<div className="pocket-list-title">已确认</div>{save.unlockedFactIds.map((id) => <p className="pocket-fact" key={id}>{recordTitle(id)}</p>)}</div><button className="compare-shortcut" onClick={() => setPanel('records')}>▦ 打开完整记录 →</button></aside>}
     </main>}
+    {selectionTip && panel === 'browser' && <button className="selection-tip" style={{ left: selectionTip.x, top: selectionTip.y }} onMouseDown={(event) => event.preventDefault()} onClick={() => discover(selectionTip.id)}>☆ 记下这段</button>}
+    {feedback && panel === 'browser' && <div key={feedback.id} className="record-feedback" role="status" style={{ left: feedback.x, top: feedback.y }}>✓ 已记下：{feedback.title}</div>}
 
-    {panel === 'collection' && <main className="document-page compact-document">
-      <div className="document-title"><div><small>PERSONAL ARCHIVE / 01</small><h1>收藏夹</h1><p>摘要由档案自动生成，保留来源链接。</p></div><button onClick={() => setPanel('browser')}>返回浏览器 →</button></div>
-      <section className="collection-ledger">{save.savedEvidenceIds.length ? save.savedEvidenceIds.map((id) => {
-        const item = caseData.evidence.find((entry) => entry.id === id)
-        return item ? <article key={id}><h2>{item.title}</h2><p>{item.summary}</p>{item.timestamp && <time>{item.timestamp}</time>}<div><button onClick={() => navigate(item.sourcePageId)}>打开来源 ↗</button><button onClick={() => toggleSaveEvidence(id)}>取消收藏</button></div></article> : null
-      }) : <p>还没有收藏记录。网页中可查看的对象可以一键收藏。</p>}</section>
-    </main>}
+    {panel === 'records' && <main className="document-page compact-document"><div className="document-title"><div><small>LOCAL ARCHIVE / RECORDS</small><h1>记录</h1><p>从已见内容中核对关联；日期与文字仍可回到原网页查看。</p></div><button onClick={() => setPanel('browser')}>返回浏览器 →</button></div><div className="record-layout"><section className="record-ledger"><h2>已记下</h2>{save.discoveredEvidenceIds.length ? save.discoveredEvidenceIds.map((id) => { const item = caseData.evidence.find((entry) => entry.id === id)!; return <div className="record-line" key={id}><div><b>{item.title}</b><p>{item.summary}</p><small>{item.timestamp}</small><button onClick={() => navigate(item.sourcePageId)}>查看来源 ↗</button></div><button className="record-select" disabled={!possibleIds.has(id) && !selectedIds.includes(id)} onClick={() => setSelectedIds((old) => old.includes(id) ? old.filter((entry) => entry !== id) : [...old, id])}>{selectedIds.includes(id) ? '✓ 已选' : '选择'}</button></div> }) : <p>尚无记录。返回网页查看时间详情或选中文字。</p>}</section>
+      <section className="record-ledger"><h2>已确认</h2>{save.unlockedFactIds.length ? save.unlockedFactIds.map((id) => { const fact = caseData.facts.find((entry) => entry.id === id)!; return <div className="record-line" key={id}><div><b>{fact.title}</b><p>{fact.summary}</p></div><button className="record-select" disabled={!possibleIds.has(id) && !selectedIds.includes(id)} onClick={() => setSelectedIds((old) => old.includes(id) ? old.filter((entry) => entry !== id) : [...old, id])}>{selectedIds.includes(id) ? '✓ 已选' : '选择'}</button></div> }) : <p>尚未确认关联。</p>}<div className="relation-desk"><h3>核对关联</h3><p>{selectedIds.length ? selectedIds.map(recordTitle).join(' ＋ ') : '先选择一条记录，再选择与它有关的已知记录。'}</p>{selectedIds.length > 0 && <button onClick={() => setSelectedIds([])}>清除所选</button>}<button disabled={!exact} onClick={confirmRelation}>确认关联</button></div>
+        {caseData.puzzles.filter((puzzle) => puzzle.evidenceIds.every((id) => save.discoveredEvidenceIds.includes(id))).map((puzzle) => { const completed = save.completedPuzzleIds.includes(puzzle.id); const order = save.timelineOrders[puzzle.id] || puzzle.evidenceIds; return <div className="puzzle-block" key={puzzle.id}><h3>{puzzle.title}</h3>{puzzle.type === 'timeline' ? <ol className="timeline-order">{order.map((id, index) => <li key={id}><span>{recordTitle(id)}<small>{caseData.evidence.find((item) => item.id === id)?.timestamp}</small></span><button disabled={completed || index === 0} onClick={() => { const next = [...order]; [next[index], next[index - 1]] = [next[index - 1], next[index]]; setSave((old) => old ? { ...old, timelineOrders: { ...old.timelineOrders, [puzzle.id]: next } } : old) }}>↑</button><button disabled={completed || index === order.length - 1} onClick={() => { const next = [...order]; [next[index], next[index + 1]] = [next[index + 1], next[index]]; setSave((old) => old ? { ...old, timelineOrders: { ...old.timelineOrders, [puzzle.id]: next } } : old) }}>↓</button></li>)}</ol> : <input aria-label={puzzle.title} maxLength={32} value={shortAnswers[puzzle.id] || ''} disabled={completed} onChange={(event) => setShortAnswers((old) => ({ ...old, [puzzle.id]: event.target.value }))} />}<button disabled={completed} onClick={() => checkPuzzle(puzzle.id)}>{completed ? '已确认' : '核对'}</button></div> })}</section></div></main>}
 
-    {panel === 'compare' && <main className="document-page compact-document">
-      <div className="document-title"><div><small>ARCHIVE DESK / 02</small><h1>记录对照</h1><p>选择已查看的记录，核对关联或按日期排序。</p></div><button onClick={() => setPanel('browser')}>返回浏览器 →</button></div>
-      <div className="compare-layout"><section className="compare-sheet"><h2>证据配对</h2><p>选择两项或更多记录，再核对它们之间是否存在关联。</p>
-        <div className="compare-options">{save.discoveredEvidenceIds.map((id) => {
-          const item = caseData.evidence.find((entry) => entry.id === id)
-          return item ? <label key={id}><input type="checkbox" checked={compareIds.includes(id)} onChange={() => toggleCompare(id)} /><span>{item.title}<small>{item.timestamp || item.type}</small></span></label> : null
-        })}</div>
-        {!save.discoveredEvidenceIds.length && <p>先从网页中查看一些记录。</p>}
-        <button disabled={compareIds.length < 2} onClick={confirmRelation}>核对所选记录</button>
-        {save.establishedRelationIds.map((id) => { const item = caseData.relations.find((entry) => entry.id === id); return item ? <div className="confirmed-relation" key={id}><strong>{item.title}</strong><p>{item.summary}</p></div> : null })}
-      </section><section className="compare-sheet"><h2>日期与短解密</h2>
-        {caseData.puzzles.map((puzzle) => {
-          const available = puzzle.evidenceIds.every((id) => save.discoveredEvidenceIds.includes(id))
-          const completed = save.completedPuzzleIds.includes(puzzle.id)
-          return <div className="puzzle-block" key={puzzle.id}><h3>{puzzle.title}</h3>
-            {!available ? <p>相关记录尚未全部查看。</p> : puzzle.type === 'timeline' ? <><p>按日期先后移动记录：</p><ol className="timeline-order">{currentOrder(puzzle).map((id, index) => {
-              const item = caseData.evidence.find((entry) => entry.id === id)!
-              return <li key={id}><span>{item.title}<small>{item.timestamp || '日期未记录'}</small></span><button aria-label={`上移 ${item.title}`} disabled={index === 0 || completed} onClick={() => moveTimeline(puzzle, index, -1)}>↑</button><button aria-label={`下移 ${item.title}`} disabled={index === puzzle.evidenceIds.length - 1 || completed} onClick={() => moveTimeline(puzzle, index, 1)}>↓</button></li>
-            })}</ol><button disabled={completed} onClick={() => checkTimeline(puzzle)}>{completed ? '顺序已确认' : '核对顺序'}</button></> :
-              <><p>{puzzle.prompt || '输入从记录中找到的简短答案。'}</p><div className="short-input"><input aria-label={puzzle.title} maxLength={32} autoComplete="off" value={shortAnswers[puzzle.id] || ''} disabled={completed} onChange={(event) => setShortAnswers((old) => ({ ...old, [puzzle.id]: event.target.value }))} /><button disabled={completed || !shortAnswers[puzzle.id]?.trim()} onClick={() => checkShort(puzzle)}>{completed ? '已解锁' : '核对'}</button></div></>}
-          </div>
-        })}
-        {save.unlockedFactIds.length > 0 && <div className="unlocked-facts"><h3>已建立的事实</h3>{save.unlockedFactIds.map((id) => { const fact = caseData.facts.find((item) => item.id === id); return fact ? <p key={id}><strong>{fact.title}</strong> · {fact.summary}</p> : null })}</div>}
-      </section></div>
-    </main>}
-
-    {panel === 'case' && <main className="document-page compact-document"><div className="document-title"><div><small>CASE LOADER / {caseData.id}</small><h1>案件资料</h1><p>{caseData.title} · {caseData.subtitle}</p></div><button onClick={() => setPanel('browser')}>返回浏览器 →</button></div>
-      <section className="case-sheet">{caseData.status !== 'ready' && <div className="case-placeholder"><strong>{caseData.status === 'developer-mock' ? '开发者测试材料' : '旧 Demo：待替换'}</strong><p>{caseData.status === 'developer-mock' ? '只验证点击发现、收藏、关联、排序和短输入；不属于《寻人启事》剧情。' : '旧剧情仅作旧网页展示，不代表新案件。'}</p></div>}
-        <h2>说明</h2><p>{caseData.briefing}</p><p>{caseData.objective}</p>
-        {hasLegacySave() && <div className="legacy-notice">检测到 v0.1/v0.2 旧存档。它仍保留在浏览器中，但不会自动迁入 v0.3，以免旧 Demo 内容污染新调查。</div>}
-        <div className="case-loader"><h2>载入 Case</h2><p>导入本地 JSON，或切换内置测试材料。切换前会确认是否替换当前调查状态。</p><button onClick={() => fileInput.current?.click()}>选择 Case JSON…</button><input ref={fileInput} type="file" accept=".json,application/json" onChange={importCase} hidden /><small>旧 Demo 独立保留；正式《寻人启事》内容尚未制作。</small></div>
-        <div className="case-actions"><button onClick={() => loadBuiltIn('mock')}>载入开发者测试材料</button><button onClick={() => loadBuiltIn('legacy')}>查看旧 Demo 占位页</button></div>
-      </section></main>}
-    <footer className="app-footer">Last Seen Online · 数字调查骨架　·　本地存档　·　非正式案件内容</footer>
+    {panel === 'case' && <main className="document-page compact-document"><div className="document-title"><div><small>CASE FILE</small><h1>{caseData.title}</h1><p>{caseData.subtitle}</p></div><button onClick={() => setPanel('browser')}>返回浏览器 →</button></div><section className="collection-ledger"><p>{caseData.briefing}</p><p>{caseData.objective}</p>{hasLegacySave() && <p className="legacy-notice">检测到旧版存档。旧 Demo 与当前案件隔离；旧数据不会混入本次记录。</p>}<div className="case-actions"><button onClick={() => void loadBuiltIn('formal')}>载入《寻人启事》当前片段</button><button onClick={() => void loadBuiltIn('mock')}>载入 developer/mock</button><button onClick={() => void loadBuiltIn('legacy')}>载入旧 Demo</button><button onClick={() => fileInput.current?.click()}>导入 Case JSON</button><input ref={fileInput} type="file" accept="application/json,.json" hidden onChange={(event) => void importCase(event)} /></div></section></main>}
     {notice && <div className="toast" role="status">{notice}<button aria-label="关闭提示" onClick={() => setNotice('')}>×</button></div>}
   </div>
 }
