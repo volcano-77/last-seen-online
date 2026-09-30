@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import type { ReactNode } from 'react'
 import type { CaseMedia, CasePage, PageObject, PuzzleDefinition } from './case'
-import { getBlogEntries, getPageLinks, getProfileActivity, getSiteHome, getSiteNavigation, getThreadStats } from './siteData'
+import { customSignature, getBlogEntries, getPageLinks, getProfileActivity, getSiteHome, getSiteNavigation, getThreadStats } from './siteData'
 import type { NavigateOptions, PageState } from './browserState'
 import { searchPages } from './search'
 import type { SearchHit } from './search'
@@ -16,6 +16,8 @@ export interface SiteProps {
   onSolve: (id: string, answer: string) => boolean
   mediaCatalog: CaseMedia[]; onViewMedia: (id: string) => void
   onCompareImage: (media: CaseMedia, referenceId: string, point: Point) => boolean
+  recentVisits?: { pageId: string; tabId: string; entryId: string }[]
+  onReturnVisit?: (tabId: string, entryId: string) => void
 }
 const pointAt = (element: HTMLElement) => { const rect = element.getBoundingClientRect(); return { x: rect.left, y: rect.bottom + 6 } }
 const src = (media: CaseMedia) => `${import.meta.env.BASE_URL}${media.src}`
@@ -48,7 +50,7 @@ function Breadcrumb(props: SiteProps & { section?: string }) {
 }
 function User({ name, ...props }: SiteProps & { name: string }) {
   const profile = props.userProfiles[name]
-  return profile ? <PageLink className="username" pageId={profile}>{name}</PageLink> : <span className="username">{name}</span>
+  return profile && props.pages.some((item) => item.id === profile) ? <PageLink className="username" pageId={profile}>{name}</PageLink> : <span className="username">{name}</span>
 }
 function Metadata({ values }: { values?: Record<string, string> }) {
   return values ? <dl className="metadata">{Object.entries(values).map(([key, value]) => <div key={key}><dt>{key}</dt><dd>{value}</dd></div>)}</dl> : null
@@ -151,18 +153,21 @@ export function SearchSite({ page, pages, pageState, onStateChange, onNavigate, 
     {pageState.searchSubmitted && <><div className="search-info">搜索「{query}」，找到 {results.length} 条索引记录</div><SearchResults hits={results} query={query} newTab /></>}<footer>{page.title} · 网页索引</footer></div></Navigation.Provider>
 }
 function Portal(props: SiteProps) {
-  return <div className="navigation-home"><h1>{props.page.siteName}网址导航</h1><Breadcrumb {...props} /><p>常用站点</p><Links {...props} /><hr /><PageLink pageId="search_home">打开南城搜索</PageLink><small>网页链接按保存时的状态保留。</small></div>
+  const input = props.pageState.searchInput || ''
+  return <div className="navigation-home"><h1>{props.page.siteName}网址导航</h1><form className="home-search" onSubmit={(event) => {
+    event.preventDefault(); if (input.trim()) props.onNavigate('search_home', { newTab: true, state: { searchInput: input.trim(), searchQuery: input.trim(), searchSubmitted: true } })
+  }}><label htmlFor="home-search">南城搜索</label><div><input id="home-search" maxLength={32} value={input} onChange={(event) => props.onStateChange({ searchInput: event.target.value })} /><button>搜索</button></div></form>
+    <h2>收藏夹 / 常用网站</h2><Links {...props} /><h2>最近访问</h2><ul className="home-recent">{props.recentVisits?.map((visit) => {
+      const target = props.pages.find((item) => item.id === visit.pageId)
+      return target ? <li key={visit.entryId}><button className="text-link is-visited" onClick={() => props.onReturnVisit?.(visit.tabId, visit.entryId)}>{target.title}</button><small>{target.siteName || target.url}</small></li> : null
+    })}</ul>{!props.recentVisits?.length && <p>暂无访问记录。</p>}<small>链接按保存时的状态保留。</small></div>
 }
-function ForumMember(props: SiteProps & { name: string; owner?: boolean }) {
-  const profile = props.pages.find((item) => item.id === props.userProfiles[props.name])
-  const details = props.owner ? props.page.details || profile?.details : profile?.details
-  const count = props.pages.reduce((total, page) => total + (page.author === props.name ? 1 : 0) +
-    (page.objects || []).filter((item) => item.type === 'reply' && item.author === props.name).length, 0)
+function ForumMember(props: SiteProps & { name: string }) {
   const color = [...props.name].reduce((value, char) => value + char.charCodeAt(0), 0) % 4
   return <aside className="forum-member"><div className={`forum-avatar avatar-${color}`} aria-hidden="true">{props.name.slice(0, 1)}</div>
-    <User {...props} name={props.name} /><span className="member-rank">{props.page.skin === 'campus' ? '校园站友' : '注册会员'}</span>
-    <small>发言：{count}</small><small>注册：{details?.registeredAt || '旧站会员'}</small>{details?.lastOnline && <small>最后在线：{details.lastOnline}</small>}</aside>
+    <User {...props} name={props.name} /><span className="member-rank">{props.page.skin === 'campus' ? '校园站友' : '注册会员'}</span></aside>
 }
+function Signature({ value }: { value?: string }) { const text = customSignature(value); return text ? <div className="signature">{text}</div> : null }
 function ThreadPosition(props: SiteProps) {
   const replies = props.page.objects?.filter((item) => item.type === 'reply') || []
   return <div className="forum-page-strip"><span>共 {replies.length + 1} 楼 · 完整归档</span><span className="page-number">1</span>
@@ -187,16 +192,16 @@ function Forum(props: SiteProps) {
       const stats = getThreadStats(thread)
       return <tr key={thread.id}><td><span className="thread-symbol" aria-hidden="true">▤</span> <PageLink pageId={thread.id}>{thread.title}</PageLink>{thread.details?.section && <p>{thread.details.section} · {thread.author}</p>}</td><td>{thread.kind === 'forum-thread' ? stats.replyCount : '—'}</td><td>{thread.kind === 'forum-thread' ? stats.lastReplyAt || '暂无回复' : '—'}</td></tr>
     })}</tbody></table><div className="forum-page-strip"><span>{visibleThreads.length} 个主题 · 完整归档</span><span className="page-number">1</span></div></>}</> :
-      <><ThreadPosition {...props} /><div className="forum-floor" id="thread-main"><ForumMember {...props} name={page.author || '匿名'} owner /><article><div className="floor-meta">{timestamp ? <Time item={timestamp} label={`发表于 ${page.date}`} onDiscover={props.onDiscover} /> : <span>发表于 {page.date}</span>}<span>1#</span></div>{page.body.map((line, i) => <p key={i}>{line}</p>)}<Media {...props} media={page.media} /><div className="signature">{page.details?.signature || '这个人很懒，什么也没有留下。'}</div></article></div>
-      {page.objects?.filter((item) => item.type === 'reply').map((item, index) => <div className="forum-floor reply" key={item.id} id={item.id}><ForumMember {...props} name={item.author || '匿名'} /><article><div className="floor-meta"><span>{item.timestamp}</span><span>{index + 2}#</span></div>{item.metadata?.['引用'] && <blockquote className="forum-quote"><small>引用 {item.metadata['引用作者'] || '原帖'} 的发言：</small><p>{item.metadata['引用']}</p></blockquote>}{item.body?.map((line, i) => <p key={i}>{line}</p>)}{item.links?.map((link) => <PageLink key={link.pageId} pageId={link.pageId}>{link.label}</PageLink>)}<div className="signature">{props.pages.find((p) => p.id === props.userProfiles[item.author || ''])?.details?.signature || '这个人很懒，什么也没有留下。'}</div></article></div>)}<ThreadPosition {...props} /></>}
+      <><ThreadPosition {...props} /><div className="forum-floor" id="thread-main"><ForumMember {...props} name={page.author || '匿名'} /><article><div className="floor-meta">{timestamp ? <Time item={timestamp} label={`发表于 ${page.date}`} onDiscover={props.onDiscover} /> : <span>发表于 {page.date}</span>}<span>1#</span></div>{page.body.map((line, i) => <p key={i}>{line}</p>)}<Media {...props} media={page.media} /><Signature value={page.details?.signature} /></article></div>
+      {page.objects?.filter((item) => item.type === 'reply').map((item, index) => <div className="forum-floor reply" key={item.id} id={item.id}><ForumMember {...props} name={item.author || '匿名'} /><article><div className="floor-meta"><span>{item.timestamp}</span><span>{index + 2}#</span></div>{item.metadata?.['引用'] && <blockquote className="forum-quote"><small>引用 {item.metadata['引用作者'] || '原帖'} 的发言：</small><p>{item.metadata['引用']}</p></blockquote>}{item.body?.map((line, i) => <p key={i}>{line}</p>)}{item.links?.map((link) => <PageLink key={link.pageId} pageId={link.pageId}>{link.label}</PageLink>)}<Signature value={props.pages.find((p) => p.id === props.userProfiles[item.author || ''])?.details?.signature} /></article></div>)}<ThreadPosition {...props} /></>}
     <Links {...props} /><footer>Powered by {campus ? 'CampusBBS' : 'LifeForum'}　|　旧帖只读</footer>
   </div>
 }
 function Profile(props: SiteProps) {
   const { page } = props
-  const activity = getProfileActivity(props.pages.filter((item) => !item.accessPuzzleId || props.completedPuzzleIds.includes(item.accessPuzzleId)), page.author || '')
+  const activity = getProfileActivity(props.pages.filter((item) => item.siteId === page.siteId && (!item.accessPuzzleId || props.completedPuzzleIds.includes(item.accessPuzzleId))), page.author || '')
   return <div className={`forum-site ${page.skin === 'campus' ? 'campus-forum' : 'life-forum'}`}><header className="forum-header"><SiteName {...props} /><span>会员资料</span></header><SiteNav {...props} /><Breadcrumb {...props} />
-    <h2>{page.author}的个人资料</h2><div className="member-sheet"><div className="forum-avatar">{page.author?.slice(0, 1)}</div><div><p>会员：{page.author}</p><p>注册：{page.details?.registeredAt || '旧站会员'}　最后在线：{page.details?.lastOnline || '未记录'}</p><p>签名：{page.details?.signature || '这个人很懒，什么也没有留下。'}</p><Links {...props} /></div></div>
+    <h2>{page.author}的个人资料</h2><div className="member-sheet"><div className="forum-avatar">{page.author?.slice(0, 1)}</div><div><p>会员：{page.author}</p><p>注册：{page.details?.registeredAt || '旧站会员'}　最后在线：{page.details?.lastOnline || '未记录'}</p>{customSignature(page.details?.signature) && <p>签名：{page.details?.signature}</p>}<Links {...props} /></div></div>
     {page.body.map((line, i) => <p key={i}>{line}</p>)}<h3 className="profile-section">最近发帖 / 回复</h3>{activity.map((item) => <section className="content-entry" key={item.id}><h3><small>{item.kind}：</small><PageLink pageId={item.pageId}>{item.title}</PageLink></h3><small>{item.timestamp || '时间未记录'}</small>{item.body.slice(0, 1).map((line, index) => <p key={index}>{line}</p>)}</section>)}{!activity.length && <p>暂无可读取的公开发帖或回复。</p>}<footer>公开会员资料 · 不显示站内私信</footer></div>
 }
 function BlogCalendar({ entries, month }: { entries: CasePage[]; month: string }) {
@@ -232,26 +237,36 @@ function NewsList({ items, title }: { items: CasePage[]; title: string }) {
 }
 function News(props: SiteProps) {
   const { page } = props
-  const home = getSiteHome(page, props.pages), channel = page.directory ? props.pageState.channel : page.details?.section
+  const home = getSiteHome(page, props.pages)
   const items = (home?.objects || page.objects || []).flatMap((item) => {
     const target = props.pages.find((p) => p.id === item.links?.[0]?.pageId)
     return target ? [target] : []
   }).sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-  const serviceIds = ['life_forum_index_ordinary_3', 'bbs_index_ordinary_1']
   return <div className={`news-site ${page.directory ? 'news-portal' : 'news-detail'}`}><div className="portal-masthead"><span>地方资讯 · 校园生活</span><time>页面日期：{(home?.date || page.date)?.slice(0, 10)}</time></div>
     <header><div className="portal-logo"><span aria-hidden="true">资讯</span><SiteName {...props} /></div><span>关注身边事<br />记录城市生活</span></header>
-    <nav className="portal-channels" aria-label="资讯频道">{home && ['', '本地', '校园'].map((value) => <PageLink key={value} className={channel === value || !channel && !value ? 'selected' : ''} pageId={home.id} options={{ newTab: false, state: { channel: value } }}>{value || '首页'}</PageLink>)}<span>NEWS / 本地资讯</span></nav><Breadcrumb {...props} section={channel} />
-    {page.directory ? <div className="portal-front"><div className="portal-banner"><strong>身边事 · 大家看</strong><span>本地 ｜ 校园 ｜ 生活</span><small>读新闻，聊生活</small></div><div className={`portal-news-columns${channel ? ' channel-only' : ''}`}>
-      {channel ? <NewsList items={items.filter((item) => item.details?.section === channel)} title={`${channel}资讯`} /> : <>{['校园', '本地'].map((section) => <NewsList key={section} items={items.filter((item) => item.details?.section === section)} title={section === '校园' ? '校园资讯' : '本地新闻'} />)}</>}
-    </div><div className="portal-services"><h3>◇ 生活服务</h3>{serviceIds.flatMap((id) => { const item = props.pages.find((p) => p.id === id); return item ? [<PageLink key={id} pageId={id}>{id.includes('life_') ? '公交出行交流' : '图书馆公告'}</PageLink>] : [] })}<span>社区信息由网友交流，请核对原帖日期。</span></div><p className="portal-intro">{page.body.join(' ')}</p></div> :
-      <div className="news-columns single-column"><article><h2>{page.title}</h2><div className="news-meta">{page.date}　来源：本地资讯</div>{page.body.map((line, i) => <p key={i}>{line}</p>)}{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}{home && <div className="news-return"><PageLink pageId={home.id} options={{ newTab: false, state: { channel } }}>返回{channel || '新闻'}频道</PageLink></div>}</article></div>}
+    <div className="portal-rule" /><Breadcrumb {...props} />
+    {page.directory ? <div className="portal-front"><div className="portal-banner"><strong>身边事 · 大家看</strong><span>本地 ｜ 校园 ｜ 生活</span><small>读新闻，聊生活</small></div><h2 className="portal-today">今日要闻</h2><div className="portal-news-columns">
+      {['校园', '本地'].map((section) => <NewsList key={section} items={items.filter((item) => item.details?.section === section)} title={section === '校园' ? '校园资讯' : '本地新闻'} />)}
+    </div><p className="portal-intro">{page.body.join(' ')}</p></div> :
+      <div className="news-columns single-column"><article><h2>{page.title}</h2><div className="news-meta">{page.date}　来源：本地资讯</div>{page.body.map((line, i) => <p key={i}>{line}</p>)}{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}{home && <div className="news-return"><PageLink pageId={home.id} options={{ newTab: false, state: {} }}>返回资讯网首页</PageLink></div>}</article></div>}
     <footer>资讯网历史稿件　文章内容以当时报道为准</footer></div>
 }
 function Echo(props: SiteProps) {
   const { page } = props, timestamp = page.objects?.find((item) => item.type === 'timestamp')
+  const isHome = page.id === 'echo_home'
+  const notices = props.pages.find((item) => item.id === 'echo_archive_index')?.objects?.flatMap((item) => {
+    const target = props.pages.find((target) => target.id === item.links?.[0]?.pageId)
+    return target ? [{ page: target, timestamp: item.timestamp }] : []
+  }).sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || '')) || []
+  const rules = props.pages.find((item) => item.id === 'echo_submission_rules')
   return <div className="echo-site"><header><span className="echo-logo" aria-hidden="true">回声</span><div><SiteName {...props} /><p>让消息传得更远，让家人早日团聚</p></div></header><SiteNav {...props} /><Breadcrumb {...props} />
-    <div className="echo-content">{page.directory && <div className="echo-welcome"><strong>让每一条消息，多一份希望。</strong><span>公益寻人 · 公开转发 · 信息回访</span></div>}<h2>{page.title}</h2>{timestamp && <Time item={timestamp} label={`发布于 ${timestamp.timestamp}`} onDiscover={props.onDiscover} />}{page.body.map((line, i) => <p key={i}>{line}</p>)}<Media {...props} media={page.media} />
-      <div className={page.directory ? 'echo-directory' : ''}>{page.objects?.filter((item) => item.type !== 'timestamp').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}</div><Links {...props} /></div><footer>回声寻人网 · 公开信息转发与回访</footer></div>
+    <div className="echo-content">{isHome ? <><div className="echo-welcome"><strong>让每一条消息，多一份希望。</strong><span>公益寻人 · 公开转发 · 信息回访</span></div>
+      <section className="echo-notices"><h2>最新寻人</h2><ul>{notices.map((item) => <li key={item.page.id}><PageLink pageId={item.page.id}>{item.page.title}</PageLink><time>{item.timestamp}</time></li>)}</ul></section>
+      <section className="echo-small-section"><h2>已寻回</h2><p>这份副本暂无可读取的寻回条目。</p></section>
+      <section className="echo-small-section"><h2>公益动态</h2>{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}</section>
+      {rules && <section className="echo-small-section"><h2>寻人须知</h2><p>{rules.body[0]}</p></section>}
+      <section className="echo-small-section"><h2>关于我们</h2>{page.body.map((line, i) => <p key={i}>{line}</p>)}</section></> : <><h2>{page.title}</h2>{timestamp && <Time item={timestamp} label={`发布于 ${timestamp.timestamp}`} onDiscover={props.onDiscover} />}{page.body.map((line, i) => <p key={i}>{line}</p>)}<Media {...props} media={page.media} />
+      <div>{page.objects?.filter((item) => item.type !== 'timestamp').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}</div><Links {...props} /></>}</div><footer>回声寻人网 · 公开信息转发与回访</footer></div>
 }
 function Archive(props: SiteProps) {
   const { page } = props, url = props.pageState.searchInput || '', searched = props.pageState.searchSubmitted

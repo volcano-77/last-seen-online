@@ -6,6 +6,8 @@ import type { SaveData } from './storage'
 import { loadCurrentSession, resetCaseSave, writeSave } from './storage'
 import { activeTab, closeTab, currentEntry, focusTab, makeTab, openPage, siteKey, travelTab, updateEntry } from './browserState'
 import type { NavigateOptions, PageState } from './browserState'
+import { canVisitPage } from './siteData'
+import { relationChoices } from './recordRelations'
 import './App.css'
 
 const add = (old: string[], next: string[] = []) => [...new Set([...old, ...next])]
@@ -137,7 +139,7 @@ export default function App() {
   }
   function navigate(id: string, options: NavigateOptions = {}) {
     const target = caseData?.pages.find((item) => item.id === id)
-    if (!target || !save || !meets(target.unlockConditions, save)) return
+    if (!target || !save || !meets(target.unlockConditions, save) || !canVisitPage(target, save, page?.id)) return
     const newTab = options.newTab ?? (page?.kind === 'search' || Boolean(page && siteKey(page) !== siteKey(target)))
     setSave((old) => old ? { ...openPage(capture(old), target, newTab, options),
       visitedPageIds: add(old.visitedPageIds, [id]), learnedTools: add(old.learnedTools, target.learnsTool ? [target.learnsTool] : []) } : old)
@@ -148,7 +150,7 @@ export default function App() {
     if (!caseData) return
     const next = travelTab(capture(save), direction, caseData.pages)
     const target = caseData.pages.find((item) => item.id === currentEntry(next).pageId)
-    if (!target || !meets(target.unlockConditions, next)) return
+    if (!target || !meets(target.unlockConditions, next) || !canVisitPage(target, next)) return
     setSave({ ...next, visitedPageIds: add(next.visitedPageIds, [target.id]), learnedTools: add(next.learnedTools, target.learnsTool ? [target.learnsTool] : []) })
     resetChrome()
   }
@@ -211,25 +213,39 @@ export default function App() {
   }
   function confirmRelation() {
     if (!caseData || !save || selected.length < 2) return
-    const relation = caseData.relations.find((item) => {
-      const ids = [...(item.evidenceIds || []), ...(item.factIds || [])]
-      return ids.length === selected.length && ids.every((id) => selected.includes(id))
-    })
-    if (!relation) { setRelationMessage('这些记录暂未形成可确认的关联。'); return }
-    if (save.establishedRelationIds.includes(relation.id)) { setRelationMessage('这组关联已保留。'); return }
+    const relation = relationChoices(caseData.relations, save.establishedRelationIds,
+      [...save.discoveredEvidenceIds, ...save.unlockedFactIds], selected).complete
+    if (!relation) return
     setSave({ ...save, establishedRelationIds: add(save.establishedRelationIds, [relation.id]),
       unlockedFactIds: add(save.unlockedFactIds, relation.unlocks?.factIds),
       checkpointIds: add(save.checkpointIds, relation.checkpointId ? [relation.checkpointId] : []) })
-    setRelationMessage(relation.summary); setSelected([])
+    setRelationMessage('已保留这组对照。'); setSelected([])
+  }
+
+  function returnVisit(tabId: string, entryId: string) {
+    if (!caseData) return
+    setSave((old) => {
+      if (!old) return old
+      const target = old.tabs.find((item) => item.id === tabId)
+      const index = target?.history.findIndex((item) => item.id === entryId) ?? -1
+      return target && index >= 0 ? travelTab(focusTab(capture(old), tabId), index - target.historyIndex, caseData.pages) : old
+    })
+    resetChrome()
   }
 
   if (!caseData || !save || !page || !tab || !entry) return <main className="loading">{error || '正在读取网页…'}</main>
   const evidence = caseData.evidence.filter((item) => save.discoveredEvidenceIds.includes(item.id))
   const facts = caseData.facts.filter((item) => save.unlockedFactIds.includes(item.id))
-  const ordered = save.recordDateView ? [...evidence].sort((a, b) => (a.timestamp || '~').localeCompare(b.timestamp || '~')) : evidence
-  const toggle = (id: string) => { setSelected((old) => old.includes(id) ? old.filter((item) => item !== id) : [...old, id]); setRelationMessage('') }
-  const searchPages = caseData.pages.filter((item) => meets(item.unlockConditions, save) &&
+  const choices = relationChoices(caseData.relations, save.establishedRelationIds, [...evidence.map((item) => item.id), ...facts.map((item) => item.id)], selected)
+  const toggle = (id: string) => { setSelected((old) => old.includes(id) ? old.filter((item) => item !== id) : choices.compatibleIds.includes(id) ? [...old, id] : old); setRelationMessage('') }
+  const accessiblePages = caseData.pages.filter((item) => meets(item.unlockConditions, save) && canVisitPage(item, save, page.id))
+  const sitePages = accessiblePages.filter((item) => item.normalNavigation !== false || item.siteId === page.siteId || save.visitedPageIds.includes(item.id))
+  const searchPages = accessiblePages.filter((item) =>
     (!item.accessPuzzleId || save.completedPuzzleIds.includes(item.accessPuzzleId)))
+  const recentVisits = [...save.tabs].sort((a, b) => b.lastUsed - a.lastUsed)
+    .flatMap((item) => item.history.slice(0, item.historyIndex + 1).reverse().map((visit) => ({ pageId: visit.pageId, tabId: item.id, entryId: visit.id })))
+    .filter((item, index, all) => all.findIndex((other) => other.pageId === item.pageId) === index &&
+      !['portal', 'search'].includes(caseData.pages.find((target) => target.id === item.pageId)?.kind || '')).slice(0, 6)
   return <main className="browser-window" aria-label="虚拟浏览器">
     <div className="browser-title">▣ {page.title} <small>— Last Seen Online</small></div>
     <div className="browser-tabs" role="tablist" aria-label="网页标签">{save.tabs.map((item) => <div className={`browser-tab${item.id === save.activeTabId ? ' active' : ''}`} key={item.id}>
@@ -258,18 +274,19 @@ export default function App() {
       <div className="browser-page" ref={content} onMouseUp={inspectSelection} key={viewKey} onScroll={captureScroll}
         onWheel={() => { pendingRestore.current = false }} onPointerDown={() => { pendingRestore.current = false }} onKeyDown={() => { pendingRestore.current = false }} onLoadCapture={() => restoreScroll.current?.()}>
         {page.kind === 'search' ? <SearchSite page={page} pages={searchPages} pageState={entry.state} onStateChange={pageState} onNavigate={navigate} visitedPageIds={save.visitedPageIds} /> :
-          <SiteView page={page} pages={caseData.pages} userProfiles={caseData.userProfiles} visitedPageIds={save.visitedPageIds} onNavigate={navigate} onDiscover={discover}
+          <SiteView page={page} pages={sitePages} userProfiles={caseData.userProfiles} visitedPageIds={save.visitedPageIds} onNavigate={navigate} onDiscover={discover}
+            recentVisits={recentVisits} onReturnVisit={returnVisit}
             pageState={entry.state} onStateChange={pageState}
             completedPuzzleIds={save.completedPuzzleIds} puzzles={caseData.puzzles} onSolve={solve} mediaCatalog={mediaCatalog}
             onViewMedia={(id) => setSave((old) => old ? { ...old, viewedMediaIds: add(old.viewedMediaIds, [id]) } : old)} onCompareImage={compareImage} />}
       </div>
       {recordsOpen && <aside className="record-pocket" id="records" aria-label="记录夹"><header><b>记录夹</b><button aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button></header>
-        <div className="pocket-paper"><h2>已记下</h2><button className="date-toggle" onClick={() => setSave({ ...save, recordDateView: !save.recordDateView })}>{save.recordDateView ? '按阅读顺序' : '按日期查看'}</button>
+        <div className="pocket-paper"><h2>记录</h2>
           {!evidence.length && !save.clippings.length && <p className="muted">暂无记录。</p>}
-          {ordered.map((item) => <div className="record-entry" key={item.id}><label><input type="checkbox" checked={selected.includes(item.id)} onChange={() => toggle(item.id)} /><b>{item.title}</b></label><p>{item.summary}</p><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
+          {evidence.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
           {save.clippings.map((item) => <div className="record-entry excerpt" key={item.id}><p>“{item.text}”</p><button className="text-link" onClick={() => navigate(item.pageId)}>原页</button><button className="text-link" onClick={() => setSave({ ...save, clippings: save.clippings.filter((entry) => entry.id !== item.id) })}>移除</button></div>)}
-          <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><label><input type="checkbox" checked={selected.includes(item.id)} onChange={() => toggle(item.id)} /><b>{item.title}</b></label><p>{item.summary}</p></div>)}
-          <div className="relation-controls"><button disabled={selected.length < 2} onClick={confirmRelation}>比对所选</button><button disabled={!selected.length} onClick={() => { setSelected([]); setRelationMessage('') }}>取消选择</button><p role="status">{relationMessage}</p></div>
+          <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button></div>)}
+          {(selected.length > 0 || relationMessage) && <div className="relation-controls">{choices.complete && selected.length >= 2 && <button onClick={confirmRelation}>对照这些记录</button>}{selected.length > 0 && <button onClick={() => { setSelected([]); setRelationMessage('') }}>取消对照</button>}<p role="status">{relationMessage}</p></div>}
         </div></aside>}
     </div>
     {tip && <button className="selection-tip" style={{ left: tip.x, top: tip.y }} onMouseDown={(event) => event.preventDefault()} onClick={recordSelection}>☆ 记下这段</button>}

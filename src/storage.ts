@@ -2,6 +2,7 @@ import type { CasePage, GameCase } from './case'
 import { loadDefaultCase, loadDemoCase, loadMockCase, parseCase } from './case'
 import { currentEntry, makeEntry, makeTab } from './browserState'
 import type { BrowserTab, HistoryEntry, PageState } from './browserState'
+import { canVisitPage } from './siteData'
 
 const CURRENT_KEY = 'last-seen-online:v0.5:current'
 const CASE_KEY = 'last-seen-online:v0.5:case:'
@@ -59,7 +60,7 @@ function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolea
     ...caseData.puzzles.filter((puzzle) => puzzle.unlocks?.pageIds?.includes(page.id))
       .map((puzzle) => save.completedPuzzleIds.includes(puzzle.id)),
   ]
-  return directlyAllowed && (!unlockers.length || unlockers.some(Boolean))
+  return canVisitPage(page, save) && directlyAllowed && (!unlockers.length || unlockers.some(Boolean))
 }
 
 function restoreState(raw: unknown): PageState {

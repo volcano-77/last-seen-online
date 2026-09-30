@@ -38,6 +38,8 @@ export interface CasePage {
   accessPuzzleId?: string; learnsTool?: 'archive'; offlinePageId?: string
   snapshot?: { originalUrl: string; capturedAt: string }
   searchIndex?: { status: 'current' | 'orphan' | 'legacy'; aliases?: string[] }
+  normalNavigation?: boolean; searchIndexed?: boolean
+  requiresTool?: 'archive'; firstVisitFromPageId?: string
 }
 export interface EvidenceDefinition {
   id: string; type: EvidenceType; sourcePageId: string; sourceObjectId?: string
@@ -160,6 +162,9 @@ export function parseCase(input: unknown): GameCase {
       (raw.layout !== undefined && !['portal','forum','news','blog','profile','echo','index','generic'].includes(String(raw.layout))) ||
       (raw.media !== undefined && !media(raw.media)) ||
       (raw.searchable !== undefined && typeof raw.searchable !== 'boolean') ||
+      ['normalNavigation', 'searchIndexed'].some((key) => raw[key] !== undefined && typeof raw[key] !== 'boolean') ||
+      (raw.requiresTool !== undefined && raw.requiresTool !== 'archive') ||
+      (raw.firstVisitFromPageId !== undefined && !nonEmpty(raw.firstVisitFromPageId)) ||
       (raw.searchIndex !== undefined && (!record(raw.searchIndex) || !['current','orphan','legacy'].includes(String(raw.searchIndex.status)) ||
         (raw.searchIndex.aliases !== undefined && !strings(raw.searchIndex.aliases)))) ||
       (raw.directory !== undefined && typeof raw.directory !== 'boolean') ||
@@ -253,6 +258,7 @@ export function parseCase(input: unknown): GameCase {
     subset(item.factIds, factIds)
   for (const page of pages) {
     if ((page.offlinePageId && !pageIds.has(page.offlinePageId)) ||
+      (page.firstVisitFromPageId && !pageIds.has(page.firstVisitFromPageId)) ||
       (page.accessPuzzleId && !puzzleIds.has(page.accessPuzzleId)) ||
       !subset(page.links?.map((item) => item.pageId), pageIds) || !validGate(page.unlockConditions) ||
       page.objects?.some((item) => (item.evidenceId && !evidenceIds.has(item.evidenceId)) ||

@@ -88,9 +88,6 @@
           "pageId": "bbs_index"
         }
       ],
-      "metadata": {
-        "最近访问": "{{cityName}}生活论坛"
-      },
       "siteId": "navigation",
       "directory": true
     },
@@ -468,7 +465,7 @@
       "siteName": "{{cityName}}资讯网",
       "date": "{{liuNewsDate}}",
       "body": [
-        "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，稿件正文可通过站内标题和全网搜索进入。"
+        "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，可从本页列表或南城搜索进入。"
       ],
       "objects": [
         {
@@ -671,7 +668,8 @@
         "originalUrl": "nclife://bbs/thread/40612",
         "capturedAt": "{{liuNoticeDate}} 10:03"
       },
-      "siteId": "archive"
+      "siteId": "archive",
+      "requiresTool": "archive"
     },
     {
       "id": "bbs_index",
@@ -768,12 +766,7 @@
       "objects": [],
       "siteId": "life",
       "skin": "life",
-      "links": [
-        {
-          "label": "个人网站：回声寻人网",
-          "pageId": "echo_unavailable"
-        }
-      ],
+      "links": [],
       "searchIndex": {
         "status": "current",
         "aliases": [
@@ -823,19 +816,13 @@
           "type": "attachment",
           "title": "zy_old.jpg（附件未完整保存）",
           "body": [
-            "图片请求失败。原记录保留的个人链接如下。"
+            "图片请求失败。原记录只保留了附件文件名与旧邮箱。"
           ],
           "metadata": {
             "原文件名": "zy_old.jpg",
-            "邮箱": "{{zhaoOldMailbox}}",
-            "个人主页": "oldblog://zhaoyan/home"
+            "邮箱": "{{zhaoOldMailbox}}"
           },
-          "links": [
-            {
-              "label": "oldblog://zhaoyan/home",
-              "pageId": "blog_zhao_home"
-            }
-          ]
+          "links": []
         }
       ],
       "links": [
@@ -850,7 +837,8 @@
         "originalUrl": "nclife://bbs/thread/81102",
         "capturedAt": "{{zhaoReplyDate}} {{zhaoSnapshotTime}}"
       },
-      "searchable": false
+      "searchable": false,
+      "requiresTool": "archive"
     },
     {
       "id": "blog_zhaoyan",
@@ -975,34 +963,6 @@
       ],
       "objects": [
         {
-          "id": "echo-module-1",
-          "type": "text",
-          "title": "寻人信息 / 历史列表",
-          "body": [
-            "按地区与发布时间浏览家属提交的信息。"
-          ],
-          "links": [
-            {
-              "label": "浏览历史来源",
-              "pageId": "echo_archive_index"
-            }
-          ]
-        },
-        {
-          "id": "echo-module-5",
-          "type": "text",
-          "title": "寻人信息发布须知",
-          "body": [
-            "发布前请先阅读公开规则。"
-          ],
-          "links": [
-            {
-              "label": "阅读发布规则",
-              "pageId": "echo_submission_rules"
-            }
-          ]
-        },
-        {
           "id": "echo-module-8",
           "type": "text",
           "title": "网站公告",
@@ -1018,7 +978,8 @@
       "snapshot": {
         "originalUrl": "echo://home",
         "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
-      }
+      },
+      "firstVisitFromPageId": "echo_unavailable"
     },
     {
       "id": "echo_submission_rules",
@@ -1047,7 +1008,8 @@
       "snapshot": {
         "originalUrl": "echo://rules/submission",
         "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
-      }
+      },
+      "requiresTool": "archive"
     },
     {
       "id": "echo_archive_index",
@@ -1123,7 +1085,8 @@
           "label": "论坛转载的早期副本",
           "pageId": "cache_liujia_notice"
         }
-      ]
+      ],
+      "requiresTool": "archive"
     },
     {
       "id": "echo_chenyu_notice",
@@ -1189,7 +1152,8 @@
       "snapshot": {
         "originalUrl": "echo://notice/chenyu",
         "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
-      }
+      },
+      "requiresTool": "archive"
     },
     {
       "id": "bbs_moderation_log_chenyu",
@@ -1443,7 +1407,8 @@
       ],
       "siteId": "archive",
       "siteName": "网页存档服务",
-      "directory": true
+      "directory": true,
+      "requiresTool": "archive"
     },
     {
       "id": "blog_zhao_home",
@@ -1451,7 +1416,7 @@
       "skin": "zhao",
       "siteId": "zhao",
       "directory": true,
-      "title": "最近的日志",
+      "title": "赵妍的小屋",
       "siteName": "赵妍的小屋",
       "author": "赵妍",
       "url": "oldblog://zhaoyan/home",
@@ -1464,7 +1429,19 @@
         "工作之后写得少了，一些生活琐事还是想留在这里。"
       ],
       "objects": [],
-      "links": []
+      "links": [],
+      "normalNavigation": false,
+      "searchIndexed": true,
+      "metadata": {
+        "旧邮箱": "{{zhaoOldMailbox}}"
+      },
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "zhaoyan",
+          "{{zhaoOldMailbox}}"
+        ]
+      }
     },
     {
       "id": "blog_zhao_cat",
@@ -1754,7 +1731,8 @@
         "aliases": [
           "member_10"
         ]
-      }
+      },
+      "normalNavigation": false
     },
     {
       "id": "member_11",
@@ -1780,7 +1758,8 @@
         "aliases": [
           "member_11"
         ]
-      }
+      },
+      "normalNavigation": false
     },
     {
       "id": "member_12",
@@ -1806,7 +1785,8 @@
         "aliases": [
           "member_12"
         ]
-      }
+      },
+      "normalNavigation": false
     },
     {
       "id": "member_13",
@@ -1832,7 +1812,9 @@
         "aliases": [
           "member_13"
         ]
-      }
+      },
+      "normalNavigation": false,
+      "requiresTool": "archive"
     },
     {
       "id": "member_14",
@@ -1864,7 +1846,8 @@
         "aliases": [
           "14"
         ]
-      }
+      },
+      "normalNavigation": false
     },
     {
       "id": "life_forum_index_ordinary_1",

@@ -1,5 +1,14 @@
 import type { CasePage } from './case'
 
+export function canVisitPage(page: CasePage, progress: { visitedPageIds: string[]; learnedTools: string[] }, fromPageId?: string) {
+  return (!page.requiresTool || progress.learnedTools.includes(page.requiresTool)) &&
+    (!page.firstVisitFromPageId || progress.visitedPageIds.includes(page.id) || fromPageId === page.firstVisitFromPageId)
+}
+
+export function customSignature(value?: string) {
+  return value && value !== '这个人很懒，什么也没有留下。' ? value : undefined
+}
+
 export function getThreadStats(thread: CasePage) {
   const replies = thread.objects?.filter((item) => item.type === 'reply') || []
   return {
@@ -45,7 +54,7 @@ export function getPageLinks(page: CasePage, pages: CasePage[]) {
     ...getSiteNavigation(page, pages).map((item) => item.id)])
   if (page.kind === 'profile') getProfileActivity(pages, page.author || '').forEach((item) => excluded.add(item.pageId))
   return (page.links || []).filter((link) => {
-    if (excluded.has(link.pageId)) return false
+    if (excluded.has(link.pageId) || !pages.some((item) => item.id === link.pageId)) return false
     excluded.add(link.pageId)
     return true
   })

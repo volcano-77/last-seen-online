@@ -5,7 +5,7 @@
 .browser-tab{display:flex;align-items:center;border:1px solid #a6aaa1;border-bottom:0;background:linear-gradient(#efeee5,#d6d6ca);min-width:125px;max-width:270px;color:#5a625c}
 .browser-tab.active{background:#f7f6f0;color:#263b4a;border-top:2px solid #74869a}.browser-tab button{border:0;background:none;color:inherit;font-size:14px;padding:6px 10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:left}.browser-tab .tab-close{flex-shrink:0;padding:3px 8px;font-size:17px;margin-left:auto}.browser-tab .tab-close:hover{background:#e3d7ca}
 .browser-toolbar{display:flex;gap:5px;align-items:center;padding:7px 9px;background:linear-gradient(#f7f6f0,#e5e3da);border-bottom:1px solid #b0afa7;font-size:14px;flex-shrink:0}
-.browser-toolbar button,.relation-controls button,.date-toggle{padding:4px 9px;border:1px solid #a5a6a0;border-radius:2px;background:linear-gradient(#fff,#e8e8df);color:#333;white-space:nowrap}
+.browser-toolbar button,.relation-controls button{padding:4px 9px;border:1px solid #a5a6a0;border-radius:2px;background:linear-gradient(#fff,#e8e8df);color:#333;white-space:nowrap}
 .browser-toolbar button:disabled{color:#999}.browser-toolbar form{display:flex;align-items:center;gap:7px;flex:1;min-width:0}
 .browser-toolbar input{flex:1;min-width:70px;border:1px solid #a4a8a8;background:#fff;padding:4px 7px;font-family:Arial,sans-serif;font-size:15px}
 .browser-settings{position:relative;flex-shrink:0}.settings-menu{position:absolute;right:0;top:calc(100% + 5px);z-index:60;min-width:165px;padding:4px;background:#f7f6ef;border:1px solid #999e99;box-shadow:2px 2px #5553}
@@ -21,11 +21,11 @@
 .record-pocket header button{border:1px solid #aaa18a;background:#f6f3e4;line-height:1.2;font-size:18px;padding:1px 7px}
 .pocket-paper{overflow:auto;padding:12px 15px;font-size:14px;line-height:1.65}
 .pocket-paper h2{font-size:16px;margin:16px 0 7px;border-bottom:1px solid #c6bea8;padding-bottom:5px}
-.record-entry{padding:12px 0;border-bottom:1px dotted #c6bea8}.record-entry label{display:flex;align-items:flex-start;gap:5px}.record-entry input{margin-top:6px;flex-shrink:0;accent-color:#6c7057}
+.record-entry{padding:12px 0;border-bottom:1px dotted #c6bea8}.record-title{display:block;text-align:left;border:0;background:none;font:inherit;color:#514d41;padding:3px 0;margin-bottom:5px;cursor:pointer}.record-title:disabled{color:#9b9688;cursor:default}.record-title[aria-pressed=true]{color:#66551f;background:#ece4c2}.record-title:not(:disabled):hover{text-decoration:underline;text-underline-offset:3px}.record-title small{font-size:13px;color:#86764e}
 .record-entry b{font-size:14px;font-weight:500}.record-entry p{margin:5px 0;color:#696558;font-size:14px;line-height:1.65}.record-entry .text-link{font-size:13px;color:#626d70;margin-right:10px}
 .relation-controls{position:sticky;bottom:-12px;background:#f7f3df;border-top:1px solid #c5baa1;padding:13px 0 1px;margin-top:18px}
 .relation-controls button{font-size:14px;margin-right:6px}.relation-controls p{font-size:14px;line-height:1.65;margin:7px 0}.relation-controls button:disabled{color:#999}
-.date-toggle{font-size:13px;padding:3px 7px}.muted{color:#8b877a;font-size:14px}
+.muted{color:#8b877a;font-size:14px}
 .selection-tip,.record-feedback{position:fixed;z-index:110;border:1px solid #b8a976;background:#fff9da;box-shadow:1px 2px 4px #4442;padding:6px 10px;font-size:14px;color:#514b30;max-width:390px;pointer-events:auto}
 .record-feedback{pointer-events:none;animation:feedback-in .15s ease-out}
 @keyframes feedback-in{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:translateY(0)}}

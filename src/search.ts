@@ -14,9 +14,9 @@ function excerpt(text: string, term: string) {
 export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'global', siteId?: string): SearchHit[] {
   const term = query.trim().toLowerCase()
   if (!term) return []
-  return pages.filter((page) => page.searchable !== false && !page.directory && !page.offlinePageId &&
+  return pages.filter((page) => page.searchable !== false && (!page.directory || scope === 'global' && page.searchIndexed === true) && !page.offlinePageId &&
     page.kind !== 'search' && page.kind !== 'portal' && !page.snapshot && page.kind !== 'cache' &&
-    (scope === 'global' || page.siteId === siteId && (page.kind === 'forum-thread' || page.kind === 'website')))
+    (scope === 'global' ? page.searchIndexed !== false : page.siteId === siteId && (page.kind === 'forum-thread' || page.kind === 'website')))
     .flatMap((page) => {
       const hits: SearchHit[] = []
       const base = { pageId: page.id, title: page.title, author: page.author, timestamp: page.date, indexStatus: page.searchIndex?.status }
