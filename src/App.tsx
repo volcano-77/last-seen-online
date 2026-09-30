@@ -3,7 +3,7 @@ import type { FormEvent, MouseEvent } from 'react'
 import type { CaseMedia, GameCase, UnlockConditions } from './case'
 import { SearchSite, SiteView } from './Sites'
 import type { SaveData } from './storage'
-import { loadCurrentSession, writeSave } from './storage'
+import { loadCurrentSession, resetCaseSave, writeSave } from './storage'
 import { activeTab, closeTab, currentEntry, focusTab, makeTab, openPage, siteKey, travelTab, updateEntry } from './browserState'
 import type { NavigateOptions, PageState } from './browserState'
 import './App.css'
@@ -25,6 +25,8 @@ export default function App() {
   const [address, setAddress] = useState<string | null>(null)
   const [historyOpen, setHistoryOpen] = useState(false)
   const [recordsOpen, setRecordsOpen] = useState(false)
+  const [settingsOpen, setSettingsOpen] = useState(false)
+  const [resetError, setResetError] = useState('')
   const [selected, setSelected] = useState<string[]>([])
   const [relationMessage, setRelationMessage] = useState('')
   const [reload, setReload] = useState(0)
@@ -37,6 +39,7 @@ export default function App() {
   const pendingRestore = useRef(false)
   const scrollFrame = useRef<number | null>(null)
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const resetDialog = useRef<HTMLDialogElement>(null)
   useEffect(() => {
     loadCurrentSession().then((session) => { setCaseData(session.caseData); setSave(session.save) })
       .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : '网页读取失败'))
@@ -95,7 +98,23 @@ export default function App() {
   function pageState(patch: Partial<PageState>) {
     setSave((old) => old ? updateEntry(old, { state: { ...currentEntry(old).state, ...patch } }) : old)
   }
-  function resetChrome() { setAddress(null); setHistoryOpen(false); setTip(null); setFeedback(null) }
+  function resetChrome() { setAddress(null); setHistoryOpen(false); setSettingsOpen(false); setTip(null); setFeedback(null) }
+  function restartCase() {
+    if (!caseData) return
+    const fresh = resetCaseSave(caseData)
+    if (!fresh) { setResetError('无法保存重置结果，当前进度仍保留。请检查浏览器的本地存储权限后重试。'); return }
+    if (scrollFrame.current !== null) cancelAnimationFrame(scrollFrame.current)
+    scrollFrame.current = null
+    if (timer.current) clearTimeout(timer.current)
+    timer.current = null
+    pendingRestore.current = false
+    restoreScroll.current = null
+    saveRef.current = fresh
+    setSave(fresh)
+    resetChrome(); setRecordsOpen(false); setSelected([]); setRelationMessage(''); setResetError(''); setStorageFailed(false)
+    window.getSelection()?.removeAllRanges()
+    resetDialog.current?.close()
+  }
   function switchTab(id: string) { setSave((old) => old ? focusTab(capture(old), id) : old); resetChrome() }
   function dismissTab(id: string) {
     if (!caseData) return
@@ -224,7 +243,16 @@ export default function App() {
       <form onSubmit={submitAddress}><label htmlFor="browser-address">地址</label><input id="browser-address" maxLength={100} value={address ?? page.url} onChange={(event) => setAddress(event.target.value)} /><button>转到</button></form>
       <button aria-label="记录夹" aria-expanded={recordsOpen} aria-controls="records" onClick={() => setRecordsOpen(!recordsOpen)}>记录 · {evidence.length + save.clippings.length}</button>
       {save.learnedTools.includes('archive') && caseData.archivePageId && <button onClick={() => navigate(caseData.archivePageId!)}>存档</button>}
+      <div className="browser-settings" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setSettingsOpen(false) }} onKeyDown={(event) => { if (event.key === 'Escape') setSettingsOpen(false) }}>
+        <button aria-label="设置" title="设置" aria-expanded={settingsOpen} aria-controls="browser-settings-menu" onClick={() => setSettingsOpen(!settingsOpen)}>⋯</button>
+        {settingsOpen && <div className="settings-menu" id="browser-settings-menu"><button onClick={() => { setSettingsOpen(false); setResetError(''); resetDialog.current?.showModal() }}>重新开始本案</button></div>}
+      </div>
     </nav>
+    <dialog className="reset-dialog" ref={resetDialog} aria-labelledby="reset-title" aria-describedby="reset-description">
+      <h2 id="reset-title">重新开始本案</h2><p id="reset-description">这会清除当前案件的浏览历史、标签页、记录、已确认结论、解锁状态和谜题进度，并从案件开头重新开始。是否继续？</p>
+      {resetError && <p role="alert" className="reset-error">{resetError}</p>}
+      <div className="reset-actions"><button autoFocus onClick={() => resetDialog.current?.close()}>取消</button><button onClick={restartCase}>确认重新开始</button></div>
+    </dialog>
     {historyOpen && <div className="history-strip"><b>本标签访问记录</b>{tab.history.slice(0, tab.historyIndex + 1).map((item, index) => { const visited = caseData.pages.find((p) => p.id === item.pageId); return <button key={item.id} onClick={() => travel(index - tab.historyIndex)}>{visited?.title}{visited?.snapshot ? '（副本）' : ''}</button> })}</div>}
     <div className={`browser-workspace${recordsOpen ? ' with-records' : ''}`}>
       <div className="browser-page" ref={content} onMouseUp={inspectSelection} key={viewKey} onScroll={captureScroll}

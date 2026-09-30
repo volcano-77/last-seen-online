@@ -1879,12 +1879,133 @@
       "date": "{{incidentalAprilSecondDate}}",
       "searchable": true,
       "body": [
-        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+        "想周末去淘两本旧书，听说摊位挺多。公交在哪站下？大家一般几点过去？"
       ],
       "details": {
         "section": "城市闲谈"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "life_forum_index_ordinary_1-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "落叶知秋",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:07",
+          "body": [
+            "我上次十点到的，摊主基本都摆好了。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "小树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:23",
+          "body": [
+            "终点站下车还要走一小段，跟着拿书袋的人走就行。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-3",
+          "type": "reply",
+          "title": "回复",
+          "author": "榕树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:39",
+          "body": [
+            "别背太大的包，过道窄，转身容易碰到摊上的书。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-4",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:07",
+          "body": [
+            "主要想找小说，旧版的封面比较好看。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-5",
+          "type": "reply",
+          "title": "回复",
+          "author": "小猫搬家",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:23",
+          "body": [
+            "我淘过一本食谱，回来发现最后几页是别人抄的菜价，哈哈。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-6",
+          "type": "reply",
+          "title": "回复",
+          "author": "落叶知秋",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:39",
+          "body": [
+            "小说一摞卖的先翻翻，有时候会缺册。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-7",
+          "type": "reply",
+          "title": "回复",
+          "author": "隔壁桌",
+          "timestamp": "{{incidentalAprilSecondDate}} 12:07",
+          "body": [
+            "带点零钱。上次买五块的书，摊主找不开。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-8",
+          "type": "reply",
+          "title": "回复",
+          "author": "小树",
+          "timestamp": "{{incidentalAprilSecondDate}} 12:23",
+          "body": [
+            "报纸说周末可能下小雨，书摊要是盖塑料布就不好翻了。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-9",
+          "type": "reply",
+          "title": "回复",
+          "author": "榕树",
+          "timestamp": "{{incidentalAprilSecondDate}} 12:39",
+          "body": [
+            "附近能吃面，逛饿了不用坐车回来。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-10",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 13:07",
+          "body": [
+            "谢谢各位，准备拿个布袋去。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-11",
+          "type": "reply",
+          "title": "回复",
+          "author": "小猫搬家",
+          "timestamp": "{{summerLastOnlineDate}} 13:23",
+          "body": [
+            "我今天路过，摊位还在，有个摊卖的全是旧杂志。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_1-daily-12",
+          "type": "reply",
+          "title": "回复",
+          "author": "落叶知秋",
+          "timestamp": "{{summerLastOnlineDate}} 13:39",
+          "body": [
+            "那就看天气了，最好别下雨。"
+          ]
+        }
+      ]
     },
     {
       "id": "life_forum_index_ordinary_2",
@@ -1899,12 +2020,47 @@
       "date": "{{incidentalAprilSecondDate}}",
       "searchable": true,
       "body": [
-        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+        "一辆旧自行车想转让，铃铛和刹车都能用，车座有点掉皮。想看的站内联系，白天试骑。"
       ],
       "details": {
         "section": "闲置转让"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "life_forum_index_ordinary_2-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "榕树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:07",
+          "body": [
+            "多大的轮子？我怕车架太高。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_2-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:23",
+          "body": [
+            "普通的通勤车，不是山地车。我量好再回你。"
+          ],
+          "metadata": {
+            "引用作者": "榕树",
+            "引用": "多大的轮子？我怕车架太高。"
+          }
+        },
+        {
+          "id": "life_forum_index_ordinary_2-daily-3",
+          "type": "reply",
+          "title": "回复",
+          "author": "小树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:39",
+          "body": [
+            "试骑的时候看看链条，我上一辆骑两步就掉。"
+          ]
+        }
+      ]
     },
     {
       "id": "life_forum_index_ordinary_3",
@@ -1919,12 +2075,63 @@
       "date": "{{incidentalAprilSecondDate}}",
       "searchable": true,
       "body": [
-        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+        "站牌上贴了一张新线路图，字有点糊。是不是原来的路口站不停了？去市场要在哪儿换？"
       ],
       "details": {
         "section": "出行交流"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "life_forum_index_ordinary_3-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "落叶知秋",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:07",
+          "body": [
+            "我昨天坐过，司机说施工这几天绕一段。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_3-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "榕树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:23",
+          "body": [
+            "站牌上的小纸条写了临时站，得往前走。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_3-daily-3",
+          "type": "reply",
+          "title": "回复",
+          "author": "小树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:39",
+          "body": [
+            "同问，早上多走了十分钟。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_3-daily-4",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:07",
+          "body": [
+            "下午过去看清楚了，是临时调整，不是整条线取消。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_3-daily-5",
+          "type": "reply",
+          "title": "回复",
+          "author": "隔壁桌",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:23",
+          "body": [
+            "谢谢，明天早点出门。"
+          ]
+        }
+      ]
     },
     {
       "id": "life_forum_index_ordinary_4",
@@ -1939,12 +2146,33 @@
       "date": "{{incidentalAprilSecondDate}}",
       "searchable": true,
       "body": [
-        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+        "旧卡片机开机后镜头收不回去，电池换过也一样。修过的朋友说说，值不值得修？"
       ],
       "details": {
         "section": "生活求助"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "life_forum_index_ordinary_4-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "小猫搬家",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:07",
+          "body": [
+            "先问检测要不要收费，我那台最后是电池仓接触不好。"
+          ]
+        },
+        {
+          "id": "life_forum_index_ordinary_4-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "榕树",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:23",
+          "body": [
+            "镜头的问题维修不便宜，最好先拿报价再决定。"
+          ]
+        }
+      ]
     },
     {
       "id": "bbs_index_ordinary_1",
@@ -1959,12 +2187,33 @@
       "date": "{{incidentalAprilSecondDate}}",
       "searchable": true,
       "body": [
-        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+        "借阅台贴了临时闭馆的通知，周五下午做设备检修。要还书的同学留意一下门口公告，别白跑。"
       ],
       "details": {
         "section": "校园公告"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "bbs_index_ordinary_1-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:07",
+          "body": [
+            "同问，自习室也一起关吗？"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_1-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:23",
+          "body": [
+            "公告只写了借阅区，自习室得问值班老师。"
+          ]
+        }
+      ]
     },
     {
       "id": "bbs_index_ordinary_2",
@@ -1999,12 +2248,127 @@
       "date": "{{incidentalAprilSecondDate}}",
       "searchable": true,
       "body": [
-        "这个话题在旧站存档中只保留了简短的正文，回复附件已经无法读取。"
+        "整理书架，几本公共课教材想换给需要的人。有铅笔记号，不介意的跟帖说一下书名，不留手机号。"
       ],
       "details": {
         "section": "闲置交流"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "bbs_index_ordinary_3-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:07",
+          "body": [
+            "有没有旧版的高数下册？我上册还留着。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:23",
+          "body": [
+            "下册有，封面折了一角，里面是完整的。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-3",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{incidentalAprilSecondDate}} 10:39",
+          "body": [
+            "课后答案页也在吗？"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-4",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:07",
+          "body": [
+            "在，就是边上写了不少演算。"
+          ],
+          "metadata": {
+            "引用作者": "阿路",
+            "引用": "课后答案页也在吗？"
+          }
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-5",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:23",
+          "body": [
+            "不介意。我这边有英语练习册可以换。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-6",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 11:39",
+          "body": [
+            "练习册我已经买了，直接借你也行。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-7",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{incidentalAprilSecondDate}} 12:07",
+          "body": [
+            "那我把上学期的笔记复印一份给你。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-8",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{incidentalAprilSecondDate}} 12:23",
+          "body": [
+            "不用客气，有空帮我看看习题最后一道。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-9",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{incidentalAprilSecondDate}} 12:39",
+          "body": [
+            "那个我也没做出来，等问过老师再回。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-10",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{summerLastOnlineDate}} 13:07",
+          "body": [
+            "刚又翻出一本词汇书，书脊开胶了，要的话一起拿。"
+          ]
+        },
+        {
+          "id": "bbs_index_ordinary_3-daily-11",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{summerLastOnlineDate}} 13:23",
+          "body": [
+            "词汇书不用啦，我桌上也堆了好几本。谢谢。"
+          ]
+        }
+      ]
     },
     {
       "id": "forum_summer-1",
@@ -2024,7 +2388,28 @@
       "details": {
         "section": "校园闲谈"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "forum_summer-1-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "小树",
+          "timestamp": "{{summerBookPostDate}} 17:07",
+          "body": [
+            "有一套旧的，听力光盘不见了，书还在。"
+          ]
+        },
+        {
+          "id": "forum_summer-1-daily-2",
+          "type": "reply",
+          "title": "回复",
+          "author": "榕树",
+          "timestamp": "{{summerBookPostDate}} 17:23",
+          "body": [
+            "先对一下版次，练习题有的改过。"
+          ]
+        }
+      ]
     },
     {
       "id": "forum_summer-2",
@@ -2069,7 +2454,18 @@
       "details": {
         "section": "校园闲谈"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "forum_summer-3-daily-1",
+          "type": "reply",
+          "title": "回复",
+          "author": "隔壁桌",
+          "timestamp": "{{summerAlbumUploadDate}} 10:07",
+          "body": [
+            "图片加载有点慢，等回宿舍再看。"
+          ]
+        }
+      ]
     },
     {
       "id": "blog_zhao_meal",

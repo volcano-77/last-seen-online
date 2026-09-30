@@ -112,3 +112,96 @@
 .site-wrapper .text-link.is-visited,.site-wrapper .username.is-visited,.search-site .text-link.is-visited{color:#705280}.site-wrapper .text-link:hover,.site-wrapper .username:hover,.search-site .text-link:hover{color:#a1542e}
 .site-nav a{display:inline-block;text-decoration:underline;color:inherit}.site-nav a.is-visited{color:#705280}.news-site .site-nav a.is-visited{color:#eee0f1}
 @media(max-width:650px){.thread-list td,.thread-list th{padding:9px 7px}.thread-list td:last-child{width:auto;white-space:normal}.blog-site .site-breadcrumb{padding-inline:22px}}
+
+/* Local communities: a decorated life forum and a compact campus bulletin board. */
+.forum-wordmark{font:14px/1.7 Georgia,'SimSun',serif;letter-spacing:2px;display:block;margin-bottom:5px}
+.life-forum{border:1px solid #8ba7ba;background:#f6fafc}
+.life-forum .forum-header{background:repeating-linear-gradient(0deg,#ffffff12 0 1px,transparent 1px 4px),linear-gradient(100deg,#deeaf3,#98bdd2);border-bottom:4px solid #d79e58;padding-block:21px}
+.life-forum .forum-header h1{color:#275674;text-shadow:1px 1px #fff;font-size:30px}
+.life-forum .forum-wordmark{color:#4b748c}.life-forum .thread-title{border-top:3px solid #729bb6;background:linear-gradient(#fff,#e5f0f6);font-size:23px}
+.board-intro{margin:15px 0;color:#5e6c75}.board-sections{display:flex;flex-wrap:wrap;gap:5px 15px;border-bottom:1px dotted #a2b4bf;padding-bottom:12px;margin:12px 0;font-size:15px}
+.board-sections button{font:inherit;border:1px solid #aebfca;color:#3d5e75;background:linear-gradient(#fff,#e9eff3);padding:4px 10px}
+.board-sections button.selected{background:#d8e5ed;border-color:#7594a9;color:#243f54}
+.board-list-caption{border:1px solid #8ba7ba;border-bottom:0;background:linear-gradient(#e5f0f6,#c4d9e7);padding:7px 12px;font-size:16px}
+.board-list-caption small{float:right;font-size:14px;color:#547289}.thread-symbol{color:#7f95a3;font-size:15px}
+.life-forum .thread-list tr:nth-child(even){background:#f3f7fa}.life-forum .thread-list td{border-color:#ccd7df}
+.forum-floor aside small,.signature{font-size:14px;line-height:1.65}.member-rank{font-size:14px;color:#556e7f;border-bottom:1px dotted #b5c5d0;padding-bottom:4px}
+.forum-avatar{width:58px;height:58px;position:relative;border:3px double #94a7b4;box-shadow:2px 2px #d4dde3;background:#f4f0dd}
+.forum-avatar.avatar-0{color:#6f8a7b;background:repeating-linear-gradient(45deg,#e5eee5 0 7px,#f6faf4 7px 14px)}
+.forum-avatar.avatar-1{color:#9d7a4a;background:linear-gradient(135deg,#faf6e9 50%,#ead8b2 50%)}
+.forum-avatar.avatar-2{color:#6c7898;background:repeating-linear-gradient(0deg,#ebedf5 0 9px,#fafaff 9px 11px)}
+.forum-avatar.avatar-3{color:#967276;background:linear-gradient(45deg,#e9d7d8,#fff3ec)}
+.forum-quote{margin:18px 0;border:1px dashed #b4bdc3;background:#f2f4f5;padding:10px 14px;color:#68777f;font-size:15px}
+.forum-quote small{font-size:14px}.forum-floor article .forum-quote p{font-size:15px;margin:6px 0;line-height:1.7}
+.forum-page-strip{display:flex;align-items:center;flex-wrap:wrap;gap:14px;margin:14px 0;font-size:14px;color:#687983}
+.page-number{border:1px solid #a2b2be;background:#eef3f6;color:#3a5870;padding:1px 8px;font-weight:bold}
+.campus-forum{padding-inline:14px;border:1px solid #999f8e;background:#fafbf5}
+.campus-forum .forum-header{margin-inline:-14px;background:#f1f2e9;border-bottom:3px double #7c8768;padding:12px 20px}
+.campus-forum .forum-header h1{font-size:26px;letter-spacing:0;color:#405535}.campus-forum .forum-wordmark{font:14px monospace;color:#7b826d;letter-spacing:1px;margin-bottom:2px}
+.campus-forum>.site-nav{margin-inline:-14px}.campus-forum .thread-title{font-size:21px;background:#e9edde;border:1px solid #b6bca7;padding:7px 12px;font-weight:normal}
+.campus-forum .board-sections{gap:0 15px;border-bottom:1px solid #bfc4b0}.campus-forum .board-sections button{background:none;border:0;border-bottom:2px solid transparent;padding:3px 0;color:#566946}
+.campus-forum .board-sections button.selected{border-bottom-color:#7b8659;color:#3e4d30;font-weight:bold}
+.campus-forum .board-list-caption{background:#e2e7d4;border-color:#a7b092;padding-block:5px}.campus-forum .board-list-caption small{color:#687557}
+.campus-forum .thread-list td,.campus-forum .thread-list th{padding:9px 12px;border-color:#ccd0bf}.campus-forum .thread-list td p{margin:2px 0}
+.campus-forum .forum-floor{grid-template-columns:135px minmax(0,1fr);border-color:#bec5af}.campus-forum .forum-floor aside{background:#f0f2e7;border-color:#c9cebc;gap:5px}
+.campus-forum .forum-floor article{padding-inline:20px}.campus-forum .forum-avatar{width:35px;height:35px;box-shadow:none;font-size:20px;border:1px solid #b3bd9e}
+.campus-forum .member-rank{border:0;color:#707b61}.campus-forum .forum-quote{background:#f5f6ed;border-color:#b7bea6;color:#667154}.campus-forum .signature{color:#78806b;border-color:#c6ccb8;margin-top:16px}
+
+/* Blog decorations belong to the site; articles keep readable paper space. */
+.blog-home-columns{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:0}
+.blog-shelf{padding:28px 22px 25px 10px;font-size:15px;line-height:1.7}
+.blog-shelf section{margin:0 0 23px;border:1px solid #d4c8ac;background:#fffdf3;padding:12px}
+.blog-shelf h3{font-size:16px;font-weight:normal;margin:-12px -12px 12px;padding:6px 10px;background:#eee4c9;border-bottom:1px dotted #b6ab8e}
+.blog-shelf p{margin:10px 0}.blog-shelf .site-links{display:block;margin:12px 0}.blog-shelf .site-links a,.blog-shelf section>button{display:block;margin:8px 0;font-size:15px}
+.blog-shelf small{font-size:14px;color:#887b6a}.blog-section-title{font-size:18px;font-weight:normal;border-top:1px dashed #c8b99d;border-bottom:1px dashed #c8b99d;padding:8px 0;margin:28px 0 5px}
+.blog-log-list .content-entry h3{font-size:19px}.blog-log-list .content-entry h3 small{font-size:14px;margin-left:8px;white-space:nowrap}
+.blog-calendar{border-collapse:collapse;table-layout:fixed;width:100%;font:14px/1.9 Arial,'SimSun',serif;text-align:center;margin:8px 0}
+.blog-calendar caption{font-size:15px;padding-bottom:7px}.blog-calendar th{font-weight:normal;color:#94745b;border-bottom:1px dotted #cfbea4}.blog-calendar td{height:27px}.blog-calendar .has-entry{font-weight:bold;background:#ead8b8;color:#6a4c2f}
+.zhao-blog{background:repeating-linear-gradient(90deg,#f3e4d7 0 2px,#fff8ee 2px 10px);color:#65513f;border-color:#c1a07c}
+.zhao-blog .blog-header{padding:35px 42px 30px;background:repeating-linear-gradient(90deg,#ffffff33 0 1px,transparent 1px 12px),linear-gradient(#f0d0b6,#f9e8cf);border-bottom:5px double #c28d6b}
+.zhao-blog .blog-header:after{content:'♫';right:55px;top:17px;font:75px Georgia,serif;color:#ba8260;transform:rotate(-12deg)}
+.zhao-blog .blog-header h1{font:34px/1.5 'SimSun',serif;color:#925b3b;letter-spacing:4px}.zhao-blog .blog-header small{font-size:14px;letter-spacing:3px;color:#9d7056}.zhao-blog .blog-header p{color:#876046;font-size:16px}
+.zhao-blog .site-breadcrumb{color:#9b7351;border-color:#d3b99c}.zhao-blog .blog-article{background:#fffaf3;border-right:1px dashed #dcc6ae}.zhao-blog .blog-article h2{color:#935e42}
+.zhao-blog .blog-shelf section{background:#fff4e5;border:1px solid #d7b38f;box-shadow:2px 2px #e4ccb5}.zhao-blog .blog-shelf h3{background:#ead0b4;border-color:#cbaa89;color:#865936}
+.zhao-blog .blog-pagination,.zhao-blog .blog-comments{border-color:#d7b38f}.zhao-blog .text-link{color:#975e3e}
+.summer-blog{background:repeating-linear-gradient(0deg,transparent 0 23px,#dfe9df 23px 24px),repeating-linear-gradient(90deg,#f5faf3 0 23px,#dfe9df 23px 24px);border-color:#93ad91;color:#435e4c}
+.summer-blog .blog-header{padding:28px 38px 22px;background:linear-gradient(90deg,#e7f0dadd,#f5f6dde8);border-bottom:3px solid #86a47b}
+.summer-blog .blog-header:after{content:'✿';right:38px;top:9px;font-size:83px;transform:none;color:#9aad7e}
+.summer-blog .blog-header h1{font:34px/1.6 'KaiTi','SimSun',serif;color:#52774b;letter-spacing:5px}.summer-blog .blog-header small{font-size:14px;color:#738c66}.summer-blog .blog-header p{color:#6f8159;font-size:16px}
+.summer-blog .blog-article{background:#fffff8;border-left:3px double #dce6d0;margin:20px 0 20px 20px;padding:18px 28px 30px}.summer-blog .blog-article h2{color:#5a7750}
+.summer-blog .blog-shelf section{background:#f4f8e9;border:0;border-top:2px solid #a4b991}.summer-blog .blog-shelf h3{background:none;border-bottom:1px dashed #b8c9a8;color:#627e4b}.summer-blog .blog-calendar .has-entry{background:#d8e6c6;color:#3e6741}
+.summer-blog .site-breadcrumb{color:#6c8860;border-color:#bfcdb5}.summer-blog .text-link{color:#50724c}.summer-blog .blog-section-title,.summer-blog .blog-pagination{border-color:#c1d2b4}
+
+/* The news front page uses portal strips; detail pages remain a single article. */
+.news-site{border:1px solid #9bb6cd;border-top:4px solid #2f719f;background:#fff;color:#354553}
+.portal-masthead{padding:5px 22px;background:#edf1f5;border-bottom:1px solid #d0dbe4;display:flex;justify-content:space-between;gap:12px;font:14px/1.7 Arial,'Microsoft YaHei',sans-serif;color:#657d8e}
+.news-site>header{padding:21px 25px;background:#fff;border-bottom:0}.portal-logo{display:flex;align-items:center;gap:12px}
+.portal-logo>span{font:bold 17px/1.25 'SimSun',serif;background:#e78931;color:white;border:3px double #fff;outline:1px solid #e78931;padding:8px 3px;width:40px;text-align:center}
+.news-site h1{color:#245f8f;font:bold 32px/1.5 'SimSun',serif;letter-spacing:2px}.news-site header>span{font-size:15px;line-height:1.7;color:#8a9fae;text-align:right}
+.portal-channels{display:flex;align-items:center;flex-wrap:wrap;background:linear-gradient(#438cbb,#266b9b);border-top:1px solid #2c6793;border-bottom:3px solid #e99b42;color:white;padding:0 16px;gap:0}
+.portal-channels a{font:16px/1.7 'SimSun',serif;color:white;text-decoration:none;padding:8px 22px;border-right:1px solid #75a2bf}
+.portal-channels a.selected{background:#185787}.portal-channels a:hover{text-decoration:underline;background:#377dae}.portal-channels a.is-visited{color:#ece0f1}
+.portal-channels>span{margin-left:auto;font:14px Georgia,serif;letter-spacing:1px;color:#d1e4f1;padding:10px}
+.news-site .site-breadcrumb{padding:9px 24px;color:#718596;background:#f6f8fa}.portal-front{padding:20px 24px}
+.portal-banner{display:flex;align-items:center;flex-wrap:wrap;gap:12px 25px;background:repeating-linear-gradient(135deg,#fff9ec 0 8px,#f9efd9 8px 9px);border:1px solid #e5c487;border-left:5px solid #e7a34f;padding:15px 18px;color:#b27636;margin-bottom:20px}
+.portal-banner strong{font:25px/1.5 'SimSun',serif;letter-spacing:3px;color:#ad6c2d}.portal-banner span{font-size:16px}.portal-banner small{margin-left:auto;font-size:14px;color:#a48868}
+.portal-news-columns{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:20px}.portal-news-columns.channel-only{display:block}
+.portal-news-section{border:1px solid #b2c8d8;background:#fff}.portal-news-section h2{margin:0;border-bottom:1px solid #a9c1d3;background:linear-gradient(#f1f7fb,#dcebf5);color:#245f8f;font:bold 18px/1.6 'SimSun',serif;padding:6px 12px}
+.portal-news-section:nth-child(2) h2{border-top:2px solid #d99a52;padding-top:4px}.portal-news-section ul{margin:0;padding:8px 13px;list-style:none}
+.portal-news-section li{display:grid;grid-template-columns:8px minmax(0,1fr);gap:0 6px;border-bottom:1px dotted #c8d4dd;padding:10px 0;font:16px/1.7 'SimSun','Microsoft YaHei',serif}
+.portal-news-section li:last-child{border-bottom:0}.portal-news-section .text-link{color:#345f83;text-decoration:none}.portal-news-section .text-link:hover{text-decoration:underline}
+.portal-news-section time{grid-column:2;font:14px/1.7 Arial,sans-serif;color:#8a9aa6}
+.portal-services{display:flex;align-items:center;flex-wrap:wrap;gap:10px 24px;border:1px solid #d3c3a4;background:#fffaf0;padding:10px 12px;margin-top:20px;font-size:15px}
+.portal-services h3{margin:0;font-size:16px;color:#a2713f}.portal-services span{font-size:14px;color:#8e8676}.portal-intro{font-size:14px;line-height:1.7;color:#85949f;border-top:1px dotted #becbd4;padding-top:12px;margin:20px 0 0}
+.news-detail>header{padding-block:16px}.news-detail .news-columns{padding:25px 50px 35px}.news-detail .news-columns h2{font-size:28px;color:#354d60;margin-top:15px}
+.news-detail .news-columns article>p{color:#353d44}.news-detail .news-meta{color:#7c8d9a}.news-detail .news-return{border-color:#bdcdd9}.news-detail .news-return .text-link{color:#456e8e}
+
+.echo-site>header{background:linear-gradient(#fff,#eff7fc);border-bottom:4px double #73a6c6}.echo-logo{color:#e59955;border:2px solid #b4cedf;background:white;font-size:23px}
+.echo-site header h1{font-size:30px;color:#37769d}.echo-welcome{border:1px solid #c3d8e8;border-left:4px solid #e99855;background:#f8fbfe;padding:15px 18px;margin-bottom:23px;display:flex;flex-wrap:wrap;gap:10px 22px}
+.echo-welcome strong{font:21px/1.6 'SimSun',serif;color:#467c9b}.echo-welcome span{font-size:15px;color:#8b9ead}
+.echo-content h2{color:#bd723f;font-size:24px}.echo-directory{gap:18px 25px}.echo-directory .content-entry{padding:0 0 12px;border:1px solid #c9dce9;background:#fff}
+.echo-directory .content-entry h3{padding:7px 12px;background:linear-gradient(#f1f8fc,#e2eff7);border-bottom:1px solid #c9dce9;font-size:17px;margin:0}.echo-directory .content-entry p{margin:12px;font-size:16px;color:#687e8f}
+.echo-directory .content-entry>small{display:block;margin:10px 12px}.echo-site footer{background:#f5f9fc;color:#7b94a5}
+
+@media(max-width:850px){.blog-home-columns{grid-template-columns:minmax(0,1fr) 195px}.blog-shelf{padding:22px 12px}.campus-forum .forum-floor{grid-template-columns:120px minmax(0,1fr)}.portal-news-columns{grid-template-columns:minmax(0,1fr)}.portal-channels>span{display:none}.news-detail .news-columns{padding:20px 28px}}
+@media(max-width:650px){.blog-home-columns{display:block}.blog-shelf{display:flex;flex-wrap:wrap;gap:15px;padding:15px 22px}.blog-shelf section{flex:1;min-width:170px;margin:0}.summer-blog .blog-article{margin:15px;padding:20px}.forum-member .forum-avatar{width:35px;height:35px;font-size:21px}.life-forum .forum-header h1{font-size:25px}.portal-front{padding:15px}.news-site h1{font-size:25px}.news-site header>span{display:none}.portal-channels a{padding:6px 14px}.portal-masthead{font-size:14px;padding-inline:12px}.news-detail .news-columns{padding:20px}.echo-directory{grid-template-columns:minmax(0,1fr)}}

@@ -192,6 +192,14 @@ export function writeSave(save: SaveData): boolean {
     return true
   } catch { return false }
 }
+export function resetCaseSave(caseData: GameCase): SaveData | null {
+  const fresh = makeSave(caseData)
+  try {
+    // Replace this Case's progress atomically; keep other saves and Case sources intact.
+    localStorage.setItem(`${CASE_KEY}${caseData.id}`, JSON.stringify(fresh))
+    return fresh
+  } catch { return null }
+}
 export function writeCustomCase(caseData: GameCase): boolean {
   if ([DEFAULT_CASE_ID, 'developer-mock-001', 'demo-001'].includes(caseData.id)) return true
   try { localStorage.setItem(`${CUSTOM_SOURCE_KEY}${caseData.id}`, JSON.stringify(caseData)); return true }
