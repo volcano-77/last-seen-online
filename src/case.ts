@@ -40,6 +40,7 @@ export interface CasePage {
   searchIndex?: { status: 'current' | 'orphan' | 'legacy'; aliases?: string[] }
   normalNavigation?: boolean; searchIndexed?: boolean
   requiresTool?: 'archive'; firstVisitFromPageId?: string
+  tableColumns?: string[]
 }
 export interface EvidenceDefinition {
   id: string; type: EvidenceType; sourcePageId: string; sourceObjectId?: string
@@ -159,6 +160,7 @@ export function parseCase(input: unknown): GameCase {
       (raw.tags !== undefined && !strings(raw.tags)) ||
       (raw.links !== undefined && !links(raw.links)) ||
       (raw.metadata !== undefined && !metadata(raw.metadata)) ||
+      (raw.tableColumns !== undefined && (!strings(raw.tableColumns) || !raw.tableColumns.length || !unique(raw.tableColumns))) ||
       (raw.layout !== undefined && !['portal','forum','news','blog','profile','echo','index','generic'].includes(String(raw.layout))) ||
       (raw.media !== undefined && !media(raw.media)) ||
       (raw.searchable !== undefined && typeof raw.searchable !== 'boolean') ||
@@ -194,6 +196,10 @@ export function parseCase(input: unknown): GameCase {
     }
     if (raw.objects && !unique((raw.objects as PageObject[]).map((item) => item.id))) {
       throw new Error(`页面 ${raw.id} 的内容对象 ID 重复。`)
+    }
+    if (raw.tableColumns && (raw.objects as PageObject[] | undefined)?.some((item) => item.type === 'row' &&
+      !(raw.tableColumns as string[]).every((column) => nonEmpty(item.metadata?.[column])))) {
+      throw new Error(`页面 ${raw.id} 的表格行缺少列内容。`)
     }
     return raw as unknown as CasePage
   })

@@ -16,7 +16,7 @@ export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'g
   if (!term) return []
   return pages.filter((page) => page.searchable !== false && (!page.directory || scope === 'global' && page.searchIndexed === true) && !page.offlinePageId &&
     page.kind !== 'search' && page.kind !== 'portal' && !page.snapshot && page.kind !== 'cache' &&
-    (scope === 'global' ? page.searchIndexed !== false : page.siteId === siteId && (page.kind === 'forum-thread' || page.kind === 'website')))
+    (scope === 'global' ? page.searchIndexed !== false : page.siteId === siteId && (page.kind === 'forum-thread' || page.kind === 'website' || page.kind === 'profile')))
     .flatMap((page) => {
       const hits: SearchHit[] = []
       const base = { pageId: page.id, title: page.title, author: page.author, timestamp: page.date, indexStatus: page.searchIndex?.status }

@@ -103,7 +103,10 @@ function ObjectRow({ item, ...props }: SiteProps & { item: PageObject }) {
   if (item.type === 'log-entry' || (item.type === 'reply' && item.metadata)) return <div className="log-entry" id={item.id}>
     <button className="log-row" aria-expanded={open} onClick={(event) => {
       setOpen(!open); if (!open && item.evidenceId) props.onDiscover(item.evidenceId, pointAt(event.currentTarget))
-    }}><time>{item.timestamp}</time><span>{item.title}</span><span>{item.body?.[0]}</span></button>{open && <Metadata values={item.metadata} />}</div>
+    }}><time>{item.timestamp}</time><span>{item.title}</span><span>{item.body?.[0]}</span></button>
+    {(item.author || item.metadata?.['操作者']) && <div className="log-author">操作 / 发布：<User {...props} name={item.author || item.metadata!['操作者']} /></div>}
+    {open && <><Metadata values={item.metadata} />{item.body?.slice(1).map((line, index) => <p key={index}>{line}</p>)}
+      {item.links?.map((link) => <PageLink key={link.pageId} pageId={link.pageId}>{link.label}</PageLink>)}</>}</div>
   const link = item.type === 'attachment' ? undefined : item.links?.[0]
   return <section className="content-entry" id={item.id}><h3>{link ? <PageLink pageId={link.pageId}>{props.pages.find((page) => page.id === link.pageId)?.title || item.title}</PageLink> : item.title}</h3>
     {item.timestamp && <small>{item.timestamp}</small>}{item.body?.map((line, index) => <p key={index}>{line}</p>)}
@@ -281,11 +284,33 @@ function Generic(props: SiteProps) {
   const time = props.page.objects?.find((item) => item.type === 'timestamp')
   return <div className={`plain-site ${props.page.skin === 'campus' ? 'campus-forum' : ''}`}><SiteName {...props} /><SiteNav {...props} /><Breadcrumb {...props} /><h2>{props.page.title}</h2>{time && <Time item={time} onDiscover={props.onDiscover} />}{props.page.body.map((line, i) => <p key={i}>{line}</p>)}{props.page.objects?.filter((item) => item.type !== 'timestamp' && item.type !== 'cache-entry').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} /></div>
 }
+function SpreadsheetRow({ item, columns, number, ...props }: SiteProps & { item: PageObject; columns: string[]; number: number }) {
+  const [selected, setSelected] = useObjectDisclosure(item.id)
+  function select(element: HTMLElement) {
+    setSelected(!selected)
+    if (item.evidenceId) props.onDiscover(item.evidenceId, pointAt(element))
+  }
+  return <tr id={item.id} className={selected ? 'sheet-selected' : undefined} onClick={(event) => select(event.currentTarget)}>
+    <th scope="row">{number}</th>{columns.map((column, index) => <td key={column}>{index === 0 ?
+      <button className="sheet-row-label" aria-pressed={selected} onClick={(event) => { event.stopPropagation(); select(event.currentTarget) }}>{item.metadata?.[column] || '—'}</button> : item.metadata?.[column] || '—'}</td>)}
+  </tr>
+}
+function Spreadsheet(props: SiteProps) {
+  const columns = props.page.tableColumns || [], rows = props.page.objects?.filter((item) => item.type === 'row') || []
+  return <div className="spreadsheet-viewer"><header>▦ {props.page.title} <small>— 附件只读预览</small></header>
+    <div className="sheet-toolbar"><span>文件</span><span>查看</span><span>只读</span><span>{rows.length} 条记录</span></div>
+    {props.page.body.map((line, index) => <p className="sheet-note" key={index}>{line}</p>)}
+    <div className="sheet-grid"><table aria-label={props.page.title}><thead><tr><th aria-label="行号" />{columns.map((column, index) => <th key={column} scope="col" aria-label={`${String.fromCharCode(65 + index)} 列：${column}`}>{String.fromCharCode(65 + index)}</th>)}</tr>
+      <tr className="sheet-column-titles"><th scope="row">1</th>{columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
+      <tbody>{rows.map((item, index) => <SpreadsheetRow {...props} key={item.id} item={item} columns={columns} number={index + 2} />)}</tbody></table></div>
+    <footer>{props.page.subtitle || '工作表 1'}　|　只读</footer></div>
+}
 export function SiteView(props: SiteProps) {
   const { page } = props
-  if (page.offlinePageId) return <div className="unavailable-page"><h1>无法显示网页</h1><p>服务器没有返回可读取的页面。</p><p>{page.url}</p><button onClick={() => props.onNavigate(page.offlinePageId!)}>尝试打开离线副本</button><small>原站点不可用时，浏览器可以查找以前保存的页面。</small></div>
+  if (page.offlinePageId) return <div className="unavailable-page"><h1>{page.kind === 'attachment' ? '文件不存在' : '无法显示网页'}</h1><p>{page.kind === 'attachment' ? '原站附件已经失效，服务器未找到这个文件。' : '服务器没有返回可读取的页面。'}</p><p>{page.url}</p><button onClick={() => props.onNavigate(page.offlinePageId!)}>{page.kind === 'attachment' ? '尝试查看历史副本' : '尝试打开离线副本'}</button><small>原站点不可用时，浏览器可以查找以前保存的页面。</small></div>
   let content: ReactNode
   if (page.kind === 'portal') content = <Portal {...props} />
+  else if (page.kind === 'spreadsheet') content = <Spreadsheet {...props} />
   else if (page.kind === 'forum-thread' || page.kind === 'forum') content = <Forum {...props} />
   else if (page.kind === 'profile') content = <Profile {...props} />
   else if (page.kind === 'blog' || page.skin === 'summer' || page.skin === 'zhao') content = <Blog {...props} />

@@ -1185,7 +1185,8 @@
             "操作": "移动重复帖",
             "时间": "{{chenDate}} {{chenModerationTime}}"
           },
-          "detailLabel": "查看操作详情"
+          "detailLabel": "查看操作详情",
+          "author": "陈雨"
         },
         {
           "id": "chen-reply-log",
@@ -1825,29 +1826,30 @@
       "title": "陈雨的个人资料",
       "author": "陈雨",
       "siteName": "{{cityName}}大学 BBS",
-      "url": "nclife://bbs/member/14",
+      "url": "ncu://bbs/member/14",
       "searchable": true,
       "details": {
         "registeredAt": "旧站会员",
         "signature": "这个人很懒，什么也没有留下。"
       },
       "body": [
-        "校园生活区版主。"
+        "校园生活区版主。负责主题分类、重复帖合并和旧帖保留。"
       ],
       "objects": [],
       "links": [
         {
-          "label": "公开管理记录",
-          "pageId": "bbs_moderation_log_chenyu"
+          "label": "版务记录 / 旧记录",
+          "pageId": "bbs_chenyu_old_records"
         }
       ],
       "searchIndex": {
-        "status": "orphan",
+        "status": "current",
         "aliases": [
-          "14"
+          "陈雨",
+          "校园生活版主"
         ]
       },
-      "normalNavigation": false
+      "normalNavigation": true
     },
     {
       "id": "life_forum_index_ordinary_1",
@@ -2497,6 +2499,304 @@
       ],
       "objects": [],
       "links": []
+    },
+    {
+      "id": "bbs_chenyu_old_records",
+      "kind": "website",
+      "layout": "generic",
+      "title": "校园生活 · 旧版务记录",
+      "url": "ncu://bbs/modlog/chenyu/old",
+      "siteName": "{{cityName}}大学 BBS",
+      "siteId": "campus",
+      "skin": "campus",
+      "author": "陈雨",
+      "details": {
+        "section": "版务记录"
+      },
+      "body": [
+        "公开版务记录。条目详情保留操作说明及原附件引用；已失效附件无法直接下载。"
+      ],
+      "searchable": true,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "陈雨",
+          "旧版务记录"
+        ]
+      },
+      "objects": [
+        {
+          "id": "old-mod-ad",
+          "type": "log-entry",
+          "title": "处理广告",
+          "author": "陈雨",
+          "body": [
+            "清理连续发布的广告内容。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "删除广告",
+            "版块": "校园生活",
+            "时间": "旧记录时间未保留"
+          }
+        },
+        {
+          "id": "old-mod-move",
+          "type": "log-entry",
+          "title": "移动主题",
+          "author": "陈雨",
+          "body": [
+            "二手教材交换主题移至闲置交流。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "移动主题",
+            "版块": "校园生活",
+            "时间": "旧记录时间未保留"
+          },
+          "links": [
+            {
+              "label": "二手教材交换",
+              "pageId": "bbs_index_ordinary_3"
+            }
+          ]
+        },
+        {
+          "id": "old-mod-merge",
+          "type": "log-entry",
+          "title": "合并重复主题",
+          "author": "陈雨",
+          "body": [
+            "同一通知的重复主题合并，保留原回复。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "合并主题",
+            "版块": "校园生活",
+            "时间": "旧记录时间未保留"
+          }
+        },
+        {
+          "id": "old-mod-keep",
+          "type": "log-entry",
+          "title": "保留公告",
+          "author": "陈雨",
+          "body": [
+            "临时闭馆通知保留，方便站友查看。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "保留旧帖",
+            "版块": "校园生活",
+            "时间": "旧记录时间未保留"
+          },
+          "links": [
+            {
+              "label": "图书馆临时闭馆通知",
+              "pageId": "bbs_index_ordinary_1"
+            }
+          ]
+        },
+        {
+          "id": "old-mod-notices",
+          "type": "log-entry",
+          "title": "保留寻人旧帖",
+          "author": "陈雨",
+          "body": [
+            "这几条旧帖先不要清，我在核发布时间。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "暂缓清理",
+            "版块": "校园生活",
+            "涉及内容": "几条寻人旧帖",
+            "备注": "这几条旧帖先不要清，我在核发布时间。"
+          },
+          "evidenceId": "F11"
+        },
+        {
+          "id": "old-mod-sheet",
+          "type": "log-entry",
+          "title": "旧帖核对附件",
+          "author": "陈雨",
+          "body": [
+            "核对用的表先放在这里，没核实的条目仍标待核。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "补充附件",
+            "版块": "校园生活",
+            "时间": "旧记录时间未保留"
+          },
+          "links": [
+            {
+              "label": "旧帖时间核对.xls",
+              "pageId": "attachment_chenyu_timecheck"
+            }
+          ]
+        },
+        {
+          "id": "old-mod-empty",
+          "type": "log-entry",
+          "title": "清理空主题",
+          "author": "陈雨",
+          "body": [
+            "删除没有正文的空主题。"
+          ],
+          "metadata": {
+            "操作者": "陈雨",
+            "操作": "删除空帖",
+            "版块": "校园生活",
+            "时间": "旧记录时间未保留"
+          }
+        }
+      ]
+    },
+    {
+      "id": "attachment_chenyu_timecheck",
+      "kind": "attachment",
+      "title": "旧帖时间核对.xls",
+      "url": "ncu://bbs/attachments/old-post-timecheck.xls",
+      "siteId": "campus",
+      "body": [],
+      "searchable": false,
+      "offlinePageId": "snapshot_chenyu_timecheck"
+    },
+    {
+      "id": "snapshot_chenyu_timecheck",
+      "kind": "spreadsheet",
+      "title": "旧帖时间核对.xls",
+      "url": "archive://snapshot/ncu/old-post-timecheck.xls",
+      "siteName": "网页存档服务",
+      "siteId": "archive",
+      "requiresTool": "archive",
+      "searchable": false,
+      "snapshot": {
+        "originalUrl": "ncu://bbs/attachments/old-post-timecheck.xls",
+        "capturedAt": "抓取时间未保留"
+      },
+      "subtitle": "旧帖核对",
+      "body": [
+        "陈雨备注：仅作时间核对。未核条目暂留；网页失效的部分以后再核。"
+      ],
+      "tableColumns": [
+        "姓名",
+        "寻人帖时间",
+        "后续公开活动",
+        "后续情况",
+        "陈雨备注"
+      ],
+      "objects": [
+        {
+          "id": "timecheck-liujia",
+          "type": "row",
+          "title": "刘佳",
+          "metadata": {
+            "姓名": "刘佳",
+            "寻人帖时间": "{{liuNoticeDate}} 09:12",
+            "后续公开活动": "{{liuNoticeDate}} {{liuPhotoTime}} 校园照片",
+            "后续情况": "{{liuLostDate}} 晚后失联；{{liuNewsDate}} 新闻",
+            "陈雨备注": "时间对不上，需要再核"
+          }
+        },
+        {
+          "id": "timecheck-zhaoyan",
+          "type": "row",
+          "title": "赵妍",
+          "metadata": {
+            "姓名": "赵妍",
+            "寻人帖时间": "{{zhaoNoticeDate}} 10:08",
+            "后续公开活动": "{{zhaoBlogDate}} 22:17 本人博客",
+            "后续情况": "{{zhaoLostDate}} 起失联；{{zhaoNewsDate}} 新闻",
+            "陈雨备注": "旧帖发布时间早于新闻"
+          }
+        },
+        {
+          "id": "timecheck-xuning",
+          "type": "row",
+          "title": "许宁",
+          "metadata": {
+            "姓名": "许宁",
+            "寻人帖时间": "旧寻人信息，具体时间待核",
+            "后续公开活动": "寻人帖后仍有公开活动记录，时间待核",
+            "后续情况": "未确认",
+            "陈雨备注": "已发邮件，待回复"
+          },
+          "evidenceId": "F12"
+        },
+        {
+          "id": "timecheck-pending-1",
+          "type": "row",
+          "title": "待核条目 1",
+          "metadata": {
+            "姓名": "待核条目 1",
+            "寻人帖时间": "待核",
+            "后续公开活动": "页面已失效",
+            "后续情况": "未确认",
+            "陈雨备注": "旧页面待恢复"
+          }
+        },
+        {
+          "id": "timecheck-pending-2",
+          "type": "row",
+          "title": "待核条目 2",
+          "metadata": {
+            "姓名": "待核条目 2",
+            "寻人帖时间": "时间不确定",
+            "后续公开活动": "待核",
+            "后续情况": "未确认",
+            "陈雨备注": "需要再核"
+          }
+        },
+        {
+          "id": "timecheck-pending-3",
+          "type": "row",
+          "title": "待核条目 3",
+          "metadata": {
+            "姓名": "待核条目 3",
+            "寻人帖时间": "待核",
+            "后续公开活动": "待核",
+            "后续情况": "未确认",
+            "陈雨备注": "旧页面待恢复"
+          }
+        },
+        {
+          "id": "timecheck-pending-4",
+          "type": "row",
+          "title": "待核条目 4",
+          "metadata": {
+            "姓名": "待核条目 4",
+            "寻人帖时间": "时间不确定",
+            "后续公开活动": "页面已失效",
+            "后续情况": "未确认",
+            "陈雨备注": "需要再核"
+          }
+        },
+        {
+          "id": "timecheck-pending-5",
+          "type": "row",
+          "title": "待核条目 5",
+          "metadata": {
+            "姓名": "待核条目 5",
+            "寻人帖时间": "待核",
+            "后续公开活动": "待核",
+            "后续情况": "未确认",
+            "陈雨备注": "旧页面待恢复"
+          }
+        },
+        {
+          "id": "timecheck-pending-6",
+          "type": "row",
+          "title": "待核条目 6",
+          "metadata": {
+            "姓名": "待核条目 6",
+            "寻人帖时间": "时间不确定",
+            "后续公开活动": "待核",
+            "后续情况": "未确认",
+            "陈雨备注": "需要再核"
+          }
+        }
+      ]
     }
   ],
   "evidence": [
@@ -2604,6 +2904,24 @@
       "summary": "校园 BBS 记录显示陈雨当日 {{chenReplyTime}} 公开回复帖子。",
       "timestamp": "{{chenDate}} {{chenReplyTime}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F11",
+      "type": "log",
+      "sourcePageId": "bbs_chenyu_old_records",
+      "sourceObjectId": "old-mod-notices",
+      "title": "陈雨｜版务记录提到正在核多条寻人旧帖的发布时间",
+      "summary": "陈雨在版务记录中要求保留几条寻人旧帖，备注正在核发布时间。此条记录不代表每个案例均已核实。",
+      "discovery": "detail"
+    },
+    {
+      "id": "F12",
+      "type": "table-row",
+      "sourcePageId": "snapshot_chenyu_timecheck",
+      "sourceObjectId": "timecheck-xuning",
+      "title": "许宁｜陈雨备注“已发邮件，待回复”",
+      "summary": "核对表将许宁列为待核对象，提到寻人帖后的公开活动，并记有“已发邮件，待回复”。这是陈雨的表格备注，尚未取得实际邮件验证。",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -2631,6 +2949,11 @@
       "id": "C05",
       "title": "陈雨被发布为寻人对象时仍正常活动",
       "summary": "寻人帖发布后，同日校园 BBS 仍记录到陈雨本人公开回复。"
+    },
+    {
+      "id": "C06",
+      "title": "陈雨曾整理并核查多起寻人帖时间",
+      "summary": "版务记录的保留说明与九项核对表相互对应，说明陈雨曾系统整理多起寻人帖时间；表中仍有多项待核，不代表全部已确认异常。"
     }
   ],
   "relations": [
@@ -2710,6 +3033,20 @@
         ]
       },
       "checkpointId": "checkpoint_chenyu_notice"
+    },
+    {
+      "id": "R06",
+      "evidenceIds": [
+        "F11",
+        "F12"
+      ],
+      "title": "对照陈雨版务记录与核对表",
+      "summary": "对照旧帖保留备注与表格中的联系记录，确认陈雨曾系统整理多起寻人帖时间。",
+      "unlocks": {
+        "factIds": [
+          "C06"
+        ]
+      }
     }
   ],
   "puzzles": [

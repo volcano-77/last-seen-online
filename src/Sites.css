@@ -175,6 +175,16 @@
 .summer-blog .blog-shelf section{background:#f4f8e9;border:0;border-top:2px solid #a4b991}.summer-blog .blog-shelf h3{background:none;border-bottom:1px dashed #b8c9a8;color:#627e4b}.summer-blog .blog-calendar .has-entry{background:#d8e6c6;color:#3e6741}
 .summer-blog .site-breadcrumb{color:#6c8860;border-color:#bfcdb5}.summer-blog .text-link{color:#50724c}.summer-blog .blog-section-title,.summer-blog .blog-pagination{border-color:#c1d2b4}
 
+.log-author{font-size:15px;color:#536272;padding:3px 12px 8px}.log-entry>.text-link{display:inline-block;margin:0 12px 12px}
+.spreadsheet-viewer{border:1px solid #8c9297;background:#fff;color:#222;font:16px/1.7 Arial,'SimSun','Microsoft YaHei',sans-serif}
+.spreadsheet-viewer>header{padding:7px 12px;background:linear-gradient(#eff1f3,#cfd3d7);border-bottom:1px solid #92989d;font-weight:bold}.spreadsheet-viewer>header small{font-weight:normal;font-size:14px}
+.sheet-toolbar{display:flex;gap:22px;padding:4px 12px;background:#ececec;border-bottom:1px solid #a6a6a6;font-size:15px}.sheet-toolbar span:last-child{margin-left:auto}
+.sheet-note{padding:4px 12px;margin:8px 0;color:#555;font-size:15px}.sheet-grid{overflow-x:auto}.sheet-grid table{width:100%;min-width:800px;table-layout:fixed;border-collapse:collapse}
+.sheet-grid th,.sheet-grid td{border:1px solid #b9bdc0;padding:8px 10px;vertical-align:top;overflow-wrap:anywhere}.sheet-grid thead>tr:first-child th,.sheet-grid tbody th,.sheet-column-titles>th:first-child{background:#e2e4e6;color:#4b4f52;text-align:center;font-weight:normal}
+.sheet-grid tr>:first-child{width:40px;padding-inline:4px}.sheet-grid tr>:nth-child(2){width:12%}.sheet-grid tr>:nth-child(3){width:20%}.sheet-column-titles th{background:#f2f2f2;text-align:left;font-weight:bold}
+.sheet-row-label{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0;text-align:left}.sheet-row-label:focus-visible{outline:2px solid #50665a;outline-offset:3px}.sheet-grid .sheet-selected td{background:#edf3ee;box-shadow:inset 0 1px #738a77,inset 0 -1px #738a77}
+.spreadsheet-viewer>footer{background:#e2e4e6;border-top:1px solid #a6a6a6;padding:5px 12px;font-size:14px;color:#4b4f52}
+
 /* The news front page uses portal strips; detail pages remain a single article. */
 .news-site{border:1px solid #9bb6cd;border-top:4px solid #2f719f;background:#fff;color:#354553}
 .portal-masthead{padding:5px 22px;background:#edf1f5;border-bottom:1px solid #d0dbe4;display:flex;justify-content:space-between;gap:12px;font:14px/1.7 Arial,'Microsoft YaHei',sans-serif;color:#657d8e}
