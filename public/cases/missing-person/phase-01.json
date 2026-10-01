@@ -72,7 +72,27 @@
     "chenHelpReply2Time": "22:33",
     "chenHelpReply3Time": "22:37",
     "chenAfterHelpDate": "2009-04-21",
-    "chenAfterHelpTime": "09:10"
+    "chenAfterHelpTime": "09:10",
+    "chenHandoffDate": "2009-04-21",
+    "chenHandoffTime": "20:12",
+    "chenKeepQuestionTime": "20:19",
+    "chenBackupTime": "20:26",
+    "chenHandoffAckTime": "20:34",
+    "chenTextbookDate": "2009-04-22",
+    "chenTextbookTime": "10:06",
+    "chenCupDate": "2009-04-23",
+    "chenCupTime": "13:15",
+    "chenRoutineDate": "2009-04-23",
+    "chenRoutineTime": "18:25",
+    "westTeaThreadDate": "2009-04-16",
+    "westTeaThreadTime": "12:10",
+    "westTeaReply1Time": "12:27",
+    "westTeaReply2Time": "12:42",
+    "westTeaReply3Time": "13:08",
+    "westTeaReply4Time": "13:21",
+    "chenTeaDate": "2009-04-24",
+    "chenTeaTime": "17:20",
+    "westTeaFollowupTime": "17:35"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -763,6 +783,20 @@
               "pageId": "bbs_index_ordinary_3"
             }
           ]
+        },
+        {
+          "id": "bbs-list-west-tea",
+          "type": "post",
+          "title": "城西老商业楼二楼那家茶座还开吗？",
+          "metadata": {
+            "版块": "校园生活"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "bbs_west_tea"
+            }
+          ]
         }
       ],
       "siteId": "campus",
@@ -1245,10 +1279,32 @@
             "回复时间": "{{chenAfterHelpDate}} {{chenAfterHelpTime}}",
             "帖子状态": "可见"
           }
+        },
+        {
+          "id": "chen-routine-after-handoff",
+          "type": "reply",
+          "title": "普通版务回复",
+          "author": "陈雨",
+          "timestamp": "{{chenRoutineDate}} {{chenRoutineTime}}",
+          "body": [
+            "重复主题已经合并，后续请在原主题里回复。"
+          ],
+          "metadata": {
+            "账号": "陈雨",
+            "回复时间": "{{chenRoutineDate}} {{chenRoutineTime}}",
+            "帖子状态": "可见"
+          },
+          "evidenceId": "F24"
         }
       ],
       "siteId": "campus",
-      "skin": "campus"
+      "skin": "campus",
+      "links": [
+        {
+          "label": "版务交接讨论",
+          "pageId": "bbs_chenyu_handoff"
+        }
+      ]
     },
     {
       "id": "blog_summer_home",
@@ -2259,7 +2315,18 @@
       "details": {
         "section": "失物招领"
       },
-      "objects": []
+      "objects": [
+        {
+          "id": "cup-chen-routine",
+          "type": "reply",
+          "title": "回复",
+          "author": "陈雨",
+          "timestamp": "{{chenCupDate}} {{chenCupTime}}",
+          "body": [
+            "如果已经找回，记得在原帖说一声。失物信息先保留，不用另开主题。"
+          ]
+        }
+      ]
     },
     {
       "id": "bbs_index_ordinary_3",
@@ -2392,6 +2459,16 @@
           "timestamp": "{{summerLastOnlineDate}} 13:23",
           "body": [
             "词汇书不用啦，我桌上也堆了好几本。谢谢。"
+          ]
+        },
+        {
+          "id": "textbook-chen-routine",
+          "type": "reply",
+          "title": "回复",
+          "author": "陈雨",
+          "timestamp": "{{chenTextbookDate}} {{chenTextbookTime}}",
+          "body": [
+            "教材交换请标清版本和使用情况，同一条信息不要重复发帖。"
           ]
         }
       ]
@@ -3112,6 +3189,141 @@
         }
       ],
       "links": []
+    },
+    {
+      "id": "bbs_chenyu_handoff",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "siteName": "{{cityName}}大学 BBS",
+      "title": "这几天版务先帮忙看一下",
+      "url": "ncu://bbs/board-affairs/handoff",
+      "author": "陈雨",
+      "date": "{{chenHandoffDate}} {{chenHandoffTime}}",
+      "details": {
+        "section": "版务交流"
+      },
+      "body": [
+        "这几天晚上不一定在线，广告和重复帖先麻烦副版处理一下。之前那几条旧帖先别清。",
+        "版务问题留在这个主题，我上线会看。"
+      ],
+      "objects": [
+        {
+          "id": "handoff-keep-question",
+          "type": "reply",
+          "title": "旧附件还保留吗",
+          "author": "纸飞机",
+          "timestamp": "{{chenHandoffDate}} {{chenKeepQuestionTime}}",
+          "body": [
+            "那些旧帖和附件还需要留吗？有的附件点不开了，这次清理要一起删吗？"
+          ]
+        },
+        {
+          "id": "handoff-backup-reply",
+          "type": "reply",
+          "title": "先保留",
+          "author": "陈雨",
+          "timestamp": "{{chenHandoffDate}} {{chenBackupTime}}",
+          "body": [
+            "先别删。我在本站之外另外留了一份副本，站里的附件坏了也没关系。"
+          ]
+        },
+        {
+          "id": "handoff-ack-reply",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{chenHandoffDate}} {{chenHandoffAckTime}}",
+          "body": [
+            "收到，广告看到会举报。之前的旧帖先留着。"
+          ]
+        }
+      ],
+      "links": [],
+      "searchable": true
+    },
+    {
+      "id": "bbs_west_tea",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "siteName": "{{cityName}}大学 BBS",
+      "title": "城西老商业楼二楼那家茶座还开吗？",
+      "url": "ncu://bbs/thread/west-tea",
+      "author": "阿路",
+      "date": "{{westTeaThreadDate}} {{westTeaThreadTime}}",
+      "details": {
+        "section": "校园生活"
+      },
+      "body": [
+        "城西老商业楼二楼那家茶座还开着吗？周末可能从那边路过，想找个地方坐一会儿。以前去过一次，二楼不太好找。"
+      ],
+      "objects": [
+        {
+          "id": "tea-r1",
+          "type": "reply",
+          "title": "回复",
+          "author": "纸飞机",
+          "timestamp": "{{westTeaThreadDate}} {{westTeaReply1Time}}",
+          "body": [
+            "上周末还开着，里面挺安静。座位不多，不用特地跑去。"
+          ]
+        },
+        {
+          "id": "tea-r2",
+          "type": "reply",
+          "title": "回复",
+          "author": "水杯忘带了",
+          "timestamp": "{{westTeaThreadDate}} {{westTeaReply2Time}}",
+          "body": [
+            "饮料一般，我上次坐那儿看了半天书。"
+          ]
+        },
+        {
+          "id": "tea-r3",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{westTeaThreadDate}} {{westTeaReply3Time}}",
+          "body": [
+            "谢谢。上次在二楼转了两圈才找到，招牌太小。"
+          ]
+        },
+        {
+          "id": "tea-r4",
+          "type": "reply",
+          "title": "回复",
+          "author": "蜜柑",
+          "timestamp": "{{westTeaThreadDate}} {{westTeaReply4Time}}",
+          "body": [
+            "晚上几点关门没留意，楼下有的店收得早。"
+          ]
+        },
+        {
+          "id": "tea-chen-reply",
+          "type": "reply",
+          "title": "回复",
+          "author": "陈雨",
+          "timestamp": "{{chenTeaDate}} {{chenTeaTime}}",
+          "body": [
+            "二楼那家晚上还开吗？明天可能要去一趟。"
+          ]
+        },
+        {
+          "id": "tea-r6",
+          "type": "reply",
+          "title": "回复",
+          "author": "阿路",
+          "timestamp": "{{chenTeaDate}} {{westTeaFollowupTime}}",
+          "body": [
+            "最近没去过，营业时间最好到店确认。我记得附近有公交站，走过去还有一段。"
+          ]
+        }
+      ],
+      "links": [],
+      "searchable": true
     }
   ],
   "evidence": [
@@ -3340,6 +3552,52 @@
       "summary": "BBS主题删除记录显示账号陈雨执行作者自删。抓取副本早于删除；不说明她删除的具体原因。",
       "timestamp": "{{chenEnvelopeDate}} {{chenHelpDeleteTime}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F22",
+      "type": "post",
+      "sourcePageId": "bbs_chenyu_handoff",
+      "title": "陈雨｜收到信封后调整过近期版务安排",
+      "summary": "信封求助帖自删之后，陈雨在公开版务讨论里说这几天晚上不一定在线，广告和重复帖暂请副版处理，同时要求保留旧帖。她没有公开解释原因。",
+      "timestamp": "{{chenHandoffDate}} {{chenHandoffTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "这几天晚上不一定在线，广告和重复帖先麻烦副版处理一下"
+      ]
+    },
+    {
+      "id": "F23",
+      "type": "reply",
+      "sourcePageId": "bbs_chenyu_handoff",
+      "title": "陈雨｜曾说明核查相关旧帖已另留站外副本",
+      "summary": "在旧帖和附件是否清理的公开讨论中，陈雨说已在本站之外另留副本，站内附件坏了也没关系；未说明副本位置、介质或持有人。",
+      "timestamp": "{{chenHandoffDate}} {{chenBackupTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "我在本站之外另外留了一份副本"
+      ]
+    },
+    {
+      "id": "F24",
+      "type": "reply",
+      "sourcePageId": "bbs_moderation_log_chenyu",
+      "sourceObjectId": "chen-routine-after-handoff",
+      "title": "陈雨｜之后仍持续正常BBS活动",
+      "summary": "交接与站外副本说明之后，公开版务记录仍保留陈雨账号的普通重复帖处理回复，说明她没有立即停止BBS活动；不推定此后的安全状态。",
+      "timestamp": "{{chenRoutineDate}} {{chenRoutineTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F25",
+      "type": "reply",
+      "sourcePageId": "bbs_west_tea",
+      "title": "陈雨｜曾询问城西老商业楼二楼茶座近期营业情况",
+      "summary": "陈雨在普通地点讨论帖里询问二楼茶座晚上是否营业，说“明天可能要去一趟”；只记录计划询问，不确认实际到访、同行人或目的。",
+      "timestamp": "{{chenTeaDate}} {{chenTeaTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "二楼那家晚上还开吗？明天可能要去一趟"
+      ]
     }
   ],
   "facts": [
@@ -3382,6 +3640,11 @@
       "id": "C08",
       "title": "有人知道陈雨正在核查异常寻人帖，并针对她进行威慑。",
       "summary": "住处附近的信封、本人校园照与寻人启事打印件、同名核对附件局部共同支持有人针对她的调查进行威慑；身份、材料取得方式和具体递送者仍不能确认。"
+    },
+    {
+      "id": "C09",
+      "title": "陈雨收到威胁后采取过防范和备份措施，但没有立即停止自己的活动。",
+      "summary": "公开交接中调整晚间版务安排、说明已另留站外副本，之后仍有普通BBS活动。结合此前信封痕迹，仅确认这些应对与持续活动；副本去向、后续行程目的和是否已解决风险仍未知。"
     }
   ],
   "relations": [
@@ -3505,6 +3768,21 @@
           "C08"
         ]
       }
+    },
+    {
+      "id": "R09",
+      "evidenceIds": [
+        "F22",
+        "F23",
+        "F24"
+      ],
+      "title": "对照交接安排、副本说明与后续活动",
+      "summary": "按公开记录时间比对安排变化、站外副本说明和之后的普通版务回复。",
+      "unlocks": {
+        "factIds": [
+          "C09"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -3556,7 +3834,8 @@
       "character ages and heights",
       "supporting blog posts, access questions and album scenes",
       "Xu Ning old-case calendar dates and public old identity strings",
-      "Chen Yu envelope / self-deleted help post calendar dates and times"
+      "Chen Yu envelope / self-deleted help post calendar dates and times",
+      "Chen Yu handoff / public backup statement / routine replies / west-side tea discussion calendar dates and times"
     ]
   },
   "homePageId": "portal_home",
