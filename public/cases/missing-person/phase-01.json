@@ -99,7 +99,18 @@
     "chenIncidentNewsTime": "21:10",
     "chenDeathDate": "2009-04-27",
     "chenFollowupNewsDate": "2009-04-27",
-    "chenFollowupNewsTime": "18:30"
+    "chenFollowupNewsTime": "18:30",
+    "chenBackupDate": "2009-04-24",
+    "chenBackupSendTime": "20:46",
+    "chenBackupReceiveTime": "20:47",
+    "wangPrintDate": "2009-04-29",
+    "wangPrintTime": "13:40",
+    "wangOrderId": "CP-0429-016",
+    "wangPacketDate": "2009-04-30",
+    "wangShopVisitDate": "2009-05-02",
+    "wangWorkDate": "2009-05-10",
+    "wangArchiveDate": "2009-05-12",
+    "wangArchiveTime": "10:24"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3404,6 +3415,481 @@
           "pageId": "news_chenyu_stair_injury"
         }
       ]
+    },
+    {
+      "id": "wang_work_unavailable",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "资料整理 - 王曼",
+      "url": "ncitynews://reporters/wangman/materials",
+      "body": [
+        "旧帖时间核对.xls / 资料整理：王曼曾为{{cityName}}资讯网本地 / 社会新闻线实习记者。原工作页随改版下线，已从正常导航中移除，旧索引仍保留文件记录。"
+      ],
+      "searchable": true,
+      "normalNavigation": false,
+      "searchIndexed": true,
+      "searchIndex": {
+        "status": "legacy"
+      },
+      "offlinePageId": "archive_service"
+    },
+    {
+      "id": "snapshot_wang_work",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "资料整理 - 王曼",
+      "url": "archive://snapshot/ncitynews/wangman/materials",
+      "body": [
+        "王曼 / 本地、社会新闻线实习记者。做过采访、资料核对和稿件整理。此页留存的是个人工作资料，不是资讯网栏目。",
+        "日常项目：校园采访记录、本地生活选题、联系资料整理。这里只保留项目名，笔记和联系方式未收入网页副本。",
+        "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/materials",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "directory": true,
+      "objects": [
+        {
+          "id": "wang-dir-backup",
+          "type": "file",
+          "title": "陈雨资料备份",
+          "links": [
+            {
+              "label": "陈雨资料备份",
+              "pageId": "snapshot_wang_chen_backup"
+            }
+          ],
+          "metadata": {
+            "类型": "目录",
+            "保存日期": "{{wangWorkDate}}",
+            "大小": "—"
+          }
+        },
+        {
+          "id": "wang-dir-images",
+          "type": "file",
+          "title": "图片来源整理 / 收到的照片扫描件",
+          "links": [
+            {
+              "label": "图片来源整理 / 收到的照片扫描件",
+              "pageId": "snapshot_wang_photos"
+            }
+          ],
+          "metadata": {
+            "类型": "目录",
+            "保存日期": "{{wangWorkDate}}",
+            "大小": "—"
+          }
+        },
+        {
+          "id": "wang-dir-bag",
+          "type": "file",
+          "title": "冲印袋扫描",
+          "links": [
+            {
+              "label": "冲印袋扫描",
+              "pageId": "snapshot_wang_print_bag"
+            }
+          ],
+          "metadata": {
+            "类型": "图像",
+            "保存日期": "{{wangPacketDate}}",
+            "大小": "—"
+          }
+        },
+        {
+          "id": "wang-dir-order",
+          "type": "file",
+          "title": "城西照相馆订单记录",
+          "links": [
+            {
+              "label": "城西照相馆订单记录",
+              "pageId": "snapshot_wang_print_order"
+            }
+          ],
+          "metadata": {
+            "类型": "记录副本",
+            "保存日期": "{{wangShopVisitDate}}",
+            "大小": "—"
+          }
+        },
+        {
+          "id": "wang-dir-files",
+          "type": "file",
+          "title": "文件列表 / 导入记录",
+          "links": [
+            {
+              "label": "文件列表 / 导入记录",
+              "pageId": "snapshot_wang_import_files"
+            }
+          ],
+          "metadata": {
+            "类型": "清单副本",
+            "保存日期": "{{wangShopVisitDate}}",
+            "大小": "—"
+          }
+        }
+      ]
+    },
+    {
+      "id": "snapshot_wang_chen_backup",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "陈雨资料备份",
+      "url": "archive://snapshot/ncitynews/wangman/chen-backup",
+      "body": [
+        "收到后单独保存的一份附件。下列接收记录随副本保留；这里只放文件记录与必要说明，不包含陈雨的完整邮箱。",
+        "陈雨的短说明：“先放一份在你这里，旧帖时间我还在核。”"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/chen-backup",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "wang-chen-xls",
+          "type": "file",
+          "title": "旧帖时间核对.xls",
+          "metadata": {
+            "类型": "表格附件副本",
+            "保存日期": "{{chenBackupDate}}",
+            "大小": "原大小未保留"
+          }
+        },
+        {
+          "id": "wang-backup-receipt",
+          "type": "log-entry",
+          "title": "附件接收记录",
+          "timestamp": "{{chenBackupDate}} {{chenBackupReceiveTime}}",
+          "body": [
+            "陈雨 → 王曼 / 旧帖时间核对.xls"
+          ],
+          "evidenceId": "F30",
+          "metadata": {
+            "发件人": "陈雨",
+            "收件人": "王曼",
+            "发送时间": "{{chenBackupDate}} {{chenBackupSendTime}}",
+            "接收时间": "{{chenBackupDate}} {{chenBackupReceiveTime}}",
+            "文件": "旧帖时间核对.xls",
+            "来源": "王曼保存的附件接收记录与必要副本"
+          }
+        }
+      ]
+    },
+    {
+      "id": "snapshot_wang_photos",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "收到的照片 / 图片整理",
+      "url": "archive://snapshot/ncitynews/wangman/photos",
+      "body": [
+        "{{wangPacketDate|zh}}收到。袋内有六张照片，编号为038～043，都是针对我的材料。每张已经分开扫描保存。",
+        "随袋的一张纸上写着：“陈雨留给你的东西，不属于你。到这里为止。”",
+        "这些照片的边缘、清晰度和比例并不一样。下面按收到时的编号排列；括号中的来源描述只依据画面可见内容。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/photos",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "wang-photo-038",
+          "type": "photo",
+          "title": "038",
+          "body": [
+            "公开个人网页头像的保存图，边缘和底色仍像网页图片。"
+          ],
+          "media": {
+            "id": "wang-print-038",
+            "src": "cases/missing-person/images/wang-038.png",
+            "alt": "038：公开个人网页头像的保存图，边缘和底色仍像网页图片。",
+            "filename": "038.JPG（纸照片扫描副本）",
+            "caption": "点击查看扫描原图",
+            "width": "1024",
+            "height": "1536",
+            "uploadedAt": "{{wangWorkDate}}"
+          }
+        },
+        {
+          "id": "wang-photo-039",
+          "type": "photo",
+          "title": "039",
+          "body": [
+            "公开校园活动合影，人物和背景一起保留。"
+          ],
+          "media": {
+            "id": "wang-print-039",
+            "src": "cases/missing-person/images/wang-039.png",
+            "alt": "039：公开校园活动合影，人物和背景一起保留。",
+            "filename": "039.JPG（纸照片扫描副本）",
+            "caption": "点击查看扫描原图",
+            "width": "1536",
+            "height": "1024",
+            "uploadedAt": "{{wangWorkDate}}"
+          }
+        },
+        {
+          "id": "wang-photo-040",
+          "type": "photo",
+          "title": "040",
+          "body": [
+            "公开目击页面保存的近期街边照片；不显示精确地址。"
+          ],
+          "media": {
+            "id": "wang-print-040",
+            "src": "cases/missing-person/images/wang-040.png",
+            "alt": "040：公开目击页面保存的近期街边照片；不显示精确地址。",
+            "filename": "040.JPG（纸照片扫描副本）",
+            "caption": "点击查看扫描原图",
+            "width": "1024",
+            "height": "1536",
+            "uploadedAt": "{{wangWorkDate}}"
+          }
+        },
+        {
+          "id": "wang-photo-041",
+          "type": "photo",
+          "title": "041",
+          "body": [
+            "远距离、模糊的现实拍摄图；来源记录没有摄影者姓名。"
+          ],
+          "media": {
+            "id": "wang-print-041",
+            "src": "cases/missing-person/images/wang-041.png",
+            "alt": "041：远距离、模糊的现实拍摄图；来源记录没有摄影者姓名。",
+            "filename": "041.JPG（纸照片扫描副本）",
+            "caption": "点击查看扫描原图",
+            "width": "1536",
+            "height": "1024",
+            "uploadedAt": "{{wangWorkDate}}"
+          }
+        },
+        {
+          "id": "wang-photo-042",
+          "type": "photo",
+          "title": "042",
+          "body": [
+            "公开栏目信息与工作区域示意的组合图。"
+          ],
+          "media": {
+            "id": "wang-print-042",
+            "src": "cases/missing-person/images/wang-042.svg",
+            "alt": "042：公开栏目信息与工作区域示意的组合图。",
+            "filename": "042.JPG（纸照片扫描副本）",
+            "caption": "点击查看扫描原图",
+            "width": "900",
+            "height": "650",
+            "uploadedAt": "{{wangWorkDate}}"
+          }
+        },
+        {
+          "id": "wang-photo-043",
+          "type": "photo",
+          "title": "043",
+          "evidenceId": "F32",
+          "body": [
+            "已发送邮件界面打印件，只保留发件人、收件人和附件等必要片段。"
+          ],
+          "media": {
+            "id": "wang-print-043",
+            "src": "cases/missing-person/images/wang-043.svg",
+            "alt": "043：已发送邮件界面打印件，只保留发件人、收件人和附件等必要片段。",
+            "filename": "043.JPG（纸照片扫描副本）",
+            "caption": "点击查看扫描原图",
+            "width": "1080",
+            "height": "760",
+            "uploadedAt": "{{wangWorkDate}}",
+            "evidenceIds": [
+              "F32"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "snapshot_wang_print_bag",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "冲印袋扫描",
+      "url": "archive://snapshot/ncitynews/wangman/print-bag",
+      "body": [
+        "收到的六张照片装在这个普通冲印袋里。袋上的店名、订单号和冲印时间仍可辨认。",
+        "我后来拿着照片和这个袋子到城西照相馆核查；订单记录与导入清单的副本是在店员许可下保存的。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/print-bag",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "media": {
+        "id": "wang-print-bag",
+        "src": "cases/missing-person/images/wang-print-bag.png",
+        "alt": "城西照相馆普通照片冲印袋，带订单号和冲印时间",
+        "filename": "冲印袋扫描.png",
+        "width": "1024",
+        "height": "1536",
+        "caption": "照片冲印 · 数码照片 / 订单号：{{wangOrderId}} / 冲印时间：{{wangPrintDate}} {{wangPrintTime}}",
+        "printOrder": {
+          "id": "{{wangOrderId}}",
+          "printedAt": "{{wangPrintDate}} {{wangPrintTime}}"
+        },
+        "evidenceIds": [
+          "F33"
+        ]
+      }
+    },
+    {
+      "id": "snapshot_wang_print_order",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "城西照相馆订单记录",
+      "url": "archive://snapshot/ncitynews/wangman/print-order",
+      "body": [
+        "{{wangShopVisitDate|zh}}，持照片和冲印袋到店核对，经店员许可抄存本订单记录、导入清单与必要的预览生成记录。这里只有对应订单的材料，不是店里的完整业务档案。",
+        "纸袋订单号与记录相同。数量字段分开列出；导入扫描的数量并不等于实际选中打印的数量。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/print-order",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "wang-order-row",
+          "type": "log-entry",
+          "title": "订单 {{wangOrderId}}",
+          "timestamp": "{{wangPrintDate}} {{wangPrintTime}}",
+          "body": [
+            "导入 / 扫描：7张；实际选中打印：6张"
+          ],
+          "evidenceId": "F34",
+          "metadata": {
+            "店铺": "城西照相馆",
+            "订单号": "{{wangOrderId}}",
+            "冲印时间": "{{wangPrintDate}} {{wangPrintTime}}",
+            "导入 / 扫描": "7 张",
+            "实际打印": "6 张",
+            "保存来源": "王曼到店核查后，经店员许可保存的本订单副本"
+          }
+        }
+      ]
+    },
+    {
+      "id": "snapshot_wang_import_files",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "文件列表 / 导入记录",
+      "url": "archive://snapshot/ncitynews/wangman/import-files",
+      "body": [
+        "对应订单：{{wangOrderId}}。以下路径保留导入时的目录结构，未把不同文件夹重新合并编号。",
+        "文件清单中038～043为已打印的六张，037未选中、未打印。六张纸照片的扫描件保存在图片整理目录。",
+        "原始图像文件现未保留完整。冲印软件的记录显示当时生成过预览缓存；此页只有导入清单，没有可打开的预览文件。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/import-files",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "tableColumns": [
+        "原路径",
+        "打印状态",
+        "预览记录"
+      ],
+      "objects": [
+        {
+          "id": "wang-import-037",
+          "type": "file",
+          "title": "037.JPG",
+          "metadata": {
+            "原路径": "/DCIM/037.JPG",
+            "打印状态": "未选中 / 未打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        },
+        {
+          "id": "wang-import-038",
+          "type": "file",
+          "title": "038.JPG",
+          "metadata": {
+            "原路径": "/PRINT/038.JPG",
+            "打印状态": "已打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        },
+        {
+          "id": "wang-import-039",
+          "type": "file",
+          "title": "039.JPG",
+          "metadata": {
+            "原路径": "/PRINT/039.JPG",
+            "打印状态": "已打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        },
+        {
+          "id": "wang-import-040",
+          "type": "file",
+          "title": "040.JPG",
+          "metadata": {
+            "原路径": "/PRINT/040.JPG",
+            "打印状态": "已打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        },
+        {
+          "id": "wang-import-041",
+          "type": "file",
+          "title": "041.JPG",
+          "metadata": {
+            "原路径": "/PRINT/041.JPG",
+            "打印状态": "已打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        },
+        {
+          "id": "wang-import-042",
+          "type": "file",
+          "title": "042.JPG",
+          "metadata": {
+            "原路径": "/PRINT/042.JPG",
+            "打印状态": "已打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        },
+        {
+          "id": "wang-import-043",
+          "type": "file",
+          "title": "043.JPG",
+          "metadata": {
+            "原路径": "/PRINT/043.JPG",
+            "打印状态": "已打印",
+            "预览记录": "当时已生成；此副本未包含图像"
+          }
+        }
+      ]
     }
   ],
   "evidence": [
@@ -3726,6 +4212,67 @@
       "selectionTexts": [
         "目前按楼梯摔伤情况了解，具体原因仍待了解"
       ]
+    },
+    {
+      "id": "F30",
+      "type": "attachment",
+      "sourcePageId": "snapshot_wang_chen_backup",
+      "sourceObjectId": "wang-backup-receipt",
+      "title": "王曼｜保存陈雨事故前的部分调查副本",
+      "summary": "王曼保存的接收记录显示，{{chenBackupDate}} {{chenBackupReceiveTime}}收到陈雨发送的旧帖时间核对.xls；只保留必要附件副本及短说明。",
+      "timestamp": "{{chenBackupDate}} {{chenBackupReceiveTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F31",
+      "type": "page",
+      "sourcePageId": "snapshot_wang_photos",
+      "title": "王曼｜收到六张针对自己的实体威胁照片",
+      "summary": "王曼的收到记录与纸照片扫描件对应038～043六张，随袋文字针对她持有陈雨材料一事；不确认制作或寄送者。",
+      "timestamp": "{{wangPacketDate}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "袋内有六张照片，编号为038～043，都是针对我的材料"
+      ]
+    },
+    {
+      "id": "F32",
+      "type": "photo",
+      "sourcePageId": "snapshot_wang_photos",
+      "sourceObjectId": "wang-photo-043",
+      "title": "043｜陈雨曾向王曼发送调查附件",
+      "summary": "043是陈雨已发送邮件界面的截图打印件，显示陈雨→王曼及旧帖时间核对.xls。威胁包制作者接触过这段通信记录或副本，知道王曼持有材料；谁取得、如何取得及谁寄送仍不明。",
+      "discovery": "detail"
+    },
+    {
+      "id": "F33",
+      "type": "photo",
+      "sourcePageId": "snapshot_wang_print_bag",
+      "title": "冲印袋｜城西照相馆及订单标记",
+      "summary": "六张威胁照片的普通冲印袋印有城西照相馆，标注订单{{wangOrderId}}、冲印时间{{wangPrintDate}} {{wangPrintTime}}。",
+      "timestamp": "{{wangPrintDate}} {{wangPrintTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F34",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_print_order",
+      "sourceObjectId": "wang-order-row",
+      "title": "城西照相馆｜扫描7张，打印6张",
+      "summary": "经店员许可保存的订单{{wangOrderId}}副本记载导入 / 扫描7张、实际打印6张，订单号和冲印时间与袋上相同。",
+      "timestamp": "{{wangPrintDate}} {{wangPrintTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F35",
+      "type": "file-property",
+      "sourcePageId": "snapshot_wang_import_files",
+      "title": "导入清单｜038～043已打印，037未打印",
+      "summary": "同一订单七条导入记录中，/PRINT/038.JPG～043.JPG已打印，/DCIM/037.JPG未选中、未打印；原图未保留，当前不能查看其内容。",
+      "discovery": "selection",
+      "selectionTexts": [
+        "文件清单中038～043为已打印的六张，037未选中、未打印"
+      ]
     }
   ],
   "facts": [
@@ -3778,6 +4325,16 @@
       "id": "C10",
       "title": "陈雨出事的商业楼，与她此前询问准备前往的地点一致。",
       "summary": "陈雨此前询问{{westCommercialBuilding}}二楼茶座，后续两篇报道将同一商业楼的重伤事件与陈雨身份对应。只确认地点一致，不证明前往目的、约见对象、受伤过程或责任。"
+    },
+    {
+      "id": "C11",
+      "title": "王曼在陈雨事故前已经收到陈雨的调查材料。",
+      "summary": "王曼保存的事故前接收记录与043中的陈雨→王曼、同名调查附件相互对应，回收陈雨留下站外副本的说法；不确认通信记录取得者或取得方式。"
+    },
+    {
+      "id": "C12",
+      "title": "王曼收到的六张威胁照片对应一个曾扫描七张图像、实际只打印六张的冲印订单。",
+      "summary": "六张收到记录、袋上订单号、店铺订单数量和导入清单共同对应七扫六印。未打印文件没有完整原图，不推定内容、拍摄者、事故现场或责任。"
     }
   ],
   "relations": [
@@ -3931,6 +4488,36 @@
           "C10"
         ]
       }
+    },
+    {
+      "id": "R11",
+      "evidenceIds": [
+        "F30",
+        "F32"
+      ],
+      "title": "比对接收记录与已发送截图",
+      "summary": "比较双方名称及同名附件，以接收记录的时间与陈雨公开事故日期区分先后。",
+      "unlocks": {
+        "factIds": [
+          "C11"
+        ]
+      }
+    },
+    {
+      "id": "R12",
+      "evidenceIds": [
+        "F31",
+        "F33",
+        "F34",
+        "F35"
+      ],
+      "title": "比对收到数量、纸袋订单与导入清单",
+      "summary": "用普通订单号将六张纸照片、扫描与打印数量和逐文件状态对应。",
+      "unlocks": {
+        "factIds": [
+          "C12"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -3984,7 +4571,8 @@
       "Xu Ning old-case calendar dates and public old identity strings",
       "Chen Yu envelope / self-deleted help post calendar dates and times",
       "Chen Yu handoff / public backup statement / routine replies / west-side tea discussion calendar dates and times",
-      "Chen Yu stair incident / death / two public news reports calendar dates and publication times"
+      "Chen Yu stair incident / death / two public news reports calendar dates and publication times",
+      "Wang Man backup receipt / print order / packet receipt / shop visit / work page snapshot calendar dates and order number"
     ]
   },
   "homePageId": "portal_home",

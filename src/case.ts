@@ -20,6 +20,7 @@ export interface CaseMedia {
   width?: string; height?: string; uploadedAt?: string
   id?: string; identityId?: string; takenAt?: string
   evidenceIds?: string[]
+  printOrder?: { id: string; printedAt: string }
 }
 export interface PageObject {
   id: string; type: ObjectKind; title: string; body?: string[]; timestamp?: string
@@ -111,7 +112,8 @@ function media(value: unknown): value is CaseMedia {
   return record(value) && nonEmpty(value.src) && nonEmpty(value.alt) &&
     ['caption', 'filename', 'width', 'height', 'uploadedAt', 'id', 'identityId', 'takenAt']
       .every((key) => value[key] === undefined || nonEmpty(value[key])) &&
-    (value.evidenceIds === undefined || (strings(value.evidenceIds) && unique(value.evidenceIds)))
+    (value.evidenceIds === undefined || (strings(value.evidenceIds) && unique(value.evidenceIds))) &&
+    (value.printOrder === undefined || (record(value.printOrder) && nonEmpty(value.printOrder.id) && nonEmpty(value.printOrder.printedAt)))
 }
 function formatVariable(value: string, format?: string): string {
   if (!format) return value

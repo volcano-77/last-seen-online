@@ -185,6 +185,17 @@
 .sheet-row-label{border:0;background:transparent;font:inherit;color:inherit;cursor:pointer;padding:0;text-align:left}.sheet-row-label:focus-visible{outline:2px solid #50665a;outline-offset:3px}.sheet-grid .sheet-selected td{background:#edf3ee;box-shadow:inset 0 1px #738a77,inset 0 -1px #738a77}
 .spreadsheet-viewer>footer{background:#e2e4e6;border-top:1px solid #a6a6a6;padding:5px 12px;font-size:14px;color:#4b4f52}
 
+.media-scan{display:inline-block;position:relative;line-height:0}.media-scan>img{display:block}.print-bag-label{position:absolute;inset:0;width:100%;height:100%;font:italic 44px Georgia,serif;fill:#343735;pointer-events:none}
+.reporter-work{border:1px solid #969e97;background:#fdfbf4;color:#39433b;font:16px/1.7 'SimSun','Microsoft YaHei',serif}
+.reporter-work>header{padding:18px 24px;border-bottom:3px double #8e9c8f;background:linear-gradient(#eef1e9,#d8dfd2);display:flex;align-items:center;flex-wrap:wrap;gap:6px 20px}
+.reporter-work>header small{font-size:14px;color:#68705f}.reporter-work h1{font-size:28px;margin:0}.reporter-work>header>span{margin-left:auto;font-size:14px;color:#697562}
+.reporter-work>main{padding:18px 28px 28px}.reporter-work h2{font-size:24px;border-bottom:1px dotted #a9b0a0;padding-bottom:8px}.reporter-work h3{font-size:18px;margin:10px 0}
+.work-files{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px}.work-files th,.work-files td{padding:9px 12px;border:1px solid #bac2af;text-align:left;overflow-wrap:anywhere}.work-files th{background:#e8ecdf;font-weight:normal}.work-files td:first-child{min-width:160px}.work-files tbody tr:nth-child(even){background:#f2f3e9}
+.work-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:25px 0}.work-gallery>section{border-top:1px solid #b5bdac}.work-gallery figure{margin:8px 0}.work-gallery .photo-open img{max-height:220px;object-fit:contain}.work-gallery figcaption,.work-gallery section>p{font-size:14px;line-height:1.7}
+.reporter-work>footer{border-top:1px solid #b5bdac;padding:9px 24px;color:#737b69;font-size:14px}.reporter-work .site-breadcrumb{background:#f0f1e6}
+@media(max-width:850px){.work-gallery{grid-template-columns:repeat(2,minmax(0,1fr))}.work-files{font-size:14px}.work-files th,.work-files td{padding:8px}}
+@media(max-width:650px){.work-gallery{grid-template-columns:minmax(0,1fr)}.reporter-work>main{padding:16px}.reporter-work>header>span{margin-left:0}.work-files td:first-child{min-width:100px}}
+
 /* The news front page uses portal strips; detail pages remain a single article. */
 .news-site{border:1px solid #9bb6cd;border-top:4px solid #2f719f;background:#fff;color:#354553}
 .portal-masthead{padding:5px 22px;background:#edf1f5;border-bottom:1px solid #d0dbe4;display:flex;justify-content:space-between;gap:12px;font:14px/1.7 Arial,'Microsoft YaHei',sans-serif;color:#657d8e}

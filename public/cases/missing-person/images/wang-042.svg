@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650">
+ <rect width="900" height="650" fill="#e9e7dd"/><rect x="25" y="30" width="850" height="590" fill="#faf9f3" stroke="#aaa99b"/>
+ <g font-family="SimSun, Microsoft YaHei, serif" fill="#52584e">
+  <path d="M45 58h810v45H45z" fill="#d7dfd4"/><text x="65" y="87" font-size="22">地方资讯 · 公开工作资料</text>
+  <rect x="60" y="132" width="390" height="240" fill="#fff" stroke="#b7bdb0"/>
+  <text x="80" y="174" font-size="25">王曼</text><text x="80" y="214" font-size="20">本地 / 社会新闻线 · 实习记者</text>
+  <text x="80" y="260" font-size="18">日常工作：采访、资料核对、整理</text><text x="80" y="307" font-size="17">公开栏目介绍摘页</text><text x="80" y="343" font-size="16" fill="#888">原页面边栏未保留</text>
+  <g transform="rotate(-2 652 345)"><rect x="490" y="156" width="320" height="350" fill="#f0eee4" stroke="#b4ae9f"/><text x="514" y="198" font-size="21">编辑部公共办公区域</text>
+   <path d="M525 233h247v214H525z" fill="#dad8cc" stroke="#9e9c8e"/><path d="M541 267h93v60h-93zM661 267h94v60h-94zM541 353h93v60h-93zM661 353h94v60h-94z" fill="#f9f8ed" stroke="#aaa"/>
+   <text x="552" y="303" font-size="17">资料架</text><text x="672" y="303" font-size="17">办公桌</text><text x="552" y="391" font-size="17">办公桌</text><text x="672" y="391" font-size="17">会议区</text><text x="514" y="483" font-size="16">公开介绍中的平面示意</text></g>
+  <text x="67" y="438" font-size="18">来源页面片段 / 拼接保存</text><text x="67" y="472" font-size="17">图片大小、边缘与文字清晰度不一致</text>
+  <path d="M58 541h780" stroke="#aaa99b" stroke-dasharray="3 4"/><text x="65" y="577" font-size="17" fill="#848379">截图节录 · 非实时位置记录</text>
+ </g>
+</svg>

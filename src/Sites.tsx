@@ -73,15 +73,18 @@ function Media({ media, ...props }: SiteProps & { media?: CaseMedia }) {
   }, [open])
   if (!media) return null
   const references = props.mediaCatalog.filter((item) => item.id !== media.id)
+  const printLabel = media.printOrder && <svg className="print-bag-label" viewBox="0 0 1024 1536" aria-label={`订单号：${media.printOrder.id}；冲印时间：${media.printOrder.printedAt}`}><text x="280" y="735">{media.printOrder.id}</text><text x="280" y="820">{media.printOrder.printedAt}</text></svg>
+  const thumbnail = <img src={src(media)} alt={media.alt} loading="lazy" />
+  const original = <img src={src(media)} alt={media.alt} onLoad={(event) => {
+    media.evidenceIds?.forEach((id) => props.onDiscover(id, pointAt(event.currentTarget)))
+  }} />
   return <figure className="site-photo">
     <button className="photo-open" aria-label={`查看原图：${media.alt}`} onClick={() => {
       setOpen(true); setZoom(false); setMessage(''); if (media.id) props.onViewMedia(media.id)
-    }}><img src={src(media)} alt={media.alt} loading="lazy" /></button><figcaption>{media.caption || media.alt}</figcaption>
+    }}>{printLabel ? <span className="media-scan">{thumbnail}{printLabel}</span> : thumbnail}</button><figcaption>{media.caption || media.alt}</figcaption>
     {open && <div className="image-backdrop" onClick={() => setOpen(false)}><section className="image-viewer" role="dialog" aria-modal="true" aria-label="图片查看器" onClick={(event) => event.stopPropagation()}>
       <header><b>{media.filename || media.alt}</b><button aria-label="关闭图片" onClick={() => setOpen(false)}>×</button></header>
-      <div className={`image-comparison${compare ? ' comparing' : ''}`}><div className={`image-stage${zoom ? ' zoomed' : ''}`}><button aria-label="放大或缩小图片" onClick={() => setZoom(!zoom)}><img src={src(media)} alt={media.alt} onLoad={(event) => {
-        media.evidenceIds?.forEach((id) => props.onDiscover(id, pointAt(event.currentTarget)))
-      }} /></button></div>
+      <div className={`image-comparison${compare ? ' comparing' : ''}`}><div className={`image-stage${zoom ? ' zoomed' : ''}`}><button aria-label="放大或缩小图片" onClick={() => setZoom(!zoom)}>{printLabel ? <span className="media-scan">{original}{printLabel}</span> : original}</button></div>
         {compare && referenceId && <div className="reference-image"><img src={src(references.find((item) => item.id === referenceId)!)} alt={references.find((item) => item.id === referenceId)!.alt} /><small>{references.find((item) => item.id === referenceId)?.filename}</small></div>}
       </div>
       <div className="image-properties"><span>文件：{media.filename || '未记录'}</span><span>尺寸：{media.width || '—'} × {media.height || '—'}</span>{media.takenAt && <span>拍摄时间：{media.takenAt}</span>}{media.uploadedAt && <span>上传时间：{media.uploadedAt}</span>}</div>
@@ -286,6 +289,20 @@ function Generic(props: SiteProps) {
   const time = props.page.objects?.find((item) => item.type === 'timestamp')
   return <div className={`plain-site ${props.page.skin === 'campus' ? 'campus-forum' : ''}`}><SiteName {...props} /><SiteNav {...props} /><Breadcrumb {...props} /><h2>{props.page.title}</h2>{time && <Time item={time} onDiscover={props.onDiscover} />}{props.page.body.map((line, i) => <p key={i}>{line}</p>)}{props.page.objects?.filter((item) => item.type !== 'timestamp' && item.type !== 'cache-entry').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} /></div>
 }
+function WorkPage(props: SiteProps) {
+  const { page } = props
+  const files = page.objects?.filter((item) => item.type === 'file') || []
+  const photos = page.objects?.filter((item) => item.type === 'photo') || []
+  const columns = page.tableColumns || ['类型', '保存日期', '大小']
+  return <div className="reporter-work"><header><small>地方资讯 · 个人工作页</small><SiteName {...props} /><span>资料整理 / 只读副本</span></header>
+    <Breadcrumb {...props} /><main><h2>{page.title}</h2>{page.body.map((line, index) => <p key={index}>{line}</p>)}
+      {!!files.length && <div className="work-file-scroll"><table className="work-files"><thead><tr><th>文件 / 目录</th>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
+        <tbody>{files.map((item) => <tr key={item.id} id={item.id}><td><span aria-hidden="true">▧ </span>{item.links?.[0] ? <PageLink pageId={item.links[0].pageId}>{item.title}</PageLink> : item.title}</td>{columns.map((column) => <td key={column}>{item.metadata?.[column] || '—'}</td>)}</tr>)}</tbody></table></div>}
+      <Media {...props} media={page.media} />
+      {!!photos.length && <div className="work-gallery">{photos.map((item) => <section key={item.id} id={item.id}><h3>{item.title}</h3><Media {...props} media={item.media} />{item.body?.map((line, index) => <p key={index}>{line}</p>)}</section>)}</div>}
+      {page.objects?.filter((item) => item.type !== 'file' && item.type !== 'photo').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} />
+    </main><footer>个人工作资料 · 来源与保存日期见各项记录</footer></div>
+}
 function SpreadsheetRow({ item, columns, number, ...props }: SiteProps & { item: PageObject; columns: string[]; number: number }) {
   const [selected, setSelected] = useObjectDisclosure(item.id)
   function select(element: HTMLElement) {
@@ -309,7 +326,10 @@ function Spreadsheet(props: SiteProps) {
 }
 export function SiteView(props: SiteProps) {
   const { page } = props
-  if (page.offlinePageId && !page.deleted) return <div className="unavailable-page"><h1>{page.kind === 'attachment' ? '文件不存在' : '无法显示网页'}</h1><p>{page.kind === 'attachment' ? '原站附件已经失效，服务器未找到这个文件。' : '服务器没有返回可读取的页面。'}</p><p>{page.url}</p><button onClick={() => props.onNavigate(page.offlinePageId!)}>{page.kind === 'attachment' ? '尝试查看历史副本' : '尝试打开离线副本'}</button><small>原站点不可用时，浏览器可以查找以前保存的页面。</small></div>
+  if (page.offlinePageId && !page.deleted) {
+    const archiveLookup = props.pages.find((item) => item.id === page.offlinePageId)?.skin === 'archive'
+    return <div className="unavailable-page"><h1>{page.kind === 'attachment' ? '文件不存在' : '无法显示网页'}</h1><p>{page.kind === 'attachment' ? '原站附件已经失效，服务器未找到这个文件。' : '服务器没有返回可读取的页面。'}</p><p>{page.url}</p><button onClick={() => props.onNavigate(page.offlinePageId!, archiveLookup ? { state: { searchInput: page.url, searchQuery: page.url, searchSubmitted: true } } : undefined)}>{archiveLookup || page.kind === 'attachment' ? '尝试查看历史副本' : '尝试打开离线副本'}</button><small>原站点不可用时，浏览器可以查找以前保存的页面。</small></div>
+  }
   let content: ReactNode
   if (page.deleted) content = <div className="forum-site campus-forum"><header className="forum-header"><SiteName {...props} /><span>校园交流 / BBS</span></header><Breadcrumb {...props} />
     <h2 className="thread-title">{page.title}</h2><div className="plain-site"><p>发帖：<User {...props} name={page.author || '匿名'} />　{page.date}</p>
@@ -317,6 +337,7 @@ export function SiteView(props: SiteProps) {
       <p><PageLink pageId="archive_service" options={{ state: { searchInput: page.url, searchQuery: page.url, searchSubmitted: true } }}>在网页存档中查找这个地址</PageLink></p>
     </div><footer>Powered by CampusBBS　|　旧帖只读</footer></div>
   else if (page.kind === 'portal') content = <Portal {...props} />
+  else if (page.siteId === 'wang-work') content = <WorkPage {...props} />
   else if (page.kind === 'spreadsheet') content = <Spreadsheet {...props} />
   else if (page.kind === 'forum-thread' || page.kind === 'forum') content = <Forum {...props} />
   else if (page.kind === 'profile') content = <Profile {...props} />
