@@ -92,7 +92,14 @@
     "westTeaReply4Time": "13:21",
     "chenTeaDate": "2009-04-24",
     "chenTeaTime": "17:20",
-    "westTeaFollowupTime": "17:35"
+    "westTeaFollowupTime": "17:35",
+    "westCommercialBuilding": "城西老商业楼",
+    "chenIncidentDate": "2009-04-25",
+    "chenIncidentNewsDate": "2009-04-25",
+    "chenIncidentNewsTime": "21:10",
+    "chenDeathDate": "2009-04-27",
+    "chenFollowupNewsDate": "2009-04-27",
+    "chenFollowupNewsTime": "18:30"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -498,7 +505,7 @@
       "title": "{{cityName}}资讯网",
       "url": "ncitynews://home",
       "siteName": "{{cityName}}资讯网",
-      "date": "{{liuNewsDate}}",
+      "date": "{{chenFollowupNewsDate}}",
       "body": [
         "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，可从本页列表或南城搜索进入。"
       ],
@@ -566,6 +573,28 @@
             {
               "label": "年轻女子遭前男友堵截受伤",
               "pageId": "news_xuning_assault"
+            }
+          ]
+        },
+        {
+          "id": "news-list-news_chenyu_stair_injury",
+          "type": "text",
+          "title": "城西一商业楼内女子楼梯间摔伤送医",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_chenyu_stair_injury"
+            }
+          ]
+        },
+        {
+          "id": "news-list-news_chenyu_stair_followup",
+          "type": "text",
+          "title": "城西商业楼摔伤女子抢救无效死亡",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_chenyu_stair_followup"
             }
           ]
         }
@@ -787,7 +816,7 @@
         {
           "id": "bbs-list-west-tea",
           "type": "post",
-          "title": "城西老商业楼二楼那家茶座还开吗？",
+          "title": "{{westCommercialBuilding}}二楼那家茶座还开吗？",
           "metadata": {
             "版块": "校园生活"
           },
@@ -3250,7 +3279,7 @@
       "skin": "campus",
       "siteId": "campus",
       "siteName": "{{cityName}}大学 BBS",
-      "title": "城西老商业楼二楼那家茶座还开吗？",
+      "title": "{{westCommercialBuilding}}二楼那家茶座还开吗？",
       "url": "ncu://bbs/thread/west-tea",
       "author": "阿路",
       "date": "{{westTeaThreadDate}} {{westTeaThreadTime}}",
@@ -3258,7 +3287,7 @@
         "section": "校园生活"
       },
       "body": [
-        "城西老商业楼二楼那家茶座还开着吗？周末可能从那边路过，想找个地方坐一会儿。以前去过一次，二楼不太好找。"
+        "{{westCommercialBuilding}}二楼那家茶座还开着吗？周末可能从那边路过，想找个地方坐一会儿。以前去过一次，二楼不太好找。"
       ],
       "objects": [
         {
@@ -3324,6 +3353,57 @@
       ],
       "links": [],
       "searchable": true
+    },
+    {
+      "id": "news_chenyu_stair_injury",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "城西一商业楼内女子楼梯间摔伤送医",
+      "url": "ncitynews://local/{{chenIncidentNewsDate|compact}}/stair-injury",
+      "author": "本报记者",
+      "date": "{{chenIncidentNewsDate}} {{chenIncidentNewsTime}}",
+      "details": {
+        "section": "本地"
+      },
+      "body": [
+        "本报讯　{{chenIncidentDate|zh}}，{{westCommercialBuilding}}内一名年轻女性在楼梯间被工作人员发现重伤，随后送医。伤者身份当时尚未公开。",
+        "据现场工作人员介绍，工作人员发现伤者后拨打了急救电话。伤者随后被送往医院接受救治。",
+        "上述情况为初步信息，目前按楼梯摔伤情况了解，具体原因仍待了解。"
+      ],
+      "searchable": true,
+      "searchIndexed": true,
+      "links": []
+    },
+    {
+      "id": "news_chenyu_stair_followup",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "城西商业楼摔伤女子抢救无效死亡",
+      "url": "ncitynews://local/{{chenFollowupNewsDate|compact}}/stair-followup",
+      "author": "本报记者",
+      "date": "{{chenFollowupNewsDate}} {{chenFollowupNewsTime}}",
+      "details": {
+        "section": "本地"
+      },
+      "body": [
+        "本报讯　{{chenIncidentDate|zh}}在{{westCommercialBuilding}}楼梯间受伤送医的年轻女子，经持续救治，送医两天后，于{{chenDeathDate|zh}}抢救无效死亡。",
+        "两日前本报曾报道，一名年轻女子被商业楼工作人员发现受伤，随后送医。当时伤者身份尚未公开。",
+        "记者从后续公开信息获悉，伤者为{{cityName}}大学学生陈雨。她此前在该校就读。此次事件仍按相关程序核查，具体原因尚无进一步公开说明。"
+      ],
+      "searchable": true,
+      "searchIndexed": true,
+      "links": [
+        {
+          "label": "此前报道：城西一商业楼内女子楼梯间摔伤送医",
+          "pageId": "news_chenyu_stair_injury"
+        }
+      ]
     }
   ],
   "evidence": [
@@ -3591,12 +3671,60 @@
       "id": "F25",
       "type": "reply",
       "sourcePageId": "bbs_west_tea",
-      "title": "陈雨｜曾询问城西老商业楼二楼茶座近期营业情况",
+      "title": "陈雨｜曾询问{{westCommercialBuilding}}二楼茶座近期营业情况",
       "summary": "陈雨在普通地点讨论帖里询问二楼茶座晚上是否营业，说“明天可能要去一趟”；只记录计划询问，不确认实际到访、同行人或目的。",
       "timestamp": "{{chenTeaDate}} {{chenTeaTime}}",
       "discovery": "selection",
       "selectionTexts": [
         "二楼那家晚上还开吗？明天可能要去一趟"
+      ]
+    },
+    {
+      "id": "F26",
+      "type": "page",
+      "sourcePageId": "news_chenyu_stair_injury",
+      "title": "{{westCommercialBuilding}}｜一名年轻女性在楼梯间被发现重伤并送医",
+      "summary": "首篇公开报道记载，{{chenIncidentDate|zh}}，{{westCommercialBuilding}}内一名年轻女性在楼梯间被工作人员发现重伤并送医；当时未公开身份，也未说明受伤原因。",
+      "timestamp": "{{chenIncidentNewsDate}} {{chenIncidentNewsTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "{{westCommercialBuilding}}内一名年轻女性在楼梯间被工作人员发现重伤，随后送医"
+      ]
+    },
+    {
+      "id": "F27",
+      "type": "page",
+      "sourcePageId": "news_chenyu_stair_followup",
+      "title": "后续报道｜伤者确认是陈雨",
+      "summary": "后续公开报道确认，{{westCommercialBuilding}}楼梯间受伤送医的女子为{{cityName}}大学学生陈雨；不说明她到场目的、同行人或事故过程。",
+      "timestamp": "{{chenFollowupNewsDate}} {{chenFollowupNewsTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "伤者为{{cityName}}大学学生陈雨"
+      ]
+    },
+    {
+      "id": "F28",
+      "type": "page",
+      "sourcePageId": "news_chenyu_stair_followup",
+      "title": "陈雨｜送医两天后死亡",
+      "summary": "后续报道记载伤者持续接受救治，于{{chenDeathDate|zh}}抢救无效死亡，与{{chenIncidentDate|zh}}送医相隔两天；不据此判断责任或更早救援的结果。",
+      "timestamp": "{{chenFollowupNewsDate}} {{chenFollowupNewsTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "送医两天后，于{{chenDeathDate|zh}}抢救无效死亡"
+      ]
+    },
+    {
+      "id": "F29",
+      "type": "page",
+      "sourcePageId": "news_chenyu_stair_injury",
+      "title": "公开报道｜最初按楼梯摔伤情况描述",
+      "summary": "首篇报道写明目前按楼梯摔伤情况了解，具体原因仍待了解。这记录的是当时公开表述，不证明事实一定是意外摔倒。",
+      "timestamp": "{{chenIncidentNewsDate}} {{chenIncidentNewsTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "目前按楼梯摔伤情况了解，具体原因仍待了解"
       ]
     }
   ],
@@ -3645,6 +3773,11 @@
       "id": "C09",
       "title": "陈雨收到威胁后采取过防范和备份措施，但没有立即停止自己的活动。",
       "summary": "公开交接中调整晚间版务安排、说明已另留站外副本，之后仍有普通BBS活动。结合此前信封痕迹，仅确认这些应对与持续活动；副本去向、后续行程目的和是否已解决风险仍未知。"
+    },
+    {
+      "id": "C10",
+      "title": "陈雨出事的商业楼，与她此前询问准备前往的地点一致。",
+      "summary": "陈雨此前询问{{westCommercialBuilding}}二楼茶座，后续两篇报道将同一商业楼的重伤事件与陈雨身份对应。只确认地点一致，不证明前往目的、约见对象、受伤过程或责任。"
     }
   ],
   "relations": [
@@ -3783,6 +3916,21 @@
           "C09"
         ]
       }
+    },
+    {
+      "id": "R10",
+      "evidenceIds": [
+        "F25",
+        "F26",
+        "F27"
+      ],
+      "title": "对照此前地点询问、事发地点与伤者身份",
+      "summary": "将普通茶座回复中的商业楼名称与公开事故地点、后续身份确认对应；不把其他威胁记录合并成责任判断。",
+      "unlocks": {
+        "factIds": [
+          "C10"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -3835,7 +3983,8 @@
       "supporting blog posts, access questions and album scenes",
       "Xu Ning old-case calendar dates and public old identity strings",
       "Chen Yu envelope / self-deleted help post calendar dates and times",
-      "Chen Yu handoff / public backup statement / routine replies / west-side tea discussion calendar dates and times"
+      "Chen Yu handoff / public backup statement / routine replies / west-side tea discussion calendar dates and times",
+      "Chen Yu stair incident / death / two public news reports calendar dates and publication times"
     ]
   },
   "homePageId": "portal_home",
