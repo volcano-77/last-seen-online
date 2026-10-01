@@ -57,7 +57,13 @@
     "zhaoSnapshotTime": "16:20",
     "albumAnswer": "二食堂",
     "zhaoCatName": "豆包",
-    "zhaoOldMailbox": "zhaoyan@oldmail.example"
+    "zhaoOldMailbox": "zhaoyan@oldmail.example",
+    "xuNoticeDate": "2008-06-12",
+    "xuNoticeSnapshotDate": "2008-06-13",
+    "xuStatementDate": "2008-06-14",
+    "xuNewsDate": "2008-06-22",
+    "xuOldMailbox": "xuning@oldmail.example",
+    "xuOldUsername": "xuning"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -520,6 +526,17 @@
             {
               "label": "阅读报道",
               "pageId": "news_zhaoyan_missing"
+            }
+          ]
+        },
+        {
+          "id": "news-list-xuning",
+          "type": "post",
+          "title": "年轻女子遭前男友堵截受伤",
+          "links": [
+            {
+              "label": "年轻女子遭前男友堵截受伤",
+              "pageId": "news_xuning_assault"
             }
           ]
         }
@@ -2797,6 +2814,156 @@
           }
         }
       ]
+    },
+    {
+      "id": "index_xuning_notice",
+      "kind": "website",
+      "layout": "generic",
+      "title": "许宁寻人信息 / 旧网页索引",
+      "url": "search://old-index/echo/xuning",
+      "siteId": "search",
+      "siteName": "{{cityName}}搜索 · 旧网页索引",
+      "date": "{{xuNoticeDate}}",
+      "body": [
+        "寻人信息称许宁无法正常联系，家人或朋友担心安全，发布方正在征集目击信息。",
+        "以上为当时索引保留的发布方摘要，未核实其中的失联或健康描述。原寻人页面已经失效；完整历史内容可在网页存档中查看。"
+      ],
+      "normalNavigation": false,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "许宁",
+          "回声寻人网"
+        ]
+      },
+      "links": [
+        {
+          "label": "查看网页存档中的历史页面",
+          "pageId": "snapshot_xuning_notice"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_xuning_notice",
+      "kind": "snapshot",
+      "layout": "echo",
+      "skin": "echo",
+      "title": "许宁寻人信息",
+      "url": "archive://snapshot/echo/xuning",
+      "siteId": "echo",
+      "siteName": "回声寻人网",
+      "author": "回声寻人网",
+      "date": "{{xuNoticeDate}}",
+      "searchable": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "echo://notice/xuning-old",
+        "capturedAt": "{{xuNoticeSnapshotDate}}"
+      },
+      "body": [
+        "寻人对象：许宁，成年女性。原页列出的旧公开用户名为 {{xuOldUsername}}；其他特征未保留完整。",
+        "以下说明由原发布者提供，本站未独立核实失联或健康描述。",
+        "寻人信息称：许宁近期情绪、精神状态不稳定，家人或朋友担心其安全，无法正常联系，希望知情者协助寻找。",
+        "发布方正在征集许宁的目击信息，包括出现时间、工作地点和活动区域，以便联系。"
+      ],
+      "media": {
+        "src": "cases/missing-person/images/xu-ning-placeholder.svg",
+        "alt": "许宁寻人页的照片占位；原照片未保留",
+        "caption": "原寻人页照片未保留，当前为占位图"
+      },
+      "links": [],
+      "objects": [
+        {
+          "id": "xuning-notice-time",
+          "type": "timestamp",
+          "title": "发布记录",
+          "timestamp": "{{xuNoticeDate}}",
+          "metadata": {
+            "发布者": "回声寻人网",
+            "发布时间": "{{xuNoticeDate}}",
+            "说明": "失联和健康描述来自发布方，未经独立核实"
+          }
+        }
+      ]
+    },
+    {
+      "id": "xuning_safety_statement",
+      "kind": "website",
+      "layout": "generic",
+      "title": "本人安全，请停止转发寻人信息",
+      "url": "oldpage://xuning/notice",
+      "siteId": "xuning",
+      "siteName": "许宁的旧个人页",
+      "author": "许宁",
+      "date": "{{xuStatementDate}}",
+      "normalNavigation": false,
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "许宁",
+          "{{xuOldMailbox}}"
+        ]
+      },
+      "body": [
+        "我是许宁（旧用户名：{{xuOldUsername}}）。我现在安全。我没有失踪，也没有与所有人失去联系。",
+        "网上流传的寻人信息未经我同意。请不要再转发，也不要把我的生活情况告诉来打听的人。",
+        "请不要公开我的住处、工作地点、实时出现位置和目击信息。我不希望这些信息继续被传播。",
+        "如果看见转载，请删除。我已经受到骚扰，请不要替我发布新的寻人信息。",
+        "署名：许宁。如需处理转载或删除信息，可邮件联系我的旧邮箱：{{xuOldMailbox}}。"
+      ],
+      "links": [],
+      "objects": [
+        {
+          "id": "xuning-statement-time",
+          "type": "timestamp",
+          "title": "发布时间",
+          "timestamp": "{{xuStatementDate}}",
+          "metadata": {
+            "发布时间": "{{xuStatementDate}}"
+          }
+        }
+      ]
+    },
+    {
+      "id": "news_xuning_assault",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "title": "年轻女子遭前男友堵截受伤",
+      "url": "ncnews://local/{{xuNewsDate|compact}}-xuning",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "date": "{{xuNewsDate}}",
+      "details": {
+        "section": "本地"
+      },
+      "body": [
+        "许宁近日被前男友找到并堵截，双方发生暴力冲突，许宁受伤。",
+        "报道所引述的相关人员称，两人此前存在控制、暴力和持续纠缠问题。许宁曾试图断开联系并躲避对方，仍被对方找到。",
+        "警方正在处理相关情况。对方如何找到许宁，尚无公开说明；最终处理结果未公布。"
+      ],
+      "links": []
+    },
+    {
+      "id": "catalog_xuning_name",
+      "kind": "website",
+      "layout": "generic",
+      "title": "旧书资料目录：许宁",
+      "url": "booklist://authors/xuning",
+      "siteId": "booklist",
+      "siteName": "旧书资料目录",
+      "normalNavigation": false,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "许宁"
+        ]
+      },
+      "body": [
+        "作者字段：许宁。书目条目收录《阅读札记》的目录摘记。",
+        "馆藏副本只保留书目字段，没有个人照片、联系方式或寻人信息。"
+      ],
+      "links": []
     }
   ],
   "evidence": [
@@ -2922,6 +3089,68 @@
       "title": "许宁｜陈雨备注“已发邮件，待回复”",
       "summary": "核对表将许宁列为待核对象，提到寻人帖后的公开活动，并记有“已发邮件，待回复”。这是陈雨的表格备注，尚未取得实际邮件验证。",
       "discovery": "detail"
+    },
+    {
+      "id": "F13",
+      "type": "page",
+      "sourcePageId": "xuning_safety_statement",
+      "title": "许宁｜当时公开声明自己安全、没有失踪",
+      "summary": "许宁署名的旧声明说自己当时安全、没有失踪，也没有与所有人失去联系；不证明她现在的状态。",
+      "selectionTexts": [
+        "我现在安全。我没有失踪",
+        "我没有失踪，也没有与所有人失去联系"
+      ],
+      "timestamp": "{{xuStatementDate}}",
+      "discovery": "selection"
+    },
+    {
+      "id": "F14",
+      "type": "page",
+      "sourcePageId": "xuning_safety_statement",
+      "title": "许宁｜要求停止传播住处、工作地点和目击信息",
+      "summary": "旧声明要求停止公开住处、工作地点、实时出现位置和目击信息，明确反对未经同意的寻人传播。",
+      "selectionTexts": [
+        "请不要公开我的住处、工作地点、实时出现位置和目击信息"
+      ],
+      "timestamp": "{{xuStatementDate}}",
+      "discovery": "selection"
+    },
+    {
+      "id": "F15",
+      "type": "page",
+      "sourcePageId": "xuning_safety_statement",
+      "title": "许宁｜旧声明公开过联系邮箱",
+      "summary": "许宁署名的旧声明将 {{xuOldMailbox}} 列为处理转载 / 删除信息的联系邮箱；仅证明当时公开使用，不证明当前可投递或控制权。",
+      "selectionTexts": [
+        "{{xuOldMailbox}}"
+      ],
+      "timestamp": "{{xuStatementDate}}",
+      "discovery": "selection"
+    },
+    {
+      "id": "F16",
+      "type": "page",
+      "sourcePageId": "news_xuning_assault",
+      "title": "许宁｜公开报道记载后来被前男友找到并受伤",
+      "summary": "公开新闻记载前男友找到许宁、发生暴力冲突并造成伤害。报道没有解释定位来源，不能证明寻人页导致暴力。",
+      "selectionTexts": [
+        "许宁近日被前男友找到并堵截，双方发生暴力冲突，许宁受伤"
+      ],
+      "timestamp": "{{xuNewsDate}}",
+      "discovery": "selection"
+    },
+    {
+      "id": "F17",
+      "type": "page",
+      "sourcePageId": "snapshot_xuning_notice",
+      "title": "许宁｜旧寻人页征集目击信息（发布方说法）",
+      "summary": "旧寻人页以家人或朋友担心安全、无法联系为说法，征集许宁的目击及活动区域。失联和健康描述只是发布方说法，未获独立确认。",
+      "selectionTexts": [
+        "发布方正在征集许宁的目击信息",
+        "家人或朋友担心其安全，无法正常联系"
+      ],
+      "timestamp": "{{xuNoticeDate}}",
+      "discovery": "selection"
     }
   ],
   "facts": [
@@ -2954,6 +3183,11 @@
       "id": "C06",
       "title": "陈雨曾整理并核查多起寻人帖时间",
       "summary": "版务记录的保留说明与九项核对表相互对应，说明陈雨曾系统整理多起寻人帖时间；表中仍有多项待核，不代表全部已确认异常。"
+    },
+    {
+      "id": "C07",
+      "title": "许宁的寻人信息与本人意愿明显冲突",
+      "summary": "寻人历史页与本人声明的姓名、旧用户名对应。寻人页征集目击与活动区域；许宁说自己安全、没有失踪，要求停止传播位置信息。只确认传播与本人意愿冲突，不确认后来暴力的定位来源或因果。"
     }
   ],
   "relations": [
@@ -3047,6 +3281,21 @@
           "C06"
         ]
       }
+    },
+    {
+      "id": "R07",
+      "evidenceIds": [
+        "F17",
+        "F13",
+        "F14"
+      ],
+      "title": "对照寻人信息与本人声明",
+      "summary": "对照发布方征集目击的说明与许宁本人安全、拒绝位置传播的声明。",
+      "unlocks": {
+        "factIds": [
+          "C07"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -3096,7 +3345,8 @@
       "calendar dates",
       "city",
       "character ages and heights",
-      "supporting blog posts, access questions and album scenes"
+      "supporting blog posts, access questions and album scenes",
+      "Xu Ning old-case calendar dates and public old identity strings"
     ]
   },
   "homePageId": "portal_home",

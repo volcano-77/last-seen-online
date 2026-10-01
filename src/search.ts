@@ -22,7 +22,7 @@ export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'g
       const base = { pageId: page.id, title: page.title, author: page.author, timestamp: page.date, indexStatus: page.searchIndex?.status }
       const body = page.body.find((line) => contains(line, term))
       if (contains(page.title, term)) hits.push({ ...base, id: `${page.id}/title`, anchorId: page.kind === 'forum-thread' ? 'thread-main' : undefined,
-        snippet: page.title, match: '标题', floor: page.kind === 'forum-thread' ? 1 : undefined })
+        snippet: excerpt(body || page.body[0] || page.title, term), match: '标题', floor: page.kind === 'forum-thread' ? 1 : undefined })
       else if (body) hits.push({ ...base, id: `${page.id}/body`, anchorId: page.kind === 'forum-thread' ? 'thread-main' : undefined,
         snippet: excerpt(body, term), match: '正文', floor: page.kind === 'forum-thread' ? 1 : undefined })
       else if (contains(page.author, term)) hits.push({ ...base, id: `${page.id}/author`, snippet: page.author!, match: '用户名' })

@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="220" viewBox="0 0 180 220" role="img" aria-label="照片占位：原照片未保留">
+  <rect width="180" height="220" fill="#e4e5e6"/>
+  <rect x="6" y="6" width="168" height="208" fill="none" stroke="#9a9c9e"/>
+  <circle cx="90" cy="72" r="29" fill="#b8bbbd"/>
+  <path d="M38 172v-23c0-28 23-43 52-43s52 15 52 43v23z" fill="#b8bbbd"/>
+  <text x="90" y="196" text-anchor="middle" fill="#666" font-size="14" font-family="sans-serif">原照片未保留</text>
+</svg>

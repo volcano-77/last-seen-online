@@ -245,7 +245,7 @@ function News(props: SiteProps) {
     const target = props.pages.find((p) => p.id === item.links?.[0]?.pageId)
     return target ? [target] : []
   }).sort((a, b) => (b.date || '').localeCompare(a.date || ''))
-  return <div className={`news-site ${page.directory ? 'news-portal' : 'news-detail'}`}><div className="portal-masthead"><span>地方资讯 · 校园生活</span><time>页面日期：{(home?.date || page.date)?.slice(0, 10)}</time></div>
+  return <div className={`news-site ${page.directory ? 'news-portal' : 'news-detail'}`}><div className="portal-masthead"><span>地方资讯 · 校园生活</span><time>页面日期：{page.date?.slice(0, 10)}</time></div>
     <header><div className="portal-logo"><span aria-hidden="true">资讯</span><SiteName {...props} /></div><span>关注身边事<br />记录城市生活</span></header>
     <div className="portal-rule" /><Breadcrumb {...props} />
     {page.directory ? <div className="portal-front"><div className="portal-banner"><strong>身边事 · 大家看</strong><span>本地 ｜ 校园 ｜ 生活</span><small>读新闻，聊生活</small></div><h2 className="portal-today">今日要闻</h2><div className="portal-news-columns">
