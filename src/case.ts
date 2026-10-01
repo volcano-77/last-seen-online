@@ -19,6 +19,7 @@ export interface CaseMedia {
   src: string; alt: string; caption?: string; filename?: string
   width?: string; height?: string; uploadedAt?: string
   id?: string; identityId?: string; takenAt?: string
+  evidenceIds?: string[]
 }
 export interface PageObject {
   id: string; type: ObjectKind; title: string; body?: string[]; timestamp?: string
@@ -41,6 +42,7 @@ export interface CasePage {
   normalNavigation?: boolean; searchIndexed?: boolean
   requiresTool?: 'archive'; firstVisitFromPageId?: string
   tableColumns?: string[]
+  deleted?: { by: 'author'; at: string }
 }
 export interface EvidenceDefinition {
   id: string; type: EvidenceType; sourcePageId: string; sourceObjectId?: string
@@ -108,7 +110,8 @@ function unlocks(value: unknown): value is Unlocks {
 function media(value: unknown): value is CaseMedia {
   return record(value) && nonEmpty(value.src) && nonEmpty(value.alt) &&
     ['caption', 'filename', 'width', 'height', 'uploadedAt', 'id', 'identityId', 'takenAt']
-      .every((key) => value[key] === undefined || nonEmpty(value[key]))
+      .every((key) => value[key] === undefined || nonEmpty(value[key])) &&
+    (value.evidenceIds === undefined || (strings(value.evidenceIds) && unique(value.evidenceIds)))
 }
 function formatVariable(value: string, format?: string): string {
   if (!format) return value
@@ -161,6 +164,7 @@ export function parseCase(input: unknown): GameCase {
       (raw.links !== undefined && !links(raw.links)) ||
       (raw.metadata !== undefined && !metadata(raw.metadata)) ||
       (raw.tableColumns !== undefined && (!strings(raw.tableColumns) || !raw.tableColumns.length || !unique(raw.tableColumns))) ||
+      (raw.deleted !== undefined && (!record(raw.deleted) || raw.deleted.by !== 'author' || !nonEmpty(raw.deleted.at))) ||
       (raw.layout !== undefined && !['portal','forum','news','blog','profile','echo','index','generic'].includes(String(raw.layout))) ||
       (raw.media !== undefined && !media(raw.media)) ||
       (raw.searchable !== undefined && typeof raw.searchable !== 'boolean') ||
@@ -263,6 +267,10 @@ export function parseCase(input: unknown): GameCase {
     subset(item.evidenceIds, evidenceIds) && subset(item.pageIds, pageIds) &&
     subset(item.factIds, factIds)
   for (const page of pages) {
+    const images = [page.media, ...(page.objects || []).map((item) => item.media)].filter((item): item is CaseMedia => Boolean(item))
+    if (images.some((image) => image.evidenceIds?.some((id) => !(evidence as EvidenceDefinition[]).some((item) => item.id === id && item.sourcePageId === page.id && item.discovery === 'detail')))) {
+      throw new Error(`页面 ${page.id} 的图片记录来源无效。`)
+    }
     if ((page.offlinePageId && !pageIds.has(page.offlinePageId)) ||
       (page.firstVisitFromPageId && !pageIds.has(page.firstVisitFromPageId)) ||
       (page.accessPuzzleId && !puzzleIds.has(page.accessPuzzleId)) ||

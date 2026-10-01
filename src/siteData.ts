@@ -19,6 +19,7 @@ export function getThreadStats(thread: CasePage) {
 
 export function getProfileActivity(pages: CasePage[], name: string) {
   const activity = pages.flatMap((page) => {
+    if (page.snapshot) return []
     const posts = (page.kind === 'forum-thread' || (page.layout === 'echo' && !page.directory)) && page.author === name ?
       [{ id: page.id, pageId: page.id, title: page.title, timestamp: page.date, body: page.body, kind: '发帖' }] : []
     const replies = (page.objects || []).filter((item) => item.type === 'reply' && item.author === name)

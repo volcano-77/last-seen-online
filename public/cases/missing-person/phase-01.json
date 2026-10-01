@@ -63,7 +63,16 @@
     "xuStatementDate": "2008-06-14",
     "xuNewsDate": "2008-06-22",
     "xuOldMailbox": "xuning@oldmail.example",
-    "xuOldUsername": "xuning"
+    "xuOldUsername": "xuning",
+    "chenEnvelopeDate": "2009-04-20",
+    "chenHelpTime": "22:24",
+    "chenHelpDeleteTime": "23:03",
+    "chenHelpCaptureTime": "22:49",
+    "chenHelpReply1Time": "22:28",
+    "chenHelpReply2Time": "22:33",
+    "chenHelpReply3Time": "22:37",
+    "chenAfterHelpDate": "2009-04-21",
+    "chenAfterHelpTime": "09:10"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -1221,6 +1230,21 @@
           },
           "evidenceId": "F10",
           "detailLabel": "查看回复详情"
+        },
+        {
+          "id": "chen-after-help-log",
+          "type": "reply",
+          "title": "重复帖处理回复",
+          "author": "陈雨",
+          "timestamp": "{{chenAfterHelpDate}} {{chenAfterHelpTime}}",
+          "body": [
+            "同一问题请在原主题回复，重复帖已经合并。"
+          ],
+          "metadata": {
+            "账号": "陈雨",
+            "回复时间": "{{chenAfterHelpDate}} {{chenAfterHelpTime}}",
+            "帖子状态": "可见"
+          }
         }
       ],
       "siteId": "campus",
@@ -2964,6 +2988,130 @@
         "馆藏副本只保留书目字段，没有个人照片、联系方式或寻人信息。"
       ],
       "links": []
+    },
+    {
+      "id": "bbs_chenyu_envelope_deleted",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "siteName": "{{cityName}}大学 BBS",
+      "title": "7栋今晚有人看到谁往门口放东西吗？",
+      "url": "ncu://bbs/thread/chenyu-envelope",
+      "author": "陈雨",
+      "date": "{{chenEnvelopeDate}} {{chenHelpTime}}",
+      "details": {
+        "section": "校园生活"
+      },
+      "body": [
+        "今晚回来时门口有一个牛皮纸信封，不像广告。有没有人看到是谁放的？知道的请私信。"
+      ],
+      "normalNavigation": false,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "陈雨",
+          "信封",
+          "7栋"
+        ]
+      },
+      "offlinePageId": "snapshot_chenyu_envelope",
+      "deleted": {
+        "by": "author",
+        "at": "{{chenEnvelopeDate}} {{chenHelpDeleteTime}}"
+      },
+      "objects": [
+        {
+          "id": "chen-help-delete",
+          "type": "log-entry",
+          "title": "主题删除记录",
+          "timestamp": "{{chenEnvelopeDate}} {{chenHelpDeleteTime}}",
+          "body": [
+            "作者自删"
+          ],
+          "metadata": {
+            "操作": "作者自删",
+            "账号": "陈雨",
+            "删除时间": "{{chenEnvelopeDate}} {{chenHelpDeleteTime}}"
+          },
+          "evidenceId": "F21"
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "snapshot_chenyu_envelope",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "siteName": "{{cityName}}大学 BBS",
+      "title": "7栋今晚有人看到谁往门口放东西吗？",
+      "url": "archive://snapshot/ncu/chenyu-envelope",
+      "author": "陈雨",
+      "date": "{{chenEnvelopeDate}} {{chenHelpTime}}",
+      "details": {
+        "section": "校园生活"
+      },
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncu://bbs/thread/chenyu-envelope",
+        "capturedAt": "{{chenEnvelopeDate}} {{chenHelpCaptureTime}}"
+      },
+      "body": [
+        "今晚回宿舍时，门口有一个牛皮纸信封，半塞在门缝边上。不是广告，里面有照片和几张打印出来的纸。",
+        "我拿回来摊在桌上拍了一张。其中一张是我最近在校园里的照片，还有网上那张写着寻找我的东西。照片是谁拍的我不知道。",
+        "7栋这边今晚有人看到是谁放的吗？我回来前没接到电话，也没有留言。知道的麻烦私信，不用在这里说房间号。"
+      ],
+      "media": {
+        "id": "chen-envelope-desk",
+        "src": "cases/missing-person/images/chen-envelope.png",
+        "alt": "陈雨上传的桌面照片：牛皮纸信封和部分抽出的打印材料",
+        "filename": "IMG_0420.JPG",
+        "width": "1536",
+        "height": "1024",
+        "uploadedAt": "{{chenEnvelopeDate}} {{chenHelpTime}}",
+        "caption": "刚才拿回来的这些。点击图片查看原图。",
+        "evidenceIds": [
+          "F19",
+          "F20"
+        ]
+      },
+      "objects": [
+        {
+          "id": "chen-help-reply-1",
+          "type": "reply",
+          "author": "纸飞机",
+          "title": "回复",
+          "timestamp": "{{chenEnvelopeDate}} {{chenHelpReply1Time}}",
+          "body": [
+            "你先来我这里，别一个人回去。"
+          ]
+        },
+        {
+          "id": "chen-help-reply-2",
+          "type": "reply",
+          "author": "阿路",
+          "title": "回复",
+          "timestamp": "{{chenEnvelopeDate}} {{chenHelpReply2Time}}",
+          "body": [
+            "九点多经过楼下，没注意有人。"
+          ]
+        },
+        {
+          "id": "chen-help-reply-3",
+          "type": "reply",
+          "author": "水杯忘带了",
+          "title": "回复",
+          "timestamp": "{{chenEnvelopeDate}} {{chenHelpReply3Time}}",
+          "body": [
+            "问一下宿管吧。也看看是不是别人放错了。"
+          ]
+        }
+      ],
+      "links": []
     }
   ],
   "evidence": [
@@ -3151,6 +3299,47 @@
       ],
       "timestamp": "{{xuNoticeDate}}",
       "discovery": "selection"
+    },
+    {
+      "id": "F18",
+      "type": "post",
+      "sourcePageId": "snapshot_chenyu_envelope",
+      "title": "陈雨｜曾收到放在住处附近的牛皮纸信封",
+      "summary": "历史求助帖中，陈雨说回宿舍时在门缝边发现牛皮纸信封，内有照片和打印材料；不知是谁放的。",
+      "timestamp": "{{chenEnvelopeDate}} {{chenHelpTime}}",
+      "discovery": "selection",
+      "selectionTexts": [
+        "门口有一个牛皮纸信封",
+        "半塞在门缝边上"
+      ]
+    },
+    {
+      "id": "F19",
+      "type": "photo",
+      "sourcePageId": "snapshot_chenyu_envelope",
+      "title": "陈雨｜信封内包含近期校园照片及自己的寻人启事",
+      "summary": "陈雨上传的桌面照片中，有她的校园照片和写着“寻找陈雨”的打印件，照片与此前寻人页中的人物对应；材料来源与递送者未知。",
+      "timestamp": "{{chenEnvelopeDate}} {{chenHelpTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F20",
+      "type": "photo",
+      "sourcePageId": "snapshot_chenyu_envelope",
+      "title": "陈雨｜信封材料中出现旧帖时间核对.xls文件名",
+      "summary": "放大桌面照片可读到“旧帖时间核对.xls”及局部表头，与此前恢复的陈雨核对附件同名；不能确认对方怎样取得材料。",
+      "timestamp": "{{chenEnvelopeDate}} {{chenHelpTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F21",
+      "type": "log",
+      "sourcePageId": "bbs_chenyu_envelope_deleted",
+      "sourceObjectId": "chen-help-delete",
+      "title": "陈雨｜相关求助帖后来由本人删除",
+      "summary": "BBS主题删除记录显示账号陈雨执行作者自删。抓取副本早于删除；不说明她删除的具体原因。",
+      "timestamp": "{{chenEnvelopeDate}} {{chenHelpDeleteTime}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -3188,6 +3377,11 @@
       "id": "C07",
       "title": "许宁的寻人信息与本人意愿明显冲突",
       "summary": "寻人历史页与本人声明的姓名、旧用户名对应。寻人页征集目击与活动区域；许宁说自己安全、没有失踪，要求停止传播位置信息。只确认传播与本人意愿冲突，不确认后来暴力的定位来源或因果。"
+    },
+    {
+      "id": "C08",
+      "title": "有人知道陈雨正在核查异常寻人帖，并针对她进行威慑。",
+      "summary": "住处附近的信封、本人校园照与寻人启事打印件、同名核对附件局部共同支持有人针对她的调查进行威慑；身份、材料取得方式和具体递送者仍不能确认。"
     }
   ],
   "relations": [
@@ -3296,6 +3490,21 @@
           "C07"
         ]
       }
+    },
+    {
+      "id": "R08",
+      "evidenceIds": [
+        "F18",
+        "F19",
+        "F20"
+      ],
+      "title": "对照信封位置与其中的打印材料",
+      "summary": "把求助帖中的信封位置与放大照片里的本人材料、核对文件名放在一起比对。",
+      "unlocks": {
+        "factIds": [
+          "C08"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -3346,7 +3555,8 @@
       "city",
       "character ages and heights",
       "supporting blog posts, access questions and album scenes",
-      "Xu Ning old-case calendar dates and public old identity strings"
+      "Xu Ning old-case calendar dates and public old identity strings",
+      "Chen Yu envelope / self-deleted help post calendar dates and times"
     ]
   },
   "homePageId": "portal_home",

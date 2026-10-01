@@ -79,7 +79,9 @@ function Media({ media, ...props }: SiteProps & { media?: CaseMedia }) {
     }}><img src={src(media)} alt={media.alt} loading="lazy" /></button><figcaption>{media.caption || media.alt}</figcaption>
     {open && <div className="image-backdrop" onClick={() => setOpen(false)}><section className="image-viewer" role="dialog" aria-modal="true" aria-label="图片查看器" onClick={(event) => event.stopPropagation()}>
       <header><b>{media.filename || media.alt}</b><button aria-label="关闭图片" onClick={() => setOpen(false)}>×</button></header>
-      <div className={`image-comparison${compare ? ' comparing' : ''}`}><div className={`image-stage${zoom ? ' zoomed' : ''}`}><button aria-label="放大或缩小图片" onClick={() => setZoom(!zoom)}><img src={src(media)} alt={media.alt} /></button></div>
+      <div className={`image-comparison${compare ? ' comparing' : ''}`}><div className={`image-stage${zoom ? ' zoomed' : ''}`}><button aria-label="放大或缩小图片" onClick={() => setZoom(!zoom)}><img src={src(media)} alt={media.alt} onLoad={(event) => {
+        media.evidenceIds?.forEach((id) => props.onDiscover(id, pointAt(event.currentTarget)))
+      }} /></button></div>
         {compare && referenceId && <div className="reference-image"><img src={src(references.find((item) => item.id === referenceId)!)} alt={references.find((item) => item.id === referenceId)!.alt} /><small>{references.find((item) => item.id === referenceId)?.filename}</small></div>}
       </div>
       <div className="image-properties"><span>文件：{media.filename || '未记录'}</span><span>尺寸：{media.width || '—'} × {media.height || '—'}</span>{media.takenAt && <span>拍摄时间：{media.takenAt}</span>}{media.uploadedAt && <span>上传时间：{media.uploadedAt}</span>}</div>
@@ -307,9 +309,14 @@ function Spreadsheet(props: SiteProps) {
 }
 export function SiteView(props: SiteProps) {
   const { page } = props
-  if (page.offlinePageId) return <div className="unavailable-page"><h1>{page.kind === 'attachment' ? '文件不存在' : '无法显示网页'}</h1><p>{page.kind === 'attachment' ? '原站附件已经失效，服务器未找到这个文件。' : '服务器没有返回可读取的页面。'}</p><p>{page.url}</p><button onClick={() => props.onNavigate(page.offlinePageId!)}>{page.kind === 'attachment' ? '尝试查看历史副本' : '尝试打开离线副本'}</button><small>原站点不可用时，浏览器可以查找以前保存的页面。</small></div>
+  if (page.offlinePageId && !page.deleted) return <div className="unavailable-page"><h1>{page.kind === 'attachment' ? '文件不存在' : '无法显示网页'}</h1><p>{page.kind === 'attachment' ? '原站附件已经失效，服务器未找到这个文件。' : '服务器没有返回可读取的页面。'}</p><p>{page.url}</p><button onClick={() => props.onNavigate(page.offlinePageId!)}>{page.kind === 'attachment' ? '尝试查看历史副本' : '尝试打开离线副本'}</button><small>原站点不可用时，浏览器可以查找以前保存的页面。</small></div>
   let content: ReactNode
-  if (page.kind === 'portal') content = <Portal {...props} />
+  if (page.deleted) content = <div className="forum-site campus-forum"><header className="forum-header"><SiteName {...props} /><span>校园交流 / BBS</span></header><Breadcrumb {...props} />
+    <h2 className="thread-title">{page.title}</h2><div className="plain-site"><p>发帖：<User {...props} name={page.author || '匿名'} />　{page.date}</p>
+      <p>此主题已由作者删除，正文及附件无法在当前页面查看。</p>{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}
+      <p><PageLink pageId="archive_service" options={{ state: { searchInput: page.url, searchQuery: page.url, searchSubmitted: true } }}>在网页存档中查找这个地址</PageLink></p>
+    </div><footer>Powered by CampusBBS　|　旧帖只读</footer></div>
+  else if (page.kind === 'portal') content = <Portal {...props} />
   else if (page.kind === 'spreadsheet') content = <Spreadsheet {...props} />
   else if (page.kind === 'forum-thread' || page.kind === 'forum') content = <Forum {...props} />
   else if (page.kind === 'profile') content = <Profile {...props} />

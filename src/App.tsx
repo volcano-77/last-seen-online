@@ -239,7 +239,8 @@ export default function App() {
   const choices = relationChoices(caseData.relations, save.establishedRelationIds, [...evidence.map((item) => item.id), ...facts.map((item) => item.id)], selected)
   const toggle = (id: string) => { setSelected((old) => old.includes(id) ? old.filter((item) => item !== id) : choices.compatibleIds.includes(id) ? [...old, id] : old); setRelationMessage('') }
   const accessiblePages = caseData.pages.filter((item) => meets(item.unlockConditions, save) && canVisitPage(item, save, page.id))
-  const sitePages = accessiblePages.filter((item) => item.normalNavigation !== false || item.siteId === page.siteId || save.visitedPageIds.includes(item.id))
+  const sitePages = accessiblePages.filter((item) => item.normalNavigation !== false || item.siteId === page.siteId ||
+    (page.skin === 'archive' && item.snapshot) || save.visitedPageIds.includes(item.id))
   const searchPages = accessiblePages.filter((item) =>
     (!item.accessPuzzleId || save.completedPuzzleIds.includes(item.accessPuzzleId)))
   const recentVisits = [...save.tabs].sort((a, b) => b.lastUsed - a.lastUsed)

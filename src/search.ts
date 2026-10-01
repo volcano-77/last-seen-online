@@ -14,7 +14,7 @@ function excerpt(text: string, term: string) {
 export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'global', siteId?: string): SearchHit[] {
   const term = query.trim().toLowerCase()
   if (!term) return []
-  return pages.filter((page) => page.searchable !== false && (!page.directory || scope === 'global' && page.searchIndexed === true) && !page.offlinePageId &&
+  return pages.filter((page) => page.searchable !== false && (!page.directory || scope === 'global' && page.searchIndexed === true) && (!page.offlinePageId || page.deleted) &&
     page.kind !== 'search' && page.kind !== 'portal' && !page.snapshot && page.kind !== 'cache' &&
     (scope === 'global' ? page.searchIndexed !== false : page.siteId === siteId && (page.kind === 'forum-thread' || page.kind === 'website' || page.kind === 'profile')))
     .flatMap((page) => {
@@ -25,9 +25,9 @@ export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'g
         snippet: excerpt(body || page.body[0] || page.title, term), match: '标题', floor: page.kind === 'forum-thread' ? 1 : undefined })
       else if (body) hits.push({ ...base, id: `${page.id}/body`, anchorId: page.kind === 'forum-thread' ? 'thread-main' : undefined,
         snippet: excerpt(body, term), match: '正文', floor: page.kind === 'forum-thread' ? 1 : undefined })
-      else if (contains(page.author, term)) hits.push({ ...base, id: `${page.id}/author`, snippet: page.author!, match: '用户名' })
+      else if (contains(page.author, term)) hits.push({ ...base, id: `${page.id}/author`, snippet: page.deleted ? page.body[0] : page.author!, match: '用户名' })
       let replyIndex = 0
-      for (const item of page.objects || []) {
+      for (const item of page.deleted ? [] : page.objects || []) {
         if (item.type === 'reply') replyIndex++
         const line = item.body?.find((line) => contains(line, term))
         const matchedAuthor = contains(item.author, term)
