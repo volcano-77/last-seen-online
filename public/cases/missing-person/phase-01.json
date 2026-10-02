@@ -126,7 +126,21 @@
     "civilPairExitTime": "14:23",
     "civilWorkerEnterTime": "14:30",
     "civilWorkerFindTime": "14:31",
-    "civilFirstCallTime": "14:33"
+    "civilFirstCallTime": "14:33",
+    "xuLaterUsername": "ning_74",
+    "xuLaterNickname": "阿宁",
+    "xuLaterProfileDate": "2008-08-11",
+    "chenXuSentDate": "2009-04-19",
+    "chenXuSentTime": "20:10",
+    "wangXuSearchDate": "2009-09-20",
+    "wangXuMessageDate": "2009-09-20",
+    "wangXuMessageTime": "19:42",
+    "xuMessageReplyDate": "2009-09-21",
+    "xuMessageReplyTime": "11:08",
+    "wangXuMeetingDate": "2009-09-23",
+    "xuMemoConfirmedDate": "2009-09-24",
+    "wangContactArchiveDate": "2009-09-26",
+    "wangContactArchiveTime": "09:16"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3489,14 +3503,15 @@
       "body": [
         "王曼 / 本地、社会新闻线实习记者。做过采访、资料核对和稿件整理。此页留存的是个人工作资料，不是资讯网栏目。",
         "日常项目：校园采访记录、本地生活选题、联系资料整理。这里只保留项目名，笔记和联系方式未收入网页副本。",
-        "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。"
+        "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。",
+        "本次恢复的是较晚更新的目录。五月保存的旧附件沿用各自抓取记录；九月联系记录与采访节录是后来链接、分别抓取的必要副本，不由早期目录截图推定可恢复。"
       ],
       "searchable": false,
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/materials",
-        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
       },
       "directory": true,
       "objects": [
@@ -3579,6 +3594,54 @@
             "保存日期": "{{wangShopVisitDate}}",
             "大小": "—"
           }
+        },
+        {
+          "id": "wang-dir-xu-search",
+          "type": "file",
+          "title": "联系核查 / 旧账号检索",
+          "links": [
+            {
+              "label": "联系核查 / 旧账号检索",
+              "pageId": "snapshot_wang_xu_search"
+            }
+          ],
+          "metadata": {
+            "类型": "工作备忘",
+            "保存日期": "{{wangXuSearchDate}}",
+            "大小": "必要节录"
+          }
+        },
+        {
+          "id": "wang-dir-xu-messages",
+          "type": "file",
+          "title": "站内联系记录节录",
+          "links": [
+            {
+              "label": "站内联系记录节录",
+              "pageId": "snapshot_wang_xu_messages"
+            }
+          ],
+          "metadata": {
+            "类型": "自存记录",
+            "保存日期": "{{xuMessageReplyDate}}",
+            "大小": "必要节录"
+          }
+        },
+        {
+          "id": "wang-dir-xu-meeting",
+          "type": "file",
+          "title": "会面采访备忘（核认节录）",
+          "links": [
+            {
+              "label": "会面采访备忘（核认节录）",
+              "pageId": "snapshot_wang_xu_meeting"
+            }
+          ],
+          "metadata": {
+            "类型": "采访备忘",
+            "保存日期": "{{xuMemoConfirmedDate}}",
+            "大小": "必要节录"
+          }
         }
       ]
     },
@@ -3609,7 +3672,13 @@
             "类型": "表格附件副本",
             "保存日期": "{{chenBackupDate}}",
             "大小": "原大小未保留"
-          }
+          },
+          "links": [
+            {
+              "label": "旧帖时间核对.xls",
+              "pageId": "snapshot_chenyu_timecheck"
+            }
+          ]
         },
         {
           "id": "wang-backup-receipt",
@@ -3627,6 +3696,23 @@
             "接收时间": "{{chenBackupDate}} {{chenBackupReceiveTime}}",
             "文件": "旧帖时间核对.xls",
             "来源": "王曼保存的附件接收记录与必要副本"
+          }
+        },
+        {
+          "id": "chen-to-xu-sent",
+          "type": "log-entry",
+          "title": "已发送截图 / 关于你以前那张寻人启事",
+          "body": [
+            "陈雨留在事故前有限备份中的已发送截图：收件地址为{{xuOldMailbox}}，附既有寻人案例截图。",
+            "这里只恢复这一条必要发送字段，不提供邮箱登录、其他邮件或收件端状态。“已发送”不能证明许宁已读，也不能证明谁先看到了邮件。"
+          ],
+          "metadata": {
+            "发件人": "陈雨",
+            "收件地址": "{{xuOldMailbox}}",
+            "主题": "关于你以前那张寻人启事",
+            "发送时间": "{{chenXuSentDate}} {{chenXuSentTime}}",
+            "附件": "既有案例截图（仅保留附件说明）",
+            "保存链": "陈雨自存截图 → {{chenBackupDate}}给王曼的有限备份 → 王曼必要工作副本 → 本文件历史抓取"
           }
         }
       ]
@@ -4504,6 +4590,326 @@
           "evidenceId": "F44"
         }
       ]
+    },
+    {
+      "id": "snapshot_wang_xu_search",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "联系核查 / 旧账号检索",
+      "url": "archive://snapshot/ncitynews/wangman/xu-contact-notes",
+      "body": [
+        "{{wangXuSearchDate}} / 工作备忘。旧帖时间核对.xls中许宁一栏写“已发邮件，待回复”，陈雨留的已发送截图与之相符。我想核实她是否知道陈雨后来的调查。",
+        "043已经出现陈雨的通信记录。我不沿陈雨发信的旧地址继续联系，也不往那个地址投递资料。",
+        "先找回“本人安全，请停止转发寻人信息”。用里面公开的旧用户名与旧联系地址搜索，核对后来账号保留的资料字段；不能因为昵称相近就认人。下面是我当时留下的核查结果，不是给旧邮箱发信的记录。"
+      ],
+      "author": "王曼",
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-contact-notes",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "wang-xu-public-fields",
+          "type": "log-entry",
+          "title": "公开资料核对 / 两项旧字段",
+          "body": [
+            "后来账号{{xuLaterUsername}}的旧名说明与旧声明的{{xuOldUsername}}一致；保留的停用联系地址{{xuOldMailbox}}也一致。",
+            "两项公开字段共同对应旧声明署名的许宁。先据此找到联系候选，再通过回应及会面核认；昵称“{{xuLaterNickname}}”本身不作为身份证明。"
+          ],
+          "metadata": {
+            "核查日期": "{{wangXuSearchDate}}",
+            "公开来源一": "许宁旧公开安全声明",
+            "公开来源二": "普通个人页 / {{xuLaterUsername}}",
+            "核对项": "旧用户名；相同停用邮箱",
+            "联系方式": "账号站内收件箱；不沿旧邮件链投递"
+          },
+          "evidenceId": "F45"
+        }
+      ],
+      "links": [
+        {
+          "label": "旧帖时间核对.xls",
+          "pageId": "snapshot_chenyu_timecheck"
+        },
+        {
+          "label": "陈雨资料备份 / 已发送截图",
+          "pageId": "snapshot_wang_chen_backup"
+        },
+        {
+          "label": "本人安全，请停止转发寻人信息",
+          "pageId": "xuning_safety_statement"
+        },
+        {
+          "label": "公开账号资料来源",
+          "pageId": "xu_later_public_account"
+        },
+        {
+          "label": "站内联系记录节录",
+          "pageId": "snapshot_wang_xu_messages"
+        }
+      ]
+    },
+    {
+      "id": "xu_later_public_account",
+      "kind": "website",
+      "layout": "generic",
+      "siteId": "ning-personal",
+      "siteName": "{{xuLaterNickname}}的个人页",
+      "title": "{{xuLaterNickname}}的个人页",
+      "url": "oldspace://members/{{xuLaterUsername}}",
+      "author": "{{xuLaterNickname}}",
+      "date": "{{xuLaterProfileDate}}",
+      "directory": true,
+      "normalNavigation": false,
+      "searchable": true,
+      "searchIndexed": true,
+      "searchIndex": {
+        "status": "orphan",
+        "aliases": [
+          "{{xuOldUsername}}",
+          "{{xuOldMailbox}}",
+          "{{xuLaterUsername}}"
+        ]
+      },
+      "searchTerms": [
+        "{{xuOldUsername}}",
+        "{{xuOldMailbox}}",
+        "旧名",
+        "停用邮箱"
+      ],
+      "body": [
+        "普通个人资料 / {{xuLaterUsername}}",
+        "很久没更新了。这里只留旧资料，不公开现在的住处、工作和联系方式。",
+        "留言请用站内收件箱。旧地址已停用，勿投递。当前网页副本不开放收件箱登录。"
+      ],
+      "objects": [
+        {
+          "id": "ning-public-profile",
+          "type": "text",
+          "title": "旧资料",
+          "body": [
+            "以前的用户名：{{xuOldUsername}}",
+            "旧联系地址：{{xuOldMailbox}}（已停用）"
+          ],
+          "metadata": {
+            "昵称": "{{xuLaterNickname}}",
+            "账号": "{{xuLaterUsername}}",
+            "资料更新时间": "{{xuLaterProfileDate}}"
+          }
+        }
+      ],
+      "links": []
+    },
+    {
+      "id": "snapshot_wang_xu_messages",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "站内联系记录节录",
+      "url": "archive://snapshot/ncitynews/wangman/xu-saved-messages",
+      "body": [
+        "来源：王曼自己的站内发出 / 收到记录，整理后留下的必要文字副本。与本次核查无关的通信、登录资料及双方现在的联系方式均未收入。",
+        "原件由王曼保存；此节录曾单独链接于记者工作页并被抓取。玩家查看的是王曼留存的历史副本，不能进入对方收件箱，也不能发送新的消息。"
+      ],
+      "author": "王曼",
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-saved-messages",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "wang-seventh-sent",
+          "type": "log-entry",
+          "title": "发出 / 王曼 → {{xuLaterUsername}}",
+          "body": [
+            "我看到了第七张。",
+            "王曼备忘：当时还不知道037是谁拍的；这句话只试探对方是否知道第七张，不在公开留言板贴图。"
+          ],
+          "metadata": {
+            "发送日期": "{{wangXuMessageDate}} {{wangXuMessageTime}}",
+            "方向": "王曼 → {{xuLaterUsername}}",
+            "可见范围": "站内私信，仅收发双方",
+            "原保存者": "王曼（自己的发送记录）"
+          },
+          "evidenceId": "F46"
+        },
+        {
+          "id": "xu-first-reply",
+          "type": "log-entry",
+          "title": "收到 / {{xuLaterUsername}} → 王曼",
+          "body": [
+            "你从哪里看到的？你到底拿到了什么？不要在这里说这些。",
+            "这是第一条回复的必要节录。对方警惕，并未在这里确认拍摄者或说明事故经过。"
+          ],
+          "metadata": {
+            "接收日期": "{{xuMessageReplyDate}} {{xuMessageReplyTime}}",
+            "方向": "{{xuLaterUsername}} → 王曼",
+            "原保存者": "王曼（自己的收到记录）"
+          }
+        },
+        {
+          "id": "wang-meeting-arrangement",
+          "type": "log-entry",
+          "title": "后续联络 / 只约线下核对",
+          "body": [
+            "王曼记录：只描述我手里有037局部、043和七扫六印记录，没有在线发送整份调查资料。",
+            "对方要先核对我拿到的究竟是什么，提出线下见面，由她选择人员较多的公共场所。具体位置不收入网页副本；材料在见面时当面展示。",
+            "一句试探和两项公开字段没有自动换来全部信任，拍摄者与事故经过是在会面核对后才记录的。"
+          ],
+          "metadata": {
+            "会面日期": "{{wangXuMeetingDate}}",
+            "地点类型": "人员较多的公共场所，由对方选择",
+            "网上附件": "未附整份材料"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "联系核查 / 旧账号检索",
+          "pageId": "snapshot_wang_xu_search"
+        },
+        {
+          "label": "会面采访备忘（核认节录）",
+          "pageId": "snapshot_wang_xu_meeting"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_wang_xu_meeting",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "会面采访备忘（核认节录）",
+      "url": "archive://snapshot/ncitynews/wangman/xu-meeting-memo",
+      "body": [
+        "会面日期：{{wangXuMeetingDate}}。地点：许宁选择的人员较多的公共场所；具体地点隐去。对方：许宁。",
+        "王曼在会面后立即整理这份采访备忘，将必要节录交许宁核对；{{xuMemoConfirmedDate}}由许宁核认陈述。不是警察笔录、偷拍视频或录音逐字稿。",
+        "核对过程：王曼当面展示037局部、043与照相馆七扫六印记录；许宁确认自己曾留下037，再说明现场。这些材料用于核实联系确有依据，不是一次性交出全部调查资料。",
+        "来源链：许宁口述并核认 → 王曼自存采访备忘 → 遮蔽无关联系字段的必要工作页副本 → 本文件单独历史抓取。下列条目仍是当事人陈述，照片与公开时序只支持其中能交叉核对的部分。"
+      ],
+      "author": "王曼",
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-meeting-memo",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-037-authorship",
+          "type": "log-entry",
+          "title": "许宁陈述 / 037拍摄来源",
+          "body": [
+            "037是我自己偷偷拍的。当时陈雨已经倒在楼梯平台附近，梁低头处理她的手机和包。",
+            "我不是为了公开揭发去拍的。看到他这样做，我怕以后自己也会被同样处理，想留一点自保的东西。他不知道这张照片，我没有立即公开。",
+            "该说法能与王曼从照相馆取得的缓存及DCIM源路径核对；缓存本身不署拍摄者姓名。"
+          ],
+          "metadata": {
+            "陈述人": "许宁",
+            "记录人": "王曼",
+            "核认日期": "{{xuMemoConfirmedDate}}",
+            "类别": "本人拍摄来源说明；需核照相馆来源链"
+          },
+          "evidenceId": "F47"
+        },
+        {
+          "id": "xu-incident-context",
+          "type": "log-entry",
+          "title": "许宁陈述 / 约见与跌落（视角有限）",
+          "body": [
+            "陈雨以为只会见我。我们在城西老商业楼二层小茶座见面，梁后来出现。谈话失控，陈雨想走，到了楼梯区域，围绕手机和包发生争执、拉扯。",
+            "陈雨失去平衡，摔下半层楼梯。我没有完整无遮挡的视角，不能证明究竟哪个具体动作直接使她跌落，不能说亲眼看见他故意把她推下去。"
+          ],
+          "metadata": {
+            "类别": "当事人对经过的陈述",
+            "未核范围": "致跌瞬间、具体动作和故意程度；无完整过程影像"
+          }
+        },
+        {
+          "id": "xu-signs-of-life",
+          "type": "log-entry",
+          "title": "许宁陈述 / 跌落后查看",
+          "body": [
+            "梁下去查看陈雨，她还有呼吸和微弱反应。他检查后知道她还活着。",
+            "这是许宁的观察与对当时梁知情的陈述，不是医学诊断。037不能辨认呼吸，公开外围摘要也不记录这次查看。"
+          ],
+          "metadata": {
+            "事件日期": "{{chenIncidentDate}}",
+            "陈述人": "许宁",
+            "核认日期": "{{xuMemoConfirmedDate}}",
+            "独立核实限制": "生命迹象及梁当时知情依赖证言"
+          },
+          "evidenceId": "F48"
+        },
+        {
+          "id": "xu-material-search",
+          "type": "log-entry",
+          "title": "许宁陈述 / 先处理手机与包",
+          "body": [
+            "他没有立即对外求助，先查看她的手机，翻包找调查材料，问有没有备份、有没有发给别人。",
+            "037能看见手机 / 包内物品的处理，公开摘要能核后来离开、发现和首次明确急救呼叫；二者不直接显示他问过什么，也不能读出手机内容。"
+          ],
+          "metadata": {
+            "事件日期": "{{chenIncidentDate}}",
+            "陈述人": "许宁",
+            "核认日期": "{{xuMemoConfirmedDate}}",
+            "互证部分": "037现场处理物品；公开离开及首次明确呼叫时序"
+          },
+          "evidenceId": "F49"
+        },
+        {
+          "id": "xu-stopped-help",
+          "type": "log-entry",
+          "title": "许宁陈述 / 当时提出求助",
+          "body": [
+            "我提出马上对外求助，他要求我当时不要打电话，先处理陈雨的资料问题。",
+            "阻止当时求助是许宁明确声称的内容，没有通话录音或全程录像。外部材料只支持现场行为与呼叫先后，不能把这句话改写成完全客观记录。"
+          ],
+          "metadata": {
+            "事件日期": "{{chenIncidentDate}}",
+            "陈述人": "许宁",
+            "核认日期": "{{xuMemoConfirmedDate}}",
+            "类别": "本人证言；没有独立记录这一要求"
+          },
+          "evidenceId": "F50"
+        },
+        {
+          "id": "xu-memo-boundaries",
+          "type": "text",
+          "title": "王曼核查附记 / 支持范围",
+          "body": [
+            "可交叉核对：037中的受伤现场、梁处理手机 / 物品；公开摘要中的外围离开、工作人员发现及首次可确认急救呼叫。两类材料来源不同，不能证明许宁所有陈述。",
+            "尚依赖陈述：037由许宁拍摄、梁检查后知道生命迹象、具体询问备份内容、阻止立即打电话。照片来源链及当面核认增强出处，不能变成跌落过程录像。",
+            "只能在证言、037和公开时序共同支持下评估主动不救；不能推定故意推落、预谋杀人、延误必然导致死亡或立即求救必然救活。此次节录不说明梁如何提前得知调查，也不含任何后续任务资料。"
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "站内联系记录节录",
+          "pageId": "snapshot_wang_xu_messages"
+        },
+        {
+          "label": "文件列表 / 导入记录",
+          "pageId": "snapshot_wang_import_files"
+        },
+        {
+          "label": "城西照相馆订单记录",
+          "pageId": "snapshot_wang_print_order"
+        },
+        {
+          "label": "公开事故案件摘要",
+          "pageId": "public_chenyu_civil_summary"
+        }
+      ]
     }
   ],
   "evidence": [
@@ -4983,6 +5389,66 @@
       "summary": "同一摘要引用{{civilCoverageStart}}—{{civilCoverageEnd}}的本事件急救受理记录，首次可确认呼叫为工作人员于{{civilFirstCallTime}}发起。不能据此排除所有私人通话、未记录尝试或其他方式求助。",
       "timestamp": "{{chenIncidentDate}} {{civilFirstCallTime}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F45",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_xu_search",
+      "sourceObjectId": "wang-xu-public-fields",
+      "title": "王曼｜通过两项旧公开字段找到许宁后来账号",
+      "summary": "王曼核查旧用户名与相同停用邮箱，同时对应许宁旧声明和后来普通账号；昵称同名不作身份证明，随后联系及会面核认。",
+      "timestamp": "{{wangXuSearchDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F46",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_xu_messages",
+      "sourceObjectId": "wang-seventh-sent",
+      "title": "王曼｜留下“我看到了第七张”",
+      "summary": "王曼自己的站内私信发出记录保存原句“我看到了第七张。”，仅收发双方可见，不公开037，也不沿已暴露旧邮件链发信。",
+      "timestamp": "{{wangXuMessageDate}} {{wangXuMessageTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F47",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_xu_meeting",
+      "sourceObjectId": "xu-037-authorship",
+      "title": "许宁｜确认037由自己拍摄",
+      "summary": "经许宁核认的王曼采访节录：037由许宁在陈雨重伤后暗中拍摄，为自保留筹码；梁不知照片存在，未立即公开。来源身份与缓存路径需交叉核对。",
+      "timestamp": "{{wangXuMeetingDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F48",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_xu_meeting",
+      "sourceObjectId": "xu-signs-of-life",
+      "title": "许宁证言｜梁查看后知道陈雨仍有生命迹象",
+      "summary": "许宁称梁下去查看，看到陈雨有呼吸和微弱反应，知道她还活着。生命迹象与梁知情依赖本人证言，不是照片可确认的医学判断。",
+      "timestamp": "{{chenIncidentDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F49",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_xu_meeting",
+      "sourceObjectId": "xu-material-search",
+      "title": "许宁证言｜梁优先搜查手机、包和调查资料",
+      "summary": "许宁称梁优先查看手机、翻包找调查资料并询问备份 / 外传。037可支持处理物品，公开时序支持之后才有明确外部呼叫；具体询问仍依赖证言。",
+      "timestamp": "{{chenIncidentDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F50",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_xu_meeting",
+      "sourceObjectId": "xu-stopped-help",
+      "title": "许宁证言｜梁阻止当时立即对外求助",
+      "summary": "许宁称自己提出立即求助，梁要求先处理资料、当时不要打电话。是经本人核认的陈述，没有独立录音 / 全程录像，不单独当成完全客观事实。",
+      "timestamp": "{{chenIncidentDate}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -5070,6 +5536,21 @@
       "id": "C17",
       "title": "现有公开时间资料显示，陈雨受伤后并未立即出现可确认的对外急救呼叫；首次明确的急救呼叫来自后来发现她的工作人员。",
       "summary": "事故可能区间、发现与急救受理时间存在先后间隔，037仅补现场重伤背景。结论限于公开摘要所核事件及记录覆盖，不排除其他求助尝试，不证明生命迹象知情、阻止求助、延迟导致死亡或早救必活；不计算精确延误或法律意义。"
+    },
+    {
+      "id": "C18",
+      "title": "许宁确认037由她本人拍摄。",
+      "summary": "联系对象经两项公开字段核对，许宁核认的采访节录与七扫六印、DCIM映射和实际恢复预览对应。是本人确认及来源互证，不是原照片自动署名。"
+    },
+    {
+      "id": "C19",
+      "title": "许宁的事故证言与037所显示的现场行为、公开事故时间线相互印证。",
+      "summary": "仅部分关键陈述有独立材料支持：037处理手机 / 物品，公开时序中的离开、发现和首次明确呼叫。生命迹象、问话与阻止求助不能因此全部变成客观记录。"
+    },
+    {
+      "id": "C20",
+      "title": "现有证据强烈支持：梁知道陈雨仍有生命迹象，却优先处理调查资料，并阻止当时立即求助。",
+      "summary": "E07强支持层：许宁核认证言与037和公开时序共同支持。不是跌落全程录像，不能推出故意推落、预谋杀人、延误必然致死、早救必活或精确法律责任。"
     }
   ],
   "relations": [
@@ -5339,6 +5820,64 @@
           "C17"
         ]
       }
+    },
+    {
+      "id": "R18",
+      "evidenceIds": [
+        "F45",
+        "F47",
+        "F35",
+        "F37"
+      ],
+      "factIds": [
+        "C12"
+      ],
+      "title": "核对联系身份、拍摄者确认与照相馆缓存出处",
+      "summary": "两项公开字段定位联系对象；本人核认拍摄说明，和七扫六印、源路径、实际恢复内容交叉对应。",
+      "unlocks": {
+        "factIds": [
+          "C18"
+        ]
+      }
+    },
+    {
+      "id": "R19",
+      "evidenceIds": [
+        "F48",
+        "F49"
+      ],
+      "factIds": [
+        "C18",
+        "C15",
+        "C17"
+      ],
+      "title": "将核认的事故陈述与可见现场、公开时序分别对照",
+      "summary": "只核照片及公开时序真正覆盖的部分，不把生命迹象陈述或全部经过一并当作独立客观事实。",
+      "unlocks": {
+        "factIds": [
+          "C19"
+        ]
+      }
+    },
+    {
+      "id": "R20",
+      "evidenceIds": [
+        "F48",
+        "F49",
+        "F50"
+      ],
+      "factIds": [
+        "C15",
+        "C17",
+        "C19"
+      ],
+      "title": "组合生命迹象知情、先处理资料与阻止求助的强支持链",
+      "summary": "本人核认证言 + 037 + 首次明确急救呼叫时序，形成E07强支持层，保留跌落动作及救助结果的不确定性。",
+      "unlocks": {
+        "factIds": [
+          "C20"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -5458,7 +5997,8 @@
       "Chen Yu stair incident / death / two public news reports calendar dates and publication times",
       "Wang Man backup receipt / print order / packet receipt / shop visit / work page snapshot calendar dates and order number",
       "Chen Yu same-day campus photo server / capture times and shop preview-cache generation time",
-      "Public civil summary / follow-up publication dates, possible accident interval and calibrated peripheral / emergency-call minutes"
+      "Public civil summary / follow-up publication dates, possible accident interval and calibrated peripheral / emergency-call minutes",
+      "Xu later public account identifier / nickname and public profile, Chen sent excerpt, Wang contact / meeting / confirmation / later directory capture calendar dates and times"
     ]
   },
   "homePageId": "portal_home",
