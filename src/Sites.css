@@ -176,6 +176,8 @@
 .summer-blog .site-breadcrumb{color:#6c8860;border-color:#bfcdb5}.summer-blog .text-link{color:#50724c}.summer-blog .blog-section-title,.summer-blog .blog-pagination{border-color:#c1d2b4}
 
 .log-author{font-size:15px;color:#536272;padding:3px 12px 8px}.log-entry>.text-link{display:inline-block;margin:0 12px 12px}
+.civil-document{background:#f7f8fa;color:#414b56}.civil-document h1,.civil-document h2{color:#4c6176}.civil-document h2{border-block:1px solid #b8c3ce;background:#e7ecf2;padding:8px 12px}.civil-document .log-row{grid-template-columns:165px 230px minmax(0,1fr);color:#414b56;background:#f3f5f8;border-color:#b8c3ce;font:16px/1.7 'SimSun',serif}.civil-document .log-row time{font-size:15px}.civil-document .log-row:hover{background:#e7edf4}.civil-document .log-row:focus-visible{outline:1px dotted #52697c;outline-offset:-3px}.civil-document .log-entry>p{padding-inline:15px}.civil-document .metadata{font-size:15px}
+@media(max-width:850px){.civil-document .log-row{grid-template-columns:1fr}}
 .spreadsheet-viewer{border:1px solid #8c9297;background:#fff;color:#222;font:16px/1.7 Arial,'SimSun','Microsoft YaHei',sans-serif}
 .spreadsheet-viewer>header{padding:7px 12px;background:linear-gradient(#eff1f3,#cfd3d7);border-bottom:1px solid #92989d;font-weight:bold}.spreadsheet-viewer>header small{font-weight:normal;font-size:14px}
 .sheet-toolbar{display:flex;gap:22px;padding:4px 12px;background:#ececec;border-bottom:1px solid #a6a6a6;font-size:15px}.sheet-toolbar span:last-child{margin-left:auto}

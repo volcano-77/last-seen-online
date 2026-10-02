@@ -115,7 +115,18 @@
     "chenCampusTakenTime": "09:05",
     "wangCacheTime": "13:38",
     "cache037Width": "1448",
-    "cache037Height": "1086"
+    "cache037Height": "1086",
+    "civilPublishedDate": "2009-09-18",
+    "civilFollowupDate": "2009-09-19",
+    "civilCoverageStart": "14:00",
+    "civilCoverageEnd": "14:40",
+    "civilChenSeenTime": "14:06",
+    "civilPossibleStart": "14:08",
+    "civilPossibleEnd": "14:22",
+    "civilPairExitTime": "14:23",
+    "civilWorkerEnterTime": "14:30",
+    "civilWorkerFindTime": "14:31",
+    "civilFirstCallTime": "14:33"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -521,7 +532,7 @@
       "title": "{{cityName}}资讯网",
       "url": "ncitynews://home",
       "siteName": "{{cityName}}资讯网",
-      "date": "{{chenFollowupNewsDate}}",
+      "date": "{{civilFollowupDate}}",
       "body": [
         "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，可从本页列表或南城搜索进入。"
       ],
@@ -611,6 +622,17 @@
             {
               "label": "阅读报道",
               "pageId": "news_chenyu_stair_followup"
+            }
+          ]
+        },
+        {
+          "id": "news-list-chen-family",
+          "type": "text",
+          "title": "陈雨家属就商业楼安全及发现时间提出异议",
+          "links": [
+            {
+              "label": "阅读报道",
+              "pageId": "news_chenyu_family_claim"
             }
           ]
         }
@@ -3432,6 +3454,10 @@
         {
           "label": "此前报道：城西一商业楼内女子楼梯间摔伤送医",
           "pageId": "news_chenyu_stair_injury"
+        },
+        {
+          "label": "后续报道：陈雨家属提出安全及发现时间异议",
+          "pageId": "news_chenyu_family_claim"
         }
       ]
     },
@@ -4277,6 +4303,207 @@
           }
         }
       ]
+    },
+    {
+      "id": "news_chenyu_family_claim",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "陈雨家属就商业楼安全及发现时间提出异议",
+      "url": "ncitynews://local/{{civilFollowupDate|compact}}/chenyu-family",
+      "date": "{{civilFollowupDate}}",
+      "author": "本报记者",
+      "details": {
+        "section": "本地"
+      },
+      "searchable": true,
+      "searchIndexed": true,
+      "body": [
+        "此前在{{westCommercialBuilding}}楼梯间受伤、送医两天后死亡的陈雨，其家属后来就商业楼及物业安全责任进行维权，对事故前后的人员活动、发现伤者及急救呼叫时间提出异议。",
+        "有关民事案件的公开文字资料近日留下必要时间摘要，引用商业楼外围监控、工作人员发现情况及急救受理记录。家属维权所涉的安全责任，与事故最初新闻中的“楼梯摔伤”表述，不能代替完整事故因果调查。",
+        "公开材料不提供原始监控或急救录音。楼梯平台存在摄像头盲区，摘要只能核查部分外围活动与时间，不足以说明跌落过程。"
+      ],
+      "links": [
+        {
+          "label": "公开资料来源：商业楼民事案件摘要",
+          "pageId": "public_chenyu_civil_summary"
+        },
+        {
+          "label": "此前报道：摔伤女子抢救无效死亡",
+          "pageId": "news_chenyu_stair_followup"
+        }
+      ]
+    },
+    {
+      "id": "civil_public_index",
+      "kind": "website",
+      "siteId": "civil-public",
+      "siteName": "{{cityName}}法律信息",
+      "title": "民事公开资料索引",
+      "url": "legal://local/civil",
+      "directory": true,
+      "searchable": false,
+      "normalNavigation": true,
+      "body": [
+        "地方公开法律信息转载页。只保留必要案件摘要，隐去身份证件、住址与联系方式；原始卷宗、影像及录音不在本页提供。"
+      ],
+      "objects": [
+        {
+          "id": "civil-index-chen",
+          "type": "text",
+          "title": "商业楼楼梯摔伤事件 / 民事案件公开摘要",
+          "body": [
+            "类型：民事安全责任相关。摘要公开日期：{{civilPublishedDate}}。"
+          ],
+          "links": [
+            {
+              "label": "商业楼楼梯摔伤事件 / 民事案件公开摘要",
+              "pageId": "public_chenyu_civil_summary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "public_chenyu_civil_summary",
+      "kind": "website",
+      "siteId": "civil-public",
+      "siteName": "{{cityName}}法律信息",
+      "title": "商业楼楼梯摔伤事件 / 民事案件公开摘要",
+      "url": "legal://local/civil/chenyu-stairs",
+      "date": "{{civilPublishedDate}}",
+      "details": {
+        "section": "安全责任"
+      },
+      "searchable": true,
+      "searchIndexed": true,
+      "normalNavigation": true,
+      "searchIndex": {
+        "status": "current",
+        "aliases": [
+          "陈雨",
+          "城西商业楼",
+          "楼梯摔伤",
+          "家属",
+          "物业"
+        ]
+      },
+      "searchTerms": [
+        "陈雨",
+        "{{westCommercialBuilding}}",
+        "城西商业楼",
+        "楼梯摔伤",
+        "物业",
+        "民事安全责任"
+      ],
+      "body": [
+        "摘要公开日期：{{civilPublishedDate}}。所涉事件日期：{{chenIncidentDate}}。以下事件时间不是本页发布日期。",
+        "案件类型：民事安全责任相关。家属曾就{{westCommercialBuilding}}及物业安全责任进行维权或诉讼；本页摘录公开民事材料引用的必要时间信息，不展开裁判结果。",
+        "隐私处理：受伤者为陈雨；家属、工作人员及其他相关人员只按角色记述，不展示身份证件、住址或私人联系方式。",
+        "来源：民事案件公开摘要，引用商业楼外围监控、工作人员发现情况及急救受理记录。公开摘要已按同一时间基准核对外围监控与受理时钟；下列均为校核后时间。",
+        "核查范围：{{chenIncidentDate}} {{civilCoverageStart}}—{{civilCoverageEnd}}，同一商业楼事件。人员出入与呼叫条目出自同一份公开摘要，不算两个独立见证。",
+        "时间条目按原摘要顺序列出。点击条目可展开引用来源及记录范围。这里只提供文字，不提供原始警方CCTV、卷宗或急救录音。"
+      ],
+      "objects": [
+        {
+          "id": "civil-chen-seen",
+          "type": "log-entry",
+          "title": "陈雨出现于商业楼相关区域",
+          "timestamp": "{{chenIncidentDate}} {{civilChenSeenTime}}",
+          "body": [
+            "外围记录显示陈雨离开二层茶座外通道，向楼梯区域移动。"
+          ],
+          "metadata": {
+            "记录类型": "茶座外通道的外围监控摘要",
+            "可见范围": "相关通道，不是楼梯平台内部"
+          }
+        },
+        {
+          "id": "civil-possible-window",
+          "type": "log-entry",
+          "title": "事故可能时间区间 / 楼梯监控盲区",
+          "timestamp": "{{chenIncidentDate}} {{civilPossibleStart}}—{{civilPossibleEnd}}",
+          "body": [
+            "公开摘要将事故可能发生时段记为该区间；楼梯平台及实际跌落位置不在摄像头直接覆盖范围内。",
+            "外围摘要另记一名男子随后进入楼梯区域，另一名女子在附近出现；本条没有公布他们的姓名。",
+            "区间来自公开材料对事故前后记录的核对，不是摄像头直接拍下受伤时刻。不能据此判断怎样摔落、谁推她、是否争抢或跌落瞬间哪些人在场。"
+          ],
+          "metadata": {
+            "事件日期": "{{chenIncidentDate}}",
+            "可能事故时段": "{{civilPossibleStart}}—{{civilPossibleEnd}}",
+            "盲区": "楼梯平台 / 实际跌落位置",
+            "时钟": "外围监控与急救受理时间已按摘要统一校核",
+            "核查覆盖": "{{civilCoverageStart}}—{{civilCoverageEnd}}",
+            "来源层级": "同一民事公开摘要；非原始CCTV"
+          },
+          "evidenceId": "F41"
+        },
+        {
+          "id": "civil-related-exit",
+          "type": "log-entry",
+          "title": "相关人员离开区域",
+          "timestamp": "{{chenIncidentDate}} {{civilPairExitTime}}",
+          "body": [
+            "此前在相关区域出现的一男一女离开，陈雨未同行。",
+            "此条记录外围出口活动，没有展开二人姓名或确认身份。离开时间不等于受伤时间。"
+          ],
+          "metadata": {
+            "底层记录": "外围出入口监控的公开摘要",
+            "身份呈现": "一男一女 / 相关人员",
+            "时钟": "校核后时间"
+          },
+          "evidenceId": "F42"
+        },
+        {
+          "id": "civil-worker-enter",
+          "type": "log-entry",
+          "title": "工作人员进入楼梯区域",
+          "timestamp": "{{chenIncidentDate}} {{civilWorkerEnterTime}}",
+          "body": [
+            "商业楼工作人员后来进入楼梯区域。"
+          ],
+          "metadata": {
+            "底层记录": "外围进入记录",
+            "顺序": "相关人员离开之后"
+          }
+        },
+        {
+          "id": "civil-worker-find",
+          "type": "log-entry",
+          "title": "工作人员发现陈雨",
+          "timestamp": "{{chenIncidentDate}} {{civilWorkerFindTime}}",
+          "body": [
+            "工作人员在楼梯区域发现重伤倒地的陈雨。",
+            "这是摘要引用的发现情况，与外围进入记录衔接；不是玩家另行取得的证人采访或警方现场记录。"
+          ],
+          "metadata": {
+            "底层记录": "工作人员发现情况的公开记载",
+            "事件": "同日同一商业楼事件",
+            "顺序": "进入楼梯区域之后"
+          },
+          "evidenceId": "F43"
+        },
+        {
+          "id": "civil-first-call",
+          "type": "log-entry",
+          "title": "首次可确认的急救呼叫",
+          "timestamp": "{{chenIncidentDate}} {{civilFirstCallTime}}",
+          "body": [
+            "该事件在所核时间范围内，首次可确认的对外急救呼叫由后来发现伤者的商业楼工作人员发起。",
+            "摘要引用的急救受理记录覆盖{{civilCoverageStart}}—{{civilCoverageEnd}}，未列出此前本事件的急救呼叫；这不是仅凭监控没有拍到打电话作出的推断。",
+            "本条不涵盖全部私人通话、未被记录的尝试或其他形式求助，不证明所有现场协助不存在，也不说明更早呼救是否能够改变结果。"
+          ],
+          "metadata": {
+            "底层记录": "公开摘要引用的急救呼叫 / 受理记录",
+            "核查事件及范围": "{{chenIncidentDate}} / {{westCommercialBuilding}} / {{civilCoverageStart}}—{{civilCoverageEnd}}",
+            "呼叫者": "发现伤者的商业楼工作人员",
+            "时钟": "与外围监控按同一基准校核"
+          },
+          "evidenceId": "F44"
+        }
+      ]
     }
   ],
   "evidence": [
@@ -4716,6 +4943,46 @@
       "title": "梁志诚｜回声创办人公开人物照",
       "summary": "回声寻人网关于我们页以姓名与创办人介绍展示梁志诚公开照片，面貌可作为人工图像对照来源；该页面没有事故或违法行为说明。",
       "discovery": "detail"
+    },
+    {
+      "id": "F41",
+      "type": "log",
+      "sourcePageId": "public_chenyu_civil_summary",
+      "sourceObjectId": "civil-possible-window",
+      "title": "公开案件资料｜事故可能时段与楼梯监控盲区",
+      "summary": "同一事件的可能事故时段为{{civilPossibleStart}}—{{civilPossibleEnd}}；实际平台 / 跌落位置不在镜头直接覆盖范围内。公开摘要按同一时钟校核{{civilCoverageStart}}—{{civilCoverageEnd}}外围及急救受理记录，不能还原跌落动作。",
+      "timestamp": "{{chenIncidentDate}} {{civilPossibleStart}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F42",
+      "type": "log",
+      "sourcePageId": "public_chenyu_civil_summary",
+      "sourceObjectId": "civil-related-exit",
+      "title": "公开案件资料｜相关人员离开，陈雨未同行",
+      "summary": "外围出入摘要记{{civilPairExitTime}}一男一女离开，陈雨未同行。只记相关人员活动，不自动认定梁或女子身份，不展示楼梯内部过程。",
+      "timestamp": "{{chenIncidentDate}} {{civilPairExitTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F43",
+      "type": "log",
+      "sourcePageId": "public_chenyu_civil_summary",
+      "sourceObjectId": "civil-worker-find",
+      "title": "工作人员｜之后在楼梯区域发现陈雨",
+      "summary": "公开摘要记工作人员进入后，于{{civilWorkerFindTime}}发现重伤倒地的陈雨。与相关人员离开记录对应同日同一事件；不是另一个独立证人采访。",
+      "timestamp": "{{chenIncidentDate}} {{civilWorkerFindTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F44",
+      "type": "log",
+      "sourcePageId": "public_chenyu_civil_summary",
+      "sourceObjectId": "civil-first-call",
+      "title": "急救记录｜首次可确认急救呼叫由工作人员发起",
+      "summary": "同一摘要引用{{civilCoverageStart}}—{{civilCoverageEnd}}的本事件急救受理记录，首次可确认呼叫为工作人员于{{civilFirstCallTime}}发起。不能据此排除所有私人通话、未记录尝试或其他方式求助。",
+      "timestamp": "{{chenIncidentDate}} {{civilFirstCallTime}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -4798,6 +5065,11 @@
       "id": "C16",
       "title": "037属于陈雨事件，而038～043属于之后针对王曼的威胁材料；所谓“第七张”并不是王曼照片组中的一张。",
       "summary": "人物比对、陈雨公开事故日期、之后的冲印订单日期、王曼收到六图记录及原路径和打印选择共同支持两组事件边界。编号只作对应，不单独证明时间、拍摄者或材料制作者。"
+    },
+    {
+      "id": "C17",
+      "title": "现有公开时间资料显示，陈雨受伤后并未立即出现可确认的对外急救呼叫；首次明确的急救呼叫来自后来发现她的工作人员。",
+      "summary": "事故可能区间、发现与急救受理时间存在先后间隔，037仅补现场重伤背景。结论限于公开摘要所核事件及记录覆盖，不排除其他求助尝试，不证明生命迹象知情、阻止求助、延迟导致死亡或早救必活；不计算精确延误或法律意义。"
     }
   ],
   "relations": [
@@ -5048,6 +5320,25 @@
           "C16"
         ]
       }
+    },
+    {
+      "id": "R17",
+      "evidenceIds": [
+        "F41",
+        "F42",
+        "F43",
+        "F44"
+      ],
+      "factIds": [
+        "C15"
+      ],
+      "title": "核对事故区间、外围离开、发现与急救受理记录",
+      "summary": "公开覆盖与校核时钟提供呼叫先后，C15仅提供037现场状态背景；不把照片当作没有呼救的唯一证据。",
+      "unlocks": {
+        "factIds": [
+          "C17"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -5166,7 +5457,8 @@
       "Chen Yu handoff / public backup statement / routine replies / west-side tea discussion calendar dates and times",
       "Chen Yu stair incident / death / two public news reports calendar dates and publication times",
       "Wang Man backup receipt / print order / packet receipt / shop visit / work page snapshot calendar dates and order number",
-      "Chen Yu same-day campus photo server / capture times and shop preview-cache generation time"
+      "Chen Yu same-day campus photo server / capture times and shop preview-cache generation time",
+      "Public civil summary / follow-up publication dates, possible accident interval and calibrated peripheral / emergency-call minutes"
     ]
   },
   "homePageId": "portal_home",

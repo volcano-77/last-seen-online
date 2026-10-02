@@ -128,8 +128,9 @@ function SiteNav(props: SiteProps) {
 function Highlight({ text, query }: { text: string; query: string }) {
   const term = query.trim()
   if (!term) return text
-  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-  return text.split(new RegExp(`(${escaped})`, 'gi')).map((part, index) => part.toLowerCase() === term.toLowerCase() ? <mark key={index}>{part}</mark> : part)
+  const words = [...new Set(term.toLowerCase().split(/\s+/))].sort((a, b) => b.length - a.length)
+  const escaped = words.map((word) => word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|')
+  return text.split(new RegExp(`(${escaped})`, 'gi')).map((part, index) => words.includes(part.toLowerCase()) ? <mark key={index}>{part}</mark> : part)
 }
 function SearchResults({ hits, query, newTab }: { hits: SearchHit[]; query: string; newTab: boolean }) {
   return <div className="fulltext-results">{hits.map((hit) => <article className="fulltext-hit" key={hit.id}>
@@ -289,7 +290,7 @@ function Archive(props: SiteProps) {
 }
 function Generic(props: SiteProps) {
   const time = props.page.objects?.find((item) => item.type === 'timestamp')
-  return <div className={`plain-site ${props.page.skin === 'campus' ? 'campus-forum' : ''}`}><SiteName {...props} /><SiteNav {...props} /><Breadcrumb {...props} /><h2>{props.page.title}</h2>{time && <Time item={time} onDiscover={props.onDiscover} />}{props.page.body.map((line, i) => <p key={i}>{line}</p>)}{props.page.objects?.filter((item) => item.type !== 'timestamp' && item.type !== 'cache-entry').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} /></div>
+  return <div className={`plain-site ${props.page.skin === 'campus' ? 'campus-forum' : ''}${props.page.siteId === 'civil-public' ? ' civil-document' : ''}`}><SiteName {...props} /><SiteNav {...props} /><Breadcrumb {...props} /><h2>{props.page.title}</h2>{time && <Time item={time} onDiscover={props.onDiscover} />}{props.page.body.map((line, i) => <p key={i}>{line}</p>)}{props.page.objects?.filter((item) => item.type !== 'timestamp' && item.type !== 'cache-entry').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} /></div>
 }
 function WorkPage(props: SiteProps) {
   const { page } = props

@@ -8,32 +8,41 @@ export interface SearchHit {
 }
 const contains = (text: string | undefined, term: string) => Boolean(text?.toLowerCase().includes(term))
 function excerpt(text: string, term: string) {
-  const index = text.toLowerCase().indexOf(term), start = Math.max(0, index - 38)
+  const positions = term.split(/\s+/).map((word) => text.toLowerCase().indexOf(word)).filter((index) => index >= 0)
+  const index = positions.length ? Math.min(...positions) : 0, start = Math.max(0, index - 38)
   return `${start ? '…' : ''}${text.slice(start, start + 150)}${text.length > start + 150 ? '…' : ''}`
 }
 export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'global', siteId?: string): SearchHit[] {
   const term = query.trim().toLowerCase()
   if (!term) return []
+  const words = term.split(/\s+/)
+  const matches = (text: string | undefined) => words.some((word) => contains(text, word))
   return pages.filter((page) => page.searchable !== false && (!page.directory || scope === 'global' && page.searchIndexed === true) &&
     (!page.offlinePageId || page.deleted || scope === 'global' && page.searchIndexed === true && page.searchIndex?.status === 'legacy') &&
     page.kind !== 'search' && page.kind !== 'portal' && (!page.snapshot || scope === 'global' && page.searchIndexed === true) && page.kind !== 'cache' &&
     (scope === 'global' ? page.searchIndexed !== false : page.siteId === siteId && (page.kind === 'forum-thread' || page.kind === 'website' || page.kind === 'profile')))
     .flatMap((page) => {
+      // A combined query must match every word in this page's searchable content.
+      const document = [page.title, page.author || '', ...page.body, page.url,
+        ...Object.values(page.metadata || {}), ...(page.searchTerms || []), ...(page.searchIndex?.aliases || []),
+        ...(page.deleted ? [] : page.objects || []).flatMap((item) => [item.title, item.author || '',
+          ...(item.body || []), ...Object.values(item.metadata || {})])].join('\n').toLowerCase()
+      if (words.length > 1 && !words.every((word) => document.includes(word))) return []
       const hits: SearchHit[] = []
       const base = { pageId: page.id, title: page.title, author: page.author, timestamp: page.date, indexStatus: page.searchIndex?.status }
-      const body = page.body.find((line) => contains(line, term))
-      if (contains(page.title, term)) hits.push({ ...base, id: `${page.id}/title`, anchorId: page.kind === 'forum-thread' ? 'thread-main' : undefined,
+      const body = page.body.find((line) => matches(line))
+      if (matches(page.title)) hits.push({ ...base, id: `${page.id}/title`, anchorId: page.kind === 'forum-thread' ? 'thread-main' : undefined,
         snippet: excerpt(body || page.body[0] || page.title, term), match: '标题', floor: page.kind === 'forum-thread' ? 1 : undefined })
       else if (body) hits.push({ ...base, id: `${page.id}/body`, anchorId: page.kind === 'forum-thread' ? 'thread-main' : undefined,
         snippet: excerpt(body, term), match: '正文', floor: page.kind === 'forum-thread' ? 1 : undefined })
-      else if (contains(page.author, term)) hits.push({ ...base, id: `${page.id}/author`, snippet: page.deleted ? page.body[0] : page.author!, match: '用户名' })
+      else if (matches(page.author)) hits.push({ ...base, id: `${page.id}/author`, snippet: page.deleted ? page.body[0] : page.author!, match: '用户名' })
       let replyIndex = 0
       for (const item of page.deleted ? [] : page.objects || []) {
         if (item.type === 'reply') replyIndex++
-        const line = item.body?.find((line) => contains(line, term))
-        const matchedAuthor = contains(item.author, term)
-        const metadata = Object.entries(item.metadata || {}).map(([key, value]) => `${key}：${value}`).find((text) => contains(text, term))
-        if (!line && !matchedAuthor && !contains(item.title, term) && !metadata) continue
+        const line = item.body?.find((line) => matches(line))
+        const matchedAuthor = matches(item.author)
+        const metadata = Object.entries(item.metadata || {}).map(([key, value]) => `${key}：${value}`).find((text) => matches(text))
+        if (!line && !matchedAuthor && !matches(item.title) && !metadata) continue
         hits.push({ ...base, id: `${page.id}/${item.id}`, anchorId: item.id,
           match: matchedAuthor && !line ? '用户名' : item.type === 'reply' ? '回复' : metadata ? '属性 / 索引' : '正文',
           snippet: excerpt(line || metadata || (matchedAuthor ? item.author! : item.title), term),
@@ -44,7 +53,7 @@ export function searchPages(pages: CasePage[], query: string, scope: 'site' | 'g
       }
       if (!hits.length && scope === 'global') {
         const text = [page.url, ...Object.values(page.metadata || {}), ...(page.searchTerms || []), ...(page.searchIndex?.aliases || [])]
-          .find((text) => contains(text, term))
+          .find((text) => matches(text))
         if (text) hits.push({ ...base, id: `${page.id}/index`, snippet: excerpt(text, term), match: '属性 / 索引' })
       }
       return hits
