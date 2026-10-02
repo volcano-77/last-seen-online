@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="260" viewBox="0 0 720 260">
+  <rect width="720" height="260" fill="#e2e1dd"/>
+  <rect x="18" y="16" width="684" height="260" fill="#fafaf7" stroke="#888"/>
+  <path d="M18 62H702" stroke="#999"/>
+  <text x="36" y="47" font-size="21" font-family="SimSun,serif" fill="#333">转账确认</text>
+  <g font-family="SimSun,serif" fill="#444" font-size="19">
+    <text x="36" y="103">处理状态：完成</text>
+    <text x="36" y="145">用途备注：找人相关资料</text>
+    <text x="36" y="190">收款信息：</text>
+    <text x="36" y="232">金额：</text>
+  </g>
+  <rect x="180" y="166" width="542" height="34" fill="#deddd8"/>
+  <rect x="132" y="207" width="590" height="38" fill="#deddd8"/>
+  <path d="M0 256H720" stroke="#bbb" stroke-width="8"/>
+</svg>

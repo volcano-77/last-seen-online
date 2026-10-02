@@ -140,7 +140,25 @@
     "wangXuMeetingDate": "2009-09-23",
     "xuMemoConfirmedDate": "2009-09-24",
     "wangContactArchiveDate": "2009-09-26",
-    "wangContactArchiveTime": "09:16"
+    "wangContactArchiveTime": "09:16",
+    "xuOldThreatDate": "2008-06-24",
+    "xuLiangOldCaseDate": "2008-06-28",
+    "xuProtectionDate": "2008-07-01",
+    "xuTaskAId": "S-018",
+    "xuTaskBId": "S-022",
+    "xuFormerTaskRef": "S-00□",
+    "xuTaskATarget": "对象甲",
+    "xuTaskBTarget": "对象乙",
+    "xuTaskADate": "2008-08-18",
+    "xuTaskATime": "08:35",
+    "xuTaskAReplyTime": "16:12",
+    "xuTaskBDate": "2008-09-02",
+    "xuTaskBTime": "09:20",
+    "xuTaskBReplyTime": "18:06",
+    "xuControlReminderDate": "2008-09-16",
+    "xuExpenseDate": "2008-08-18",
+    "xuExpenseTime": "19:24",
+    "xuMaterialsProvidedDate": "2009-09-24"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3642,6 +3660,22 @@
             "保存日期": "{{xuMemoConfirmedDate}}",
             "大小": "必要节录"
           }
+        },
+        {
+          "id": "wang-dir-xu-materials",
+          "type": "file",
+          "title": "许宁提供材料",
+          "links": [
+            {
+              "label": "许宁提供材料",
+              "pageId": "snapshot_wang_xu_materials"
+            }
+          ],
+          "metadata": {
+            "类型": "有限材料目录",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          }
         }
       ]
     },
@@ -4908,6 +4942,445 @@
         {
           "label": "公开事故案件摘要",
           "pageId": "public_chenyu_civil_summary"
+        },
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_wang_xu_materials",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "许宁提供材料",
+      "url": "archive://snapshot/ncitynews/wangman/xu-materials",
+      "body": [
+        "来源登记 / {{xuMaterialsProvidedDate}}。许宁在会面核查后自愿提供自己留存的一小批通信、任务收件副本及费用记录，允许王曼复制用于采访核查。",
+        "王曼按原件类别整理，遮蔽无关联系与目标实名，只把下列必要副本链接到记者工作页。这些文件各有独立抓取记录；目录并不开放许宁的电脑或邮箱。",
+        "旧通信来自许宁本人的通信 / 设备备份；任务邮件来自她实际收到并自存的旧邮件；费用截图来自她自己的入账记录。许宁说明另行核认，不能当成系统记录。",
+        "目标姓名以代号保留，旧照片只用于辨认指令所指对象。这里只核经手的有限任务，不恢复目标新身份、客户资料或整套任务库。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-materials",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-material-old-case",
+          "type": "file",
+          "title": "旧案通信节录",
+          "links": [
+            {
+              "label": "旧案通信节录",
+              "pageId": "snapshot_xu_old_communications"
+            }
+          ],
+          "metadata": {
+            "类型": "自存通信 / 截图",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "xu-material-explanation",
+          "type": "file",
+          "title": "许宁说明 / 逐步帮忙",
+          "links": [
+            {
+              "label": "许宁说明 / 逐步帮忙",
+              "pageId": "snapshot_xu_control_note"
+            }
+          ],
+          "metadata": {
+            "类型": "本人核认说明",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "xu-material-task-a",
+          "type": "file",
+          "title": "资料确认 / 第一份收件副本",
+          "links": [
+            {
+              "label": "资料确认 / 第一份收件副本",
+              "pageId": "snapshot_xu_task_a"
+            }
+          ],
+          "metadata": {
+            "类型": "旧邮件副本",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "xu-material-task-b",
+          "type": "file",
+          "title": "补一下这个 / 第二份收件副本",
+          "links": [
+            {
+              "label": "补一下这个 / 第二份收件副本",
+              "pageId": "snapshot_xu_task_b"
+            }
+          ],
+          "metadata": {
+            "类型": "旧邮件往来节录",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "xu-material-expense",
+          "type": "file",
+          "title": "交通、资料 / 入账记录",
+          "links": [
+            {
+              "label": "交通、资料 / 入账记录",
+              "pageId": "snapshot_xu_expense"
+            }
+          ],
+          "metadata": {
+            "类型": "入账截图 / 字段摘录",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "会面采访备忘（核认节录）",
+          "pageId": "snapshot_wang_xu_meeting"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_xu_old_communications",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "旧案通信节录",
+      "url": "archive://snapshot/ncitynews/wangman/xu-old-communications",
+      "body": [
+        "原持有人：许宁。她为核查自己为什么被找到而保留的旧通信 / 设备备份。{{xuMaterialsProvidedDate}}许可王曼复制必要片段；截图无关字段、完整金额及账户不保留。",
+        "前男友发来的信息与所附付款确认片段来自同一次收到的通信，不算两个独立证人。梁的后来通信是另一段许宁实际收到并保存的往来，由许宁核认交流对象。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-old-communications",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-payment-fragment",
+          "type": "photo",
+          "title": "前男友所附转账确认截图（不完整）",
+          "media": {
+            "src": "/cases/missing-person/images/xu-old-payment-fragment.svg",
+            "alt": "不完整转账确认，显示支付完成及找人相关用途；金额和收款信息缺失",
+            "filename": "payment-fragment.svg",
+            "width": "720",
+            "height": "260",
+            "caption": "前男友所附转账确认截图（不完整）"
+          }
+        },
+        {
+          "id": "xu-ex-threat",
+          "type": "log-entry",
+          "title": "收到 / 前男友信息与附件",
+          "body": [
+            "你躲到哪里都没用。真想找你总有办法，我花钱不是白花的。",
+            "附图保留支付完成及找人相关用途的一角，金额与收款人字段缺失。它与这条话合看支持为寻找她支付过费用，不能凭此确认付款对象是谁。"
+          ],
+          "metadata": {
+            "收到日期": "{{xuOldThreatDate}}",
+            "原保存者": "许宁（自己的收到通信 / 设备备份）",
+            "附件": "不完整付款确认截图",
+            "原来源": "前男友发送给许宁的威胁 / 炫耀信息",
+            "核查限制": "收款对象、账户、完整金额未保存"
+          },
+          "evidenceId": "F51",
+          "timestamp": "{{xuOldThreatDate}}"
+        },
+        {
+          "id": "xu-liang-former-case",
+          "type": "log-entry",
+          "title": "后来通信 / 你前男友那一单",
+          "body": [
+            "你前男友那一单，{{xuFormerTaskRef}}，旧资料我这里还留着。",
+            "旧编号片段不完整，“□”是副本缺失字符，不是密码。此条只把梁的后来提法与许宁旧案相连，不能恢复前男友完整委托或付款对象。",
+            "许宁核认：这是后来与梁的往来；签名和显示名本身不用于证明某邮箱由谁运营。"
+          ],
+          "metadata": {
+            "通信日期": "{{xuLiangOldCaseDate}}",
+            "交流对象": "梁志诚（许宁核认）",
+            "原保存者": "许宁",
+            "原形态": "本人实收通信截图 / 节录",
+            "取得方式": "许宁许可王曼复制",
+            "旧编号痕迹": "{{xuFormerTaskRef}}（不完整）"
+          },
+          "evidenceId": "F52",
+          "timestamp": "{{xuLiangOldCaseDate}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_xu_control_note",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "许宁说明 / 逐步帮忙",
+      "url": "archive://snapshot/ncitynews/wangman/xu-control-note",
+      "body": [
+        "许宁本人说明及必要通信节录。王曼于{{xuMaterialsProvidedDate}}整理、交许宁核认，按她实际经历和保留材料分类；不是法律责任认定。",
+        "这份说明与旧案、两份任务收件、费用记录分别保存。她既是过去被寻找并受伤的人，也确实参加过后来的现实确认，不以其中一种身份抹去另一种。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-control-note",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-gradual-control",
+          "type": "log-entry",
+          "title": "许宁核认 / 从帮忙到不能退出",
+          "body": [
+            "他先说可以撤下部分旧寻人信息，不再接关于我的寻人请求，也不把我的新住处放进公开资料。我当时刚被找到、受了伤，很想相信以后不会再发生。",
+            "保存的早期通信（{{xuProtectionDate}}）：“旧寻人信息我帮你处理，以后关于你的请求可以不接。先帮我确认个小事。”这是梁提出的条件，不是他真的兑现全部保护的证明。",
+            "一开始只是看照片、在公开地方确认人在不在、送一份材料或拍张远照。我觉得帮完这一次，他以后就不会再管我的事。",
+            "后来请求越来越多。我做过确认、拍摄，也拿过交通和资料费用。他把我做过的事情和费用记录反复拿出来说，{{xuControlReminderDate}}的往来还提“做过的这些、收过的费用都有记录，再帮最后一次”。",
+            "他后来把这种单子叫“特殊单”。每次都说最后一次，我却退不出来。“最后一次”是他对我说的话，不是找到替代人就能退出的正式规则。"
+          ],
+          "metadata": {
+            "说明人": "许宁",
+            "记录 / 核认日期": "{{xuMaterialsProvidedDate}}",
+            "保管人": "许宁原通信；王曼核认节录",
+            "分类": "本人经历说明 + 必要通信摘录",
+            "核查方式": "须与旧案、实际任务收件及入账记录比对"
+          },
+          "evidenceId": "F53"
+        }
+      ],
+      "links": [
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_xu_task_a",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "资料确认 / 第一份收件副本",
+      "url": "archive://snapshot/ncitynews/wangman/xu-task-a",
+      "body": [
+        "许宁实际收到的旧邮件及必要回信节录。原邮件显示姓名和普通照片；本副本保留照片，目标姓名遮蔽为代号。",
+        "邮件系统收到时间与内容字段分开保留；不是一份任务登记表，也不含委托方信息。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-task-a",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-task-a-headers",
+          "type": "text",
+          "title": "旧邮件打印件 / 保留字段",
+          "metadata": {
+            "发件显示名": "梁志诚",
+            "收件人": "许宁（自存实收副本）",
+            "主题": "资料确认",
+            "收到时间": "{{xuTaskADate}} {{xuTaskATime}}",
+            "副本核认": "许宁核认交流对象为梁；发件地址等无关联系字段隐去",
+            "来源": "许宁保存的收件 / 回信节录 → 许可王曼复制 → 工作页必要文件"
+          }
+        },
+        {
+          "id": "xu-task-a-photo",
+          "type": "attachment",
+          "title": "附件 / 旧照片",
+          "media": {
+            "src": "/cases/missing-person/images/xu-task-reference-a.png",
+            "alt": "普通旧照片附件，指令所指对象以代号保留，不提供新身份",
+            "filename": "photo-a.png",
+            "width": "1448",
+            "height": "1086",
+            "caption": "附件 / 旧照片"
+          }
+        },
+        {
+          "id": "xu-task-a-received",
+          "type": "log-entry",
+          "title": "收件与回信 / 资料确认",
+          "body": [
+            "{{xuTaskAId}} / {{xuTaskATarget}}。最后知道的活动区域：城北一带。帮我确认一下照片里这个人最近还在不在那边，不用接触，看到本人就行。",
+            "许宁回信（{{xuTaskADate}} {{xuTaskAReplyTime}}）：在公共路口看见和照片相符的人，只隔着路看了一眼，没有接触。梁回复：收到。",
+            "保留的是一条有限确认指令与实收回信；编号并不单独说明收费、客户身份或任务总量。"
+          ],
+          "metadata": {
+            "内部编号": "{{xuTaskAId}}",
+            "目标代号": "{{xuTaskATarget}}（原实名遮蔽）",
+            "最后已知区域": "城北一带（粗略公共区域）",
+            "附件": "普通照片 photo-a.png",
+            "收件时间": "{{xuTaskADate}} {{xuTaskATime}}",
+            "回信时间": "{{xuTaskADate}} {{xuTaskAReplyTime}}",
+            "确认范围": "公共区域、短暂目视，不接触"
+          },
+          "evidenceId": "F54",
+          "timestamp": "{{xuTaskADate}} {{xuTaskATime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_xu_task_b",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "补一下这个 / 第二份收件副本",
+      "url": "archive://snapshot/ncitynews/wangman/xu-task-b",
+      "body": [
+        "另一日期的实收邮件与必要回信，仍来自许宁自己的留存；此份只保留目标代号和文字，原目标照片未收入这个副本。",
+        "目标仍是邮件里的待确认对象，不新增实名、完整住址或人物故事。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-task-b",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-task-b-headers",
+          "type": "text",
+          "title": "旧邮件打印件 / 保留字段",
+          "metadata": {
+            "发件显示名": "梁志诚",
+            "收件人": "许宁（自存实收副本）",
+            "主题": "补一下这个",
+            "收到时间": "{{xuTaskBDate}} {{xuTaskBTime}}",
+            "副本核认": "许宁核认交流对象为梁；发件地址等无关联系字段隐去",
+            "来源": "许宁保存的收件 / 回信节录 → 许可王曼复制 → 工作页必要文件"
+          }
+        },
+        {
+          "id": "xu-task-b-received",
+          "type": "log-entry",
+          "title": "收件与回信 / 补充确认",
+          "body": [
+            "{{xuTaskBId}} / {{xuTaskBTarget}}。只确认最后知道的公共活动区域还有没有出现，不用接触。",
+            "许宁回信（{{xuTaskBDate}} {{xuTaskBReplyTime}}）：隔得远，照片拍糊了，人转过路口我就跟丢了。我不敢往私人地方进去。",
+            "梁回复：算了，这次不用再跟，只要确认大概区域。此往来保留请求、她实际尝试过的确认及限制，不写成训练有素的连续跟踪。",
+            "第二封收到日期和编号与第一封不同，格式相同；两封必须一起比对，不能用编号跳号计算总单量。"
+          ],
+          "metadata": {
+            "内部编号": "{{xuTaskBId}}",
+            "目标代号": "{{xuTaskBTarget}}（原实名遮蔽）",
+            "收件时间": "{{xuTaskBDate}} {{xuTaskBTime}}",
+            "回信时间": "{{xuTaskBDate}} {{xuTaskBReplyTime}}",
+            "执行限制": "远照拍糊；转角跟丢；未进入私人区域",
+            "原持有人": "许宁实收邮件 / 本人回信副本"
+          },
+          "evidenceId": "F55",
+          "timestamp": "{{xuTaskBDate}} {{xuTaskBTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ]
+    },
+    {
+      "id": "snapshot_xu_expense",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "交通、资料 / 入账记录",
+      "url": "archive://snapshot/ncitynews/wangman/xu-expense",
+      "body": [
+        "许宁自己保存的一条入账凭证截图及必要字段摘录。王曼核查后保存，金额及账户字段遮蔽，只保留小额执行费用的性质。",
+        "入账日期与第一份资料确认邮件 / 回信同日，说明她参加过的那次确认有交通、资料费用往来。这是收款端副本，不是客户给梁的服务费凭证。"
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu-expense",
+        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+      },
+      "objects": [
+        {
+          "id": "xu-expense-scan",
+          "type": "photo",
+          "title": "许宁自存入账截图（必要部分）",
+          "media": {
+            "src": "/cases/missing-person/images/xu-expense-receipt.svg",
+            "alt": "许宁的小额执行费用入账记录，交通、资料备注，金额和账户字段遮蔽",
+            "filename": "expense-receipt.svg",
+            "width": "720",
+            "height": "280",
+            "caption": "许宁自存入账截图（必要部分）"
+          }
+        },
+        {
+          "id": "xu-expense-fields",
+          "type": "log-entry",
+          "title": "入账字段 / 交通、资料",
+          "body": [
+            "许宁的小额入账，备注“交通、资料”；与{{xuTaskADate}}资料确认邮件及回信时间对应。",
+            "原截图的账户、具体金额和无关联系字段不收入网页副本，不恢复完整财务账。许宁核认本条为做这次确认的费用，不代表所有任务都有付款。",
+            "该日期可与邮件系统收件 / 回信字段交叉核对；“执行费用 / 报销”和“客户支付服务费”是两种不同的交易方向。"
+          ],
+          "metadata": {
+            "入账时间": "{{xuExpenseDate}} {{xuExpenseTime}}",
+            "收款端": "许宁自己的记录",
+            "备注": "交通、资料",
+            "金额": "小额；具体金额遮蔽",
+            "对应材料": "{{xuTaskADate}} / 资料确认收件与回信",
+            "原保存者": "许宁",
+            "王曼取得日期": "{{xuMaterialsProvidedDate}}",
+            "性质": "有限现实确认的执行费用 / 报销"
+          },
+          "evidenceId": "F56",
+          "timestamp": "{{xuExpenseDate}} {{xuExpenseTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "资料确认 / 第一份收件副本",
+          "pageId": "snapshot_xu_task_a"
+        },
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
         }
       ]
     }
@@ -5449,6 +5922,66 @@
       "summary": "许宁称自己提出立即求助，梁要求先处理资料、当时不要打电话。是经本人核认的陈述，没有独立录音 / 全程录像，不单独当成完全客观事实。",
       "timestamp": "{{chenIncidentDate}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F51",
+      "type": "log",
+      "sourcePageId": "snapshot_xu_old_communications",
+      "sourceObjectId": "xu-ex-threat",
+      "title": "许宁旧案｜前男友曾暗示为寻找她支付费用",
+      "summary": "前男友发给许宁的威胁 / 炫耀信息及所附不完整付款确认，支持为找人相关事情支付过费用。收款对象、账户和完整金额缺失，不能单独确认付给梁。",
+      "timestamp": "{{xuOldThreatDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F52",
+      "type": "log",
+      "sourcePageId": "snapshot_xu_old_communications",
+      "sourceObjectId": "xu-liang-former-case",
+      "title": "许宁旧案｜梁后来提及“你前男友那一单”",
+      "summary": "许宁实际留存并核认的后来通信提及“你前男友那一单”，旁有不完整S编号片段。需与旧寻人、受伤报道和付费暗示组合，不恢复完整客户委托。",
+      "timestamp": "{{xuLiangOldCaseDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F53",
+      "type": "log",
+      "sourcePageId": "snapshot_xu_control_note",
+      "sourceObjectId": "xu-gradual-control",
+      "title": "许宁｜梁以处理旧寻人信息为条件逐步要求帮忙",
+      "summary": "许宁核认说明及必要通信：梁先许诺撤旧信息、减少未来请求、不公开新住处，逐步增加确认任务，再利用经手行为与费用记录控制她。“最后一次”是操控话术。",
+      "timestamp": "{{xuMaterialsProvidedDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F54",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_task_a",
+      "sourceObjectId": "xu-task-a-received",
+      "title": "许宁任务邮件｜第一份收件包含S格式编号",
+      "summary": "第一份实收资料确认邮件含{{xuTaskAId}}、目标代号、旧照片、粗略公共活动区域及有限要求，回信显示曾短暂目视确认。稳定重复格式需与另一封不同日期邮件比较。",
+      "timestamp": "{{xuTaskADate}} {{xuTaskATime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F55",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_task_b",
+      "sourceObjectId": "xu-task-b-received",
+      "title": "许宁任务邮件｜另一编号与有限现实确认",
+      "summary": "另一日期实收邮件含{{xuTaskBId}}；许宁回信说明远照拍糊、转角跟丢、不敢进入私人区域，梁让她停止继续跟，只核大概区域。与第一份邮件比较支持重复的有限任务。",
+      "timestamp": "{{xuTaskBDate}} {{xuTaskBTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F56",
+      "type": "log",
+      "sourcePageId": "snapshot_xu_expense",
+      "sourceObjectId": "xu-expense-fields",
+      "title": "许宁费用记录｜收到对应任务的小额交通、资料费用",
+      "summary": "许宁自己的小额入账记录备注交通、资料，日期与第一份任务邮件及回信对应。是执行费用 / 报销，不是客户付给梁的服务费，不提供完整金额、账户或财务账。",
+      "timestamp": "{{xuExpenseDate}} {{xuExpenseTime}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -5551,6 +6084,21 @@
       "id": "C20",
       "title": "现有证据强烈支持：梁知道陈雨仍有生命迹象，却优先处理调查资料，并阻止当时立即求助。",
       "summary": "E07强支持层：许宁核认证言与037和公开时序共同支持。不是跌落全程录像，不能推出故意推落、预谋杀人、延误必然致死、早救必活或精确法律责任。"
+    },
+    {
+      "id": "C21",
+      "title": "许宁原本就是梁经手的私下寻访目标之一。",
+      "summary": "前男友寻找她的付费暗示及付款片段、梁“那一单”通信，与违背本人意愿的寻人页及后来被找到受伤记录组合。仍未核实付款对象及完整交易，不证明全部S客户收费。"
+    },
+    {
+      "id": "C22",
+      "title": "许宁后来在梁控制下，参与过多次有限现实确认任务。",
+      "summary": "旧目标身份与逐步控制说明、两份不同日期实收任务及有限执行回信、小额费用相互对应。她既曾是受害目标，也实际参与过后来的确认；不简单标为同伙或替她判定法律责任。"
+    },
+    {
+      "id": "C23",
+      "title": "这些任务使用稳定的S编号，说明梁并非只临时要求许宁处理单一事件。",
+      "summary": "两份不同日期的任务收件具有不同S值和相同编号格式，各有有限请求及执行回信。只支持重复任务结构，不按编号跳号推总量，不证明每单收费或持续收费业务。"
     }
   ],
   "relations": [
@@ -5878,6 +6426,58 @@
           "C20"
         ]
       }
+    },
+    {
+      "id": "R21",
+      "evidenceIds": [
+        "F51",
+        "F52",
+        "F16",
+        "F17"
+      ],
+      "factIds": [
+        "C07"
+      ],
+      "title": "将旧案付费暗示、梁旧单通信与公开旧案核对",
+      "summary": "通信与付款片段不能独证收款对象；与公开寻人、本人意愿及被找到受伤记录组合核关联。",
+      "unlocks": {
+        "factIds": [
+          "C21"
+        ]
+      }
+    },
+    {
+      "id": "R22",
+      "evidenceIds": [
+        "F53",
+        "F54",
+        "F55",
+        "F56"
+      ],
+      "factIds": [
+        "C21"
+      ],
+      "title": "核对旧目标身份、逐步控制与实际有限任务",
+      "summary": "保留许宁的受害目标与后来执行者双重身份；任务、回信及执行费用分别核来源，不作法律评价。",
+      "unlocks": {
+        "factIds": [
+          "C22"
+        ]
+      }
+    },
+    {
+      "id": "R23",
+      "evidenceIds": [
+        "F54",
+        "F55"
+      ],
+      "title": "比对两份不同日期任务的内部编号格式",
+      "summary": "直接比较两个实收邮件的日期和不同S值；编号是邮件字段，不能当成另一个独立原件或任务总量。",
+      "unlocks": {
+        "factIds": [
+          "C23"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -5998,7 +6598,8 @@
       "Wang Man backup receipt / print order / packet receipt / shop visit / work page snapshot calendar dates and order number",
       "Chen Yu same-day campus photo server / capture times and shop preview-cache generation time",
       "Public civil summary / follow-up publication dates, possible accident interval and calibrated peripheral / emergency-call minutes",
-      "Xu later public account identifier / nickname and public profile, Chen sent excerpt, Wang contact / meeting / confirmation / later directory capture calendar dates and times"
+      "Xu later public account identifier / nickname and public profile, Chen sent excerpt, Wang contact / meeting / confirmation / later directory capture calendar dates and times",
+      "Xu old communication / protection / finite task / expense calendar dates and times, S number values and redacted target labels; no complete amounts or accounts restored"
     ]
   },
   "homePageId": "portal_home",

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280">
+  <rect width="720" height="280" fill="#deddd8"/>
+  <rect x="18" y="15" width="684" height="255" fill="#f9f9f5" stroke="#999"/>
+  <path d="M18 62H702" stroke="#aaa"/>
+  <text x="36" y="46" font-size="21" font-family="SimSun,serif" fill="#333">交易详情（入账）</text>
+  <g font-family="SimSun,serif" fill="#444" font-size="19">
+    <text x="36" y="101">交易状态：完成</text>
+    <text x="36" y="142">备注：交通、资料</text>
+    <text x="36" y="189">对方账户：</text>
+    <text x="36" y="232">入账金额：</text>
+  </g>
+  <rect x="180" y="168" width="376" height="25" fill="#555"/>
+  <rect x="180" y="211" width="226" height="25" fill="#555"/>
+</svg>
