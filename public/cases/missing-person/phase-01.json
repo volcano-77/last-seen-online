@@ -110,7 +110,12 @@
     "wangShopVisitDate": "2009-05-02",
     "wangWorkDate": "2009-05-10",
     "wangArchiveDate": "2009-05-12",
-    "wangArchiveTime": "10:24"
+    "wangArchiveTime": "10:24",
+    "chenCampusUploadTime": "09:12",
+    "chenCampusTakenTime": "09:05",
+    "wangCacheTime": "13:38",
+    "cache037Width": "1448",
+    "cache037Height": "1086"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -835,6 +840,20 @@
             {
               "label": "阅读主题",
               "pageId": "bbs_west_tea"
+            }
+          ]
+        },
+        {
+          "id": "bbs-list-campus-album",
+          "type": "post",
+          "title": "校园相册 / 上午随拍",
+          "metadata": {
+            "版块": "校园相册"
+          },
+          "links": [
+            {
+              "label": "阅读主题",
+              "pageId": "bbs_chenyu_campus_photo"
             }
           ]
         }
@@ -3763,7 +3782,7 @@
       "title": "城西照相馆订单记录",
       "url": "archive://snapshot/ncitynews/wangman/print-order",
       "body": [
-        "{{wangShopVisitDate|zh}}，持照片和冲印袋到店核对，经店员许可抄存本订单记录、导入清单与必要的预览生成记录。这里只有对应订单的材料，不是店里的完整业务档案。",
+        "{{wangShopVisitDate|zh}}，持照片和冲印袋到店核对，经店员许可抄存本订单记录、导入清单与必要的预览缓存资料。这里只有对应订单的材料，不是店里的完整业务档案。",
         "纸袋订单号与记录相同。数量字段分开列出；导入扫描的数量并不等于实际选中打印的数量。"
       ],
       "searchable": false,
@@ -3792,6 +3811,12 @@
             "保存来源": "王曼到店核查后，经店员许可保存的本订单副本"
           }
         }
+      ],
+      "links": [
+        {
+          "label": "预览缓存索引 / preview-cache.idx",
+          "pageId": "snapshot_wang_preview_cache"
+        }
       ]
     },
     {
@@ -3804,7 +3829,7 @@
       "body": [
         "对应订单：{{wangOrderId}}。以下路径保留导入时的目录结构，未把不同文件夹重新合并编号。",
         "文件清单中038～043为已打印的六张，037未选中、未打印。六张纸照片的扫描件保存在图片整理目录。",
-        "原始图像文件现未保留完整。冲印软件的记录显示当时生成过预览缓存；此页只有导入清单，没有可打开的预览文件。"
+        "原始图像文件现未保留完整。冲印软件的记录显示当时生成过预览缓存；导入清单与预览缓存索引分别保存，原始图像和软件预览不是同一种文件。"
       ],
       "searchable": false,
       "normalNavigation": false,
@@ -3887,6 +3912,368 @@
             "原路径": "/PRINT/043.JPG",
             "打印状态": "已打印",
             "预览记录": "当时已生成；此副本未包含图像"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "预览缓存索引 / preview-cache.idx",
+          "pageId": "snapshot_wang_preview_cache"
+        }
+      ]
+    },
+    {
+      "id": "bbs_chenyu_campus_photo",
+      "kind": "forum-thread",
+      "layout": "forum",
+      "skin": "campus",
+      "siteId": "campus",
+      "siteName": "{{cityName}}大学 BBS",
+      "title": "校园相册 / 上午随拍",
+      "url": "ncu://bbs/album/chenyu-campus",
+      "author": "陈雨",
+      "date": "{{chenIncidentDate}} {{chenCampusUploadTime}}",
+      "details": {
+        "section": "校园相册"
+      },
+      "body": [
+        "上午的校园照片，存一张。回头再整理相册。"
+      ],
+      "searchable": true,
+      "normalNavigation": true,
+      "media": {
+        "id": "chen-campus-white",
+        "src": "cases/missing-person/images/chen-campus-white.png",
+        "alt": "陈雨在校园里的普通生活照",
+        "filename": "campus_morning.jpg",
+        "width": "1536",
+        "height": "1024",
+        "caption": "陈雨 / 校园随拍",
+        "uploadedAt": "{{chenIncidentDate}} {{chenCampusUploadTime}}",
+        "takenAt": "{{chenIncidentDate}} {{chenCampusTakenTime}}",
+        "evidenceIds": [
+          "F39"
+        ]
+      },
+      "objects": [],
+      "links": []
+    },
+    {
+      "id": "echo_about",
+      "kind": "website",
+      "layout": "echo",
+      "skin": "echo",
+      "siteId": "echo",
+      "siteName": "回声寻人网",
+      "title": "关于我们 / 回声寻人网",
+      "url": "archive://echo/about",
+      "date": "{{echoSnapshotDate}}",
+      "body": [
+        "回声寻人网为家属和志愿者提供公开信息发布、转发与回访服务。多一位网友看见，就多一份希望；请提供可核实的消息，并及时通知我们已经寻回的情况。",
+        "创办人：梁志诚。负责网站的信息整理与日常联络。感谢家属、志愿者和网友共同帮助消息传播。"
+      ],
+      "normalNavigation": true,
+      "searchIndexed": true,
+      "searchable": true,
+      "searchIndex": {
+        "status": "current"
+      },
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "echo://about",
+        "capturedAt": "{{echoSnapshotDate}} {{echoSnapshotTime}}"
+      },
+      "media": {
+        "id": "liang-public-portrait",
+        "src": "cases/missing-person/images/liang-public.png",
+        "alt": "回声寻人网创办人梁志诚的公开人物照片",
+        "filename": "founder.jpg",
+        "width": "1536",
+        "height": "1024",
+        "caption": "梁志诚 / 回声寻人网创办人",
+        "evidenceIds": [
+          "F40"
+        ]
+      },
+      "objects": [],
+      "links": []
+    },
+    {
+      "id": "snapshot_wang_preview_cache",
+      "kind": "cache",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "预览缓存索引 / 城西照相馆",
+      "url": "archive://snapshot/ncitynews/wangman/preview-cache",
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/preview-cache",
+        "capturedAt": "{{wangArchiveDate}} {{wangArchiveTime}}"
+      },
+      "body": [
+        "对应订单：{{wangOrderId}}。这是王曼于{{wangShopVisitDate|zh}}到城西照相馆核查时，经店员许可复制的本订单导入索引与必要预览缓存副本，后来保存并链接在工作资料页中。",
+        "旧软件递归扫描存储卡上的图像，为选片生成内部预览块。source file保留扫描时的原路径，cache key是软件文件名；索引与打印选择是不同记录。",
+        "来源：原始存储卡 → 照相馆软件扫描、生成预览 → 王曼经许可复制 → 工作页保存及链接 → 网页存档恢复。此份商家记录未核实存储卡原持有人，当前也不包含原始SD卡。",
+        "生成时间记的是软件扫描，不是原图拍摄时间。预览分辨率和清晰度受保留数据限制，恢复不会增补原图细节。"
+      ],
+      "tableColumns": [
+        "source file",
+        "cache key",
+        "preview size",
+        "generated time",
+        "print selected"
+      ],
+      "objects": [
+        {
+          "id": "wang-cache-map-037",
+          "type": "row",
+          "title": "源文件 037",
+          "metadata": {
+            "source file": "/DCIM/037.JPG",
+            "cache key": "PV_0004.cache",
+            "preview size": "{{cache037Width}} × {{cache037Height}}",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "否"
+          }
+        },
+        {
+          "id": "wang-cache-map-038",
+          "type": "row",
+          "title": "源文件 038",
+          "metadata": {
+            "source file": "/PRINT/038.JPG",
+            "cache key": "PV_0007.cache",
+            "preview size": "1024 × 1536",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "是"
+          }
+        },
+        {
+          "id": "wang-cache-map-039",
+          "type": "row",
+          "title": "源文件 039",
+          "metadata": {
+            "source file": "/PRINT/039.JPG",
+            "cache key": "PV_0001.cache",
+            "preview size": "1536 × 1024",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "是"
+          }
+        },
+        {
+          "id": "wang-cache-map-040",
+          "type": "row",
+          "title": "源文件 040",
+          "metadata": {
+            "source file": "/PRINT/040.JPG",
+            "cache key": "PV_0005.cache",
+            "preview size": "1024 × 1536",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "是"
+          }
+        },
+        {
+          "id": "wang-cache-map-041",
+          "type": "row",
+          "title": "源文件 041",
+          "metadata": {
+            "source file": "/PRINT/041.JPG",
+            "cache key": "PV_0002.cache",
+            "preview size": "1536 × 1024",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "是"
+          }
+        },
+        {
+          "id": "wang-cache-map-042",
+          "type": "row",
+          "title": "源文件 042",
+          "metadata": {
+            "source file": "/PRINT/042.JPG",
+            "cache key": "PV_0006.cache",
+            "preview size": "900 × 650",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "是"
+          }
+        },
+        {
+          "id": "wang-cache-map-043",
+          "type": "row",
+          "title": "源文件 043",
+          "metadata": {
+            "source file": "/PRINT/043.JPG",
+            "cache key": "PV_0003.cache",
+            "preview size": "1080 × 760",
+            "generated time": "{{wangPrintDate}} {{wangCacheTime}}",
+            "print selected": "是"
+          }
+        },
+        {
+          "id": "wang-cache-file-0001",
+          "type": "cache-entry",
+          "title": "PV_0001.cache",
+          "recoveryPuzzleId": "P_cache_0001",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "1536 × 1024",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0001",
+            "src": "cases/missing-person/images/wang-039.png",
+            "alt": "缓存预览：039：公开校园活动合影，人物和背景一起保留。",
+            "filename": "PV_0001.cache · 软件预览",
+            "width": "1536",
+            "height": "1024",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true
+          }
+        },
+        {
+          "id": "wang-cache-file-0002",
+          "type": "cache-entry",
+          "title": "PV_0002.cache",
+          "recoveryPuzzleId": "P_cache_0002",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "1536 × 1024",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0002",
+            "src": "cases/missing-person/images/wang-041.png",
+            "alt": "缓存预览：041：远距离、模糊的现实拍摄图；来源记录没有摄影者姓名。",
+            "filename": "PV_0002.cache · 软件预览",
+            "width": "1536",
+            "height": "1024",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true
+          }
+        },
+        {
+          "id": "wang-cache-file-0003",
+          "type": "cache-entry",
+          "title": "PV_0003.cache",
+          "recoveryPuzzleId": "P_cache_0003",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "1080 × 760",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0003",
+            "src": "cases/missing-person/images/wang-043.svg",
+            "alt": "缓存预览：043：已发送邮件界面打印件，只保留发件人、收件人和附件等必要片段。",
+            "filename": "PV_0003.cache · 软件预览",
+            "width": "1080",
+            "height": "760",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true
+          }
+        },
+        {
+          "id": "wang-cache-file-0004",
+          "type": "cache-entry",
+          "title": "PV_0004.cache",
+          "recoveryPuzzleId": "P_cache_0004",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "{{cache037Width}} × {{cache037Height}}",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0004",
+            "src": "cases/missing-person/images/preview-slot-0004-v2.png",
+            "alt": "缓存预览：楼梯平台附近倒地的白外套女子、红色钥匙圈和敞开的包，一名侧脸可见的男子在旁处理手机与物品",
+            "filename": "PV_0004.cache · 软件预览",
+            "width": "{{cache037Width}}",
+            "height": "{{cache037Height}}",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true,
+            "evidenceIds": [
+              "F36",
+              "F37",
+              "F38"
+            ]
+          }
+        },
+        {
+          "id": "wang-cache-file-0005",
+          "type": "cache-entry",
+          "title": "PV_0005.cache",
+          "recoveryPuzzleId": "P_cache_0005",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "1024 × 1536",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0005",
+            "src": "cases/missing-person/images/wang-040.png",
+            "alt": "缓存预览：040：公开目击页面保存的近期街边照片；不显示精确地址。",
+            "filename": "PV_0005.cache · 软件预览",
+            "width": "1024",
+            "height": "1536",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true
+          }
+        },
+        {
+          "id": "wang-cache-file-0006",
+          "type": "cache-entry",
+          "title": "PV_0006.cache",
+          "recoveryPuzzleId": "P_cache_0006",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "900 × 650",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0006",
+            "src": "cases/missing-person/images/wang-042.svg",
+            "alt": "缓存预览：042：公开栏目信息与工作区域示意的组合图。",
+            "filename": "PV_0006.cache · 软件预览",
+            "width": "900",
+            "height": "650",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true
+          }
+        },
+        {
+          "id": "wang-cache-file-0007",
+          "type": "cache-entry",
+          "title": "PV_0007.cache",
+          "recoveryPuzzleId": "P_cache_0007",
+          "metadata": {
+            "缓存形态": "旧软件预览块",
+            "预览尺寸": "1024 × 1536",
+            "生成时间": "{{wangPrintDate}} {{wangCacheTime}}",
+            "副本出处": "城西照相馆本订单临时工作目录 → 王曼经许可复制 → 工作页已链接副本 → 网页存档",
+            "原始文件": "未包含完整原始图像"
+          },
+          "media": {
+            "id": "shop-preview-0007",
+            "src": "cases/missing-person/images/wang-038.png",
+            "alt": "缓存预览：038：公开个人网页头像的保存图，边缘和底色仍像网页图片。",
+            "filename": "PV_0007.cache · 软件预览",
+            "width": "1024",
+            "height": "1536",
+            "caption": "已恢复的缓存预览，原始图像不可获得。",
+            "previewOnly": true
           }
         }
       ]
@@ -4268,11 +4655,67 @@
       "type": "file-property",
       "sourcePageId": "snapshot_wang_import_files",
       "title": "导入清单｜038～043已打印，037未打印",
-      "summary": "同一订单七条导入记录中，/PRINT/038.JPG～043.JPG已打印，/DCIM/037.JPG未选中、未打印；原图未保留，当前不能查看其内容。",
+      "summary": "同一订单七条导入记录中，/PRINT/038.JPG～043.JPG已打印，/DCIM/037.JPG未选中、未打印。副本未包含原始图像，可另核软件预览记录。",
       "discovery": "selection",
       "selectionTexts": [
         "文件清单中038～043为已打印的六张，037未选中、未打印"
       ]
+    },
+    {
+      "id": "F36",
+      "type": "photo",
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "title": "037｜白色外套与红色钥匙圈",
+      "summary": "实际恢复的缓存预览中，一名女子倒在楼梯平台附近，穿白色外套；旁边敞开的包上有红色圆形钥匙圈。尚未仅凭此图确定身份或受伤原因。",
+      "discovery": "detail",
+      "unlockConditions": {
+        "puzzleIds": [
+          "P_cache_0004"
+        ]
+      }
+    },
+    {
+      "id": "F37",
+      "type": "photo",
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "title": "037｜男子在倒地女子附近处理手机与包内物品",
+      "summary": "缓存预览显示男子在倒地女子附近，手持旧式手机，另一只手在敞开的包与散落纸张处。图像不显示跌落、致伤动作、求助过程或手机内的内容。",
+      "discovery": "detail",
+      "unlockConditions": {
+        "puzzleIds": [
+          "P_cache_0004"
+        ]
+      }
+    },
+    {
+      "id": "F38",
+      "type": "photo",
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "title": "037｜现场男子侧脸可用于图像对照",
+      "summary": "预览保留现场男子的侧脸、发际线和面部特征，可以与公开照片作人工比较；本条不自动识别人名，也不作警方人脸鉴定。",
+      "discovery": "detail",
+      "unlockConditions": {
+        "puzzleIds": [
+          "P_cache_0004"
+        ]
+      }
+    },
+    {
+      "id": "F39",
+      "type": "photo",
+      "sourcePageId": "bbs_chenyu_campus_photo",
+      "title": "陈雨｜校园照中的白外套与红钥匙圈",
+      "summary": "陈雨账号发布的普通校园照片可见她的面貌、白色外套和包上红色圆形钥匙圈。服务器上传日期与公开事故报道同日；拍摄时刻属于图片属性，需与公开信息比对。",
+      "timestamp": "{{chenIncidentDate}} {{chenCampusUploadTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F40",
+      "type": "photo",
+      "sourcePageId": "echo_about",
+      "title": "梁志诚｜回声创办人公开人物照",
+      "summary": "回声寻人网关于我们页以姓名与创办人介绍展示梁志诚公开照片，面貌可作为人工图像对照来源；该页面没有事故或违法行为说明。",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -4335,6 +4778,26 @@
       "id": "C12",
       "title": "王曼收到的六张威胁照片对应一个曾扫描七张图像、实际只打印六张的冲印订单。",
       "summary": "六张收到记录、袋上订单号、店铺订单数量和导入清单共同对应七扫六印。未打印文件没有完整原图，不推定内容、拍摄者、事故现场或责任。"
+    },
+    {
+      "id": "C13",
+      "title": "037中的受伤女子与陈雨高度一致。",
+      "summary": "缓存预览与陈雨同日校园照的面貌、白外套、红钥匙圈相符，配公开事故地点及伤者身份报道，支持高度一致；不是绝对身份鉴定，也不据此还原跌落过程。"
+    },
+    {
+      "id": "C14",
+      "title": "037中的现场男子与梁志诚高度一致。",
+      "summary": "缓存预览中的侧脸、发际线及面部特征与回声创办人公开照片相符，支持人工比对中的高度一致；不是警方人脸鉴定，不解释其到场原因。"
+    },
+    {
+      "id": "C15",
+      "title": "037显示：与梁志诚高度一致的男子，在疑似陈雨重伤的现场处理她的手机或物品。",
+      "summary": "两项谨慎身份对照与图像中的持手机、翻找敞开包的行为相结合；仅确认画面所示处理物品，不证明如何致伤、知晓生命迹象或阻止求助。"
+    },
+    {
+      "id": "C16",
+      "title": "037属于陈雨事件，而038～043属于之后针对王曼的威胁材料；所谓“第七张”并不是王曼照片组中的一张。",
+      "summary": "人物比对、陈雨公开事故日期、之后的冲印订单日期、王曼收到六图记录及原路径和打印选择共同支持两组事件边界。编号只作对应，不单独证明时间、拍摄者或材料制作者。"
     }
   ],
   "relations": [
@@ -4518,6 +4981,73 @@
           "C12"
         ]
       }
+    },
+    {
+      "id": "R13",
+      "evidenceIds": [
+        "F36",
+        "F39",
+        "F26",
+        "F27"
+      ],
+      "title": "比对校园照片、缓存衣着及公开事故背景",
+      "summary": "比较面貌、外套和钥匙圈，再核公开事故地点、日期与伤者身份。",
+      "unlocks": {
+        "factIds": [
+          "C13"
+        ]
+      }
+    },
+    {
+      "id": "R14",
+      "evidenceIds": [
+        "F38",
+        "F40"
+      ],
+      "title": "对照侧脸与回声公开人物照",
+      "summary": "人工比较发际线、侧脸与面部特征，不使用自动人脸识别。",
+      "unlocks": {
+        "factIds": [
+          "C14"
+        ]
+      }
+    },
+    {
+      "id": "R15",
+      "factIds": [
+        "C13",
+        "C14"
+      ],
+      "evidenceIds": [
+        "F37"
+      ],
+      "title": "将人物比对与现场行为分开核验",
+      "summary": "先有两个人物对照，再结合图像里实际可见的手机与物品处理行为。",
+      "unlocks": {
+        "factIds": [
+          "C15"
+        ]
+      }
+    },
+    {
+      "id": "R16",
+      "factIds": [
+        "C13",
+        "C12"
+      ],
+      "evidenceIds": [
+        "F31",
+        "F34",
+        "F35",
+        "F26"
+      ],
+      "title": "比对事故背景、收到的六图与订单时间和选择",
+      "summary": "核事故日期与后续冲印日期、不同对象和实际打印集合，不以连续编号代替时间证据。",
+      "unlocks": {
+        "factIds": [
+          "C16"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -4559,6 +5089,69 @@
       "answerSourcePageIds": [
         "blog_zhao_cat"
       ]
+    },
+    {
+      "id": "P_cache_0001",
+      "type": "cache-preview",
+      "title": "恢复 PV_0001.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0001",
+      "answer": "PV_0001.cache"
+    },
+    {
+      "id": "P_cache_0002",
+      "type": "cache-preview",
+      "title": "恢复 PV_0002.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0002",
+      "answer": "PV_0002.cache"
+    },
+    {
+      "id": "P_cache_0003",
+      "type": "cache-preview",
+      "title": "恢复 PV_0003.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0003",
+      "answer": "PV_0003.cache"
+    },
+    {
+      "id": "P_cache_0004",
+      "type": "cache-preview",
+      "title": "恢复 PV_0004.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0004",
+      "answer": "PV_0004.cache"
+    },
+    {
+      "id": "P_cache_0005",
+      "type": "cache-preview",
+      "title": "恢复 PV_0005.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0005",
+      "answer": "PV_0005.cache"
+    },
+    {
+      "id": "P_cache_0006",
+      "type": "cache-preview",
+      "title": "恢复 PV_0006.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0006",
+      "answer": "PV_0006.cache"
+    },
+    {
+      "id": "P_cache_0007",
+      "type": "cache-preview",
+      "title": "恢复 PV_0007.cache 预览",
+      "evidenceIds": [],
+      "sourcePageId": "snapshot_wang_preview_cache",
+      "sourceObjectId": "wang-cache-file-0007",
+      "answer": "PV_0007.cache"
     }
   ],
   "provisional": {
@@ -4572,7 +5165,8 @@
       "Chen Yu envelope / self-deleted help post calendar dates and times",
       "Chen Yu handoff / public backup statement / routine replies / west-side tea discussion calendar dates and times",
       "Chen Yu stair incident / death / two public news reports calendar dates and publication times",
-      "Wang Man backup receipt / print order / packet receipt / shop visit / work page snapshot calendar dates and order number"
+      "Wang Man backup receipt / print order / packet receipt / shop visit / work page snapshot calendar dates and order number",
+      "Chen Yu same-day campus photo server / capture times and shop preview-cache generation time"
     ]
   },
   "homePageId": "portal_home",

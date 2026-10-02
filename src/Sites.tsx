@@ -62,8 +62,8 @@ function Time({ item, label, onDiscover }: { item: PageObject; label?: string; o
     if (!open && item.evidenceId) onDiscover(item.evidenceId, pointAt(event.currentTarget))
   }}>{label || item.timestamp}</button>{open && <Metadata values={item.metadata || { '时间': item.timestamp || '未记录' }} />}</div>
 }
-function Media({ media, ...props }: SiteProps & { media?: CaseMedia }) {
-  const [open, setOpen] = useState(false), [zoom, setZoom] = useState(false)
+function Media({ media, initiallyOpen = false, ...props }: SiteProps & { media?: CaseMedia; initiallyOpen?: boolean }) {
+  const [open, setOpen] = useState(initiallyOpen), [zoom, setZoom] = useState(false)
   const [referenceId, setReferenceId] = useState(''), [compare, setCompare] = useState(false), [message, setMessage] = useState('')
   useEffect(() => {
     if (!open) return
@@ -76,10 +76,11 @@ function Media({ media, ...props }: SiteProps & { media?: CaseMedia }) {
   const printLabel = media.printOrder && <svg className="print-bag-label" viewBox="0 0 1024 1536" aria-label={`订单号：${media.printOrder.id}；冲印时间：${media.printOrder.printedAt}`}><text x="280" y="735">{media.printOrder.id}</text><text x="280" y="820">{media.printOrder.printedAt}</text></svg>
   const thumbnail = <img src={src(media)} alt={media.alt} loading="lazy" />
   const original = <img src={src(media)} alt={media.alt} onLoad={(event) => {
+    if (initiallyOpen && media.id) props.onViewMedia(media.id)
     media.evidenceIds?.forEach((id) => props.onDiscover(id, pointAt(event.currentTarget)))
   }} />
   return <figure className="site-photo">
-    <button className="photo-open" aria-label={`查看原图：${media.alt}`} onClick={() => {
+    <button className="photo-open" aria-label={`${media.previewOnly ? '查看缓存预览' : '查看原图'}：${media.alt}`} onClick={() => {
       setOpen(true); setZoom(false); setMessage(''); if (media.id) props.onViewMedia(media.id)
     }}>{printLabel ? <span className="media-scan">{thumbnail}{printLabel}</span> : thumbnail}</button><figcaption>{media.caption || media.alt}</figcaption>
     {open && <div className="image-backdrop" onClick={() => setOpen(false)}><section className="image-viewer" role="dialog" aria-modal="true" aria-label="图片查看器" onClick={(event) => event.stopPropagation()}>
@@ -87,8 +88,8 @@ function Media({ media, ...props }: SiteProps & { media?: CaseMedia }) {
       <div className={`image-comparison${compare ? ' comparing' : ''}`}><div className={`image-stage${zoom ? ' zoomed' : ''}`}><button aria-label="放大或缩小图片" onClick={() => setZoom(!zoom)}>{printLabel ? <span className="media-scan">{original}{printLabel}</span> : original}</button></div>
         {compare && referenceId && <div className="reference-image"><img src={src(references.find((item) => item.id === referenceId)!)} alt={references.find((item) => item.id === referenceId)!.alt} /><small>{references.find((item) => item.id === referenceId)?.filename}</small></div>}
       </div>
-      <div className="image-properties"><span>文件：{media.filename || '未记录'}</span><span>尺寸：{media.width || '—'} × {media.height || '—'}</span>{media.takenAt && <span>拍摄时间：{media.takenAt}</span>}{media.uploadedAt && <span>上传时间：{media.uploadedAt}</span>}</div>
-      <footer><button onClick={() => setZoom(!zoom)}>{zoom ? '适合窗口' : '原尺寸'}</button><button aria-expanded={compare} onClick={() => setCompare(!compare)}>对照浏览过的图片</button>
+      <div className="image-properties"><span>文件：{media.filename || '未记录'}</span><span>{media.previewOnly ? '预览尺寸' : '尺寸'}：{media.width || '—'} × {media.height || '—'}</span>{media.previewOnly && <span>软件缓存预览 · 原始图像不可获得</span>}{media.takenAt && <span>拍摄时间：{media.takenAt}</span>}{media.uploadedAt && <span>上传时间：{media.uploadedAt}</span>}</div>
+      <footer><button onClick={() => setZoom(!zoom)}>{zoom ? '适合窗口' : media.previewOnly ? '预览实际尺寸' : '原尺寸'}</button><button aria-expanded={compare} onClick={() => setCompare(!compare)}>对照浏览过的图片</button>
         {compare && <div className="image-match"><label>对照图片 <select aria-label="对照图片" value={referenceId} onChange={(event) => { setReferenceId(event.target.value); setMessage('') }}><option value="">选择已浏览的图片</option>{references.map((item) => <option key={item.id} value={item.id}>{item.filename || item.alt}</option>)}</select></label><button disabled={!referenceId} onClick={(event) => {
           const correct = props.onCompareImage(media, referenceId, pointAt(event.currentTarget)); setMessage(correct ? '对照已保留。' : '尚不能确认照片中是同一人物。')
         }}>确认同一人物</button><span role="status">{message}</span></div>}
@@ -267,13 +268,14 @@ function Echo(props: SiteProps) {
     return target ? [{ page: target, timestamp: item.timestamp }] : []
   }).sort((a, b) => (b.timestamp || '').localeCompare(a.timestamp || '')) || []
   const rules = props.pages.find((item) => item.id === 'echo_submission_rules')
+  const about = props.pages.find((item) => item.id === 'echo_about')
   return <div className="echo-site"><header><span className="echo-logo" aria-hidden="true">回声</span><div><SiteName {...props} /><p>让消息传得更远，让家人早日团聚</p></div></header><SiteNav {...props} /><Breadcrumb {...props} />
     <div className="echo-content">{isHome ? <><div className="echo-welcome"><strong>让每一条消息，多一份希望。</strong><span>公益寻人 · 公开转发 · 信息回访</span></div>
       <section className="echo-notices"><h2>最新寻人</h2><ul>{notices.map((item) => <li key={item.page.id}><PageLink pageId={item.page.id}>{item.page.title}</PageLink><time>{item.timestamp}</time></li>)}</ul></section>
       <section className="echo-small-section"><h2>已寻回</h2><p>这份副本暂无可读取的寻回条目。</p></section>
       <section className="echo-small-section"><h2>公益动态</h2>{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}</section>
       {rules && <section className="echo-small-section"><h2>寻人须知</h2><p>{rules.body[0]}</p></section>}
-      <section className="echo-small-section"><h2>关于我们</h2>{page.body.map((line, i) => <p key={i}>{line}</p>)}</section></> : <><h2>{page.title}</h2>{timestamp && <Time item={timestamp} label={`发布于 ${timestamp.timestamp}`} onDiscover={props.onDiscover} />}{page.body.map((line, i) => <p key={i}>{line}</p>)}<Media {...props} media={page.media} />
+      <section className="echo-small-section"><h2>关于我们</h2>{page.body.map((line, i) => <p key={i}>{line}</p>)}{about && <PageLink pageId={about.id}>{about.title}</PageLink>}</section></> : <><h2>{page.title}</h2>{timestamp && <Time item={timestamp} label={`发布于 ${timestamp.timestamp}`} onDiscover={props.onDiscover} />}{page.body.map((line, i) => <p key={i}>{line}</p>)}<Media {...props} media={page.media} />
       <div>{page.objects?.filter((item) => item.type !== 'timestamp').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}</div><Links {...props} /></>}</div><footer>回声寻人网 · 公开信息转发与回访</footer></div>
 }
 function Archive(props: SiteProps) {
@@ -302,6 +304,28 @@ function WorkPage(props: SiteProps) {
       {!!photos.length && <div className="work-gallery">{photos.map((item) => <section key={item.id} id={item.id}><h3>{item.title}</h3><Media {...props} media={item.media} />{item.body?.map((line, index) => <p key={index}>{line}</p>)}</section>)}</div>}
       {page.objects?.filter((item) => item.type !== 'file' && item.type !== 'photo').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} />
     </main><footer>个人工作资料 · 来源与保存日期见各项记录</footer></div>
+}
+function CacheFile({ item, ...props }: SiteProps & { item: PageObject }) {
+  const [open, setOpen] = useObjectDisclosure(item.id)
+  const [justRestored, setJustRestored] = useState(false)
+  const restored = Boolean(item.recoveryPuzzleId && props.completedPuzzleIds.includes(item.recoveryPuzzleId))
+  return <section className="cache-file" id={item.id}><button className="cache-file-name" aria-expanded={open} onClick={() => setOpen(!open)}>▧ {item.title}</button>
+    {open && <><Metadata values={item.metadata} />{item.body?.map((line, index) => <p key={index}>{line}</p>)}
+      {restored ? <><p className="cache-status">预览已恢复 · 原始图像文件未包含在此副本中。</p><Media {...props} media={item.media} initiallyOpen={justRestored} /></> :
+        <button onClick={() => { if (item.recoveryPuzzleId && props.onSolve(item.recoveryPuzzleId, item.title)) setJustRestored(true) }}>尝试恢复预览</button>}</>}
+  </section>
+}
+function PreviewCache(props: SiteProps) {
+  const rows = props.page.objects?.filter((item) => item.type === 'row') || []
+  const files = props.page.objects?.filter((item) => item.type === 'cache-entry') || []
+  const columns = props.page.tableColumns || []
+  return <div className="reporter-work cache-work"><header><small>地方资讯 · 个人工作页</small><SiteName {...props} /><span>商家软件记录 / 只读副本</span></header><Breadcrumb {...props} />
+    <main><h2>{props.page.title}</h2>{props.page.body.map((line, index) => <p key={index}>{line}</p>)}
+      <h3>preview-cache.idx</h3><div className="work-file-scroll"><table className="work-files"><thead><tr>{columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
+        <tbody>{rows.map((item) => <tr id={item.id} key={item.id}>{columns.map((column) => <td key={column}>{item.metadata?.[column] || '—'}</td>)}</tr>)}</tbody></table></div>
+      <h3>缓存文件</h3><p className="cache-note">内部文件名与源图的对应关系见索引。恢复的是软件预览，不会取得原始照片。</p>
+      {files.map((item) => <CacheFile {...props} key={item.id} item={item} />)}<Links {...props} />
+    </main><footer>预览生成时间是扫描时间，不能用作原图拍摄时间。</footer></div>
 }
 function SpreadsheetRow({ item, columns, number, ...props }: SiteProps & { item: PageObject; columns: string[]; number: number }) {
   const [selected, setSelected] = useObjectDisclosure(item.id)
@@ -337,6 +361,7 @@ export function SiteView(props: SiteProps) {
       <p><PageLink pageId="archive_service" options={{ state: { searchInput: page.url, searchQuery: page.url, searchSubmitted: true } }}>在网页存档中查找这个地址</PageLink></p>
     </div><footer>Powered by CampusBBS　|　旧帖只读</footer></div>
   else if (page.kind === 'portal') content = <Portal {...props} />
+  else if (page.kind === 'cache' && page.siteId === 'wang-work') content = <PreviewCache {...props} />
   else if (page.siteId === 'wang-work') content = <WorkPage {...props} />
   else if (page.kind === 'spreadsheet') content = <Spreadsheet {...props} />
   else if (page.kind === 'forum-thread' || page.kind === 'forum') content = <Forum {...props} />

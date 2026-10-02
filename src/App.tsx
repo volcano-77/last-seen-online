@@ -192,7 +192,7 @@ export default function App() {
   }
   function solve(id: string, answer: string): boolean {
     const puzzle = caseData?.puzzles.find((item) => item.id === id)
-    if (!puzzle || !save || puzzle.type !== 'short-input' || (puzzle.sourcePageId && puzzle.sourcePageId !== page?.id) ||
+    if (!puzzle || !save || !['short-input', 'cache-preview'].includes(puzzle.type) || (puzzle.sourcePageId && puzzle.sourcePageId !== page?.id) ||
       normalize(answer) !== normalize(puzzle.answer || '')) return false
     setSave((old) => old ? { ...old, completedPuzzleIds: add(old.completedPuzzleIds, [id]),
       unlockedFactIds: add(old.unlockedFactIds, puzzle.unlocks?.factIds),

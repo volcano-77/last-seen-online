@@ -21,11 +21,13 @@ export interface CaseMedia {
   id?: string; identityId?: string; takenAt?: string
   evidenceIds?: string[]
   printOrder?: { id: string; printedAt: string }
+  previewOnly?: boolean
 }
 export interface PageObject {
   id: string; type: ObjectKind; title: string; body?: string[]; timestamp?: string
   metadata?: Record<string, string>; evidenceId?: string; links?: CaseLink[]
   author?: string; floor?: string; media?: CaseMedia; detailLabel?: string
+  recoveryPuzzleId?: string
 }
 export interface CasePage {
   id: string; kind: PageKind; title: string; url: string; body: string[]
@@ -57,7 +59,7 @@ export interface RelationDefinition {
 }
 export interface FactDefinition { id: string; title: string; summary: string }
 export interface PuzzleDefinition {
-  id: string; type: 'timeline' | 'short-input' | 'image-match'; title: string; evidenceIds: string[]
+  id: string; type: 'timeline' | 'short-input' | 'image-match' | 'cache-preview'; title: string; evidenceIds: string[]
   expectedOrder?: string[]; answer?: string; prompt?: string; unlocks?: Unlocks
   sourcePageId?: string; sourceObjectId?: string; referenceMediaId?: string; answerSourcePageIds?: string[]
 }
@@ -113,7 +115,8 @@ function media(value: unknown): value is CaseMedia {
     ['caption', 'filename', 'width', 'height', 'uploadedAt', 'id', 'identityId', 'takenAt']
       .every((key) => value[key] === undefined || nonEmpty(value[key])) &&
     (value.evidenceIds === undefined || (strings(value.evidenceIds) && unique(value.evidenceIds))) &&
-    (value.printOrder === undefined || (record(value.printOrder) && nonEmpty(value.printOrder.id) && nonEmpty(value.printOrder.printedAt)))
+    (value.printOrder === undefined || (record(value.printOrder) && nonEmpty(value.printOrder.id) && nonEmpty(value.printOrder.printedAt))) &&
+    (value.previewOnly === undefined || typeof value.previewOnly === 'boolean')
 }
 function formatVariable(value: string, format?: string): string {
   if (!format) return value
@@ -195,6 +198,7 @@ export function parseCase(input: unknown): GameCase {
       (item.author === undefined || nonEmpty(item.author)) &&
       (item.floor === undefined || nonEmpty(item.floor)) &&
       (item.detailLabel === undefined || nonEmpty(item.detailLabel)) &&
+      (item.recoveryPuzzleId === undefined || nonEmpty(item.recoveryPuzzleId)) &&
       (item.media === undefined || media(item.media)) &&
       (item.metadata === undefined || metadata(item.metadata)) &&
       (item.links === undefined || links(item.links))))) {
@@ -238,13 +242,14 @@ export function parseCase(input: unknown): GameCase {
   if (!facts.every((item) => record(item) && nonEmpty(item.id) &&
     nonEmpty(item.title) && nonEmpty(item.summary))) throw new Error('事实格式无效。')
   if (!puzzles.every((item) => record(item) && nonEmpty(item.id) && nonEmpty(item.title) &&
-    (item.type === 'timeline' || item.type === 'short-input' || item.type === 'image-match') && strings(item.evidenceIds) &&
+    (item.type === 'timeline' || item.type === 'short-input' || item.type === 'image-match' || item.type === 'cache-preview') && strings(item.evidenceIds) &&
     (item.type !== 'timeline' || (strings(item.expectedOrder) && item.expectedOrder.length === item.evidenceIds.length)) &&
     (item.type !== 'short-input' || (nonEmpty(item.answer) && item.answer.length <= 32)) &&
     (item.prompt === undefined || nonEmpty(item.prompt)) &&
     ['sourcePageId', 'sourceObjectId', 'referenceMediaId'].every((key) => item[key] === undefined || nonEmpty(item[key])) &&
     (item.answerSourcePageIds === undefined || strings(item.answerSourcePageIds)) &&
     (item.type !== 'image-match' || (nonEmpty(item.sourcePageId) && nonEmpty(item.sourceObjectId) && nonEmpty(item.referenceMediaId))) &&
+    (item.type !== 'cache-preview' || (nonEmpty(item.sourcePageId) && nonEmpty(item.sourceObjectId) && nonEmpty(item.answer) && item.answer.length <= 32)) &&
     (item.unlocks === undefined || unlocks(item.unlocks)))) throw new Error('谜题格式无效。')
 
   const pageIds = new Set(pages.map((item) => item.id))
@@ -278,6 +283,7 @@ export function parseCase(input: unknown): GameCase {
       (page.accessPuzzleId && !puzzleIds.has(page.accessPuzzleId)) ||
       !subset(page.links?.map((item) => item.pageId), pageIds) || !validGate(page.unlockConditions) ||
       page.objects?.some((item) => (item.evidenceId && !evidenceIds.has(item.evidenceId)) ||
+        (item.recoveryPuzzleId && !puzzleIds.has(item.recoveryPuzzleId)) ||
         !subset(item.links?.map((link) => link.pageId), pageIds))) throw new Error(`页面 ${page.id} 的引用无效。`)
   }
   for (const item of evidence as EvidenceDefinition[]) {
@@ -294,6 +300,10 @@ export function parseCase(input: unknown): GameCase {
       !validUnlocks(item.unlocks)) throw new Error(`关联 ${item.id} 的引用无效。`)
   }
   for (const item of puzzles as PuzzleDefinition[]) {
+    if (item.type === 'cache-preview' && !pages.find((page) => page.id === item.sourcePageId)?.objects?.some((object) =>
+      object.id === item.sourceObjectId && object.type === 'cache-entry' && object.recoveryPuzzleId === item.id && object.title === item.answer && object.media)) {
+      throw new Error(`缓存恢复 ${item.id} 的文件映射无效。`)
+    }
     if ((item.sourcePageId && !pageIds.has(item.sourcePageId)) ||
       (item.sourceObjectId && !pages.find((page) => page.id === item.sourcePageId)?.objects?.some((object) => object.id === item.sourceObjectId)) ||
       (item.referenceMediaId && !mediaIds.includes(item.referenceMediaId)) ||
