@@ -230,7 +230,19 @@
     "xuMailboxProvidedDate": "2009-10-01",
     "xuMailboxMemoConfirmedDate": "2009-10-01",
     "wangMailboxArchiveDate": "2009-10-02",
-    "wangMailboxArchiveTime": "10:32"
+    "wangMailboxArchiveTime": "10:32",
+    "wangRiskId": "R-006",
+    "wangRiskCreateDate": "2009-04-26",
+    "wangRiskCreateTime": "08:42",
+    "wangRiskMailTime": "09:06",
+    "xuWangPhotoDate": "2009-04-27",
+    "xuWangPhotoTime": "16:34",
+    "wangRiskSupplementDate": "2009-04-28",
+    "wangRiskSupplementTime": "09:22",
+    "xuRiskProvidedDate": "2009-10-01",
+    "xuRiskMemoConfirmedDate": "2009-10-01",
+    "wangRiskArchiveDate": "2009-10-03",
+    "wangRiskArchiveTime": "11:10"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3595,14 +3607,14 @@
         "日常项目：校园采访记录、本地生活选题、联系资料整理。这里只保留项目名，笔记和联系方式未收入网页副本。",
         "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。",
         "本次恢复的是较晚更新的目录。五月保存的旧附件沿用各自抓取记录；九月联系记录与采访节录是后来链接、分别抓取的必要副本，不由早期目录截图推定可恢复。",
-        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接，以及许宁后来补交的旧邮箱安全记录。旧文件仍沿用各自独立抓取记录。"
+        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接，以及许宁后来补交的旧邮箱安全记录和{{wangRiskId}}有限材料。旧文件仍沿用各自独立抓取记录。"
       ],
       "searchable": false,
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/materials",
-        "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}"
+        "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}"
       },
       "directory": true,
       "objects": [
@@ -3763,6 +3775,22 @@
             {
               "label": "{{s034Id}} 核查材料",
               "pageId": "snapshot_wang_s034"
+            }
+          ]
+        },
+        {
+          "id": "wang-dir-risk-compare",
+          "type": "file",
+          "title": "038～043来源对照",
+          "metadata": {
+            "类型": "记者核查笔记",
+            "保存日期": "{{xuRiskProvidedDate}}",
+            "大小": "必要节录"
+          },
+          "links": [
+            {
+              "label": "038～043来源对照",
+              "pageId": "snapshot_wang_risk_compare"
             }
           ]
         }
@@ -5069,7 +5097,7 @@
       "body": [
         "来源登记 / {{xuMaterialsProvidedDate}}；旧邮箱安全记录于{{xuMailboxProvidedDate}}补交。许宁在会面核查后自愿提供自己留存的一小批通信、任务收件副本及费用记录，允许王曼复制用于采访核查。",
         "王曼按原件类别整理，遮蔽无关联系与目标实名，只把下列必要副本链接到记者工作页。这些文件各有独立抓取记录；目录并不开放许宁的电脑或邮箱。",
-        "旧通信来自许宁本人的通信 / 设备备份；任务邮件来自她实际收到并自存的旧邮件；费用截图来自她自己的入账记录。后补的安全通知来自她仍独立控制的恢复邮箱。许宁说明另行核认，不能当成系统记录。",
+        "旧通信来自许宁本人的通信 / 设备备份；任务邮件来自她实际收到并自存的旧邮件；费用截图来自她自己的入账记录。后补的安全通知来自她仍独立控制的恢复邮箱，{{wangRiskId}}邮件与局部附件也来自她的实收副本。许宁说明另行核认，不能当成系统记录。",
         "目标姓名以代号保留，旧照片只用于辨认指令所指对象。这里只核经手的有限任务，不恢复目标新身份、客户资料或整套任务库。"
       ],
       "searchable": false,
@@ -5077,7 +5105,7 @@
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/xu-materials",
-        "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}"
+        "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}"
       },
       "objects": [
         {
@@ -5205,6 +5233,22 @@
             {
               "label": "旧邮箱安全记录",
               "pageId": "snapshot_xu_mailbox_materials"
+            }
+          ]
+        },
+        {
+          "id": "xu-material-risk",
+          "type": "file",
+          "title": "{{wangRiskId}} 风险材料",
+          "metadata": {
+            "类型": "实收任务邮件 / 局部附件 / 核认说明",
+            "保存日期": "{{xuRiskProvidedDate}}",
+            "大小": "必要副本"
+          },
+          "links": [
+            {
+              "label": "{{wangRiskId}} 风险材料",
+              "pageId": "snapshot_xu_risk_materials"
             }
           ]
         }
@@ -7271,6 +7315,245 @@
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": { "originalUrl": "ncitynews://reporters/wangman/mailbox-check", "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_risk_materials",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{wangRiskId}} 风险材料",
+      "url": "archive://snapshot/ncitynews/wangman/xu-risk-materials",
+      "body": [
+        "{{xuRiskProvidedDate}}来源登记。许宁交出自己实际收到并保存的一封梁的任务邮件、局部附件及后续少量交接补记；王曼经许可复制必要字段。另有{{xuRiskMemoConfirmedDate}}核认的采访节录。",
+        "这里只能看到许宁这一条收件链，不能打开梁的任务库。{{wangRiskId}}是内部风险确认编号；S类是客户委托的特殊寻访。目录本身不自动证明六张图片的来源。"
+      ],
+      "objects": [
+        {
+          "id": "xu-risk-mail-file",
+          "type": "file",
+          "title": "{{wangRiskId}} / 先核一下",
+          "metadata": { "类型": "梁发给许宁 / 实收邮件副本", "保存日期": "{{xuRiskProvidedDate}}", "大小": "必要字段" },
+          "links": [{ "label": "{{wangRiskId}} / 先核一下", "pageId": "snapshot_xu_risk_mail" }]
+        },
+        {
+          "id": "xu-risk-attachment-file",
+          "type": "file",
+          "title": "{{wangRiskId}} / 局部交接附件",
+          "metadata": { "类型": "原邮件附件与后续补记", "保存日期": "{{xuRiskProvidedDate}}", "大小": "少数行" },
+          "links": [{ "label": "{{wangRiskId}} / 局部交接附件", "pageId": "snapshot_xu_risk_attachment" }]
+        },
+        {
+          "id": "xu-risk-statement-file",
+          "type": "file",
+          "title": "许宁 / 王曼风险核查说明",
+          "metadata": { "类型": "本人核认节录", "保存日期": "{{xuRiskMemoConfirmedDate}}", "大小": "必要节录" },
+          "links": [{ "label": "许宁 / 王曼风险核查说明", "pageId": "snapshot_xu_risk_statement" }]
+        }
+      ],
+      "links": [{ "label": "许宁提供材料", "pageId": "snapshot_wang_xu_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-risk-materials", "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_risk_mail",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{wangRiskId}} / 先核一下",
+      "url": "archive://snapshot/ncitynews/wangman/xu-risk-mail",
+      "body": [
+        "许宁实收并自存的梁来信，{{xuRiskProvidedDate}}许可王曼复制。系统收件时间与附件中的内部创建字段分别保存；邮件不含客户委托或收费字段。"
+      ],
+      "objects": [
+        {
+          "id": "xu-risk-mail-header",
+          "type": "text",
+          "title": "收件字段",
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "许宁（实收副本）",
+            "主题": "{{wangRiskId}} / 先核一下",
+            "系统收件时间": "{{wangRiskCreateDate}} {{wangRiskMailTime}}",
+            "来源": "许宁自存实收邮件 → {{xuRiskProvidedDate}}许可王曼复制"
+          }
+        },
+        {
+          "id": "xu-risk-mail-body",
+          "type": "log-entry",
+          "title": "梁的任务正文 / 王曼",
+          "timestamp": "{{wangRiskCreateDate}} {{wangRiskMailTime}}",
+          "body": [
+            "{{wangRiskId}} / 王曼，内部风险确认。先确认她最近是否仍在本地、是否还接触陈雨留下的材料。先查公开能看见的东西，不要直接接触她。",
+            "陈雨随身手机里那条给王曼的已发送记录，收件人和附件名见随信截取。只回我能确认的范围。"
+          ],
+          "metadata": {
+            "任务性质": "原信写内部风险确认；未见客户或收费字段",
+            "收件时间": "{{wangRiskCreateDate}} {{wangRiskMailTime}}",
+            "附件": "局部发送字段 / 少数行交接",
+            "原持有人": "许宁实际收件并保存"
+          },
+          "evidenceId": "F79"
+        },
+        {
+          "id": "xu-risk-local-sent-fragment",
+          "type": "log-entry",
+          "title": "随信局部截取 / 陈雨本地已发送视图",
+          "body": [
+            "随信截取只显示陈雨手机本地可见的一条已发送信息：陈雨 → 王曼；附件 旧帖时间核对.xls。梁来信指向这条记录，未附陈雨完整邮箱、云端会话或其他历史邮件。",
+            "王曼自己的事故前接收记录和043可独立核对收件人与附件；这份截取本身不能证明是谁拍屏、谁制作043或梁最早看见它的分钟。"
+          ],
+          "metadata": {
+            "截取范围": "随身手机本地已发送列表 / 一条必要字段",
+            "收件人": "王曼",
+            "附件名": "旧帖时间核对.xls",
+            "保存链": "梁的{{wangRiskCreateDate}}来信随附局部截取 → 许宁实收保存 → 王曼复制"
+          },
+          "evidenceId": "F78"
+        }
+      ],
+      "links": [{ "label": "{{wangRiskId}} 风险材料", "pageId": "snapshot_xu_risk_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-risk-mail", "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_risk_attachment",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{wangRiskId}} / 局部交接附件",
+      "url": "archive://snapshot/ncitynews/wangman/xu-risk-attachment",
+      "body": [
+        "许宁保存的原邮件少数行附件与{{wangRiskSupplementDate}}后续收到的补记，{{xuRiskProvidedDate}}许可王曼复制。两次收件按原时间分列；后续信息不能倒填为初始邮件已知。",
+        "内部编号只保留这一项，附件不含R目录、客户账款或其他风险人员名单。"
+      ],
+      "objects": [
+        {
+          "id": "xu-risk-create-row",
+          "type": "log-entry",
+          "title": "初始行 / 创建时间与状态",
+          "timestamp": "{{wangRiskCreateDate}} {{wangRiskCreateTime}}",
+          "body": [
+            "{{wangRiskId}}｜对象：王曼｜状态：风险确认，待核。处理备注：陈雨资料外传收件人；先核公开活动与本地是否仍可见。",
+            "这是发给许宁的一行任务摘录，创建字段早于同日上午的系统收件时间；事故日期应另与公开报道及037现场证据核对。"
+          ],
+          "metadata": {
+            "创建字段": "{{wangRiskCreateDate}} {{wangRiskCreateTime}}",
+            "邮件系统收件": "{{wangRiskCreateDate}} {{wangRiskMailTime}}",
+            "编号": "{{wangRiskId}}",
+            "状态": "风险确认 / 待核",
+            "来源": "梁来信局部附件 → 许宁实收保存 → 王曼复制"
+          },
+          "evidenceId": "F80"
+        },
+        {
+          "id": "xu-risk-source-categories",
+          "type": "log-entry",
+          "title": "后续补记 / 可用来源类别",
+          "timestamp": "{{wangRiskSupplementDate}} {{wangRiskSupplementTime}}",
+          "body": [
+            "公开个人页头像；旧校园活动合照；网上近期目击图；工作栏目的公开区域信息；陈雨本地已发送记录。另补一张远处的现场确认图。",
+            "这条补记晚于许宁{{xuWangPhotoDate}}的有限现实确认，早于{{wangPrintDate}}照相馆冲印。它记信息类别，不列038～043文件名，也不证明每张最终图片是谁制作或谁放进袋中。"
+          ],
+          "metadata": {
+            "补记收件": "{{wangRiskSupplementDate}} {{wangRiskSupplementTime}}",
+            "范围": "{{wangRiskId}} / 少量来源类别",
+            "来源": "许宁收到的同任务后续交接节录 → 王曼复制"
+          },
+          "evidenceId": "F81"
+        }
+      ],
+      "links": [{ "label": "{{wangRiskId}} 风险材料", "pageId": "snapshot_xu_risk_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-risk-attachment", "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_risk_statement",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "许宁 / 王曼风险核查说明",
+      "url": "archive://snapshot/ncitynews/wangman/xu-risk-statement",
+      "body": [
+        "王曼整理的采访节录，{{xuRiskMemoConfirmedDate}}由许宁核认。仅代表她对自己经手范围的说明，不替代原邮件、照片或照相馆记录。"
+      ],
+      "objects": [
+        {
+          "id": "xu-risk-statement-confirmed",
+          "type": "log-entry",
+          "title": "许宁核认 / 只做过有限现实确认",
+          "timestamp": "{{xuRiskMemoConfirmedDate}}",
+          "body": [
+            "那封{{wangRiskId}}邮件是陈雨出事后才来的。我只按要求看王曼是否还在公开工作地点一带，{{xuWangPhotoDate}} {{xuWangPhotoTime}}隔着一段距离拍了那张模糊的图，后来知道它对应041。没有进她住处，也没有一直跟着她。",
+            "其余几张我没在现场拍。梁后来给的来源里有公开头像、校园合照、网上目击、工作信息和陈雨发件记录。我负责拿卡去普通照相馆打印六张，但不知道这些源图各由谁截取、拼版或放进寄给王曼的袋子。",
+            "王曼注：037是陈雨现场那张，另按原相机与店铺缓存核；这段说明只涉及038～043中的有限参与。"
+          ],
+          "metadata": {
+            "核认者": "许宁",
+            "核认日期": "{{xuRiskMemoConfirmedDate}}",
+            "041拍摄时间": "{{xuWangPhotoDate}} {{xuWangPhotoTime}}",
+            "本人承认": "公开地点短暂确认 / 远距一张 / 到店打印六张",
+            "不确认": "其他图的原拍者、拼版者、装袋者及寄送者"
+          },
+          "evidenceId": "F82"
+        }
+      ],
+      "links": [{ "label": "{{wangRiskId}} 风险材料", "pageId": "snapshot_xu_risk_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-risk-statement", "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_wang_risk_compare",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "038～043来源对照",
+      "url": "archive://snapshot/ncitynews/wangman/risk-compare",
+      "body": [
+        "王曼 / 记者工作笔记，{{xuRiskProvidedDate}}整理。对照收到的纸照片、许宁实收的{{wangRiskId}}局部交接与陈雨事故前资料；仅按可见内容和来源类别列可能对应。",
+        "六张图的分辨率、裁切比例和压缩程度不一致：有网页保存边缘、活动合照、网络截图、模糊远摄、公开资料组合以及邮件屏幕截取。源图拍摄日不等于威胁材料组装日。"
+      ],
+      "objects": [
+        { "id": "wang-risk-038-row", "type": "text", "title": "038 / 公开头像", "metadata": { "可见内容": "个人网页头像与网页边缘", "可能来源": "公开个人页", "可核依据": "038扫描件；R补记的公开头像类别" } },
+        { "id": "wang-risk-039-row", "type": "text", "title": "039 / 活动合照", "metadata": { "可见内容": "多人校园活动照，原画面比例保留", "可能来源": "公开校园相册", "可核依据": "039扫描件；R补记的活动合照类别" } },
+        { "id": "wang-risk-040-row", "type": "text", "title": "040 / 网上目击", "metadata": { "可见内容": "近期街边图与网页压缩痕迹", "可能来源": "公开目击页面", "可核依据": "040扫描件；R补记的网上目击类别" } },
+        { "id": "wang-risk-041-row", "type": "text", "title": "041 / 远距确认", "metadata": { "可见内容": "模糊、远距离的现实拍摄", "可能来源": "许宁的短暂现场确认", "可核依据": "041扫描件；许宁本人核认与拍摄时间" } },
+        { "id": "wang-risk-042-row", "type": "text", "title": "042 / 工作信息", "metadata": { "可见内容": "公开栏目与工作区域资料组合", "可能来源": "公开工作网页", "可核依据": "042扫描件；R补记的工作栏目类别" } },
+        { "id": "wang-risk-043-row", "type": "text", "title": "043 / 陈雨发送记录", "metadata": { "可见内容": "陈雨→王曼、旧帖时间核对.xls", "可能来源": "陈雨本地可见已发送记录或其副本", "可核依据": "043扫描件；陈雨事故前王曼接收记录；R邮件随信局部截取" } },
+        {
+          "id": "wang-risk-compare-note",
+          "type": "log-entry",
+          "title": "六类信息 / 对照边界",
+          "timestamp": "{{xuRiskProvidedDate}}",
+          "body": [
+            "{{wangRiskId}}补记中的六类来源与038～043的六种可见内容逐项对应；041另有许宁本人核认，043另有陈雨事故前发件与王曼接收记录。",
+            "照片形态和来源差异支持拼装，而非同一人连续拍摄。原始头像、活动照等可早于事故；这里只核事故后R创建、来源补记、冲印与收袋的顺序，不把每张源图的拍摄时间改成事故后。",
+            "对照本身不能确定谁截取全部网页、谁拼版、谁装袋或谁寄送，也不产生王曼S类付费任务。"
+          ],
+          "metadata": {
+            "对照者": "王曼",
+            "基础": "038～043收到副本 / {{wangRiskId}}有限实收材料 / 许宁核认 / 陈雨事故前备份",
+            "边界": "六类来源对应；不鉴定全部制作人或寄送人"
+          },
+          "evidenceId": "F83"
+        }
+      ],
+      "links": [
+        { "label": "图片来源整理 / 038～043", "pageId": "snapshot_wang_photos" },
+        { "label": "{{wangRiskId}} 风险材料", "pageId": "snapshot_xu_risk_materials" },
+        { "label": "陈雨资料备份", "pageId": "snapshot_wang_chen_backup" }
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/risk-compare", "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}" }
     }
   ],
   "evidence": [
@@ -8099,6 +8382,66 @@
       "summary": "记者备忘按许宁恢复邮箱通知、陈雨已发送字段和信封照片排列：规则仍启用提醒早于邮件，邮件早于威胁材料出现文件名。需回各原件核时；无阅读回执或设置者操作日志。",
       "timestamp": "{{xuMailboxProvidedDate}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F78",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_risk_mail",
+      "sourceObjectId": "xu-risk-local-sent-fragment",
+      "title": "R随信局部截取｜陈雨手机已发送条目指向王曼",
+      "summary": "梁事故后发给许宁的实收邮件附一条陈雨随身手机本地可见已发送字段：陈雨→王曼、旧帖时间核对.xls。与王曼事故前接收记录及043互核；没有陈雨完整邮箱或截图者鉴定。",
+      "timestamp": "{{wangRiskCreateDate}} {{wangRiskMailTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F79",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_risk_mail",
+      "sourceObjectId": "xu-risk-mail-body",
+      "title": "梁给许宁的{{wangRiskId}}邮件｜王曼被单独列为风险确认对象",
+      "summary": "许宁实收邮件给王曼单列{{wangRiskId}}，要求核她是否仍在本地及是否接触陈雨材料，只查公开信息、不直接接触；注明内部风险确认，未见客户委托或收费字段。",
+      "timestamp": "{{wangRiskCreateDate}} {{wangRiskMailTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F80",
+      "type": "other",
+      "sourcePageId": "snapshot_xu_risk_attachment",
+      "sourceObjectId": "xu-risk-create-row",
+      "title": "{{wangRiskId}}创建行｜创建字段与实收邮件均晚于陈雨事故",
+      "summary": "许宁收到的少数行附件记{{wangRiskCreateDate}} {{wangRiskCreateTime}}创建、风险确认待核；同日{{wangRiskMailTime}}邮件系统实收。独立事故报道与037时间须另核；不据人工字段推R编号连续或完整名单。",
+      "timestamp": "{{wangRiskCreateDate}} {{wangRiskCreateTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F81",
+      "type": "other",
+      "sourcePageId": "snapshot_xu_risk_attachment",
+      "sourceObjectId": "xu-risk-source-categories",
+      "title": "R后续补记｜公开网页、通信与有限现场确认混用",
+      "summary": "许宁后收的{{wangRiskSupplementDate}}局部补记列公开头像、校园合照、网上目击、工作信息、陈雨已发送记录及一张远处现场图。补记晚于初始R邮件、早于冲印，不把源图拍摄日等同组装日。",
+      "timestamp": "{{wangRiskSupplementDate}} {{wangRiskSupplementTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F82",
+      "type": "log",
+      "sourcePageId": "snapshot_xu_risk_statement",
+      "sourceObjectId": "xu-risk-statement-confirmed",
+      "title": "许宁核认｜038～043中仅041为她的远距拍摄",
+      "summary": "许宁称只在公开地点短暂核王曼、远距拍041并到店打印六张；其余多张不是她现场所拍。她未进私人住处、未持续尾随，不知道全部截取、拼版、装袋或寄送者。",
+      "timestamp": "{{xuRiskMemoConfirmedDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F83",
+      "type": "other",
+      "sourcePageId": "snapshot_wang_risk_compare",
+      "sourceObjectId": "wang-risk-compare-note",
+      "title": "王曼来源对照｜R六类信息逐项对应038～043",
+      "summary": "记者将R补记、六张纸照、许宁核认及陈雨收发记录逐项对照：038公开头像、039校园合照、040网上目击、041许宁远摄、042公开工作信息、043陈雨通信。画质和格式差异支持混合拼装，不鉴定具体制作者。",
+      "timestamp": "{{xuRiskProvidedDate}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -8286,6 +8629,26 @@
       "id": "C34",
       "title": "现有证据强烈支持：梁通过许宁旧邮箱的控制／转发渠道提前获得陈雨的调查信息，从而知道她正在核查异常寻人帖。",
       "summary": "转发规则在陈雨发件前仍启用，目的地为已核工作邮箱；随后威胁材料准确出现附件文件名。没有阅读回执，不能确定梁打开邮件的分钟、设置者或威胁包制作者，更不能推出预谋伤害。"
+    },
+    {
+      "id": "C35",
+      "title": "陈雨事故后，梁从她留下的设备／材料中发现王曼已收到调查资料。",
+      "summary": "037支持梁在重伤现场处理陈雨手机或物品；事故后的梁来信及随信本地已发送截取明确指向王曼，与事故前王曼接收记录和043相符。限于本地可见局部，不推得完整邮箱或精确首次查看时刻。"
+    },
+    {
+      "id": "C36",
+      "title": "王曼随后被作为独立的{{wangRiskId}}内部风险对象处理，不属于S类付费寻访目标。",
+      "summary": "事故后R创建行、梁的实收任务邮件及陈雨资料外传缘由相接。R用于内部风险确认；已有S类材料显示其为客户委托寻访。王曼这条没有客户或收费字段，不把其他R编号、完整名单或王曼付费委托推出来。"
+    },
+    {
+      "id": "C37",
+      "title": "038～043与R类风险核查材料高度对应，来源混合，包括公开资料、陈雨通信记录和少量现实确认。",
+      "summary": "R后续补记的六类来源、许宁对041的有限参与、王曼逐张对照与收到的038～043及043字段互证；不能确定每张图片的截取者、拼版者或寄送者。"
+    },
+    {
+      "id": "C38",
+      "title": "现有证据强烈支持：038～043是陈雨事故后围绕王曼制作的内部风险威慑材料，而非客户付费寻访材料。",
+      "summary": "事故后识别王曼、R任务和混合来源与七扫六印及037／038事件分界闭合。只确认内部用途和威慑性质；不证明梁亲自制作全部图片、谁装袋寄送、R任务总量、收费客户寻找王曼或王曼后来去向。"
     }
   ],
   "relations": [
@@ -8904,6 +9267,38 @@
           "C34"
         ]
       }
+    },
+    {
+      "id": "R35",
+      "title": "事故现场设备与事故后R来信中的王曼收件记录",
+      "evidenceIds": ["F78", "F30", "F32", "F26", "F27"],
+      "factIds": ["C15"],
+      "summary": "公开事故日期及伤者身份、037现场处理手机、事故前王曼接收记录、043和梁事故后随信局部截取互核；只支持发现外传收件人，不扩展为完整邮箱。",
+      "unlocks": { "factIds": ["C35"] }
+    },
+    {
+      "id": "R36",
+      "title": "区分事故后R风险确认与S客户寻访",
+      "evidenceIds": ["F79", "F80"],
+      "factIds": ["C35", "C28", "C31"],
+      "summary": "R邮件与少数行创建字段晚于事故并因陈雨资料外传指向王曼；已有S业务结论说明付费客户委托的不同用途。没有王曼S任务或客户付款证据。",
+      "unlocks": { "factIds": ["C36"] }
+    },
+    {
+      "id": "R37",
+      "title": "对照R来源类别、许宁核认与038～043",
+      "evidenceIds": ["F81", "F82", "F83", "F31", "F32"],
+      "factIds": [],
+      "summary": "局部来源补记、041本人核认和记者逐张对照须与收到的六图及043邮件字段共同使用；不因打开R目录自动确认。",
+      "unlocks": { "factIds": ["C37"] }
+    },
+    {
+      "id": "R38",
+      "title": "确认038～043的事故后内部风险用途",
+      "evidenceIds": [],
+      "factIds": ["C35", "C36", "C37", "C12", "C16"],
+      "summary": "事故后识别、R任务、混合来源与七扫六印及037／038事件分界闭合；强支持内部风险威慑用途，不认定具体装袋寄送者或收费客户。",
+      "unlocks": { "factIds": ["C38"] }
     }
   ],
   "puzzles": [
@@ -9028,7 +9423,8 @@
       "Xu old communication / protection / finite task / expense calendar dates and times, S number values and redacted target labels; no complete amounts or accounts restored",
       "S-034 number, target old public label, contact / work mailbox strings, commercial contact project label, all transaction / public sighting / verification / capture dates and times, payment amounts and account tail; no bank brand or final settlement",
       "Third partial adult-family sample S value, redacted target code / old public nickname / username, public / mail / attachment receipt calendar dates and times; no customer identity, fee or complete transaction restored",
-      "Xu old-mailbox security notice, forwarding activation and status reminder, supplementary handoff and work-page capture calendar dates and times; no operator log or read receipt restored"
+      "Xu old-mailbox security notice, forwarding activation and status reminder, supplementary handoff and work-page capture calendar dates and times; no operator log or read receipt restored",
+      "Wang R risk number, post-incident creation and Xu receipt / brief photograph / source supplement / handoff / archive dates and times; no complete R registry, customer order or later Wang departure restored"
     ]
   },
   "homePageId": "portal_home",
