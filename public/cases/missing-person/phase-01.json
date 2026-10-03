@@ -158,7 +158,48 @@
     "xuControlReminderDate": "2008-09-16",
     "xuExpenseDate": "2008-08-18",
     "xuExpenseTime": "19:24",
-    "xuMaterialsProvidedDate": "2009-09-24"
+    "xuMaterialsProvidedDate": "2009-09-24",
+    "s034Id": "S-034",
+    "s034Target": "程先生",
+    "s034Region": "城东",
+    "s034PublicProject": "旧商贸合作",
+    "zhouMailbox": "zhou.qm@oldbiz.example",
+    "liangWorkMailbox": "liang@echo.example",
+    "s034Payee": "梁志诚",
+    "s034AccountTail": "6217",
+    "s034Advance": "1200.00",
+    "s034Remainder": "800.00",
+    "s034CommissionDate": "2009-02-02",
+    "s034CommissionTime": "10:16",
+    "s034AcceptDate": "2009-02-03",
+    "s034AcceptTime": "09:12",
+    "s034InstructionDate": "2009-02-04",
+    "s034InstructionTime": "08:42",
+    "s034PaymentDate": "2009-02-04",
+    "s034PaymentTime": "15:08",
+    "s034NoticeDate": "2009-02-05",
+    "s034NoticeTime": "10:21",
+    "s034Sight1Date": "2009-02-06",
+    "s034Sight1Time": "20:14",
+    "s034Sight2Date": "2009-02-07",
+    "s034Sight2Time": "17:36",
+    "s034TaskDate": "2009-02-08",
+    "s034TaskTime": "09:03",
+    "s034CheckDate": "2009-02-09",
+    "s034CheckTime": "18:26",
+    "s034DeliveryDate": "2009-02-10",
+    "s034DeliveryTime": "11:40",
+    "s034DisputeDate": "2009-02-13",
+    "s034DisputeTime": "16:12",
+    "s034DisputeReplyTime": "18:04",
+    "s034PublicCaptureDate": "2009-02-14",
+    "s034PublicCaptureTime": "08:30",
+    "zhouContactDate": "2009-09-27",
+    "zhouProvidedDate": "2009-09-28",
+    "s034ArchiveDate": "2009-09-30",
+    "s034ArchiveTime": "10:12",
+    "xuNormalReplyDate": "2008-06-15",
+    "xuNormalReplyTime": "11:09"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3522,14 +3563,15 @@
         "王曼 / 本地、社会新闻线实习记者。做过采访、资料核对和稿件整理。此页留存的是个人工作资料，不是资讯网栏目。",
         "日常项目：校园采访记录、本地生活选题、联系资料整理。这里只保留项目名，笔记和联系方式未收入网页副本。",
         "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。",
-        "本次恢复的是较晚更新的目录。五月保存的旧附件沿用各自抓取记录；九月联系记录与采访节录是后来链接、分别抓取的必要副本，不由早期目录截图推定可恢复。"
+        "本次恢复的是较晚更新的目录。五月保存的旧附件沿用各自抓取记录；九月联系记录与采访节录是后来链接、分别抓取的必要副本，不由早期目录截图推定可恢复。",
+        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接；许宁材料与五月旧文件仍沿用各自独立抓取记录。"
       ],
       "searchable": false,
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/materials",
-        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
       },
       "directory": true,
       "objects": [
@@ -3676,6 +3718,22 @@
             "保存日期": "{{xuMaterialsProvidedDate}}",
             "大小": "必要副本"
           }
+        },
+        {
+          "id": "wang-dir-s034",
+          "type": "file",
+          "title": "{{s034Id}} 核查材料",
+          "metadata": {
+            "类型": "来源分类目录",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          },
+          "links": [
+            {
+              "label": "{{s034Id}} 核查材料",
+              "pageId": "snapshot_wang_s034"
+            }
+          ]
         }
       ]
     },
@@ -4141,7 +4199,25 @@
           "F40"
         ]
       },
-      "objects": [],
+      "objects": [
+        {
+          "id": "echo-public-work-contact",
+          "type": "log-entry",
+          "title": "日常联络 / 负责人联系方式",
+          "body": [
+            "梁志诚 / 回声寻人网日常信息整理与联络。",
+            "寻回反馈、旧信息修订或停止转发，请使用此工作邮箱。"
+          ],
+          "metadata": {
+            "负责人": "梁志诚",
+            "工作邮箱": "{{liangWorkMailbox}}",
+            "日常用途": "寻人信息联络 / 修订 / 停止转发",
+            "来源": "回声旧公开关于我们页"
+          },
+          "evidenceId": "F59-A",
+          "timestamp": "{{echoSnapshotDate}}"
+        }
+      ],
       "links": []
     },
     {
@@ -5049,6 +5125,22 @@
             "保存日期": "{{xuMaterialsProvidedDate}}",
             "大小": "必要副本"
           }
+        },
+        {
+          "id": "xu-material-s034",
+          "type": "file",
+          "title": "{{s034Id}} / 最近是否还在城东",
+          "metadata": {
+            "类型": "有限任务收件",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要副本"
+          },
+          "links": [
+            {
+              "label": "{{s034Id}} / 最近是否还在城东",
+              "pageId": "snapshot_s034_xu_task"
+            }
+          ]
         }
       ],
       "links": [
@@ -5383,6 +5475,1069 @@
           "pageId": "snapshot_wang_xu_materials"
         }
       ]
+    },
+    {
+      "id": "snapshot_s034_xu_task",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{s034Id}} / 最近是否还在城东",
+      "url": "archive://snapshot/ncitynews/wangman/s034_xu_task",
+      "body": [
+        "许宁实际收件与自存回信 / {{xuMaterialsProvidedDate}}许可王曼复制；不含客户资料。",
+        "原公开页面没有内部编号。旧照片的称呼仍可用于南城搜索，编号只留在内部邮件中。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_s034_xu_task-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "许宁（实收副本）",
+            "主题": "{{s034Id}} / 最近是否还在城东",
+            "邮件系统时间": "{{s034TaskDate}} {{s034TaskTime}}",
+            "来源": "许宁实际收件与自存回信 / {{xuMaterialsProvidedDate}}许可王曼复制；不含客户资料。"
+          }
+        },
+        {
+          "id": "s034-task-photo",
+          "type": "attachment",
+          "title": "附件 / 旧照片",
+          "media": {
+            "src": "cases/missing-person/images/s034-target-old.png",
+            "alt": "{{s034Target}}的普通旧照片；同一照片用于公开寻人页与执行收件副本",
+            "filename": "old-photo.png",
+            "width": "1448",
+            "height": "1086",
+            "caption": "旧照片 / {{s034Target}}"
+          }
+        },
+        {
+          "id": "s034-task-body",
+          "type": "log-entry",
+          "title": "收件正文 / 有限确认",
+          "body": [
+            "{{s034Id}} / {{s034Target}}。确认一下最近是否还在{{s034Region}}一带活动。不用接触，看到本人即可。",
+            "用附件 old-photo.png 比对。公开寻人页里，{{s034Sight1Date|zh}}市场外围、{{s034Sight2Date|zh}}附近公交站这两条说法可以先看一下，不必把那些不确定的回复都当真。",
+            "这封收件只有目标、照片、近期区域与要求，没有委托人的姓名或联系方式。"
+          ],
+          "metadata": {
+            "内部编号": "{{s034Id}}",
+            "目标": "{{s034Target}}",
+            "附件": "old-photo.png（与公开页同一照片）",
+            "区域": "{{s034Region}}市场外围 / 附近公交站（公共区域）",
+            "收件": "{{s034TaskDate}} {{s034TaskTime}}",
+            "要求": "不接触，只作短暂目视确认"
+          },
+          "evidenceId": "F57",
+          "timestamp": "{{s034TaskDate}} {{s034TaskTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "南城搜索",
+          "pageId": "search_home"
+        },
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_xu_task",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_public",
+      "kind": "website",
+      "skin": "echo",
+      "layout": "echo",
+      "siteId": "echo",
+      "siteName": "回声寻人网",
+      "title": "寻找旧合作伙伴 / {{s034Target}}",
+      "url": "archive://echo/old/partner-notice",
+      "date": "{{s034NoticeDate}}",
+      "body": [
+        "旧合作伙伴{{s034Target}}近来联系不上，还有一些重要事务和资料没有处理完。希望了解他近况的朋友提供消息，也请本人看到后联系。",
+        "以前知道他在{{s034Region}}一带活动，照片是旧照。请不要把只是长得相像的人当成已经确认找到。"
+      ],
+      "media": {
+        "src": "cases/missing-person/images/s034-target-old.png",
+        "alt": "{{s034Target}}的普通旧照片；同一照片用于公开寻人页与执行收件副本",
+        "filename": "old-photo.png",
+        "width": "1448",
+        "height": "1086",
+        "caption": "旧照片 / {{s034Target}}"
+      },
+      "objects": [
+        {
+          "id": "s034-public-contact",
+          "type": "log-entry",
+          "title": "原页联系信息",
+          "body": [
+            "联系人：周先生。旧商贸合作事项，请知情者通过原留邮箱联系。",
+            "原页联系人没有公开全名；此处保留当时普通邮箱和事项字段，不能凭姓氏认定是谁。"
+          ],
+          "metadata": {
+            "联系人": "周先生",
+            "公开邮箱": "{{zhouMailbox}}",
+            "联系事项": "{{s034PublicProject}}",
+            "发布于": "{{s034NoticeDate}} {{s034NoticeTime}}",
+            "目标旧称": "{{s034Target}}",
+            "照片": "old-photo.png",
+            "原区域": "{{s034Region}}一带",
+            "来源": "回声原公开页面 / 独立抓取副本"
+          },
+          "evidenceId": "F57-P",
+          "timestamp": "{{s034NoticeDate}} {{s034NoticeTime}}"
+        },
+        {
+          "id": "s034-public-sightings",
+          "type": "log-entry",
+          "title": "网友留言 / 旧回复节录",
+          "body": [
+            "{{s034Sight1Date}} 路过的网友：昨天下午市场外围见过一个很像照片里的人，走得快，不能确定。",
+            "{{s034Sight2Date}} 等车的网友：今天下午在市场附近公交站看见像他的人，好像还在那边做事，没上去问。",
+            "{{s034Sight2Date}} 普通回复：我记得在城北见过，不过也许是上个月，照片看不太准。",
+            "{{s034Sight2Date}} 补充回复：我前面说的那个戴眼镜，可能认错了。麻烦不要直接当成找到。",
+            "留言是普通网友的自述，日期为原站发布字段；时间不确定的见闻不等于精确位置。"
+          ],
+          "metadata": {
+            "目击1发布": "{{s034Sight1Date}} {{s034Sight1Time}}",
+            "目击2发布": "{{s034Sight2Date}} {{s034Sight2Time}}",
+            "有用区域": "{{s034Region}}市场外围 / 附近公交站",
+            "不确定项": "城北旧印象、可能认错",
+            "来源": "原公开主题回复 / 独立抓取"
+          },
+          "evidenceId": "F63",
+          "timestamp": "{{s034Sight2Date}} {{s034Sight2Time}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "原联系人留下的商业资料",
+          "pageId": "snapshot_zhou_business"
+        }
+      ],
+      "searchable": true,
+      "searchIndexed": true,
+      "normalNavigation": false,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "{{s034Target}}",
+          "{{zhouMailbox}}"
+        ]
+      },
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "echo://old/partner-notice",
+        "capturedAt": "{{s034PublicCaptureDate}} {{s034PublicCaptureTime}}"
+      }
+    },
+    {
+      "id": "snapshot_zhou_business",
+      "kind": "website",
+      "siteId": "zhou-business",
+      "siteName": "旧商业联系页",
+      "title": "旧合作项目 / 公开联系资料",
+      "url": "archive://oldbiz/project/contact",
+      "body": [
+        "旧项目联系方式，供合作事务联络。页面保留当时的信息，不代表现在仍在使用。"
+      ],
+      "objects": [
+        {
+          "id": "zhou-public-fields",
+          "type": "log-entry",
+          "title": "项目联络栏",
+          "body": [
+            "项目联络：周启明。",
+            "这里是普通商业联系资料，没有写他曾向谁委托寻访。"
+          ],
+          "metadata": {
+            "姓名": "周启明",
+            "公开邮箱": "{{zhouMailbox}}",
+            "合作事项": "{{s034PublicProject}}",
+            "来源": "旧商业公开网页 / 独立历史副本"
+          },
+          "evidenceId": "F58-B"
+        }
+      ],
+      "links": [
+        {
+          "label": "恢复件保存说明 / 王曼核查资料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": true,
+      "searchIndexed": true,
+      "normalNavigation": true,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "{{zhouMailbox}}",
+          "周启明"
+        ]
+      },
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "oldbiz://project/contact",
+        "capturedAt": "{{s034PublicCaptureDate}} {{s034PublicCaptureTime}}"
+      }
+    },
+    {
+      "id": "snapshot_wang_s034",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{s034Id}} 核查材料",
+      "url": "archive://snapshot/ncitynews/wangman/wang_s034",
+      "body": [
+        "来源登记 / 王曼。{{zhouContactDate}}按旧公开联系字段以记者身份联系周启明；核对原邮箱、合作事项及本人对旧材料的说明。{{zhouProvidedDate}}获准复制其自存材料用于采访核查。",
+        "周说自己保留这些材料，是为证明“前面的费用已经付过，不欠对方所说的那么多”。他对价格与效果有自己的立场，不把他的评价当作所有事实。",
+        "公开资料是原网页独立恢复件；客户往来与银行回单由周本人提供；执行收件和回复由许宁提供；下列来源登记不替代实际阅读原材料。",
+        "每份文件有独立抓取记录，不开放任何完整邮箱、客户库或电脑。正常运营邮件另列于邮箱核查，取自许宁原有寻人帖停止转发通信。"
+      ],
+      "objects": [
+        {
+          "id": "s034-file-snapshot_s034_public",
+          "type": "file",
+          "title": "公开资料 / 寻人历史页",
+          "links": [
+            {
+              "label": "公开资料 / 寻人历史页",
+              "pageId": "snapshot_s034_public"
+            }
+          ],
+          "metadata": {
+            "类型": "公开网页存档",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_zhou_business",
+          "type": "file",
+          "title": "公开资料 / 旧商业联系页",
+          "links": [
+            {
+              "label": "公开资料 / 旧商业联系页",
+              "pageId": "snapshot_zhou_business"
+            }
+          ],
+          "metadata": {
+            "类型": "公开网页存档",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_commission",
+          "type": "file",
+          "title": "周启明提供 / 初次委托",
+          "links": [
+            {
+              "label": "周启明提供 / 初次委托",
+              "pageId": "snapshot_s034_commission"
+            }
+          ],
+          "metadata": {
+            "类型": "周授权发件副本",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_acceptance",
+          "type": "file",
+          "title": "周启明提供 / 接单确认",
+          "links": [
+            {
+              "label": "周启明提供 / 接单确认",
+              "pageId": "snapshot_s034_acceptance"
+            }
+          ],
+          "metadata": {
+            "类型": "周授权收件副本",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_instruction",
+          "type": "file",
+          "title": "周启明提供 / 付款指示",
+          "links": [
+            {
+              "label": "周启明提供 / 付款指示",
+              "pageId": "snapshot_s034_instruction"
+            }
+          ],
+          "metadata": {
+            "类型": "周授权收件副本",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_bank",
+          "type": "file",
+          "title": "周启明提供 / 银行回单",
+          "links": [
+            {
+              "label": "周启明提供 / 银行回单",
+              "pageId": "snapshot_s034_bank"
+            }
+          ],
+          "metadata": {
+            "类型": "周授权银行凭证",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_delivery",
+          "type": "file",
+          "title": "周启明提供 / 寻访结果",
+          "links": [
+            {
+              "label": "周启明提供 / 寻访结果",
+              "pageId": "snapshot_s034_delivery"
+            }
+          ],
+          "metadata": {
+            "类型": "周实际收件文件",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_dispute",
+          "type": "file",
+          "title": "周启明提供 / 尾款争议",
+          "links": [
+            {
+              "label": "周启明提供 / 尾款争议",
+              "pageId": "snapshot_s034_dispute"
+            }
+          ],
+          "metadata": {
+            "类型": "周授权往来节录",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_xu_task",
+          "type": "file",
+          "title": "许宁提供 / 确认任务",
+          "links": [
+            {
+              "label": "许宁提供 / 确认任务",
+              "pageId": "snapshot_s034_xu_task"
+            }
+          ],
+          "metadata": {
+            "类型": "许宁实收邮件",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_check",
+          "type": "file",
+          "title": "许宁提供 / 有限确认回信",
+          "links": [
+            {
+              "label": "许宁提供 / 有限确认回信",
+              "pageId": "snapshot_s034_check"
+            }
+          ],
+          "metadata": {
+            "类型": "许宁自存发件副本",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_identity",
+          "type": "file",
+          "title": "王曼核查 / 联系与许可",
+          "links": [
+            {
+              "label": "王曼核查 / 联系与许可",
+              "pageId": "snapshot_s034_identity"
+            }
+          ],
+          "metadata": {
+            "类型": "采访来源登记",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        },
+        {
+          "id": "s034-file-snapshot_s034_mailbox",
+          "type": "file",
+          "title": "王曼核查 / 邮箱资料引用",
+          "links": [
+            {
+              "label": "王曼核查 / 邮箱资料引用",
+              "pageId": "snapshot_s034_mailbox"
+            }
+          ],
+          "metadata": {
+            "类型": "三类原来源索引",
+            "保存日期": "{{zhouProvidedDate}}",
+            "大小": "必要副本"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": true,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/wang_s034",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_identity",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "周先生 / 联系与许可登记",
+      "url": "archive://snapshot/ncitynews/wangman/s034_identity",
+      "body": [
+        "{{zhouContactDate}}，沿公开寻人页的“周先生”旧邮箱，查到旧商业项目联系页。两页的邮箱和合作事项一致，商业页署名周启明；这只先确定联系人候选，不能仅凭姓周判断委托关系。",
+        "{{zhouProvidedDate}}，周启明确认是自己留下的旧联系方式，授权复制本人持有的初次委托、梁回复、付款指示、银行回单、结果附件和尾款争议。原创建者与收发方向保留在各件中。",
+        "他称这是旧商业合作对象，账务和资料未处理完，对方后来不愿再谈旧账而主动断了联络。初次委托把争执说得较轻；这段是当事人的说明，不恢复债务金额或另写纠纷经过。",
+        "公开寻人页、旧商业页来自公开恢复；交易副本来自周；执行任务来自许宁。王曼登记取得日期与许可，各件独立核对，不因为它们放在同一目录就成为一个来源。"
+      ],
+      "objects": [],
+      "links": [
+        {
+          "label": "原公开寻人页",
+          "pageId": "snapshot_s034_public"
+        },
+        {
+          "label": "原商业联系页",
+          "pageId": "snapshot_zhou_business"
+        },
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_identity",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_commission",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "关于旧合作伙伴的联系",
+      "url": "archive://snapshot/ncitynews/wangman/s034_commission",
+      "body": [
+        "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_s034_commission-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{zhouMailbox}}",
+            "收件人": "{{liangWorkMailbox}}",
+            "主题": "关于旧合作伙伴的联系",
+            "邮件系统时间": "{{s034CommissionDate}} {{s034CommissionTime}}",
+            "来源": "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+          }
+        },
+        {
+          "id": "s034-commission-photo",
+          "type": "attachment",
+          "title": "附件 / 旧照片",
+          "media": {
+            "src": "cases/missing-person/images/s034-target-old.png",
+            "alt": "{{s034Target}}的普通旧照片；同一照片用于公开寻人页与执行收件副本",
+            "filename": "old-photo.png",
+            "width": "1448",
+            "height": "1086",
+            "caption": "旧照片 / {{s034Target}}"
+          }
+        },
+        {
+          "id": "s034-commission-body",
+          "type": "log-entry",
+          "title": "原发件正文",
+          "body": [
+            "梁先生：以前合作的{{s034Target}}突然联系不上了，账务和资料还有一些事情没处理完。想先确认人是否安全、目前大概在哪里。",
+            "旧照片附上，原来知道他在{{s034Region}}一带活动。我的旧联络邮箱仍是{{zhouMailbox}}，{{s034PublicProject}}的事您可按这个联系。",
+            "周启明。"
+          ],
+          "metadata": {
+            "原发件人": "周启明 / {{zhouMailbox}}",
+            "原收件地址": "{{liangWorkMailbox}}",
+            "目标": "{{s034Target}}",
+            "旧照片": "old-photo.png",
+            "旧区域": "{{s034Region}}",
+            "关系自述": "旧商业合作对象，账务和资料未处理完"
+          },
+          "evidenceId": "F58-M",
+          "timestamp": "{{s034CommissionDate}} {{s034CommissionTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_commission",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_acceptance",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "Re: 关于旧合作伙伴的联系",
+      "url": "archive://snapshot/ncitynews/wangman/s034_acceptance",
+      "body": [
+        "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_s034_acceptance-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "周启明 / {{zhouMailbox}}",
+            "主题": "Re: 关于旧合作伙伴的联系",
+            "邮件系统时间": "{{s034AcceptDate}} {{s034AcceptTime}}",
+            "来源": "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+          }
+        },
+        {
+          "id": "s034-accept-body",
+          "type": "log-entry",
+          "title": "接单回复正文",
+          "body": [
+            "这单按特殊寻访处理，编号{{s034Id}}。先做公开信息核查，有需要再安排一次有限现场确认。目标按您原信中的{{s034Target}}和旧照。",
+            "费用分阶段，前期{{s034Advance}}元；结果整理交付后还有{{s034Remainder}}元尾款。付款信息另发。这里只确认接受这单，后续信息以核查时点为准。",
+            "梁志诚 / 回声寻人网。"
+          ],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "承接编号": "{{s034Id}}",
+            "对应原信": "{{s034CommissionDate}} {{s034CommissionTime}} / {{s034Target}}",
+            "内部称呼": "特殊寻访",
+            "前期服务费": "{{s034Advance}}元",
+            "约定尾款": "{{s034Remainder}}元"
+          },
+          "evidenceId": "F60",
+          "timestamp": "{{s034AcceptDate}} {{s034AcceptTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_acceptance",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_xu_normal_reply",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "Re: 本人安全，请停止转发",
+      "url": "archive://snapshot/ncitynews/wangman/xu_normal_reply",
+      "body": [
+        "许宁实际收件与自存回信 / {{xuMaterialsProvidedDate}}许可王曼复制；不含客户资料。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_xu_normal_reply-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "许宁 / {{xuOldMailbox}}",
+            "主题": "Re: 本人安全，请停止转发",
+            "邮件系统时间": "{{xuNormalReplyDate}} {{xuNormalReplyTime}}",
+            "来源": "许宁实际收件与自存回信 / {{xuMaterialsProvidedDate}}许可王曼复制；不含客户资料。"
+          }
+        },
+        {
+          "id": "xu-normal-reply-body",
+          "type": "log-entry",
+          "title": "普通运营回复正文",
+          "body": [
+            "许宁：收到你本人安全的反馈。原寻人信息会标记已得到本人消息，本站停止继续转发；其他网站的旧转载请按各站联系途径处理。",
+            "如需修订原帖联系方式，可以回复本邮箱。梁志诚 / 回声寻人网。"
+          ],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件": "{{xuOldMailbox}}",
+            "业务": "旧寻人帖联系 / 停止转发",
+            "签名": "梁志诚 / 回声寻人网",
+            "收到时间": "{{xuNormalReplyDate}} {{xuNormalReplyTime}}",
+            "来源": "许宁自存普通运营实收邮件 → 许可王曼复制"
+          },
+          "evidenceId": "F59-B",
+          "timestamp": "{{xuNormalReplyDate}} {{xuNormalReplyTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu_normal_reply",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_mailbox",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "邮箱资料引用 / 三类来源",
+      "url": "archive://snapshot/ncitynews/wangman/s034_mailbox",
+      "body": [
+        "公开联络页将负责人姓名与地址相连；许宁原有寻人信息的普通运营回复保留实际发件地址；周收到的接单回复使用同一地址。",
+        "分别查看三份原来源，再在记录中对照。显示名或一封邮件的落款不能代替三类互证。签名不是另一份独立证据。",
+        "本页是王曼所用引用索引，打开索引不自动记录归属；也不开放邮箱登录。"
+      ],
+      "objects": [],
+      "links": [
+        {
+          "label": "公开负责人联系资料",
+          "pageId": "echo_about"
+        },
+        {
+          "label": "普通运营邮件 / 停止转发",
+          "pageId": "snapshot_xu_normal_reply"
+        },
+        {
+          "label": "客户收到的接单回复",
+          "pageId": "snapshot_s034_acceptance"
+        },
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_mailbox",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_instruction",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{s034Id}} / 前期费用",
+      "url": "archive://snapshot/ncitynews/wangman/s034_instruction",
+      "body": [
+        "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_s034_instruction-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "周启明 / {{zhouMailbox}}",
+            "主题": "{{s034Id}} / 前期费用",
+            "邮件系统时间": "{{s034InstructionDate}} {{s034InstructionTime}}",
+            "来源": "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+          }
+        },
+        {
+          "id": "s034-instruction-body",
+          "type": "log-entry",
+          "title": "付款指示正文",
+          "body": [
+            "{{s034Id}}前期费用按前封接单回复办理：{{s034Advance}}元，收款户名{{s034Payee}}，账户尾号{{s034AccountTail}}。汇出后保留回单，便于对上这单。",
+            "这封信是付款要求，不是银行已经完成转账的确认。完整账户无关字段已遮蔽；不指定银行品牌。"
+          ],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "对应编号": "{{s034Id}}",
+            "收款户名": "{{s034Payee}}",
+            "账户识别": "尾号 {{s034AccountTail}}",
+            "应付前期金额": "{{s034Advance}}元",
+            "指示时间": "{{s034InstructionDate}} {{s034InstructionTime}}"
+          },
+          "evidenceId": "F61",
+          "timestamp": "{{s034InstructionDate}} {{s034InstructionTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_instruction",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_bank",
+      "kind": "attachment",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "转账回单 / 周启明提供",
+      "url": "archive://snapshot/ncitynews/wangman/s034_bank",
+      "body": [
+        "银行系统转账回单必要字段副本。周启明持有原付款凭证，{{zhouProvidedDate}}许可王曼复制；无关完整账号遮蔽。银行 / 平台品牌未恢复，不通过备注推服务用途。"
+      ],
+      "objects": [
+        {
+          "id": "s034-bank-fields",
+          "type": "log-entry",
+          "title": "银行回单 / 完成记录",
+          "body": [
+            "转账状态：已完成。以下为回单保留字段，不是付款指示邮件内容。",
+            "凭证只证明这笔转账；必须与对应日期的付款指示及原委托、接单上下文对照，才能归到这项服务。"
+          ],
+          "metadata": {
+            "付款人": "周启明",
+            "收款户名": "{{s034Payee}}",
+            "收款账户识别": "尾号 {{s034AccountTail}}",
+            "实际金额": "{{s034Advance}}元",
+            "银行系统完成时间": "{{s034PaymentDate}} {{s034PaymentTime}}",
+            "状态": "已完成",
+            "来源": "周本人的银行回单 → 授权必要字段副本"
+          },
+          "evidenceId": "F62",
+          "timestamp": "{{s034PaymentDate}} {{s034PaymentTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_bank",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_check",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "Re: {{s034Id}} / 区域确认",
+      "url": "archive://snapshot/ncitynews/wangman/s034_check",
+      "body": [
+        "许宁实际收件与自存回信 / {{xuMaterialsProvidedDate}}许可王曼复制；不含客户资料。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_s034_check-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "许宁（本人发件保存）",
+            "收件人": "{{liangWorkMailbox}}",
+            "主题": "Re: {{s034Id}} / 区域确认",
+            "邮件系统时间": "{{s034CheckDate}} {{s034CheckTime}}",
+            "来源": "许宁实际收件与自存回信 / {{xuMaterialsProvidedDate}}许可王曼复制；不含客户资料。"
+          }
+        },
+        {
+          "id": "s034-check-body",
+          "type": "log-entry",
+          "title": "发件与相邻回信节录",
+          "body": [
+            "{{s034Id}}：在{{s034Region}}市场外围隔着路看到了像旧照片的人，发际和体态应该是本人，只短暂看见，没上去接触。只能确认还在这片区域，不能说住在哪。",
+            "梁回信：收到。和前两条市场外围、附近公交站的公开留言对一下即可，别把城北那条旧印象算进去。",
+            "许宁核认这是她实际发出的有限确认回信；她没有客户身份、家庭地址、身份证或电话定位资料，也没有留下一套专业尾随记录。"
+          ],
+          "metadata": {
+            "对应编号": "{{s034Id}}",
+            "对应收件": "{{s034TaskDate}} {{s034TaskTime}}",
+            "目标旧照": "{{s034Target}} / old-photo.png",
+            "回信系统时间": "{{s034CheckDate}} {{s034CheckTime}}",
+            "确认范围": "{{s034Region}}市场外围（公共区域）",
+            "确定程度": "像本人 / 应该是，未接触"
+          },
+          "evidenceId": "F64",
+          "timestamp": "{{s034CheckDate}} {{s034CheckTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_check",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_delivery",
+      "kind": "attachment",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{s034Id}} 寻访结果 / 客户收件",
+      "url": "archive://snapshot/ncitynews/wangman/s034_delivery",
+      "body": [
+        "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。",
+        "以下是周启明实际收到的结果附件必要内容，连同交付邮件的收发字段保留。不是梁整个任务目录，也不是目标实时住址。"
+      ],
+      "objects": [
+        {
+          "id": "s034-delivery-headers",
+          "type": "text",
+          "title": "交付邮件 / 附件接收字段",
+          "body": [],
+          "metadata": {
+            "发件": "{{liangWorkMailbox}}",
+            "收件": "周启明 / {{zhouMailbox}}",
+            "收件系统时间": "{{s034DeliveryDate}} {{s034DeliveryTime}}",
+            "附件": "{{s034Id}}-寻访结果.txt"
+          }
+        },
+        {
+          "id": "s034-delivery-body",
+          "type": "log-entry",
+          "title": "结果附件正文",
+          "body": [
+            "{{s034Id}} / {{s034Target}}。最近可确认的范围为{{s034Region}}市场外围及附近公交站。",
+            "采用的公开记录：{{s034Sight1Date|zh}}网友市场外围留言、{{s034Sight2Date|zh}}公交站留言。见到时刻是网友自述；城北不确定旧印象与认错补充未作为有效位置。",
+            "有限现实确认：{{s034CheckDate|zh}}隔路短暂目视，像旧照本人，只确认还在区域内。现阶段可能的工作 / 活动范围就在上述公共区域，没有家庭住址和私人联系方式。",
+            "摘要按此次核查时点整理，不能保证日后仍在原处。"
+          ],
+          "metadata": {
+            "内部编号": "{{s034Id}}",
+            "目标": "{{s034Target}}",
+            "客户实际收件": "{{s034DeliveryDate}} {{s034DeliveryTime}}",
+            "定位输入": "两条公开目击 + 一次有限确认",
+            "范围": "{{s034Region}}市场外围 / 附近公交站"
+          },
+          "evidenceId": "F65",
+          "timestamp": "{{s034DeliveryDate}} {{s034DeliveryTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_delivery",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s034_dispute",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "Re: {{s034Id}} / 余款",
+      "url": "archive://snapshot/ncitynews/wangman/s034_dispute",
+      "body": [
+        "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+      ],
+      "objects": [
+        {
+          "id": "snapshot_s034_dispute-headers",
+          "type": "text",
+          "title": "邮件打印副本 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "周启明 / {{zhouMailbox}}",
+            "收件人": "{{liangWorkMailbox}}",
+            "主题": "Re: {{s034Id}} / 余款",
+            "邮件系统时间": "{{s034DisputeDate}} {{s034DisputeTime}}",
+            "来源": "周启明自存往来 / {{zhouProvidedDate}}许可王曼复制必要内容；工作页所链接文件的独立存档恢复件。"
+          }
+        },
+        {
+          "id": "s034-dispute-body",
+          "type": "log-entry",
+          "title": "尾款往来节录",
+          "body": [
+            "周启明：你给的位置人已经不在那里了。前面的{{s034Advance}}元我已经付过，结果很快就用不上，价格也高；剩下这部分我不认。",
+            "梁回复（{{s034DisputeDate}} {{s034DisputeReplyTime}}）：交付时的信息是有效的，按当时核查整理。约定的{{s034Remainder}}元尾款仍应支付。",
+            "只保留这次争执，不恢复后来是否补款、退款或其他处理结果。周对效果的评价有立场；此处能核双方在交付后争议剩余费用。"
+          ],
+          "metadata": {
+            "编号": "{{s034Id}}",
+            "周原发件地址": "{{zhouMailbox}}",
+            "梁回复地址": "{{liangWorkMailbox}}",
+            "已付争执字段": "前期 {{s034Advance}}元",
+            "未付争执字段": "尾款 {{s034Remainder}}元（争议，最终处理未恢复）",
+            "所指结果": "{{s034DeliveryDate}}交付摘要"
+          },
+          "evidenceId": "F66",
+          "timestamp": "{{s034DisputeDate}} {{s034DisputeTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s034Id}} 核查材料",
+          "pageId": "snapshot_wang_s034"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C23"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s034_dispute",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
     }
   ],
   "evidence": [
@@ -5982,6 +7137,135 @@
       "summary": "许宁自己的小额入账记录备注交通、资料，日期与第一份任务邮件及回信对应。是执行费用 / 报销，不是客户付给梁的服务费，不提供完整金额、账户或财务账。",
       "timestamp": "{{xuExpenseDate}} {{xuExpenseTime}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F57",
+      "type": "email",
+      "sourcePageId": "snapshot_s034_xu_task",
+      "sourceObjectId": "s034-task-body",
+      "title": "{{s034Id}}｜执行邮件中的目标、旧照和近期公共区域",
+      "summary": "许宁实收邮件包含编号、{{s034Target}}、old-photo.png和{{s034Region}}近期确认要求，无客户身份；不能凭指令认定已经执行。",
+      "discovery": "detail",
+      "timestamp": "{{s034TaskDate}} {{s034TaskTime}}"
+    },
+    {
+      "id": "F57-P",
+      "type": "page",
+      "sourcePageId": "snapshot_s034_public",
+      "sourceObjectId": "s034-public-contact",
+      "title": "公开寻人页｜旧照、区域与周先生的联系字段",
+      "summary": "公开页中的{{s034Target}}、old-photo.png、{{s034Region}}及发布时间可与执行收件核对；联系人仅周先生，邮箱和事项留在原页，不单独证明客户。",
+      "discovery": "detail",
+      "timestamp": "{{s034NoticeDate}} {{s034NoticeTime}}"
+    },
+    {
+      "id": "F58-B",
+      "type": "page",
+      "sourcePageId": "snapshot_zhou_business",
+      "sourceObjectId": "zhou-public-fields",
+      "title": "旧商业页｜周启明的公开邮箱与合作事项",
+      "summary": "公开商业页署名周启明，邮箱{{zhouMailbox}}与{{s034PublicProject}}可与寻人页交叉。姓氏或同名不足，委托关系还须实际客户材料。",
+      "discovery": "detail"
+    },
+    {
+      "id": "F58-M",
+      "type": "email",
+      "sourcePageId": "snapshot_s034_commission",
+      "sourceObjectId": "s034-commission-body",
+      "title": "委托邮件｜周启明寻找旧商业合作对象",
+      "summary": "周自己的原发件副本含同一旧照、目标与区域，自述失联、账务资料未了；需与实收回复及付款核对，不独证描述完全真实。",
+      "discovery": "detail",
+      "timestamp": "{{s034CommissionDate}} {{s034CommissionTime}}"
+    },
+    {
+      "id": "F59-A",
+      "type": "page",
+      "sourcePageId": "echo_about",
+      "sourceObjectId": "echo-public-work-contact",
+      "title": "公开运营资料｜梁志诚的负责人工作邮箱",
+      "summary": "独立公开关于我们页把梁志诚、日常运营联络与{{liangWorkMailbox}}关联；公开署名单独不足以确认特殊邮件的控制。",
+      "discovery": "detail",
+      "timestamp": "{{echoSnapshotDate}}"
+    },
+    {
+      "id": "F59-B",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_normal_reply",
+      "sourceObjectId": "xu-normal-reply-body",
+      "title": "普通运营邮件｜同地址处理许宁旧帖停止转发",
+      "summary": "许宁本人实收普通业务回复来自{{liangWorkMailbox}}，处理原帖停止转发并有梁 / 回声签名；不含S/R，不新增志愿者身份。",
+      "discovery": "detail",
+      "timestamp": "{{xuNormalReplyDate}} {{xuNormalReplyTime}}"
+    },
+    {
+      "id": "F60",
+      "type": "email",
+      "sourcePageId": "snapshot_s034_acceptance",
+      "sourceObjectId": "s034-accept-body",
+      "title": "{{s034Id}}｜同一工作邮箱回复特殊寻访接单",
+      "summary": "周实收回复来自{{liangWorkMailbox}}，承接原委托，给{{s034Id}}及特殊寻访称呼、分阶段费用；接单与签名不单独证明付款或归属。",
+      "discovery": "detail",
+      "timestamp": "{{s034AcceptDate}} {{s034AcceptTime}}"
+    },
+    {
+      "id": "F61",
+      "type": "email",
+      "sourcePageId": "snapshot_s034_instruction",
+      "sourceObjectId": "s034-instruction-body",
+      "title": "{{s034Id}}｜工作邮箱发出前期费用指示",
+      "summary": "邮件要求前期{{s034Advance}}元，收款户名{{s034Payee}}、账户尾号{{s034AccountTail}}。需先核邮箱归属，再与独立回单和委托上下文核付款目的。",
+      "discovery": "detail",
+      "timestamp": "{{s034InstructionDate}} {{s034InstructionTime}}"
+    },
+    {
+      "id": "F62",
+      "type": "attachment",
+      "sourcePageId": "snapshot_s034_bank",
+      "sourceObjectId": "s034-bank-fields",
+      "title": "银行回单｜周启明完成向指定账户的转账",
+      "summary": "银行凭证付款人周启明、收款{{s034Payee}}、尾号{{s034AccountTail}}、{{s034Advance}}元与时间，和指示相符；回单本身不证明服务用途。",
+      "discovery": "detail",
+      "timestamp": "{{s034PaymentDate}} {{s034PaymentTime}}"
+    },
+    {
+      "id": "F63",
+      "type": "reply",
+      "sourcePageId": "snapshot_s034_public",
+      "sourceObjectId": "s034-public-sightings",
+      "title": "公开寻人页｜市场外围与公交站目击，也有误认",
+      "summary": "普通网友的区域线索有不确定时刻、城北旧印象与认错补充。是否被用于定位需与任务、现实确认及结果中采用的来源核对。",
+      "discovery": "detail",
+      "timestamp": "{{s034Sight2Date}} {{s034Sight2Time}}"
+    },
+    {
+      "id": "F64",
+      "type": "email",
+      "sourcePageId": "snapshot_s034_check",
+      "sourceObjectId": "s034-check-body",
+      "title": "{{s034Id}}｜许宁实际作过一次有限目视确认",
+      "summary": "许宁自存回信与相邻回复显示，隔路短暂看到像本人者，只确认{{s034Region}}公共区域，未接触。梁明确把两条公开留言与此次确认核对，未采城北旧印象。",
+      "discovery": "detail",
+      "timestamp": "{{s034CheckDate}} {{s034CheckTime}}"
+    },
+    {
+      "id": "F65",
+      "type": "attachment",
+      "sourcePageId": "snapshot_s034_delivery",
+      "sourceObjectId": "s034-delivery-body",
+      "title": "{{s034Id}}｜周启明收到整合目击与有限确认的结果",
+      "summary": "客户实际收件附件保留编号、目标、两条公开目击与有限确认、粗略可能活动范围；交付不保证此后位置一直有效。",
+      "discovery": "detail",
+      "timestamp": "{{s034DeliveryDate}} {{s034DeliveryTime}}"
+    },
+    {
+      "id": "F66",
+      "type": "email",
+      "sourcePageId": "snapshot_s034_dispute",
+      "sourceObjectId": "s034-dispute-body",
+      "title": "{{s034Id}}｜交付后双方争执剩余费用",
+      "summary": "周称前期已付、位置很快失效、拒认剩余费用；梁称交付时有效并要求约定尾款。最终补款、退款及法律结果未恢复。",
+      "discovery": "detail",
+      "timestamp": "{{s034DisputeDate}} {{s034DisputeTime}}"
     }
   ],
   "facts": [
@@ -6099,6 +7383,41 @@
       "id": "C23",
       "title": "这些任务使用稳定的S编号，说明梁并非只临时要求许宁处理单一事件。",
       "summary": "两份不同日期的任务收件具有不同S值和相同编号格式，各有有限请求及执行回信。只支持重复任务结构，不按编号跳号推总量，不证明每单收费或持续收费业务。"
+    },
+    {
+      "id": "F58",
+      "title": "周启明｜与公开寻人页“周先生”的联系字段对应",
+      "summary": "公开寻人页和旧商业页的邮箱、合作事项交叉相符，商业页署名周启明；形成联系人候选，客户身份须另核原委托及交易。"
+    },
+    {
+      "id": "F59",
+      "title": "梁工作邮箱｜公开运营、普通邮件与特殊接单三类互证",
+      "summary": "负责人公开地址、许宁普通业务实收邮件、周特殊接单实收邮件使用{{liangWorkMailbox}}；三类共同核验梁与回声运营关联，不凭签名独证。"
+    },
+    {
+      "id": "C24",
+      "title": "{{s034Id}}内部任务与公开寻人页面属于同一寻访对象。",
+      "summary": "目标、同一旧照、区域及原页 / 收件时间对应；公开页没有内部编号，不能只按同名。"
+    },
+    {
+      "id": "C25",
+      "title": "{{s034Id}}是一项由周启明委托并实际支付费用的特殊寻访服务。",
+      "summary": "先核联系人与实际委托，再核三类邮箱归属、接单、付款指示及独立银行回单；指示不等于支付，回单不独证用途。"
+    },
+    {
+      "id": "C26",
+      "title": "{{s034Id}}利用公开寻人和普通网友目击缩小目标活动范围，并辅以许宁的有限现实确认。",
+      "summary": "两条模糊公开区域目击与实际有限确认回信、同一目标相接；其他旧印象与误认并未全部采用。"
+    },
+    {
+      "id": "C27",
+      "title": "梁最终向周启明交付了{{s034Id}}寻访结果，双方随后因服务效果发生尾款争议。",
+      "summary": "客户实际收件与交付后争议核对，不把效果评价当永久有效，也不恢复最终结算。"
+    },
+    {
+      "id": "C28",
+      "title": "至少在{{s034Id}}这一案例中，梁将特殊寻访作为收费服务运营：接受客户委托、收取费用、利用公开目击和有限现实确认定位目标，并向客户交付结果。",
+      "summary": "仅这一单的完整客户侧链。不能推所有S收费、总量、收入、持续业务或刘佳赵妍具体付费身份。"
     }
   ],
   "relations": [
@@ -6478,6 +7797,123 @@
           "C23"
         ]
       }
+    },
+    {
+      "id": "R58-identity",
+      "title": "对照两页的旧公开联系字段",
+      "evidenceIds": [
+        "F57-P",
+        "F58-B"
+      ],
+      "factIds": [],
+      "summary": "同邮箱和合作事项相接，不能只凭姓周或把候选直接当客户。",
+      "unlocks": {
+        "factIds": [
+          "F58"
+        ]
+      }
+    },
+    {
+      "id": "R59-mailbox",
+      "title": "核对公开、普通运营与特殊接单的同一邮箱",
+      "evidenceIds": [
+        "F59-A",
+        "F59-B",
+        "F60"
+      ],
+      "factIds": [],
+      "summary": "缺任何一类都不确认归属；同一封邮件的两个签名不算两类。",
+      "unlocks": {
+        "factIds": [
+          "F59"
+        ]
+      }
+    },
+    {
+      "id": "R24",
+      "title": "{{s034Id}}内部任务与公开寻人页面属于同一寻访对象。",
+      "evidenceIds": [
+        "F57",
+        "F57-P"
+      ],
+      "factIds": [],
+      "summary": "目标、同一旧照、区域及原页 / 收件时间对应；公开页没有内部编号，不能只按同名。",
+      "unlocks": {
+        "factIds": [
+          "C24"
+        ]
+      }
+    },
+    {
+      "id": "R25",
+      "title": "{{s034Id}}是一项由周启明委托并实际支付费用的特殊寻访服务。",
+      "evidenceIds": [
+        "F58-M",
+        "F60",
+        "F61",
+        "F62"
+      ],
+      "factIds": [
+        "F58",
+        "F59"
+      ],
+      "summary": "先核联系人与实际委托，再核三类邮箱归属、接单、付款指示及独立银行回单；指示不等于支付，回单不独证用途。",
+      "unlocks": {
+        "factIds": [
+          "C25"
+        ]
+      }
+    },
+    {
+      "id": "R26",
+      "title": "{{s034Id}}利用公开寻人和普通网友目击缩小目标活动范围，并辅以许宁的有限现实确认。",
+      "evidenceIds": [
+        "F63",
+        "F64"
+      ],
+      "factIds": [
+        "C24"
+      ],
+      "summary": "两条模糊公开区域目击与实际有限确认回信、同一目标相接；其他旧印象与误认并未全部采用。",
+      "unlocks": {
+        "factIds": [
+          "C26"
+        ]
+      }
+    },
+    {
+      "id": "R27",
+      "title": "梁最终向周启明交付了{{s034Id}}寻访结果，双方随后因服务效果发生尾款争议。",
+      "evidenceIds": [
+        "F65",
+        "F66"
+      ],
+      "factIds": [
+        "C25"
+      ],
+      "summary": "客户实际收件与交付后争议核对，不把效果评价当永久有效，也不恢复最终结算。",
+      "unlocks": {
+        "factIds": [
+          "C27"
+        ]
+      }
+    },
+    {
+      "id": "R28",
+      "title": "至少在{{s034Id}}这一案例中，梁将特殊寻访作为收费服务运营：接受客户委托、收取费用、利用公开目击和有限现实确认定位目标，并向客户交付结果。",
+      "evidenceIds": [],
+      "factIds": [
+        "C24",
+        "C25",
+        "C26",
+        "C27"
+      ],
+      "summary": "仅这一单的完整客户侧链。不能推所有S收费、总量、收入、持续业务或刘佳赵妍具体付费身份。",
+      "unlocks": {
+        "factIds": [
+          "C28"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -6599,7 +8035,8 @@
       "Chen Yu same-day campus photo server / capture times and shop preview-cache generation time",
       "Public civil summary / follow-up publication dates, possible accident interval and calibrated peripheral / emergency-call minutes",
       "Xu later public account identifier / nickname and public profile, Chen sent excerpt, Wang contact / meeting / confirmation / later directory capture calendar dates and times",
-      "Xu old communication / protection / finite task / expense calendar dates and times, S number values and redacted target labels; no complete amounts or accounts restored"
+      "Xu old communication / protection / finite task / expense calendar dates and times, S number values and redacted target labels; no complete amounts or accounts restored",
+      "S-034 number, target old public label, contact / work mailbox strings, commercial contact project label, all transaction / public sighting / verification / capture dates and times, payment amounts and account tail; no bank brand or final settlement"
     ]
   },
   "homePageId": "portal_home",
