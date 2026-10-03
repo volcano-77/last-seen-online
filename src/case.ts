@@ -9,6 +9,7 @@ export type EvidenceType = 'page' | 'post' | 'reply' | 'timestamp' | 'email' |
 export interface CaseLink { label: string; pageId: string }
 export interface UnlockConditions {
   evidenceIds?: string[]; relationIds?: string[]; factIds?: string[]; puzzleIds?: string[]
+  materialPackageGenerated?: boolean
 }
 export interface Unlocks { evidenceIds?: string[]; pageIds?: string[]; factIds?: string[] }
 export interface PageDetails {
@@ -104,7 +105,8 @@ function links(value: unknown): value is CaseLink[] {
 }
 function gate(value: unknown): value is UnlockConditions {
   return record(value) && ['evidenceIds', 'relationIds', 'factIds', 'puzzleIds']
-    .every((key) => value[key] === undefined || strings(value[key]))
+    .every((key) => value[key] === undefined || strings(value[key])) &&
+    (value.materialPackageGenerated === undefined || typeof value.materialPackageGenerated === 'boolean')
 }
 function unlocks(value: unknown): value is Unlocks {
   return record(value) && ['evidenceIds', 'pageIds', 'factIds']

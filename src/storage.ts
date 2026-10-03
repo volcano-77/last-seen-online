@@ -5,6 +5,8 @@ import type { BrowserTab, HistoryEntry, PageState } from './browserState'
 import { canVisitPage } from './siteData'
 import { emptyFinalReview, emptyReviewItem, REVIEW_CLAIMS, REVIEW_GATE_FACT_IDS, REVIEW_LEVELS, reviewClaim } from './finalReview'
 import type { FinalReviewProgress, ReviewItemProgress, ReviewLevel } from './finalReview'
+import { channelSourcesReady, DELIVERY_CHANNELS, emptyMaterialDelivery, finalReviewComplete, finalReviewSourceIds, MATERIAL_PACKAGE_ID } from './materialDelivery'
+import type { DeliveryChannelId, DeliveryReceipt, MaterialDeliveryProgress } from './materialDelivery'
 
 const CURRENT_KEY = 'last-seen-online:v0.5:current'
 const CASE_KEY = 'last-seen-online:v0.5:case:'
@@ -33,6 +35,7 @@ export interface SaveData {
   learnedTools: string[]
   clippings: { id: string; pageId: string; text: string }[]
   finalReview: FinalReviewProgress
+  materialDelivery: MaterialDeliveryProgress
 }
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -49,7 +52,7 @@ export function makeSave(caseData: GameCase): SaveData {
     discoveredEvidenceIds: [], savedEvidenceIds: [], establishedRelationIds: [],
     unlockedFactIds: [], checkpointIds: [], completedPuzzleIds: [], timelineOrders: {},
     viewedMediaIds: [], learnedTools: [], clippings: [], recordDateView: false,
-    finalReview: emptyFinalReview() }
+    finalReview: emptyFinalReview(), materialDelivery: emptyMaterialDelivery() }
 }
 function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolean {
   const gate = page.unlockConditions
@@ -57,7 +60,8 @@ function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolea
     (gate.evidenceIds || []).every((id) => save.discoveredEvidenceIds.includes(id)) &&
     (gate.relationIds || []).every((id) => save.establishedRelationIds.includes(id)) &&
     (gate.factIds || []).every((id) => save.unlockedFactIds.includes(id)) &&
-    (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id))
+    (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id)) &&
+    (gate.materialPackageGenerated !== true || save.materialDelivery.generated)
   const unlockers = [
     ...caseData.relations.filter((relation) => relation.unlocks?.pageIds?.includes(page.id))
       .map((relation) => save.establishedRelationIds.includes(relation.id)),
@@ -171,6 +175,57 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
     items: reviewItems,
     complete: REVIEW_CLAIMS.every((claim) => reviewItems[claim.id].reviewed),
   }
+  const rawMaterial = record(raw.materialDelivery) ? raw.materialDelivery : {}
+  const sourceIds = finalReviewSourceIds(restored.finalReview)
+  const rawSourceIds = keptIds(rawMaterial.sourceIds, new Set(sourceIds))
+  const generated = rawMaterial.generated === true && rawMaterial.packageId === MATERIAL_PACKAGE_ID &&
+    finalReviewComplete(restored.finalReview) && rawSourceIds.length === sourceIds.length &&
+    sourceIds.every((id, index) => rawSourceIds[index] === id)
+  const familyVerified = generated && rawMaterial.familyVerified === true &&
+    channelSourcesReady('family', restored.discoveredEvidenceIds)
+  const mediaVerified = generated && rawMaterial.mediaVerified === true &&
+    channelSourcesReady('media', restored.discoveredEvidenceIds)
+  function receipt(channel: DeliveryChannelId, verified: boolean): DeliveryReceipt | undefined {
+    const data = rawMaterial[channel === 'family' ? 'familyDelivered' : 'mediaDelivered']
+    const spec = DELIVERY_CHANNELS[channel]
+    const verifiedSourceIds = record(data) ? data.verifiedSourceIds : undefined
+    if (!verified || !record(data) || !restored.discoveredEvidenceIds.includes(spec.receiptId) ||
+      data.channel !== channel || data.channelId !== spec.channelId ||
+      data.channelAddress !== caseData.variables[spec.addressVariable] ||
+      data.lastConfirmedAt !== caseData.variables[spec.updatedVariable] ||
+      data.packageId !== MATERIAL_PACKAGE_ID || typeof data.submittedAt !== 'string' ||
+      !Number.isFinite(Date.parse(data.submittedAt)) || !Array.isArray(verifiedSourceIds) ||
+      !spec.requiredIds.every((id) => verifiedSourceIds.includes(id))) return undefined
+    return { channel, channelId: spec.channelId, channelAddress: data.channelAddress,
+      verifiedSourceIds: [...spec.requiredIds], lastConfirmedAt: data.lastConfirmedAt,
+      submittedAt: data.submittedAt, packageId: MATERIAL_PACKAGE_ID }
+  }
+  const familyDelivered = receipt('family', familyVerified)
+  const mediaDelivered = receipt('media', mediaVerified)
+  restored.materialDelivery = {
+    open: generated && rawMaterial.open === true, generated,
+    packageId: generated ? MATERIAL_PACKAGE_ID : undefined,
+    generatedAt: generated && typeof rawMaterial.generatedAt === 'string' ? rawMaterial.generatedAt : undefined,
+    sourceIds: generated ? sourceIds : [],
+    familyVerified,
+    familyVerifiedAt: familyVerified && typeof rawMaterial.familyVerifiedAt === 'string' ? rawMaterial.familyVerifiedAt : undefined,
+    mediaVerified,
+    mediaVerifiedAt: mediaVerified && typeof rawMaterial.mediaVerifiedAt === 'string' ? rawMaterial.mediaVerifiedAt : undefined,
+    familyDelivered, mediaDelivered,
+    dualDeliveryComplete: Boolean(familyDelivered && mediaDelivered),
+  }
+  const validReceiptIds = new Set<string>([
+    ...(familyDelivered ? [DELIVERY_CHANNELS.family.receiptId] : []),
+    ...(mediaDelivered ? [DELIVERY_CHANNELS.media.receiptId] : []),
+  ])
+  const receiptIds = new Set<string>([DELIVERY_CHANNELS.family.receiptId, DELIVERY_CHANNELS.media.receiptId])
+  restored.discoveredEvidenceIds = restored.discoveredEvidenceIds.filter((id) =>
+    !receiptIds.has(id) || validReceiptIds.has(id))
+  restored.savedEvidenceIds = restored.savedEvidenceIds.filter((id) =>
+    !receiptIds.has(id) || validReceiptIds.has(id))
+  if (generated) restored.finalReview.open = false
+  if (restored.materialDelivery.dualDeliveryComplete) restored.unlockedFactIds = [...new Set([...restored.unlockedFactIds, 'C44'])]
+  else restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C44')
   restored.tabs = restored.tabs.map((tab) => {
     const current = caseData.pages.find((page) => page.id === tab.history[tab.historyIndex].pageId)
     return current && allowedPage(current, restored, caseData) ? tab : { ...tab, title: clean.tabs[0].title,

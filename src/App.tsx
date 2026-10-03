@@ -10,6 +10,9 @@ import { canVisitPage } from './siteData'
 import { relationChoices } from './recordRelations'
 import FinalReview from './ReviewBoard'
 import { REVIEW_GATE_FACT_IDS } from './finalReview'
+import MaterialPackage from './MaterialPackage'
+import { channelSourcesReady, DELIVERY_CHANNELS, finalReviewComplete, finalReviewSourceIds, MATERIAL_PACKAGE_ID } from './materialDelivery'
+import type { DeliveryChannelId, DeliveryReceipt } from './materialDelivery'
 import './App.css'
 
 const add = (old: string[], next: string[] = []) => [...new Set([...old, ...next])]
@@ -19,7 +22,8 @@ function meets(gate: UnlockConditions | undefined, save: SaveData) {
   return !gate || (gate.evidenceIds || []).every((id) => save.discoveredEvidenceIds.includes(id)) &&
     (gate.relationIds || []).every((id) => save.establishedRelationIds.includes(id)) &&
     (gate.factIds || []).every((id) => save.unlockedFactIds.includes(id)) &&
-    (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id))
+    (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id)) &&
+    (gate.materialPackageGenerated !== true || save.materialDelivery.generated)
 }
 
 export default function App() {
@@ -105,6 +109,7 @@ export default function App() {
   function resetChrome() {
     setAddress(null); setHistoryOpen(false); setSettingsOpen(false); setTip(null); setFeedback(null)
     setSave((old) => old?.finalReview.open ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)
+    setSave((old) => old?.materialDelivery.open ? { ...old, materialDelivery: { ...old.materialDelivery, open: false } } : old)
   }
   function restartCase() {
     if (!caseData) return
@@ -227,6 +232,48 @@ export default function App() {
     setRelationMessage('已保留这组对照。'); setSelected([])
   }
 
+  function generateMaterialPackage() {
+    setSave((old) => {
+      if (!old || !finalReviewComplete(old.finalReview) || old.materialDelivery.generated) return old
+      return { ...old, finalReview: { ...old.finalReview, open: false },
+        materialDelivery: { ...old.materialDelivery, open: true, generated: true,
+          packageId: MATERIAL_PACKAGE_ID, generatedAt: new Date().toISOString(),
+          sourceIds: finalReviewSourceIds(old.finalReview) } }
+    })
+  }
+  function verifyDeliveryChannel(channel: DeliveryChannelId) {
+    setSave((old) => {
+      if (!old || !old.materialDelivery.generated || !finalReviewComplete(old.finalReview) ||
+        !channelSourcesReady(channel, old.discoveredEvidenceIds) ||
+        !old.visitedPageIds.includes(DELIVERY_CHANNELS[channel].pageId)) return old
+      const key = channel === 'family' ? 'familyVerified' : 'mediaVerified'
+      const atKey = channel === 'family' ? 'familyVerifiedAt' : 'mediaVerifiedAt'
+      return { ...old, materialDelivery: { ...old.materialDelivery, [key]: true, [atKey]: new Date().toISOString() } }
+    })
+  }
+  function deliverMaterialPackage(channel: DeliveryChannelId) {
+    setSave((old) => {
+      if (!old || !caseData || !old.materialDelivery.generated || !finalReviewComplete(old.finalReview) ||
+        old.materialDelivery.packageId !== MATERIAL_PACKAGE_ID ||
+        !channelSourcesReady(channel, old.discoveredEvidenceIds)) return old
+      const spec = DELIVERY_CHANNELS[channel]
+      const verified = channel === 'family' ? old.materialDelivery.familyVerified : old.materialDelivery.mediaVerified
+      const alreadyDelivered = channel === 'family' ? old.materialDelivery.familyDelivered : old.materialDelivery.mediaDelivered
+      if (!verified || alreadyDelivered || !old.visitedPageIds.includes(spec.pageId)) return old
+      const receipt: DeliveryReceipt = { channel, channelId: spec.channelId,
+        channelAddress: caseData.variables[spec.addressVariable],
+        verifiedSourceIds: [...spec.requiredIds], lastConfirmedAt: caseData.variables[spec.updatedVariable],
+        submittedAt: new Date().toISOString(), packageId: MATERIAL_PACKAGE_ID }
+      const materialDelivery = { ...old.materialDelivery,
+        [channel === 'family' ? 'familyDelivered' : 'mediaDelivered']: receipt,
+        dualDeliveryComplete: Boolean(channel === 'family' ? old.materialDelivery.mediaDelivered : old.materialDelivery.familyDelivered) }
+      return { ...old, materialDelivery,
+        discoveredEvidenceIds: add(old.discoveredEvidenceIds, [spec.receiptId]),
+        savedEvidenceIds: add(old.savedEvidenceIds, [spec.receiptId]),
+        unlockedFactIds: materialDelivery.dualDeliveryComplete ? add(old.unlockedFactIds, ['C44']) : old.unlockedFactIds }
+    })
+  }
+
   function returnVisit(tabId: string, entryId: string) {
     if (!caseData) return
     setSave((old) => {
@@ -289,18 +336,24 @@ export default function App() {
       </div>
       {recordsOpen && <aside className="record-pocket" id="records" aria-label="记录夹"><header><b>记录夹</b><button aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button></header>
         <div className="pocket-paper">{reviewReady && <div className="pocket-review-entry"><button onClick={() => {
-          setSave((old) => old ? { ...old, finalReview: { ...old.finalReview, open: true } } : old)
+          setSave((old) => old ? old.materialDelivery.generated ?
+            { ...old, materialDelivery: { ...old.materialDelivery, open: true } } :
+            { ...old, finalReview: { ...old.finalReview, open: true } } : old)
           setRecordsOpen(false); setSelected([]); setRelationMessage('')
-        }}>案件复核</button><small>整理已经取得的事实与结论</small></div>}<h2>记录</h2>
+        }}>{save.materialDelivery.generated ? '案件复核材料包' : '案件复核'}</button><small>{save.materialDelivery.generated ? '查看材料与双路递交记录' : '整理已经取得的事实与结论'}</small></div>}<h2>记录</h2>
           {!evidence.length && !save.clippings.length && <p className="muted">暂无记录。</p>}
           {evidence.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
           {save.clippings.map((item) => <div className="record-entry excerpt" key={item.id}><p>“{item.text}”</p><button className="text-link" onClick={() => navigate(item.pageId)}>原页</button><button className="text-link" onClick={() => setSave({ ...save, clippings: save.clippings.filter((entry) => entry.id !== item.id) })}>移除</button></div>)}
           <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button></div>)}
           {(selected.length > 0 || relationMessage) && <div className="relation-controls">{choices.complete && selected.length >= 2 && <button onClick={confirmRelation}>对照这些记录</button>}{selected.length > 0 && <button onClick={() => { setSelected([]); setRelationMessage('') }}>取消对照</button>}<p role="status">{relationMessage}</p></div>}
         </div></aside>}
-      {reviewReady && save.finalReview.open && <FinalReview caseData={caseData} save={save}
-        onProgress={(progress) => setSave((old) => old ? { ...old, finalReview: progress } : old)}
-        onClose={() => setSave((old) => old ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)} />}
+      {reviewReady && !save.materialDelivery.generated && save.finalReview.open && <FinalReview caseData={caseData} save={save}
+        onProgress={(progress) => setSave((old) => old && !old.materialDelivery.generated ? { ...old, finalReview: progress } : old)}
+        onClose={() => setSave((old) => old ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)}
+        onGenerate={generateMaterialPackage} />}
+      {save.materialDelivery.generated && save.materialDelivery.open && <MaterialPackage caseData={caseData} save={save}
+        onClose={() => setSave((old) => old ? { ...old, materialDelivery: { ...old.materialDelivery, open: false } } : old)}
+        onNavigate={navigate} onVerify={verifyDeliveryChannel} onDeliver={deliverMaterialPackage} />}
     </div>
     {tip && <button className="selection-tip" style={{ left: tip.x, top: tip.y }} onMouseDown={(event) => event.preventDefault()} onClick={recordSelection}>☆ 记下这段</button>}
     {feedback && <div className="record-feedback" role="status" style={{ left: feedback.x, top: feedback.y }}>{feedback.text}</div>}

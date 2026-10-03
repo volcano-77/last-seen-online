@@ -5,6 +5,7 @@
 .review-heading button,.review-sections button,.review-actions button,.review-selected button{border:1px solid #969d9b;border-radius:1px;background:linear-gradient(#fff,#e8e9e4);padding:5px 12px;color:#364751;font:inherit;cursor:pointer}
 .review-heading button:hover,.review-sections button:hover,.review-actions button:hover,.review-selected button:hover{background:#e5ebed}
 .review-complete{margin:0;padding:12px 22px;background:#edf0e7;border-bottom:1px solid #aab6a4;color:#3e5541}.review-complete strong{margin-right:10px}
+.review-complete button{margin-left:14px;border:1px solid #8c9b8b;background:linear-gradient(#fff,#e5ece2);padding:4px 10px;color:#36543e;font:inherit;cursor:pointer}
 .review-sections{display:flex;gap:0;border-bottom:1px solid #aab1ae;background:#ecece6;padding:0 22px}.review-sections button{border:0;border-right:1px solid #b3bab7;background:none;padding:9px 15px}.review-sections button:first-child{border-left:1px solid #b3bab7}.review-sections button[aria-pressed=true]{background:#faf9f4;font-weight:600}
 .review-layout{display:grid;grid-template-columns:minmax(235px,290px) minmax(0,1fr)}
 .review-index{border-right:1px solid #b5bbb7;background:#f0efe8}.review-index h2{font-size:15px;margin:0;padding:12px 14px;border-bottom:1px solid #b5bbb7}

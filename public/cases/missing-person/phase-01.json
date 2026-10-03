@@ -258,7 +258,11 @@
     "wangRiskFollowupTime": "10:25",
     "xuRiskFollowupGivenDate": "2009-10-18",
     "wangDepartureArchiveDate": "2009-10-21",
-    "wangDepartureArchiveTime": "10:10"
+    "wangDepartureArchiveTime": "10:10",
+    "familyCurrentNoticeDate": "2026-09-25",
+    "familyMaterialMailbox": "chenyu-materials@case-representative.example",
+    "mediaCurrentContactDate": "2026-09-29",
+    "mediaTipsMailbox": "tips@ncitynews.example"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -667,6 +671,12 @@
       "date": "{{civilFollowupDate}}",
       "body": [
         "本地资讯、校园新闻与民生信息。历史稿件按原发布日期归档，可从本页列表或南城搜索进入。"
+      ],
+      "links": [
+        {
+          "label": "联系我们 / 调查线索投稿",
+          "pageId": "news_tips_current"
+        }
       ],
       "objects": [
         {
@@ -4623,7 +4633,97 @@
         {
           "label": "此前报道：摔伤女子抢救无效死亡",
           "pageId": "news_chenyu_stair_followup"
+        },
+        {
+          "label": "后续公开资料：家属代表材料接收说明",
+          "pageId": "news_chenyu_family_current"
         }
+      ]
+    },
+    {
+      "id": "news_chenyu_family_current",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "陈雨家属代表材料接收说明",
+      "url": "ncitynews://local/{{familyCurrentNoticeDate|compact}}/chenyu-family-materials",
+      "date": "{{familyCurrentNoticeDate}}",
+      "author": "本报记者",
+      "details": { "section": "本地 / 后续公开资料" },
+      "unlockConditions": { "materialPackageGenerated": true },
+      "body": [
+        "这份后续公开说明沿陈雨家属就商业楼安全及发现时间提出异议的资料线索整理。原民事公开摘要用于识别事件和家属维权脉络，不把旧文书上的历史邮箱当作现时递交地址。",
+        "家属方面委托的材料接收角色仍接受与陈雨事件相关、注明来源和证明边界的复核材料。页面只公开机构接收用途的虚构邮箱，不展示家属私人住址、手机号或身份号码。"
+      ],
+      "objects": [
+        {
+          "id": "family-channel-listed",
+          "type": "log-entry",
+          "title": "家属代表公开材料渠道",
+          "timestamp": "{{familyCurrentNoticeDate}}",
+          "body": [
+            "接收角色：陈雨家属法律代理材料联系。材料类型：陈雨事件相关公开资料与可核验副本。游戏内渠道：{{familyMaterialMailbox}}。",
+            "此处仅供游戏剧情核对，不能从旧民事摘要或王曼的旧记者联系方式推定本渠道。"
+          ],
+          "evidenceId": "F90"
+        },
+        {
+          "id": "family-channel-current",
+          "type": "log-entry",
+          "title": "较晚更新｜仍接收本案复核材料",
+          "timestamp": "{{familyCurrentNoticeDate}}",
+          "body": [
+            "页面于{{familyCurrentNoticeDate}}核对接收状态，仍将{{familyMaterialMailbox}}列为陈雨事件材料提交渠道；无效的旧私人联系方法不在接收范围内。"
+          ],
+          "evidenceId": "F91"
+        }
+      ],
+      "links": [
+        { "label": "回看家属维权报道", "pageId": "news_chenyu_family_claim" }
+      ]
+    },
+    {
+      "id": "news_tips_current",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "联系我们 / 调查线索投稿",
+      "url": "ncitynews://contact/investigation-tips",
+      "date": "{{mediaCurrentContactDate}}",
+      "details": { "section": "联系我们" },
+      "unlockConditions": { "materialPackageGenerated": true },
+      "body": [
+        "本站调查及社会新闻线索接收说明。本页为资讯网机构栏目，与已下线的王曼个人工作页及旧记者私人地址无关。",
+        "需要提供可核对的来源、原页面或副本取得方式，并注明无法由材料证明的部分。本轮递交仅在游戏内记录，不连接真实邮箱。"
+      ],
+      "objects": [
+        {
+          "id": "media-channel-listed",
+          "type": "log-entry",
+          "title": "机构调查线索渠道",
+          "timestamp": "{{mediaCurrentContactDate}}",
+          "body": [
+            "栏目：{{cityName}}资讯网调查 / 新闻线索。材料类型：有来源索引的案件复核材料。游戏内渠道：{{mediaTipsMailbox}}。"
+          ],
+          "evidenceId": "F92"
+        },
+        {
+          "id": "media-channel-current",
+          "type": "log-entry",
+          "title": "栏目状态｜仍接收新闻线索",
+          "timestamp": "{{mediaCurrentContactDate}}",
+          "body": [
+            "{{mediaCurrentContactDate}}更新的本栏目说明继续列出{{mediaTipsMailbox}}，并标注调查线索材料正常接收。页面从资讯网当前首页导航可达。"
+          ],
+          "evidenceId": "F93"
+        }
+      ],
+      "links": [
+        { "label": "返回资讯网首页", "pageId": "news_index" }
       ]
     },
     {
@@ -8811,6 +8911,60 @@
       "summary": "王曼和此前知晓调查风险的可信编辑在离开前约定：若将来需要报平安，以仅双方知晓的调查材料细节核验来讯者。未公开问题、答案或通道；本事实不证明后来的安全确认已经发生。",
       "timestamp": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F90",
+      "type": "page",
+      "sourcePageId": "news_chenyu_family_current",
+      "sourceObjectId": "family-channel-listed",
+      "title": "家属代表｜公开接收陈雨事件复核材料的渠道",
+      "summary": "后续公开说明将{{familyMaterialMailbox}}列为陈雨家属法律代理的本案材料接收渠道；不是旧民事摘要中的历史联系人，也不是家属私人地址。",
+      "timestamp": "{{familyCurrentNoticeDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F91",
+      "type": "timestamp",
+      "sourcePageId": "news_chenyu_family_current",
+      "sourceObjectId": "family-channel-current",
+      "title": "家属渠道核验｜较晚公开说明仍接受本案材料",
+      "summary": "{{familyCurrentNoticeDate}}更新的同案公开说明仍列家属代理材料渠道为有效接收路径；仅核本次游戏内提交用途，不推出代理对调查结论的认可。",
+      "timestamp": "{{familyCurrentNoticeDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F92",
+      "type": "page",
+      "sourcePageId": "news_tips_current",
+      "sourceObjectId": "media-channel-listed",
+      "title": "资讯网｜公开调查线索材料提交渠道",
+      "summary": "南城资讯网当前机构栏目列{{mediaTipsMailbox}}接收有来源索引的调查／新闻线索材料；不是王曼旧工作页或私人邮箱。",
+      "timestamp": "{{mediaCurrentContactDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F93",
+      "type": "timestamp",
+      "sourcePageId": "news_tips_current",
+      "sourceObjectId": "media-channel-current",
+      "title": "资讯网渠道核验｜当前栏目仍接收线索",
+      "summary": "{{mediaCurrentContactDate}}栏目状态说明仍列同一{{mediaTipsMailbox}}并标注正常接收，从资讯网首页当前导航可达。",
+      "timestamp": "{{mediaCurrentContactDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F94",
+      "type": "log",
+      "sourcePageId": "news_chenyu_family_current",
+      "title": "递交记录｜复核材料包已交家属有效代表渠道",
+      "summary": "玩家游戏内提交同一案件复核材料包至已核验的家属法律代理渠道；仅证明递交记录已保存，不代表对方已接受结论或案件已重启。"
+    },
+    {
+      "id": "F95",
+      "type": "log",
+      "sourcePageId": "news_tips_current",
+      "title": "递交记录｜复核材料包已交资讯网有效线索渠道",
+      "summary": "玩家游戏内提交同一案件复核材料包至已核验的资讯网机构线索栏目；仅证明递交记录已保存，不代表已刊发或完成独立核实。"
     }
   ],
   "facts": [
@@ -9033,6 +9187,11 @@
       "id": "C41",
       "title": "梁后续未能通过现有公开信息可靠确认王曼的当前位置。",
       "summary": "许宁实收的{{wangRiskId}}短跟进称本轮无法可靠确认，旧工作、校园、采访及论坛资料的原时间互异，已知公开工作动态不再提供实时位置。仅限这轮公开信息核查，不推出梁永久找不到她。"
+    },
+    {
+      "id": "C44",
+      "title": "案件复核材料包已通过两条独立且经核验仍有效的渠道完成游戏内递交。",
+      "summary": "F90～F93分别确认家属代表与资讯网机构线索渠道及其当前有效状态，F94、F95保存同一材料包的两份递交记录。只证明游戏内双路递交完成，不代表家属、媒体或机关已采信或采取后续行动。"
     }
   ],
   "relations": [

@@ -10,10 +10,11 @@ interface Props {
   save: SaveData
   onProgress: (progress: FinalReviewProgress) => void
   onClose: () => void
+  onGenerate: () => void
 }
 interface AvailableRecord { id: string; title: string; summary: string; source: string; text: string }
 
-export default function FinalReview({ caseData, save, onProgress, onClose }: Props) {
+export default function FinalReview({ caseData, save, onProgress, onClose, onGenerate }: Props) {
   const [activeId, setActiveId] = useState('E01')
   const [query, setQuery] = useState('')
   const [person, setPerson] = useState('全部人物')
@@ -72,7 +73,7 @@ export default function FinalReview({ caseData, save, onProgress, onClose }: Pro
         <div><small>调查资料 / 结论整理</small><h1>案件复核</h1><p>按已有记录给陈述分级，并注明依据。选择不会立即判定；完成一组后统一复核。</p></div>
         <button type="button" onClick={onClose}>返回网页</button>
       </header>
-      {save.finalReview.complete && <p className="review-complete" role="status"><strong>复核完成。</strong>现有结论已整理。可以开始制作案件复核材料。</p>}
+      {save.finalReview.complete && <div className="review-complete" role="status"><strong>复核完成。</strong>现有结论已整理。可以开始制作案件复核材料。<button type="button" onClick={onGenerate}>制作案件复核材料</button></div>}
       <div className="review-sections" role="group" aria-label="陈述分组">
         <button type="button" aria-pressed={section === 'E'} onClick={() => showClaim('E01')}>核心陈述</button>
         <button type="button" aria-pressed={section === 'X'} onClick={() => showClaim('X01')}>需要核对的说法</button>
