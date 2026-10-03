@@ -330,23 +330,28 @@ function PreviewCache(props: SiteProps) {
 }
 function SpreadsheetRow({ item, columns, number, ...props }: SiteProps & { item: PageObject; columns: string[]; number: number }) {
   const [selected, setSelected] = useObjectDisclosure(item.id)
+  const retainedFields = Object.fromEntries(Object.entries(item.metadata || {}).filter(([key]) => !columns.includes(key)))
   function select(element: HTMLElement) {
     setSelected(!selected)
     if (item.evidenceId) props.onDiscover(item.evidenceId, pointAt(element))
   }
-  return <tr id={item.id} className={selected ? 'sheet-selected' : undefined} onClick={(event) => select(event.currentTarget)}>
+  return <><tr id={item.id} className={selected ? 'sheet-selected' : undefined} onClick={(event) => select(event.currentTarget)}>
     <th scope="row">{number}</th>{columns.map((column, index) => <td key={column}>{index === 0 ?
       <button className="sheet-row-label" aria-pressed={selected} onClick={(event) => { event.stopPropagation(); select(event.currentTarget) }}>{item.metadata?.[column] || '—'}</button> : item.metadata?.[column] || '—'}</td>)}
-  </tr>
+  </tr>{selected && Object.keys(retainedFields).length > 0 && <tr><td colSpan={columns.length + 1}><Metadata values={retainedFields} /></td></tr>}</>
 }
 function Spreadsheet(props: SiteProps) {
   const columns = props.page.tableColumns || [], rows = props.page.objects?.filter((item) => item.type === 'row') || []
+  const received = props.page.objects?.find((item) => item.type === 'timestamp')
   return <div className="spreadsheet-viewer"><header>▦ {props.page.title} <small>— 附件只读预览</small></header>
     <div className="sheet-toolbar"><span>文件</span><span>查看</span><span>只读</span><span>{rows.length} 条记录</span></div>
+    {received && <Time item={received} label={`附件收件：${received.timestamp}`} onDiscover={props.onDiscover} />}
     {props.page.body.map((line, index) => <p className="sheet-note" key={index}>{line}</p>)}
     <div className="sheet-grid"><table aria-label={props.page.title}><thead><tr><th aria-label="行号" />{columns.map((column, index) => <th key={column} scope="col" aria-label={`${String.fromCharCode(65 + index)} 列：${column}`}>{String.fromCharCode(65 + index)}</th>)}</tr>
       <tr className="sheet-column-titles"><th scope="row">1</th>{columns.map((column) => <th key={column} scope="col">{column}</th>)}</tr></thead>
       <tbody>{rows.map((item, index) => <SpreadsheetRow {...props} key={item.id} item={item} columns={columns} number={index + 2} />)}</tbody></table></div>
+    {props.page.objects?.filter((item) => item.type !== 'row' && item.type !== 'timestamp').map((item) => <ObjectRow {...props} key={item.id} item={item} />)}
+    <Links {...props} />
     <footer>{props.page.subtitle || '工作表 1'}　|　只读</footer></div>
 }
 export function SiteView(props: SiteProps) {
@@ -363,8 +368,8 @@ export function SiteView(props: SiteProps) {
     </div><footer>Powered by CampusBBS　|　旧帖只读</footer></div>
   else if (page.kind === 'portal') content = <Portal {...props} />
   else if (page.kind === 'cache' && page.siteId === 'wang-work') content = <PreviewCache {...props} />
-  else if (page.siteId === 'wang-work') content = <WorkPage {...props} />
   else if (page.kind === 'spreadsheet') content = <Spreadsheet {...props} />
+  else if (page.siteId === 'wang-work') content = <WorkPage {...props} />
   else if (page.kind === 'forum-thread' || page.kind === 'forum') content = <Forum {...props} />
   else if (page.kind === 'profile') content = <Profile {...props} />
   else if (page.kind === 'blog' || page.skin === 'summer' || page.skin === 'zhao') content = <Blog {...props} />

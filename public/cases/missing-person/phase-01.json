@@ -199,7 +199,28 @@
     "s034ArchiveDate": "2009-09-30",
     "s034ArchiveTime": "10:12",
     "xuNormalReplyDate": "2008-06-15",
-    "xuNormalReplyTime": "11:09"
+    "xuNormalReplyTime": "11:09",
+    "s041Id": "S-041",
+    "s041Target": "阿禾",
+    "s041TargetCode": "家属甲",
+    "s041OldUsername": "ahe_old",
+    "s041Region": "南站附近",
+    "s041ActivityDate": "2009-03-01",
+    "s041ActivityTime": "19:18",
+    "s041NoticeDate": "2009-03-03",
+    "s041NoticeTime": "10:32",
+    "s041SightingDate": "2009-03-04",
+    "s041SightingTime": "18:45",
+    "s041RequestDate": "2009-03-05",
+    "s041ConfirmDate": "2009-03-07",
+    "s041ConfirmTime": "17:16",
+    "s041StopDate": "2009-03-08",
+    "s041StopTime": "09:28",
+    "xuHandoverDate": "2009-03-09",
+    "xuHandoverTime": "08:54",
+    "xuHandoverFilename": "本周确认.xls",
+    "s041PublicCaptureDate": "2009-03-10",
+    "s041PublicCaptureTime": "11:06"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -5141,6 +5162,22 @@
               "pageId": "snapshot_s034_xu_task"
             }
           ]
+        },
+        {
+          "id": "xu-material-handover",
+          "type": "file",
+          "title": "局部任务交接",
+          "metadata": {
+            "类型": "实收附件 / 后续收件",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "局部副本"
+          },
+          "links": [
+            {
+              "label": "局部任务交接",
+              "pageId": "snapshot_xu_handover_materials"
+            }
+          ]
         }
       ],
       "links": [
@@ -6538,6 +6575,487 @@
         "originalUrl": "ncitynews://reporters/wangman/s034_dispute",
         "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
       }
+    },
+    {
+      "id": "snapshot_xu_handover_materials",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "局部任务交接",
+      "url": "archive://snapshot/ncitynews/wangman/xu_handover_materials",
+      "body": [
+        "来源登记 / {{xuMaterialsProvidedDate}}。许宁许可王曼复制自己实际收到的交接邮件、所附小表及后续停止确认邮件；后来的工作页只链接这些必要副本，各文件分别抓取。",
+        "附件是某次停止 / 交接事项所选的几行，旧项仅供许宁对照哪些不要再确认。不是全量登记、完整历史或梁的数据库。",
+        "收件时间、旧任务原日期、公开页发布时间及本次抓取时间分别保留。此目录打开不记录正文，也不从文件数量推任务数。"
+      ],
+      "objects": [
+        {
+          "id": "handover-file-snapshot_xu_handover_mail",
+          "type": "file",
+          "title": "交接邮件 / 附件收到记录",
+          "metadata": {
+            "类型": "许宁实收邮件",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要部分"
+          },
+          "links": [
+            {
+              "label": "交接邮件 / 附件收到记录",
+              "pageId": "snapshot_xu_handover_mail"
+            }
+          ]
+        },
+        {
+          "id": "handover-file-snapshot_xu_handover_sheet",
+          "type": "file",
+          "title": "{{xuHandoverFilename}}",
+          "metadata": {
+            "类型": "局部附件",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要部分"
+          },
+          "links": [
+            {
+              "label": "{{xuHandoverFilename}}",
+              "pageId": "snapshot_xu_handover_sheet"
+            }
+          ]
+        },
+        {
+          "id": "handover-file-snapshot_s041_stop",
+          "type": "file",
+          "title": "{{s041Id}} / 已交付，停止确认",
+          "metadata": {
+            "类型": "许宁后续收件",
+            "保存日期": "{{xuMaterialsProvidedDate}}",
+            "大小": "必要部分"
+          },
+          "links": [
+            {
+              "label": "{{s041Id}} / 已交付，停止确认",
+              "pageId": "snapshot_s041_stop"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "label": "许宁提供材料",
+          "pageId": "snapshot_wang_xu_materials"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C28"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu_handover_materials",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_xu_handover_mail",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "交接邮件 / 本周确认",
+      "url": "archive://snapshot/ncitynews/wangman/xu_handover_mail",
+      "body": [
+        "许宁保存的邮件打印副本和一段自己的短回信，{{xuMaterialsProvidedDate}}许可王曼复制。附件收到时间由邮件系统字段保留，不把表内手填状态当作整个业务的时钟。"
+      ],
+      "objects": [
+        {
+          "id": "xu-handover-mail-headers",
+          "type": "text",
+          "title": "收件打印 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "许宁（本人实收保存）",
+            "邮件系统收件": "{{xuHandoverDate}} {{xuHandoverTime}}",
+            "附件": "{{xuHandoverFilename}}",
+            "来源": "梁发件 → 许宁实际保存收件和附件 → 王曼许可副本"
+          }
+        },
+        {
+          "id": "xu-handover-mail-body",
+          "type": "text",
+          "title": "邮件正文",
+          "body": [
+            "把本周停止、交接的几项留给你对照，旧项不需要重新跑。{{s041Id}}按前一封停止通知处理。附{{xuHandoverFilename}}。",
+            "附件只选你需要辨认的几项，原确认要求保留在备注中，当前状态以本次交接和停止通知核对。"
+          ]
+        },
+        {
+          "id": "xu-handover-attachment",
+          "type": "attachment",
+          "title": "{{xuHandoverFilename}}",
+          "body": [
+            "邮件实收附件 / 少量任务行"
+          ],
+          "links": [
+            {
+              "label": "打开附件：{{xuHandoverFilename}}",
+              "pageId": "snapshot_xu_handover_sheet"
+            }
+          ]
+        },
+        {
+          "id": "s041-finite-reply",
+          "type": "text",
+          "title": "许宁自存短回信 / {{s041ConfirmDate}} {{s041ConfirmTime}}",
+          "body": [
+            "{{s041Id}}：这两天没再看到。只在{{s041Region}}问到以前有人见过，没有继续跟，也没接触本人。"
+          ],
+          "metadata": {
+            "对应原要求": "{{s041RequestDate}} / {{s041TargetCode}}、旧称{{s041Target}}",
+            "来源": "许宁本人保存的短发件节录",
+            "范围": "有限公共区域询问，未成功取得明确现时位置"
+          }
+        }
+      ],
+      "links": [
+        {
+          "label": "局部任务交接",
+          "pageId": "snapshot_xu_handover_materials"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C28"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu_handover_mail",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_xu_handover_sheet",
+      "kind": "spreadsheet",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{xuHandoverFilename}} / 局部附件",
+      "url": "archive://snapshot/ncitynews/wangman/xu_handover_sheet",
+      "body": [
+        "实收附件只保留本次停止 / 交接的四行。原邮件与附件一起由许宁保存；不是网站后台导出，不包含所有年份的任务。",
+        "旧项在同次交接中仅作“不再确认”的对照；原任务日期要回看各自邮件，不能按本表行序或编号给它们重新排年表。",
+        "原确认要求留在备注，{{s041Id}}当前已交付状态须与另外保存的停止邮件核对。收费字段与客户材料没有随这个附件提供。"
+      ],
+      "objects": [
+        {
+          "id": "xu-handover-received",
+          "type": "timestamp",
+          "title": "附件的实际收件字段",
+          "timestamp": "{{xuHandoverDate}} {{xuHandoverTime}}",
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件保存者": "许宁",
+            "附件文件名": "{{xuHandoverFilename}}",
+            "系统收到": "{{xuHandoverDate}} {{xuHandoverTime}}",
+            "保留编号": "{{xuTaskAId}} / {{xuTaskBId}} / {{s034Id}} / {{s041Id}}",
+            "许可取得": "{{xuMaterialsProvidedDate}}",
+            "来源": "许宁实际收到并保存的少量交接行 → 王曼必要文件"
+          },
+          "evidenceId": "F67"
+        },
+        {
+          "id": "handover-task-a",
+          "type": "row",
+          "title": "{{xuTaskAId}}",
+          "metadata": {
+            "编号": "{{xuTaskAId}}",
+            "目标简称": "{{xuTaskATarget}}",
+            "区域": "城北一带",
+            "状态": "旧项 / 停止确认",
+            "简短备注": "本次只供对照，不重跑",
+            "收款状态": "本附件未提供",
+            "是否交付": "本附件未列"
+          }
+        },
+        {
+          "id": "handover-task-b",
+          "type": "row",
+          "title": "{{xuTaskBId}}",
+          "metadata": {
+            "编号": "{{xuTaskBId}}",
+            "目标简称": "{{xuTaskBTarget}}",
+            "区域": "原确认区域",
+            "状态": "旧项 / 停止确认",
+            "简短备注": "不用继续跟，旧项对照",
+            "收款状态": "本附件未提供",
+            "是否交付": "本附件未列"
+          }
+        },
+        {
+          "id": "handover-task-s034",
+          "type": "row",
+          "title": "{{s034Id}}",
+          "metadata": {
+            "编号": "{{s034Id}}",
+            "目标简称": "{{s034Target}}",
+            "区域": "{{s034Region}}",
+            "状态": "已交付 / 停止确认",
+            "简短备注": "本次不再确认",
+            "收款状态": "本附件未提供",
+            "是否交付": "已交付（内部标记）"
+          }
+        },
+        {
+          "id": "handover-task-s041",
+          "type": "row",
+          "title": "{{s041Id}}",
+          "metadata": {
+            "编号": "{{s041Id}}",
+            "目标简称": "{{s041TargetCode}} / {{s041Target}}",
+            "区域": "{{s041Region}}",
+            "状态": "已交付 / 停止确认",
+            "简短备注": "原要求：公共区域目视、不接触",
+            "原确认要求日期": "{{s041RequestDate}}",
+            "目标旧账号": "{{s041OldUsername}}",
+            "原寻人页": "echo://old/adult-family",
+            "原页发布": "{{s041NoticeDate}} {{s041NoticeTime}}",
+            "原说明": "成年、已离开原生活区域；不接触本人",
+            "收款状态": "本附件未提供",
+            "是否交付": "已交付（内部标记）"
+          },
+          "evidenceId": "F69"
+        },
+        {
+          "id": "handover-number-boundary",
+          "type": "log-entry",
+          "title": "王曼保存说明 / 局部范围",
+          "body": [
+            "现有编号存在明显缺口，无法据此推算任务总量。",
+            "这是许宁实收附件里选中的几项，缺少大量记录，无法确认编号生成规则。最大值不是总量，也不能把未提供的收费字段理解成已付款或未付款。",
+            "跨时期要核原通信、邮件和公开页面日期。本表本身只证明当次交接片段；许宁自己的旧案不因为缺编号就被补成一行。"
+          ],
+          "metadata": {
+            "原持有": "许宁（实际收到的局部附件）",
+            "取得日期": "{{xuMaterialsProvidedDate}}",
+            "王曼备注": "编号不统计数量；本附件不包含客户收费字段或完整历史"
+          },
+          "evidenceId": "F71"
+        }
+      ],
+      "links": [
+        {
+          "label": "原交接邮件",
+          "pageId": "snapshot_xu_handover_mail"
+        },
+        {
+          "label": "南城搜索",
+          "pageId": "search_home"
+        },
+        {
+          "label": "局部任务交接",
+          "pageId": "snapshot_xu_handover_materials"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C28"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/xu_handover_sheet",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      },
+      "tableColumns": [
+        "编号",
+        "目标简称",
+        "区域",
+        "状态",
+        "简短备注"
+      ],
+      "subtitle": "本周停止 / 交接事项（局部）"
+    },
+    {
+      "id": "snapshot_s041_stop",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{s041Id}} / 已交付，停止确认",
+      "url": "archive://snapshot/ncitynews/wangman/s041_stop",
+      "body": [
+        "许宁本人实际收到并保存的另一封短邮件，{{xuMaterialsProvidedDate}}许可王曼复制。只保留她收到的必要内容，不打开客户收件端。"
+      ],
+      "objects": [
+        {
+          "id": "s041-stop-headers",
+          "type": "text",
+          "title": "收件打印 / 保留字段",
+          "body": [],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "许宁（自存实收副本）",
+            "邮件系统收到": "{{s041StopDate}} {{s041StopTime}}",
+            "对应编号": "{{s041Id}}",
+            "来源": "梁发件 → 许宁保存 → 王曼必要副本"
+          }
+        },
+        {
+          "id": "s041-stop-body",
+          "type": "log-entry",
+          "title": "收件正文 / 停止通知",
+          "body": [
+            "{{s041Id}} 已交付，停止确认。",
+            "原对象{{s041TargetCode}}、旧称{{s041Target}}，{{s041Region}}这项不用再看。"
+          ],
+          "metadata": {
+            "编号": "{{s041Id}}",
+            "对象旧称": "{{s041Target}} / {{s041TargetCode}}",
+            "原区域": "{{s041Region}}",
+            "系统收件": "{{s041StopDate}} {{s041StopTime}}",
+            "状态范围": "内部告知已交付；未附客户收件或付款材料"
+          },
+          "evidenceId": "F70",
+          "timestamp": "{{s041StopDate}} {{s041StopTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "交接附件",
+          "pageId": "snapshot_xu_handover_sheet"
+        },
+        {
+          "label": "局部任务交接",
+          "pageId": "snapshot_xu_handover_materials"
+        }
+      ],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C28"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "ncitynews://reporters/wangman/s041_stop",
+        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s041_public",
+      "kind": "website",
+      "skin": "echo",
+      "layout": "echo",
+      "siteId": "echo",
+      "siteName": "回声寻人网",
+      "title": "成年家属久未联系 / {{s041Target}}",
+      "url": "archive://echo/old/adult-family",
+      "date": "{{s041NoticeDate}}",
+      "body": [
+        "家里很久没有{{s041Target}}的消息，希望了解近况的朋友提供线索。本人已成年，离开原来的生活区域后联系渐少；家人担心，也希望本人看到后报个平安。",
+        "以前公开使用过{{s041OldUsername}}这个旧账号。最近听说在{{s041Region}}一带，未得到确切消息。请不要把相似的人或不确定的旧印象当成已经找到。"
+      ],
+      "objects": [
+        {
+          "id": "s041-public-fields",
+          "type": "log-entry",
+          "title": "原发布字段与普通留言",
+          "body": [
+            "对象：{{s041Target}}，已成年。联系人为普通直系家属；此副本隐去无关私人联系字段。",
+            "{{s041SightingDate}}普通网友：前些天南站附近像是见过，不过隔得远，时间记不清。",
+            "{{s041SightingDate}}补充：有人说已经搬走了，也不知是不是同一个人。另一回复后来称可能看错，不能确认。",
+            "原页只留下普通家属担心的说法。{{s041Target}}旧留言中的主动减少联系是本人表达，不等于家属有恶意，也不等于愿意公开现位置。"
+          ],
+          "metadata": {
+            "对象旧称": "{{s041Target}}",
+            "旧公开账号": "{{s041OldUsername}}",
+            "身份范围": "成年人 / 普通直系家属寻找",
+            "粗略区域": "{{s041Region}}",
+            "原站发布时间": "{{s041NoticeDate}} {{s041NoticeTime}}",
+            "普通回复发布": "{{s041SightingDate}} {{s041SightingTime}}",
+            "来源": "回声原公开页及回复 → 独立历史副本"
+          },
+          "evidenceId": "F68",
+          "timestamp": "{{s041NoticeDate}} {{s041NoticeTime}}"
+        }
+      ],
+      "links": [
+        {
+          "label": "{{s041Target}}的旧公开留言",
+          "pageId": "snapshot_s041_activity"
+        }
+      ],
+      "searchable": true,
+      "searchIndexed": true,
+      "normalNavigation": false,
+      "searchIndex": {
+        "status": "legacy",
+        "aliases": [
+          "{{s041Target}}",
+          "{{s041OldUsername}}"
+        ]
+      },
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C28"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "echo://old/adult-family",
+        "capturedAt": "{{s041PublicCaptureDate}} {{s041PublicCaptureTime}}"
+      }
+    },
+    {
+      "id": "snapshot_s041_activity",
+      "kind": "website",
+      "siteId": "s041-old-public",
+      "siteName": "旧留言页",
+      "title": "{{s041Target}} / 旧公开留言",
+      "author": "{{s041OldUsername}}",
+      "date": "{{s041ActivityDate}}",
+      "url": "archive://oldpage/ahe/notes",
+      "body": [
+        "{{s041Target}} / {{s041OldUsername}}。搬离原来生活的地方后，我暂时不想恢复以前那样频繁的家里联系。请不要替我问现在住在哪。",
+        "普通旧公开留言，只保留必要一段。没有家庭冲突经过或现住处。"
+      ],
+      "objects": [
+        {
+          "id": "s041-ordinary-public-headers",
+          "type": "text",
+          "title": "原页发布字段",
+          "body": [],
+          "metadata": {
+            "公开署名": "{{s041Target}}",
+            "旧账号": "{{s041OldUsername}}",
+            "服务器发布时间": "{{s041ActivityDate}} {{s041ActivityTime}}",
+            "来源": "原公开留言页 / 独立历史副本"
+          }
+        }
+      ],
+      "links": [],
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": true,
+      "requiresTool": "archive",
+      "unlockConditions": {
+        "factIds": [
+          "C28"
+        ]
+      },
+      "snapshot": {
+        "originalUrl": "oldpage://ahe/notes",
+        "capturedAt": "{{s041PublicCaptureDate}} {{s041PublicCaptureTime}}"
+      }
     }
   ],
   "evidence": [
@@ -7266,6 +7784,56 @@
       "summary": "周称前期已付、位置很快失效、拒认剩余费用；梁称交付时有效并要求约定尾款。最终补款、退款及法律结果未恢复。",
       "discovery": "detail",
       "timestamp": "{{s034DisputeDate}} {{s034DisputeTime}}"
+    },
+    {
+      "id": "F67",
+      "type": "attachment",
+      "sourcePageId": "snapshot_xu_handover_sheet",
+      "sourceObjectId": "xu-handover-received",
+      "title": "局部交接附件｜许宁实收多个非连续S编号的少量行",
+      "summary": "邮件系统收到时间及附件副本对应；保留{{xuTaskAId}}、{{xuTaskBId}}、{{s034Id}}、{{s041Id}}四项。只是本次交接选择，原任务日期另核原件，不是全历史。",
+      "discovery": "detail",
+      "timestamp": "{{xuHandoverDate}} {{xuHandoverTime}}"
+    },
+    {
+      "id": "F68",
+      "type": "page",
+      "sourcePageId": "snapshot_s041_public",
+      "sourceObjectId": "s041-public-fields",
+      "title": "成年家属寻人页｜旧称、旧账号与南站粗略区域",
+      "summary": "普通直系家属寻找已成年、主动减少联系者。旧称{{s041Target}}、{{s041OldUsername}}、区域及原页时间可核内部引用；善意担心不等于本人同意被定位。",
+      "discovery": "detail",
+      "timestamp": "{{s041NoticeDate}} {{s041NoticeTime}}"
+    },
+    {
+      "id": "F69",
+      "type": "table-row",
+      "sourcePageId": "snapshot_xu_handover_sheet",
+      "sourceObjectId": "handover-task-s041",
+      "title": "{{s041Id}}｜局部行保留公共区域有限确认要求",
+      "summary": "目标简称{{s041TargetCode}} / {{s041Target}}、旧账号、区域、原寻人页引用与时间对应，原要求不接触；本次已交付是内部状态，不独证客户收件或付款。",
+      "discovery": "detail",
+      "timestamp": "{{s041RequestDate}}"
+    },
+    {
+      "id": "F70",
+      "type": "email",
+      "sourcePageId": "snapshot_s041_stop",
+      "sourceObjectId": "s041-stop-body",
+      "title": "{{s041Id}}｜后续实收邮件“已交付，停止确认”",
+      "summary": "许宁收到同号、同对象、同区域的停止邮件。只证梁内部告知进入交付状态，不知道交给谁、交付了什么，也无客户付款凭证。",
+      "discovery": "detail",
+      "timestamp": "{{s041StopDate}} {{s041StopTime}}"
+    },
+    {
+      "id": "F71",
+      "type": "other",
+      "sourcePageId": "snapshot_xu_handover_sheet",
+      "sourceObjectId": "handover-number-boundary",
+      "title": "编号边界｜缺口与局部附件不能用于推算规模",
+      "summary": "实际少量行有缺口，编号规则未知。王曼保留局部范围说明；最大值不等于总数，缺收费字段不等于付款或未付款，跨期须原日期互证。",
+      "discovery": "detail",
+      "timestamp": "{{xuMaterialsProvidedDate}}"
     }
   ],
   "facts": [
@@ -7418,6 +7986,21 @@
       "id": "C28",
       "title": "至少在{{s034Id}}这一案例中，梁将特殊寻访作为收费服务运营：接受客户委托、收取费用、利用公开目击和有限现实确认定位目标，并向客户交付结果。",
       "summary": "仅这一单的完整客户侧链。不能推所有S收费、总量、收入、持续业务或刘佳赵妍具体付费身份。"
+    },
+    {
+      "id": "C29",
+      "title": "{{s041Id}}的公开寻人页面与内部确认任务属于同一寻访对象。",
+      "summary": "旧称、旧公开账号、南站粗略区域、原页地址与发布时间对应。公开页不带内部编号，不能只按同名匹配。"
+    },
+    {
+      "id": "C30",
+      "title": "{{s041Id}}后来进入“已交付”状态，但现有材料不足以确认其客户付款情况。",
+      "summary": "许宁实收停止邮件与同号交接行相符。仅内部状态，不核客户真实收件、结果满意度或付款。"
+    },
+    {
+      "id": "C31",
+      "title": "现有跨时期材料支持：特殊寻访并非{{s034Id}}的一次性例外，而是一类被重复编号、交接、确认并交付的内部业务。",
+      "summary": "许宁旧案、不同日期有限任务、一个完整收费样本及另一期部分交付状态相接。时间取原通信 / 收件 / 网页，不由编号排序推导；不能推出每个S收费、持续收费全账或任务规模。"
     }
   ],
   "relations": [
@@ -7914,6 +8497,58 @@
           "C28"
         ]
       }
+    },
+    {
+      "id": "R29",
+      "title": "{{s041Id}}的公开寻人页面与内部确认任务属于同一寻访对象。",
+      "summary": "旧称、旧公开账号、南站粗略区域、原页地址与发布时间对应。公开页不带内部编号，不能只按同名匹配。",
+      "evidenceIds": [
+        "F68",
+        "F69"
+      ],
+      "factIds": [],
+      "unlocks": {
+        "factIds": [
+          "C29"
+        ]
+      }
+    },
+    {
+      "id": "R30",
+      "title": "{{s041Id}}后来进入“已交付”状态，但现有材料不足以确认其客户付款情况。",
+      "summary": "许宁实收停止邮件与同号交接行相符。仅内部状态，不核客户真实收件、结果满意度或付款。",
+      "evidenceIds": [
+        "F70"
+      ],
+      "factIds": [
+        "C29"
+      ],
+      "unlocks": {
+        "factIds": [
+          "C30"
+        ]
+      }
+    },
+    {
+      "id": "R31",
+      "title": "现有跨时期材料支持：特殊寻访并非{{s034Id}}的一次性例外，而是一类被重复编号、交接、确认并交付的内部业务。",
+      "summary": "许宁旧案、不同日期有限任务、一个完整收费样本及另一期部分交付状态相接。时间取原通信 / 收件 / 网页，不由编号排序推导；不能推出每个S收费、持续收费全账或任务规模。",
+      "evidenceIds": [
+        "F67",
+        "F71"
+      ],
+      "factIds": [
+        "C21",
+        "C23",
+        "C28",
+        "C29",
+        "C30"
+      ],
+      "unlocks": {
+        "factIds": [
+          "C31"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -8036,7 +8671,8 @@
       "Public civil summary / follow-up publication dates, possible accident interval and calibrated peripheral / emergency-call minutes",
       "Xu later public account identifier / nickname and public profile, Chen sent excerpt, Wang contact / meeting / confirmation / later directory capture calendar dates and times",
       "Xu old communication / protection / finite task / expense calendar dates and times, S number values and redacted target labels; no complete amounts or accounts restored",
-      "S-034 number, target old public label, contact / work mailbox strings, commercial contact project label, all transaction / public sighting / verification / capture dates and times, payment amounts and account tail; no bank brand or final settlement"
+      "S-034 number, target old public label, contact / work mailbox strings, commercial contact project label, all transaction / public sighting / verification / capture dates and times, payment amounts and account tail; no bank brand or final settlement",
+      "Third partial adult-family sample S value, redacted target code / old public nickname / username, public / mail / attachment receipt calendar dates and times; no customer identity, fee or complete transaction restored"
     ]
   },
   "homePageId": "portal_home",
