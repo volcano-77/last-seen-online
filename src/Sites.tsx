@@ -248,6 +248,7 @@ function NewsList({ items, title }: { items: CasePage[]; title: string }) {
 function News(props: SiteProps) {
   const { page } = props
   const home = getSiteHome(page, props.pages)
+  const internalRecord = page.details?.section?.startsWith('材料后续') === true
   const items = (home?.objects || page.objects || []).flatMap((item) => {
     const target = props.pages.find((p) => p.id === item.links?.[0]?.pageId)
     return target ? [target] : []
@@ -258,8 +259,8 @@ function News(props: SiteProps) {
     {page.directory ? <div className="portal-front"><div className="portal-banner"><strong>身边事 · 大家看</strong><span>本地 ｜ 校园 ｜ 生活</span><small>读新闻，聊生活</small></div><h2 className="portal-today">今日要闻</h2><div className="portal-news-columns">
       {['校园', '本地'].map((section) => <NewsList key={section} items={items.filter((item) => item.details?.section === section)} title={section === '校园' ? '校园资讯' : '本地新闻'} />)}
     </div><p className="portal-intro">{page.body.join(' ')}</p><Links {...props} /></div> :
-      <div className="news-columns single-column"><article><h2>{page.title}</h2><div className="news-meta">{page.date}　来源：本地资讯</div>{page.body.map((line, i) => <p key={i}>{line}</p>)}{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} />{home && <div className="news-return"><PageLink pageId={home.id} options={{ newTab: false, state: {} }}>返回资讯网首页</PageLink></div>}</article></div>}
-    <footer>资讯网历史稿件　文章内容以当时报道为准</footer></div>
+      <div className="news-columns single-column"><article><h2>{page.title}</h2><div className="news-meta">{page.date}　来源：{internalRecord ? '材料处理记录' : '本地资讯'}</div>{page.body.map((line, i) => <p key={i}>{line}</p>)}{page.objects?.map((item) => <ObjectRow {...props} key={item.id} item={item} />)}<Links {...props} />{home && <div className="news-return"><PageLink pageId={home.id} options={{ newTab: false, state: {} }}>返回资讯网首页</PageLink></div>}</article></div>}
+    <footer>{internalRecord ? '内部材料节录　不作为公开新闻稿' : '资讯网历史稿件　文章内容以当时报道为准'}</footer></div>
 }
 function Echo(props: SiteProps) {
   const { page } = props, timestamp = page.objects?.find((item) => item.type === 'timestamp')

@@ -25,6 +25,11 @@ export interface MaterialDeliveryProgress {
   familyDelivered?: DeliveryReceipt
   mediaDelivered?: DeliveryReceipt
   dualDeliveryComplete: boolean
+  postDeliveryResponseUnlocked: boolean
+  familyResponseSeen: boolean
+  mediaResponseSeen: boolean
+  wangEditorRecordUnlocked: boolean
+  wangSafetyMessageSeen: boolean
 }
 
 export const DELIVERY_CHANNELS = {
@@ -53,6 +58,9 @@ export const DELIVERY_CHANNELS = {
 export const emptyMaterialDelivery = (): MaterialDeliveryProgress => ({
   open: false, generated: false, sourceIds: [], familyVerified: false,
   mediaVerified: false, dualDeliveryComplete: false,
+  postDeliveryResponseUnlocked: false, familyResponseSeen: false,
+  mediaResponseSeen: false, wangEditorRecordUnlocked: false,
+  wangSafetyMessageSeen: false,
 })
 
 export function finalReviewComplete(review: FinalReviewProgress): boolean {

@@ -23,7 +23,10 @@ function meets(gate: UnlockConditions | undefined, save: SaveData) {
     (gate.relationIds || []).every((id) => save.establishedRelationIds.includes(id)) &&
     (gate.factIds || []).every((id) => save.unlockedFactIds.includes(id)) &&
     (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id)) &&
-    (gate.materialPackageGenerated !== true || save.materialDelivery.generated)
+    (gate.materialPackageGenerated !== true || save.materialDelivery.generated) &&
+    (gate.dualDeliveryComplete !== true || save.materialDelivery.dualDeliveryComplete) &&
+    (gate.postDeliveryResponseUnlocked !== true || save.materialDelivery.postDeliveryResponseUnlocked) &&
+    (gate.wangEditorRecordUnlocked !== true || save.materialDelivery.wangEditorRecordUnlocked)
 }
 
 export default function App() {
@@ -176,7 +179,17 @@ export default function App() {
     const evidence = caseData?.evidence.find((item) => item.id === id)
     if (!save || !page || !evidence || evidence.sourcePageId !== page.id || !meets(evidence.unlockConditions, save) ||
       (page.accessPuzzleId && !save.completedPuzzleIds.includes(page.accessPuzzleId)) || save.discoveredEvidenceIds.includes(id)) return
-    setSave((old) => old ? { ...old, discoveredEvidenceIds: add(old.discoveredEvidenceIds, [id]), savedEvidenceIds: add(old.savedEvidenceIds, [id]) } : old)
+    setSave((old) => {
+      if (!old) return old
+      const discoveredEvidenceIds = add(old.discoveredEvidenceIds, [id])
+      const familyResponseSeen = old.materialDelivery.familyResponseSeen || id === 'F96'
+      const mediaResponseSeen = old.materialDelivery.mediaResponseSeen || id === 'F97'
+      return { ...old, discoveredEvidenceIds, savedEvidenceIds: add(old.savedEvidenceIds, [id]),
+        materialDelivery: { ...old.materialDelivery, familyResponseSeen, mediaResponseSeen,
+          wangEditorRecordUnlocked: old.materialDelivery.wangEditorRecordUnlocked ||
+            old.materialDelivery.postDeliveryResponseUnlocked && familyResponseSeen && mediaResponseSeen,
+          wangSafetyMessageSeen: old.materialDelivery.wangSafetyMessageSeen || id === 'F89' } }
+    })
     showFeedback(`✓ 已记下：${evidence.title}`, anchor || (tip ? { x: tip.x, y: tip.y + 42 } : undefined))
   }
   function inspectSelection(event: MouseEvent) {
@@ -274,6 +287,18 @@ export default function App() {
     })
   }
 
+  function checkPostDeliveryResponse() {
+    const target = caseData?.pages.find((item) => item.id === 'news_review_followup')
+    if (!target) return
+    setSave((old) => {
+      if (!old || !old.materialDelivery.dualDeliveryComplete || !old.unlockedFactIds.includes('C44')) return old
+      const progressed = { ...old, materialDelivery: { ...old.materialDelivery,
+        open: false, postDeliveryResponseUnlocked: true } }
+      return { ...openPage(capture(progressed), target, false), visitedPageIds: add(old.visitedPageIds, [target.id]) }
+    })
+    resetChrome()
+  }
+
   function returnVisit(tabId: string, entryId: string) {
     if (!caseData) return
     setSave((old) => {
@@ -353,7 +378,8 @@ export default function App() {
         onGenerate={generateMaterialPackage} />}
       {save.materialDelivery.generated && save.materialDelivery.open && <MaterialPackage caseData={caseData} save={save}
         onClose={() => setSave((old) => old ? { ...old, materialDelivery: { ...old.materialDelivery, open: false } } : old)}
-        onNavigate={navigate} onVerify={verifyDeliveryChannel} onDeliver={deliverMaterialPackage} />}
+        onNavigate={navigate} onVerify={verifyDeliveryChannel} onDeliver={deliverMaterialPackage}
+        onCheckResponse={checkPostDeliveryResponse} />}
     </div>
     {tip && <button className="selection-tip" style={{ left: tip.x, top: tip.y }} onMouseDown={(event) => event.preventDefault()} onClick={recordSelection}>☆ 记下这段</button>}
     {feedback && <div className="record-feedback" role="status" style={{ left: feedback.x, top: feedback.y }}>{feedback.text}</div>}

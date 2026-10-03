@@ -61,7 +61,10 @@ function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolea
     (gate.relationIds || []).every((id) => save.establishedRelationIds.includes(id)) &&
     (gate.factIds || []).every((id) => save.unlockedFactIds.includes(id)) &&
     (gate.puzzleIds || []).every((id) => save.completedPuzzleIds.includes(id)) &&
-    (gate.materialPackageGenerated !== true || save.materialDelivery.generated)
+    (gate.materialPackageGenerated !== true || save.materialDelivery.generated) &&
+    (gate.dualDeliveryComplete !== true || save.materialDelivery.dualDeliveryComplete) &&
+    (gate.postDeliveryResponseUnlocked !== true || save.materialDelivery.postDeliveryResponseUnlocked) &&
+    (gate.wangEditorRecordUnlocked !== true || save.materialDelivery.wangEditorRecordUnlocked)
   const unlockers = [
     ...caseData.relations.filter((relation) => relation.unlocks?.pageIds?.includes(page.id))
       .map((relation) => save.establishedRelationIds.includes(relation.id)),
@@ -202,6 +205,19 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
   }
   const familyDelivered = receipt('family', familyVerified)
   const mediaDelivered = receipt('media', mediaVerified)
+  const dualDeliveryComplete = Boolean(familyDelivered && mediaDelivered)
+  const postDeliveryResponseUnlocked = dualDeliveryComplete && rawMaterial.postDeliveryResponseUnlocked === true &&
+    restored.visitedPageIds.includes('news_review_followup')
+  const familyResponseSeen = postDeliveryResponseUnlocked && rawMaterial.familyResponseSeen === true &&
+    restored.discoveredEvidenceIds.includes('F96')
+  const mediaResponseSeen = postDeliveryResponseUnlocked && rawMaterial.mediaResponseSeen === true &&
+    restored.discoveredEvidenceIds.includes('F97')
+  const wangEditorRecordUnlocked = familyResponseSeen && mediaResponseSeen &&
+    rawMaterial.wangEditorRecordUnlocked === true
+  const editorIdentityVerified = wangEditorRecordUnlocked &&
+    restored.visitedPageIds.includes('news_wang_editor_record') && restored.discoveredEvidenceIds.includes('F98')
+  const wangSafetyMessageSeen = editorIdentityVerified && rawMaterial.wangSafetyMessageSeen === true &&
+    restored.visitedPageIds.includes('news_wang_safety_excerpt') && restored.discoveredEvidenceIds.includes('F89')
   restored.materialDelivery = {
     open: generated && rawMaterial.open === true, generated,
     packageId: generated ? MATERIAL_PACKAGE_ID : undefined,
@@ -212,7 +228,8 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
     mediaVerified,
     mediaVerifiedAt: mediaVerified && typeof rawMaterial.mediaVerifiedAt === 'string' ? rawMaterial.mediaVerifiedAt : undefined,
     familyDelivered, mediaDelivered,
-    dualDeliveryComplete: Boolean(familyDelivered && mediaDelivered),
+    dualDeliveryComplete, postDeliveryResponseUnlocked,
+    familyResponseSeen, mediaResponseSeen, wangEditorRecordUnlocked, wangSafetyMessageSeen,
   }
   const validReceiptIds = new Set<string>([
     ...(familyDelivered ? [DELIVERY_CHANNELS.family.receiptId] : []),
@@ -223,12 +240,44 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
     !receiptIds.has(id) || validReceiptIds.has(id))
   restored.savedEvidenceIds = restored.savedEvidenceIds.filter((id) =>
     !receiptIds.has(id) || validReceiptIds.has(id))
+  const validPostIds = new Set<string>([
+    ...(familyResponseSeen ? ['F96'] : []), ...(mediaResponseSeen ? ['F97'] : []),
+    ...(editorIdentityVerified ? ['F98'] : []), ...(wangSafetyMessageSeen ? ['F89'] : []),
+  ])
+  const postIds = new Set(['F96', 'F97', 'F98', 'F89'])
+  restored.discoveredEvidenceIds = restored.discoveredEvidenceIds.filter((id) =>
+    !postIds.has(id) || validPostIds.has(id))
+  restored.savedEvidenceIds = restored.savedEvidenceIds.filter((id) =>
+    !postIds.has(id) || validPostIds.has(id))
   if (generated) restored.finalReview.open = false
   if (restored.materialDelivery.dualDeliveryComplete) restored.unlockedFactIds = [...new Set([...restored.unlockedFactIds, 'C44'])]
   else restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C44')
+  const c42Valid = wangSafetyMessageSeen && ['F84', 'F88', 'F98', 'F89'].every((id) =>
+    restored.discoveredEvidenceIds.includes(id)) && restored.establishedRelationIds.includes('R42')
+  restored.establishedRelationIds = restored.establishedRelationIds.filter((id) => id !== 'R42' || c42Valid)
+  restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C42')
+  if (c42Valid) restored.unlockedFactIds.push('C42')
+  const c43Valid = c42Valid && ['C39', 'C41', 'C42'].every((id) => restored.unlockedFactIds.includes(id)) &&
+    restored.discoveredEvidenceIds.includes('F84') && restored.establishedRelationIds.includes('R43')
+  restored.establishedRelationIds = restored.establishedRelationIds.filter((id) => id !== 'R43' || c43Valid)
+  restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C43')
+  if (c43Valid) restored.unlockedFactIds.push('C43')
+  const postPageIds = new Set(['news_review_followup', 'news_wang_editor_record', 'news_wang_safety_excerpt'])
+  restored.visitedPageIds = restored.visitedPageIds.filter((id) => {
+    const page = caseData.pages.find((item) => item.id === id)
+    return !postPageIds.has(id) || Boolean(page && allowedPage(page, restored, caseData))
+  })
   restored.tabs = restored.tabs.map((tab) => {
-    const current = caseData.pages.find((page) => page.id === tab.history[tab.historyIndex].pageId)
-    return current && allowedPage(current, restored, caseData) ? tab : { ...tab, title: clean.tabs[0].title,
+    const kept = tab.history.map((entry, index) => ({ entry, index })).filter(({ entry }) => {
+      const page = caseData.pages.find((item) => item.id === entry.pageId)
+      return !postPageIds.has(entry.pageId) || Boolean(page && allowedPage(page, restored, caseData))
+    })
+    if (!kept.length) return { ...tab, title: clean.tabs[0].title,
+      history: [makeEntry(caseData.pages.find((p) => p.id === caseData.startPageId)!)], historyIndex: 0 }
+    const filtered = { ...tab, history: kept.map(({ entry }) => entry),
+      historyIndex: Math.max(0, kept.filter(({ index }) => index <= tab.historyIndex).length - 1) }
+    const current = caseData.pages.find((page) => page.id === filtered.history[filtered.historyIndex].pageId)
+    return current && allowedPage(current, restored, caseData) ? { ...filtered, title: current.title } : { ...filtered, title: clean.tabs[0].title,
       history: [makeEntry(caseData.pages.find((p) => p.id === caseData.startPageId)!)], historyIndex: 0 }
   })
   restored.visitedPageIds = [...new Set([...restored.visitedPageIds, currentEntry(restored).pageId])]

@@ -4727,6 +4727,126 @@
       ]
     },
     {
+      "id": "news_review_followup",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "案件复核材料｜后续回应",
+      "url": "ncitynews://internal/review-followup",
+      "date": "递交后一段时间",
+      "details": { "section": "材料后续 / 游戏内回执" },
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "factIds": ["C44"] },
+      "body": [
+        "CY-REVIEW-01分别递交后，材料处理记录出现两条独立回应。回执只确认收件与开始核对，不代表案件已经重启调查。",
+        "先核对两条回应的范围；涉及王曼旧调查资料的编辑补记仍需另行查看。"
+      ],
+      "objects": [
+        {
+          "id": "family-review-response",
+          "type": "log-entry",
+          "title": "家属代表渠道｜收件回应",
+          "timestamp": "递交后一段时间",
+          "body": [
+            "家属代表材料渠道确认收到CY-REVIEW-01。",
+            "材料已交由代理人核对；家属方面将根据材料决定是否提出后续复核申请。此时尚无重新调查结果。"
+          ],
+          "evidenceId": "F96"
+        },
+        {
+          "id": "media-review-response",
+          "type": "log-entry",
+          "title": "南城资讯网｜内部核查回应",
+          "timestamp": "递交后一段时间",
+          "body": [
+            "资讯网调查线索栏目确认CY-REVIEW-01已进入内部来源核验。",
+            "编辑开始核对材料所引原页与副本来源；其中涉及王曼留下的旧调查资料。一名曾与她合作的可信编辑重新查看了自存旧记录。此时尚无刊发或独立核查结论。"
+          ],
+          "evidenceId": "F97"
+        }
+      ],
+      "links": [
+        { "label": "王曼旧资料核验补记", "pageId": "news_wang_editor_record" }
+      ]
+    },
+    {
+      "id": "news_wang_editor_record",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "王曼旧资料核验补记",
+      "url": "ncitynews://internal/wang-editor-record",
+      "date": "递交后一段时间",
+      "details": { "section": "材料后续 / 编辑节录" },
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "wangEditorRecordUnlocked": true, "evidenceIds": ["F96", "F97"], "factIds": ["C44"] },
+      "body": [
+        "收到并核对CY-REVIEW-01的来源索引后，曾与王曼合作的可信编辑确认这批材料与她当年的调查资料对应，才释出自存记录中的有限核验结果。此前它是非公开编辑资料，不向陌生调查者开放。",
+        "编辑不披露王曼后来的通信渠道、核验问题和答案，也不提供她的去向。"
+      ],
+      "objects": [
+        {
+          "id": "editor-later-identity-check",
+          "type": "log-entry",
+          "title": "编辑自存记录｜按离开前约定核验",
+          "timestamp": "王曼离开后",
+          "body": [
+            "编辑对照了王曼离开前留下的身份核验约定；核验结论见展开。",
+            "后来收到一条报平安消息，已按离开前约定的非公开调查细节完成核验，确认发送者为王曼本人。具体问题、答案、通信方式与地点均不公开。"
+          ],
+          "evidenceId": "F98"
+        }
+      ],
+      "links": [
+        { "label": "查看编辑保存的短讯摘录", "pageId": "news_wang_safety_excerpt" },
+        { "label": "返回材料后续", "pageId": "news_review_followup" }
+      ]
+    },
+    {
+      "id": "news_wang_safety_excerpt",
+      "kind": "website",
+      "layout": "news",
+      "skin": "news",
+      "siteId": "news",
+      "siteName": "{{cityName}}资讯网",
+      "title": "可信编辑保存的短讯摘录",
+      "url": "ncitynews://internal/wang-safety-excerpt",
+      "date": "递交后一段时间",
+      "details": { "section": "材料后续 / 有限转达" },
+      "searchable": false,
+      "searchIndexed": false,
+      "normalNavigation": false,
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "wangEditorRecordUnlocked": true, "evidenceIds": ["F98"], "factIds": ["C44"] },
+      "body": [
+        "以下只转达已按事先约定核验来源的短讯正文。它只能证明这次安全确认发生时的状态，不能证明此后永久安全、她现在仍在同一地点、完全没有受到压力，或梁以后永远无法找到她。",
+        "编辑不公开王曼的城市、住处、工作、联系方式或实时位置。"
+      ],
+      "objects": [
+        {
+          "id": "editor-verified-safety-excerpt",
+          "type": "log-entry",
+          "title": "已核验本人短讯｜展开摘录",
+          "timestamp": "王曼离开后一次安全确认",
+          "body": [
+            "正文仅在展开后可见；核验秘密与传递方式不公开。",
+            "我安全。不要找我。"
+          ],
+          "evidenceId": "F89"
+        }
+      ],
+      "links": [
+        { "label": "回看编辑核验补记", "pageId": "news_wang_editor_record" }
+      ]
+    },
+    {
       "id": "civil_public_index",
       "kind": "website",
       "siteId": "civil-public",
@@ -8913,6 +9033,17 @@
       "discovery": "detail"
     },
     {
+      "id": "F89",
+      "type": "log",
+      "sourcePageId": "news_wang_safety_excerpt",
+      "sourceObjectId": "editor-verified-safety-excerpt",
+      "title": "王曼安全短讯｜我安全。不要找我。",
+      "summary": "可信编辑按离开前约定的非公开调查细节核验发送者后保存的本人短讯原文：我安全。不要找我。只证明这次确认时王曼仍活着且主动要求不要寻找，不证明永久安全或现时去向。",
+      "timestamp": "王曼离开后一次安全确认",
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "wangEditorRecordUnlocked": true, "evidenceIds": ["F98"], "factIds": ["C44"] },
+      "discovery": "detail"
+    },
+    {
       "id": "F90",
       "type": "page",
       "sourcePageId": "news_chenyu_family_current",
@@ -8965,6 +9096,37 @@
       "sourcePageId": "news_tips_current",
       "title": "递交记录｜复核材料包已交资讯网有效线索渠道",
       "summary": "玩家游戏内提交同一案件复核材料包至已核验的资讯网机构线索栏目；仅证明递交记录已保存，不代表已刊发或完成独立核实。"
+    },
+    {
+      "id": "F96",
+      "type": "log",
+      "sourcePageId": "news_review_followup",
+      "sourceObjectId": "family-review-response",
+      "title": "家属代表回应｜材料已收到并交代理人核对",
+      "summary": "家属代表渠道回执确认收到CY-REVIEW-01，已交代理人核对；是否提出后续复核申请尚待决定，不等于官方重启调查。",
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "factIds": ["C44"] },
+      "discovery": "detail"
+    },
+    {
+      "id": "F97",
+      "type": "log",
+      "sourcePageId": "news_review_followup",
+      "sourceObjectId": "media-review-response",
+      "title": "资讯网回应｜材料进入内部来源核验",
+      "summary": "资讯网机构栏目确认CY-REVIEW-01进入内部来源核验；曾与王曼合作的可信编辑因材料涉及其旧调查记录而重新查看自存资料，尚未形成刊发结论。",
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "factIds": ["C44"] },
+      "discovery": "detail"
+    },
+    {
+      "id": "F98",
+      "type": "log",
+      "sourcePageId": "news_wang_editor_record",
+      "sourceObjectId": "editor-later-identity-check",
+      "title": "可信编辑记录｜后续消息按离开前约定方式核验",
+      "summary": "编辑在核对提交材料与王曼旧调查对应后，有限披露自存记录：后来收到的报平安消息已按离开前约定的非公开调查细节完成身份核验；不公开通信方式、问题、答案或地点。",
+      "timestamp": "王曼离开后",
+      "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "wangEditorRecordUnlocked": true, "evidenceIds": ["F96", "F97"], "factIds": ["C44"] },
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -9187,6 +9349,16 @@
       "id": "C41",
       "title": "梁后续未能通过现有公开信息可靠确认王曼的当前位置。",
       "summary": "许宁实收的{{wangRiskId}}短跟进称本轮无法可靠确认，旧工作、校园、采访及论坛资料的原时间互异，已知公开工作动态不再提供实时位置。仅限这轮公开信息核查，不推出梁永久找不到她。"
+    },
+    {
+      "id": "C42",
+      "title": "可信编辑后来确认收到经事先约定方式核验的王曼本人安全短讯：“我安全。不要找我。”",
+      "summary": "F84确认双方既有联系，F88确认离开前约定的非公开调查细节核验方式，F98是编辑后续实际核验记录，F89保留本人短讯原文。仅确认该次消息来自王曼，不公开传递渠道或核验秘密。"
+    },
+    {
+      "id": "C43",
+      "title": "截至该安全确认时点，现有证据表明王曼的公开消失源于主动撤离，而不是梁对她实施绑架或杀害。",
+      "summary": "F84与C39确认她主动离开且拒绝公开寻人，C41表明梁当轮定位未可靠确认；C42进一步确认后来一个明确时点的本人安全短讯。不推出此后永久安全、现时位置或完全没有外部压力。"
     },
     {
       "id": "C44",
@@ -9866,6 +10038,22 @@
       "factIds": ["C39"],
       "summary": "许宁实收邮件只说本轮无法可靠确认；旧页、转载及普通讨论的地点与日期均不能替代实时位置，不推永久找不到。",
       "unlocks": { "factIds": ["C41"] }
+    },
+    {
+      "id": "R42",
+      "title": "核对离开前约定、编辑核验与安全短讯",
+      "evidenceIds": ["F84", "F88", "F98", "F89"],
+      "factIds": ["C44"],
+      "summary": "可信编辑身份与离开前约定、后续实际核验记录、本人短讯原文相接；仅确认那次消息的来源及内容，不公开核验秘密或推永久安全。",
+      "unlocks": { "factIds": ["C42"] }
+    },
+    {
+      "id": "R43",
+      "title": "核对主动撤离与后来安全确认的时间边界",
+      "evidenceIds": ["F84"],
+      "factIds": ["C39", "C41", "C42"],
+      "summary": "主动离开告知、R定位失败和经核验的后来短讯互核；只到安全确认时点，不作未来持续安全或当前位置判断。",
+      "unlocks": { "factIds": ["C43"] }
     }
   ],
   "puzzles": [

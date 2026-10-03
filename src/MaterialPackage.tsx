@@ -12,6 +12,7 @@ interface Props {
   onNavigate: (id: string) => void
   onVerify: (channel: DeliveryChannelId) => void
   onDeliver: (channel: DeliveryChannelId) => void
+  onCheckResponse: () => void
 }
 interface SourceRecord {
   id: string; title: string; summary: string; type: string; pageTitle: string
@@ -30,7 +31,7 @@ const UNRESOLVED = [
   '王曼离开后的具体位置及后续持续安全状态，现有材料无法确认。',
 ]
 
-export default function MaterialPackage({ caseData, save, onClose, onNavigate, onVerify, onDeliver }: Props) {
+export default function MaterialPackage({ caseData, save, onClose, onNavigate, onVerify, onDeliver, onCheckResponse }: Props) {
   const progress = save.materialDelivery
   const sourceRecords = progress.sourceIds.flatMap<SourceRecord>((id) => {
     const evidence = caseData.evidence.find((item) => item.id === id)
@@ -108,7 +109,9 @@ export default function MaterialPackage({ caseData, save, onClose, onNavigate, o
           <h2>递交复核材料</h2>
           <p>先从公开页面核验两条仍有效的接收渠道。提交仅在游戏内保存记录，不连接现实邮箱。</p>
           {channelRow('family')}{channelRow('media')}
-          {progress.dualDeliveryComplete ? <p className="material-complete" role="status"><b>双路递交完成。</b>材料已经送出。后续回应尚未出现。</p> :
+          {progress.dualDeliveryComplete ? <div className="material-complete" role="status"><b>双路递交完成。</b>材料已经送出。{progress.postDeliveryResponseUnlocked ? '收到后续回应。' : '后续回应尚未出现。'}
+            <button type="button" onClick={progress.postDeliveryResponseUnlocked ? () => onNavigate('news_review_followup') : onCheckResponse}>
+              {progress.postDeliveryResponseUnlocked ? '查看材料后续' : '稍后检查回应'}</button></div> :
             (progress.familyDelivered || progress.mediaDelivered) && <p className="material-pending" role="status">仍有一条独立递交渠道尚未完成。</p>}
         </div>
       </div>
