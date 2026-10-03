@@ -242,7 +242,23 @@
     "xuRiskProvidedDate": "2009-10-01",
     "xuRiskMemoConfirmedDate": "2009-10-01",
     "wangRiskArchiveDate": "2009-10-03",
-    "wangRiskArchiveTime": "11:10"
+    "wangRiskArchiveTime": "11:10",
+    "wangEditorNoticeDate": "2009-10-05",
+    "wangEditorNoticeTime": "18:20",
+    "wangDiscHandoffDate": "2009-10-06",
+    "wangDiscHandoffTime": "15:10",
+    "wangLastPublicDate": "2009-10-06",
+    "wangLeaveDate": "2009-10-07",
+    "wangHiddenArchiveDate": "2009-10-08",
+    "wangHiddenArchiveTime": "09:30",
+    "wangOldWorkProfileDate": "2009-09-12",
+    "wangOldCampusPageDate": "2009-04-16",
+    "wangPublicDiscussionDate": "2009-10-12",
+    "wangRiskFollowupDate": "2009-10-16",
+    "wangRiskFollowupTime": "10:25",
+    "xuRiskFollowupGivenDate": "2009-10-18",
+    "wangDepartureArchiveDate": "2009-10-21",
+    "wangDepartureArchiveTime": "10:10"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3607,14 +3623,14 @@
         "日常项目：校园采访记录、本地生活选题、联系资料整理。这里只保留项目名，笔记和联系方式未收入网页副本。",
         "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。",
         "本次恢复的是较晚更新的目录。五月保存的旧附件沿用各自抓取记录；九月联系记录与采访节录是后来链接、分别抓取的必要副本，不由早期目录截图推定可恢复。",
-        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接，以及许宁后来补交的旧邮箱安全记录和{{wangRiskId}}有限材料。旧文件仍沿用各自独立抓取记录。"
+        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接、许宁后来补交的旧邮箱与{{wangRiskId}}有限材料，以及编辑在王曼离开后整理的风险应对资料索引。旧文件仍沿用各自独立抓取记录。"
       ],
       "searchable": false,
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/materials",
-        "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}"
+        "capturedAt": "{{wangDepartureArchiveDate}} {{wangDepartureArchiveTime}}"
       },
       "directory": true,
       "objects": [
@@ -3791,6 +3807,22 @@
             {
               "label": "038～043来源对照",
               "pageId": "snapshot_wang_risk_compare"
+            }
+          ]
+        },
+        {
+          "id": "wang-dir-departure",
+          "type": "file",
+          "title": "风险应对 / 离开前记录",
+          "metadata": {
+            "类型": "编辑补录的有限资料索引",
+            "保存日期": "{{wangDepartureArchiveDate}}",
+            "大小": "必要副本"
+          },
+          "links": [
+            {
+              "label": "风险应对 / 离开前记录",
+              "pageId": "snapshot_wang_departure_materials"
             }
           ]
         }
@@ -7554,6 +7586,293 @@
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": { "originalUrl": "ncitynews://reporters/wangman/risk-compare", "capturedAt": "{{wangRiskArchiveDate}} {{wangRiskArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_wang_departure_materials",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "风险应对 / 离开前记录",
+      "url": "archive://snapshot/ncitynews/wangman/departure-materials",
+      "body": [
+        "编辑在王曼离开后，把她先前留在工作资料中的归档说明、自己实收的告知副本，以及许宁后来给的有限R跟进编入这一页。原文件各有日期和保管者；编辑没有王曼的当前地址。",
+        "另有一页不在普通目录导航中的旧记者手记备份索引。它的旧地址失效，只能凭已知人名与文件名从南城搜索旧索引再用网页存档恢复。目录不会自动记录下列内容。"
+      ],
+      "objects": [
+        {
+          "id": "wang-departure-notice-file",
+          "type": "file",
+          "title": "给编辑的离开说明",
+          "metadata": { "类型": "王曼归档说明 / 编辑实收副本", "保存日期": "{{wangEditorNoticeDate}}", "大小": "必要节录" },
+          "links": [{ "label": "给编辑的离开说明", "pageId": "snapshot_wang_departure_notice" }]
+        },
+        {
+          "id": "wang-hidden-index-hint",
+          "type": "text",
+          "title": "旧记者手记 / 备份索引提示",
+          "body": ["目录不直连旧备份页。南城搜索旧索引曾保留王曼与旧帖时间核对.xls的关联；原址失效后可查网页存档。"],
+          "metadata": { "状态": "旧索引 / 非普通导航", "原材料": "陈雨调查必要副本", "边界": "编辑保管的实体光盘不在网页上开放" }
+        },
+        {
+          "id": "wang-risk-followup-file",
+          "type": "file",
+          "title": "{{wangRiskId}} / 后续确认",
+          "metadata": { "类型": "许宁实收跟进邮件", "保存日期": "{{xuRiskFollowupGivenDate}}", "大小": "有限节录" },
+          "links": [{ "label": "{{wangRiskId}} / 后续确认", "pageId": "snapshot_xu_risk_followup" }]
+        },
+        {
+          "id": "wang-stale-sources-file",
+          "type": "file",
+          "title": "公开旧信息 / 时间核对",
+          "metadata": { "类型": "旧页面与普通讨论索引", "保存日期": "{{wangPublicDiscussionDate}}", "大小": "必要节录" },
+          "links": [{ "label": "公开旧信息 / 时间核对", "pageId": "snapshot_wang_stale_sources" }]
+        }
+      ],
+      "links": [{ "label": "资料整理 - 王曼", "pageId": "snapshot_wang_work" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/departure-materials", "capturedAt": "{{wangDepartureArchiveDate}} {{wangDepartureArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_wang_departure_notice",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "给编辑的离开说明",
+      "url": "archive://snapshot/ncitynews/wangman/departure-notice",
+      "body": [
+        "王曼归档说明与可信编辑收到的同一告知必要副本。编辑此前知道她在核查一项有风险的社会新闻线索；本页不保存目的地、路线或私人联系地址。"
+      ],
+      "objects": [
+        {
+          "id": "wang-departure-archive-note",
+          "type": "text",
+          "title": "王曼 / 归档短说明",
+          "body": ["确认{{wangRiskId}}和038～043后，我不再把公开工作动态当成安全的实时位置记录。资料已经分处保存；我会主动离开南城，去向不写在这里。", "不要把我的停更写成失踪，也不要用新的公开寻人页替我征集位置。"],
+          "metadata": { "整理日期": "{{wangEditorNoticeDate}}", "保管": "王曼工作副本 / 旧记者资料必要节录" }
+        },
+        {
+          "id": "editor-received-departure-notice",
+          "type": "log-entry",
+          "title": "编辑实收 / 王曼离开前告知",
+          "timestamp": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
+          "body": [
+            "王曼告知：我决定主动离开南城，暂时不公开去向。请不要发布寻人信息，也不要向询问者提供实时位置；如果必要，我会按我们事先说好的方式确认安全。",
+            "编辑后记：{{wangDiscHandoffDate}}收到她交来的资料光盘；{{wangLeaveDate}}起她不再继续公开工作动态。她提前说明了自己的决定，不是毫无交代地失踪。这里不登记她后来在哪里。"
+          ],
+          "metadata": {
+            "收件人": "南城资讯网可信编辑（姓名不公开）",
+            "邮件系统实收": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
+            "后记日期": "{{wangLeaveDate}}",
+            "身份核验约定": "双方事先约定用调查材料中的非公开细节核对；核验内容不公开",
+            "来源": "编辑自存实收副本及工作备注 → 旧工作页必要说明"
+          },
+          "evidenceId": "F84"
+        },
+        {
+          "id": "editor-prearranged-safety-check",
+          "type": "log-entry",
+          "title": "离开前约定 / 日后身份核验",
+          "timestamp": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
+          "body": [
+            "王曼与编辑约定：如果将来需要报平安，编辑会用只有两人知道的调查材料细节核对来讯者身份。具体问题、答案和通信方式不写入这份工作副本。",
+            "这只是离开前建立的核验方式；此时尚无离开后的安全确认。"
+          ],
+          "metadata": {
+            "约定双方": "王曼 / 此前知晓调查风险的可信编辑",
+            "约定时间": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
+            "核验依据": "双方知道的非公开调查材料细节",
+            "来源": "编辑自存告知与工作备注必要节录"
+          },
+          "evidenceId": "F88"
+        }
+      ],
+      "links": [{ "label": "风险应对 / 离开前记录", "pageId": "snapshot_wang_departure_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/departure-notice", "capturedAt": "{{wangDepartureArchiveDate}} {{wangDepartureArchiveTime}}" }
+    },
+    {
+      "id": "wang_hidden_unavailable",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "王曼 / 旧帖时间核对.xls / 记者手记旧索引",
+      "url": "ncitynews://reporters/wangman/notes/backup-index",
+      "body": ["王曼旧记者手记下的备份说明索引，关联旧帖时间核对.xls；原页随改版失效，普通工作目录未列此入口。"],
+      "searchable": true,
+      "searchIndexed": true,
+      "normalNavigation": false,
+      "searchIndex": { "status": "legacy", "aliases": ["王曼", "旧帖时间核对.xls"] },
+      "offlinePageId": "archive_service"
+    },
+    {
+      "id": "snapshot_wang_hidden_backup",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "旧记者手记 / 资料备份索引",
+      "url": "archive://snapshot/ncitynews/wangman/notes/backup-index",
+      "body": [
+        "王曼在离开前留于旧记者工作页下的孤立资料说明。索引不在资讯网首页或普通工作目录导航中；网页存档只恢复这里实际链接并抓取的必要说明和副本，不开放她电脑或编辑手中的光盘。"
+      ],
+      "objects": [
+        {
+          "id": "wang-backup-ledger",
+          "type": "log-entry",
+          "title": "分散备份 / 交接记录",
+          "timestamp": "{{wangDiscHandoffDate}} {{wangDiscHandoffTime}}",
+          "body": [
+            "一、本人电脑：陈雨资料与后续来源核查的工作副本。二、数据光盘：标记‘陈雨资料副本’，{{wangDiscHandoffDate}}交可信编辑保管。三、旧记者工作页：必要资料目录及本索引，由旧网页存档保留可恢复部分。",
+            "编辑在纸质交接条上确认已收到数据光盘，并注明‘若王曼暂时离开，仅保管，不公开实时去向’。三处不是完全相同的文件树；实体盘仍由编辑保管，玩家不能取盘或查看电脑。"
+          ],
+          "metadata": {
+            "王曼整理": "{{wangDiscHandoffDate}}",
+            "光盘交接": "{{wangDiscHandoffDate}} {{wangDiscHandoffTime}} / 可信编辑签收",
+            "标签": "陈雨资料副本",
+            "网页索引": "本页 / 仅必要副本实际抓取",
+            "来源": "王曼归档清单 + 编辑光盘交接条必要节录"
+          },
+          "evidenceId": "F85"
+        }
+      ],
+      "links": [
+        { "label": "陈雨资料备份 / 可恢复部分", "pageId": "snapshot_wang_chen_backup" },
+        { "label": "风险应对 / 离开前记录", "pageId": "snapshot_wang_departure_materials" }
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/notes/backup-index", "capturedAt": "{{wangHiddenArchiveDate}} {{wangHiddenArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_risk_followup",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "{{wangRiskId}} / 后续确认",
+      "url": "archive://snapshot/ncitynews/wangman/risk-followup",
+      "body": [
+        "许宁实际收到并自存的同一R任务后续邮件，{{xuRiskFollowupGivenDate}}交可信编辑保存必要副本。编辑后来只将任务状态和系统时间编入旧工作资料；没有取得梁的R任务库，也没有向许宁索取王曼的私下去向。"
+      ],
+      "objects": [
+        {
+          "id": "xu-risk-followup-mail",
+          "type": "log-entry",
+          "title": "梁来信 / 暂停确认",
+          "timestamp": "{{wangRiskFollowupDate}} {{wangRiskFollowupTime}}",
+          "body": [
+            "{{wangRiskId}}。最近没有可靠确认。公开页面时间对不上，旧地点不能当现在的位置；这轮先停。",
+            "只保留这一封许宁实收的短邮件。‘没有可靠确认’是本轮状态，不代表梁从此不会再找，亦不说明他掌握王曼之后的位置。"
+          ],
+          "metadata": {
+            "发件地址": "{{liangWorkMailbox}}",
+            "收件人": "许宁（实收副本）",
+            "系统收件时间": "{{wangRiskFollowupDate}} {{wangRiskFollowupTime}}",
+            "编号": "{{wangRiskId}}",
+            "转存": "许宁自存 → {{xuRiskFollowupGivenDate}}交可信编辑 → 旧工作页必要副本"
+          },
+          "evidenceId": "F86"
+        }
+      ],
+      "links": [{ "label": "风险应对 / 离开前记录", "pageId": "snapshot_wang_departure_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/risk-followup", "capturedAt": "{{wangDepartureArchiveDate}} {{wangDepartureArchiveTime}}" }
+    },
+    {
+      "id": "public_wang_ordinary_discussion",
+      "kind": "website",
+      "siteId": "life",
+      "siteName": "南城生活论坛",
+      "title": "旧帖 / 王曼最近没更新？",
+      "url": "life://threads/wangman-old-updates",
+      "date": "{{wangPublicDiscussionDate}}",
+      "body": [
+        "普通网友谈起一名旧资讯网记者很久没更新公开动态。这里没有寻人启事，也未征集住处、电话或实时目击；发言只是对旧网页的印象。"
+      ],
+      "objects": [
+        {
+          "id": "wang-ordinary-comment-a",
+          "type": "reply",
+          "title": "旧报道印象",
+          "author": "路过读者",
+          "timestamp": "{{wangPublicDiscussionDate}} 10:16",
+          "body": ["记得她以前跑过城东采访。现在那页还在搜索结果里，但我说不准是不是近期的。"]
+        },
+        {
+          "id": "wang-ordinary-comment-b",
+          "type": "reply",
+          "title": "日期纠正",
+          "author": "旧站读者",
+          "timestamp": "{{wangPublicDiscussionDate}} 11:02",
+          "body": ["另一条校园页写的却是城西旧活动；还有南站采访的转载简介。那些都是以前的资料，拿来猜她现在在哪儿不合适。"]
+        }
+      ],
+      "searchable": true,
+      "searchIndexed": true,
+      "normalNavigation": true,
+      "searchIndex": { "status": "orphan", "aliases": ["王曼", "旧记者"] }
+    },
+    {
+      "id": "snapshot_wang_stale_sources",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "公开旧信息 / 时间核对",
+      "url": "archive://snapshot/ncitynews/wangman/stale-sources",
+      "body": [
+        "编辑保留的公开页时间核对。旧搜索结果仍指向工作、校园、采访等不同场景；显示的是各自原页面或转载时间，不是王曼离开后的实时位置。已知公开工作页在{{wangLastPublicDate}}后没有新的即时位置更新。"
+      ],
+      "objects": [
+        {
+          "id": "wang-stale-old-work",
+          "type": "text",
+          "title": "旧工作简介 / 城东采访",
+          "metadata": { "原页日期": "{{wangOldWorkProfileDate}}", "来源": "资讯网旧记者简介 / 搜索缓存", "范围": "当时采访区域，不是现住处" }
+        },
+        {
+          "id": "wang-stale-old-campus",
+          "type": "text",
+          "title": "旧校园资料 / 城西活动",
+          "metadata": { "原页日期": "{{wangOldCampusPageDate}}", "来源": "公开校园相册说明", "范围": "当时活动地点，不是实时位置" }
+        },
+        {
+          "id": "wang-stale-old-interview",
+          "type": "text",
+          "title": "旧采访转载 / 南站附近",
+          "metadata": { "原页日期": "{{wangOldWorkProfileDate}}以前", "来源": "旧采访网页转载简介", "范围": "稿件地点，不是本人去向" }
+        },
+        {
+          "id": "wang-stale-check",
+          "type": "log-entry",
+          "title": "旧页面与普通讨论 / 原时间对照",
+          "timestamp": "{{wangPublicDiscussionDate}}",
+          "body": [
+            "同一轮搜索把旧工作简介、校园资料、采访转载和网友旧印象并列。城东、城西、南站三种地点来自不同旧日场景，页面时间从{{wangOldCampusPageDate}}到{{wangOldWorkProfileDate}}；{{wangPublicDiscussionDate}}的讨论也承认只是翻旧网页。",
+            "已知公开工作动态在{{wangLastPublicDate}}后没有即时位置更新。旧资料没有自动消失，不能因为搜索仍返回这些地点，就把任何一个当成王曼此刻的位置；她也没有亲手伪造每条旧记录。"
+          ],
+          "metadata": {
+            "公开来源": "旧记者简介 / 校园公开资料 / 采访转载 / 普通论坛讨论",
+            "核查日期": "{{wangPublicDiscussionDate}}",
+            "可确认": "原页面时点互异，旧地点非实时确认",
+            "不能确认": "王曼离开后具体在哪座城市"
+          },
+          "evidenceId": "F87"
+        }
+      ],
+      "links": [
+        { "label": "普通网友旧讨论", "pageId": "public_wang_ordinary_discussion" },
+        { "label": "{{wangRiskId}} / 后续确认", "pageId": "snapshot_xu_risk_followup" },
+        { "label": "风险应对 / 离开前记录", "pageId": "snapshot_wang_departure_materials" }
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/stale-sources", "capturedAt": "{{wangDepartureArchiveDate}} {{wangDepartureArchiveTime}}" }
     }
   ],
   "evidence": [
@@ -8442,6 +8761,56 @@
       "summary": "记者将R补记、六张纸照、许宁核认及陈雨收发记录逐项对照：038公开头像、039校园合照、040网上目击、041许宁远摄、042公开工作信息、043陈雨通信。画质和格式差异支持混合拼装，不鉴定具体制作者。",
       "timestamp": "{{xuRiskProvidedDate}}",
       "discovery": "detail"
+    },
+    {
+      "id": "F84",
+      "type": "email",
+      "sourcePageId": "snapshot_wang_departure_notice",
+      "sourceObjectId": "editor-received-departure-notice",
+      "title": "王曼离开前告知｜主动离开南城并拒绝公开寻人",
+      "summary": "可信编辑于{{wangEditorNoticeDate}}实收王曼主动离开、不公开去向、不要发布寻人信息的明确告知，并有{{wangLeaveDate}}停更后记。王曼自存归档说明与之对应；不记录目的地或以后状态。",
+      "timestamp": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F85",
+      "type": "other",
+      "sourcePageId": "snapshot_wang_hidden_backup",
+      "sourceObjectId": "wang-backup-ledger",
+      "title": "分散备份｜电脑、编辑数据光盘及旧记者工作页",
+      "summary": "王曼归档清单与编辑光盘签收节录列三条独立保存路径：本人电脑工作副本、交编辑保管的数据光盘、旧记者工作页必要网络目录。三处内容不保证完全相同；玩家不能取得硬盘或实体盘。",
+      "timestamp": "{{wangDiscHandoffDate}} {{wangDiscHandoffTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F86",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_risk_followup",
+      "sourceObjectId": "xu-risk-followup-mail",
+      "title": "{{wangRiskId}}后续｜梁称这轮没有可靠位置确认",
+      "summary": "许宁实收的梁后续邮件称公开页面时间对不上、旧地点不能作当前位置，这轮先停。只说明{{wangRiskFollowupDate}}本轮状态，不证明永远找不到王曼。",
+      "timestamp": "{{wangRiskFollowupDate}} {{wangRiskFollowupTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F87",
+      "type": "other",
+      "sourcePageId": "snapshot_wang_stale_sources",
+      "sourceObjectId": "wang-stale-check",
+      "title": "公开旧信息｜不同旧地点与时间不能可靠定位王曼",
+      "summary": "旧工作简介、校园资料、采访转载及普通论坛讨论并列不同地点和原日期；已知工作页{{wangLastPublicDate}}后无即时位置更新。它们说明公开来源陈旧且不一致，不揭示离开后具体城市。",
+      "timestamp": "{{wangPublicDiscussionDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F88",
+      "type": "log",
+      "sourcePageId": "snapshot_wang_departure_notice",
+      "sourceObjectId": "editor-prearranged-safety-check",
+      "title": "王曼与可信编辑｜离开前约定日后身份核验方式",
+      "summary": "王曼和此前知晓调查风险的可信编辑在离开前约定：若将来需要报平安，以仅双方知晓的调查材料细节核验来讯者。未公开问题、答案或通道；本事实不证明后来的安全确认已经发生。",
+      "timestamp": "{{wangEditorNoticeDate}} {{wangEditorNoticeTime}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -8649,6 +9018,21 @@
       "id": "C38",
       "title": "现有证据强烈支持：038～043是陈雨事故后围绕王曼制作的内部风险威慑材料，而非客户付费寻访材料。",
       "summary": "事故后识别王曼、R任务和混合来源与七扫六印及037／038事件分界闭合。只确认内部用途和威慑性质；不证明梁亲自制作全部图片、谁装袋寄送、R任务总量、收费客户寻找王曼或王曼后来去向。"
+    },
+    {
+      "id": "C39",
+      "title": "王曼是在确认自己成为R类风险对象后主动离开南城，而不是突然失踪。",
+      "summary": "038～043的现实范围威慑及R任务使她判断公开实时活动不安全；她先给可信编辑明确告知、保留自愿离开说明，随后停止公开工作动态。未公布去向，不能从停更推被绑架。"
+    },
+    {
+      "id": "C40",
+      "title": "王曼在离开前主动分散保存了陈雨调查材料，确保资料不依赖她本人单独保管。",
+      "summary": "事故前陈雨备份与王曼收件记录、旧记者手记的三处备份清单及编辑签收相接。电脑副本、实体光盘和网页必要目录彼此独立，不声称完全同内容或玩家能拿到实体盘。"
+    },
+    {
+      "id": "C41",
+      "title": "梁后续未能通过现有公开信息可靠确认王曼的当前位置。",
+      "summary": "许宁实收的{{wangRiskId}}短跟进称本轮无法可靠确认，旧工作、校园、采访及论坛资料的原时间互异，已知公开工作动态不再提供实时位置。仅限这轮公开信息核查，不推出梁永久找不到她。"
     }
   ],
   "relations": [
@@ -9299,6 +9683,30 @@
       "factIds": ["C35", "C36", "C37", "C12", "C16"],
       "summary": "事故后识别、R任务、混合来源与七扫六印及037／038事件分界闭合；强支持内部风险威慑用途，不认定具体装袋寄送者或收费客户。",
       "unlocks": { "factIds": ["C38"] }
+    },
+    {
+      "id": "R39",
+      "title": "核对王曼离开前告知与既有R风险",
+      "evidenceIds": ["F84"],
+      "factIds": ["C36", "C38"],
+      "summary": "可信编辑实收明确的自愿离开和不公开寻人告知；结合R对象和六图现实范围威慑，支持其理性离开决定，不用未来安全消息倒证前置。",
+      "unlocks": { "factIds": ["C39"] }
+    },
+    {
+      "id": "R40",
+      "title": "核对陈雨旧备份与王曼三处交接",
+      "evidenceIds": ["F85", "F30"],
+      "factIds": ["C11"],
+      "summary": "事故前陈雨副本已到王曼，旧索引清单与编辑光盘签收列电脑、实体盘、网页必要目录三处；不把网页目录当全部私人资料。",
+      "unlocks": { "factIds": ["C40"] }
+    },
+    {
+      "id": "R41",
+      "title": "核对梁的R后续与公开旧信息时间",
+      "evidenceIds": ["F86", "F87"],
+      "factIds": ["C39"],
+      "summary": "许宁实收邮件只说本轮无法可靠确认；旧页、转载及普通讨论的地点与日期均不能替代实时位置，不推永久找不到。",
+      "unlocks": { "factIds": ["C41"] }
     }
   ],
   "puzzles": [
@@ -9424,7 +9832,8 @@
       "S-034 number, target old public label, contact / work mailbox strings, commercial contact project label, all transaction / public sighting / verification / capture dates and times, payment amounts and account tail; no bank brand or final settlement",
       "Third partial adult-family sample S value, redacted target code / old public nickname / username, public / mail / attachment receipt calendar dates and times; no customer identity, fee or complete transaction restored",
       "Xu old-mailbox security notice, forwarding activation and status reminder, supplementary handoff and work-page capture calendar dates and times; no operator log or read receipt restored",
-      "Wang R risk number, post-incident creation and Xu receipt / brief photograph / source supplement / handoff / archive dates and times; no complete R registry, customer order or later Wang departure restored"
+      "Wang R risk number, post-incident creation and Xu receipt / brief photograph / source supplement / handoff / archive dates and times; no complete R registry or customer order restored",
+      "Wang pre-departure editor notice and identity-check agreement, data-disc handoff, last public work update, hidden reporter page, old public sources, Xu R follow-up and archive calendar dates and times; later safety message and final submission remain outside this playable phase"
     ]
   },
   "homePageId": "portal_home",
