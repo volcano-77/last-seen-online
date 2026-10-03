@@ -3,6 +3,8 @@ import { loadDefaultCase, loadDemoCase, loadMockCase, parseCase } from './case'
 import { currentEntry, makeEntry, makeTab } from './browserState'
 import type { BrowserTab, HistoryEntry, PageState } from './browserState'
 import { canVisitPage } from './siteData'
+import { emptyFinalReview, emptyReviewItem, REVIEW_CLAIMS, REVIEW_GATE_FACT_IDS, REVIEW_LEVELS, reviewClaim } from './finalReview'
+import type { FinalReviewProgress, ReviewItemProgress, ReviewLevel } from './finalReview'
 
 const CURRENT_KEY = 'last-seen-online:v0.5:current'
 const CASE_KEY = 'last-seen-online:v0.5:case:'
@@ -30,6 +32,7 @@ export interface SaveData {
   viewedMediaIds: string[]
   learnedTools: string[]
   clippings: { id: string; pageId: string; text: string }[]
+  finalReview: FinalReviewProgress
 }
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -45,7 +48,8 @@ export function makeSave(caseData: GameCase): SaveData {
     phaseId: caseData.phaseId, tabs: [tab], activeTabId: tab.id, visitedPageIds: [caseData.startPageId],
     discoveredEvidenceIds: [], savedEvidenceIds: [], establishedRelationIds: [],
     unlockedFactIds: [], checkpointIds: [], completedPuzzleIds: [], timelineOrders: {},
-    viewedMediaIds: [], learnedTools: [], clippings: [], recordDateView: false }
+    viewedMediaIds: [], learnedTools: [], clippings: [], recordDateView: false,
+    finalReview: emptyFinalReview() }
 }
 function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolean {
   const gate = page.unlockConditions
@@ -145,6 +149,27 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
     clippings: Array.isArray(raw.clippings) ? raw.clippings.filter((item) => record(item) &&
       typeof item.id === 'string' && typeof item.pageId === 'string' && pageIds.has(item.pageId) &&
       typeof item.text === 'string' && item.text.length > 0 && item.text.length <= 180).slice(-30) as SaveData['clippings'] : [],
+  }
+  const rawReview = record(raw.finalReview) ? raw.finalReview : {}
+  const rawItems = record(rawReview.items) ? rawReview.items : {}
+  const availableReviewIds = new Set([...restored.discoveredEvidenceIds, ...restored.unlockedFactIds])
+  const reviewItems: Record<string, ReviewItemProgress> = {}
+  for (const claim of REVIEW_CLAIMS) {
+    const rawItem = rawItems[claim.id]
+    const source: Record<string, unknown> = record(rawItem) ? rawItem : {}
+    const level = REVIEW_LEVELS.some((item) => item.id === source.level) ? source.level as ReviewLevel : undefined
+    const recordIds = keptIds(source.recordIds, availableReviewIds)
+    const candidate: ReviewItemProgress = { ...emptyReviewItem(), level, recordIds }
+    const result = reviewClaim(claim, candidate, availableReviewIds)
+    candidate.reviewed = source.reviewed === true && result.passed
+    if (record(source.feedback) && source.feedback.kind === result.feedback.kind &&
+      typeof source.feedback.text === 'string') candidate.feedback = result.feedback
+    reviewItems[claim.id] = candidate
+  }
+  restored.finalReview = {
+    open: rawReview.open === true && REVIEW_GATE_FACT_IDS.every((id) => restored.unlockedFactIds.includes(id)),
+    items: reviewItems,
+    complete: REVIEW_CLAIMS.every((claim) => reviewItems[claim.id].reviewed),
   }
   restored.tabs = restored.tabs.map((tab) => {
     const current = caseData.pages.find((page) => page.id === tab.history[tab.historyIndex].pageId)

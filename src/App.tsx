@@ -8,6 +8,8 @@ import { activeTab, closeTab, currentEntry, focusTab, makeTab, openPage, siteKey
 import type { NavigateOptions, PageState } from './browserState'
 import { canVisitPage } from './siteData'
 import { relationChoices } from './recordRelations'
+import FinalReview from './ReviewBoard'
+import { REVIEW_GATE_FACT_IDS } from './finalReview'
 import './App.css'
 
 const add = (old: string[], next: string[] = []) => [...new Set([...old, ...next])]
@@ -100,7 +102,10 @@ export default function App() {
   function pageState(patch: Partial<PageState>) {
     setSave((old) => old ? updateEntry(old, { state: { ...currentEntry(old).state, ...patch } }) : old)
   }
-  function resetChrome() { setAddress(null); setHistoryOpen(false); setSettingsOpen(false); setTip(null); setFeedback(null) }
+  function resetChrome() {
+    setAddress(null); setHistoryOpen(false); setSettingsOpen(false); setTip(null); setFeedback(null)
+    setSave((old) => old?.finalReview.open ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)
+  }
   function restartCase() {
     if (!caseData) return
     const fresh = resetCaseSave(caseData)
@@ -236,6 +241,7 @@ export default function App() {
   if (!caseData || !save || !page || !tab || !entry) return <main className="loading">{error || '正在读取网页…'}</main>
   const evidence = caseData.evidence.filter((item) => save.discoveredEvidenceIds.includes(item.id))
   const facts = caseData.facts.filter((item) => save.unlockedFactIds.includes(item.id))
+  const reviewReady = REVIEW_GATE_FACT_IDS.every((id) => save.unlockedFactIds.includes(id))
   const choices = relationChoices(caseData.relations, save.establishedRelationIds, [...evidence.map((item) => item.id), ...facts.map((item) => item.id)], selected)
   const toggle = (id: string) => { setSelected((old) => old.includes(id) ? old.filter((item) => item !== id) : choices.compatibleIds.includes(id) ? [...old, id] : old); setRelationMessage('') }
   const accessiblePages = caseData.pages.filter((item) => meets(item.unlockConditions, save) && canVisitPage(item, save, page.id))
@@ -282,13 +288,19 @@ export default function App() {
             onViewMedia={(id) => setSave((old) => old ? { ...old, viewedMediaIds: add(old.viewedMediaIds, [id]) } : old)} onCompareImage={compareImage} />}
       </div>
       {recordsOpen && <aside className="record-pocket" id="records" aria-label="记录夹"><header><b>记录夹</b><button aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button></header>
-        <div className="pocket-paper"><h2>记录</h2>
+        <div className="pocket-paper">{reviewReady && <div className="pocket-review-entry"><button onClick={() => {
+          setSave((old) => old ? { ...old, finalReview: { ...old.finalReview, open: true } } : old)
+          setRecordsOpen(false); setSelected([]); setRelationMessage('')
+        }}>案件复核</button><small>整理已经取得的事实与结论</small></div>}<h2>记录</h2>
           {!evidence.length && !save.clippings.length && <p className="muted">暂无记录。</p>}
           {evidence.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
           {save.clippings.map((item) => <div className="record-entry excerpt" key={item.id}><p>“{item.text}”</p><button className="text-link" onClick={() => navigate(item.pageId)}>原页</button><button className="text-link" onClick={() => setSave({ ...save, clippings: save.clippings.filter((entry) => entry.id !== item.id) })}>移除</button></div>)}
           <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button></div>)}
           {(selected.length > 0 || relationMessage) && <div className="relation-controls">{choices.complete && selected.length >= 2 && <button onClick={confirmRelation}>对照这些记录</button>}{selected.length > 0 && <button onClick={() => { setSelected([]); setRelationMessage('') }}>取消对照</button>}<p role="status">{relationMessage}</p></div>}
         </div></aside>}
+      {reviewReady && save.finalReview.open && <FinalReview caseData={caseData} save={save}
+        onProgress={(progress) => setSave((old) => old ? { ...old, finalReview: progress } : old)}
+        onClose={() => setSave((old) => old ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)} />}
     </div>
     {tip && <button className="selection-tip" style={{ left: tip.x, top: tip.y }} onMouseDown={(event) => event.preventDefault()} onClick={recordSelection}>☆ 记下这段</button>}
     {feedback && <div className="record-feedback" role="status" style={{ left: feedback.x, top: feedback.y }}>{feedback.text}</div>}

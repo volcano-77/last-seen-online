@@ -13,13 +13,14 @@
 .reset-dialog{width:min(480px,calc(100vw - 32px));padding:0;background:#f7f6ef;border:1px solid #7e8b96;color:#37434c;font:16px/1.7 'Microsoft YaHei',sans-serif;box-shadow:3px 3px #3334}
 .reset-dialog::backdrop{background:#28333e55}.reset-dialog h2{font-size:17px;margin:0;padding:9px 16px;background:linear-gradient(#e3e8ec,#ccd5dc);border-bottom:1px solid #9ba8b0}.reset-dialog p{margin:20px}.reset-actions{display:flex;justify-content:flex-end;gap:12px;padding:0 20px 20px}
 .reset-actions button{font-size:15px;padding:5px 12px;border:1px solid #a5a6a0;background:linear-gradient(#fff,#e8e8df);color:#333}.reset-error{color:#a34833}
-.browser-workspace{display:flex;flex:1;min-height:0;min-width:0}.browser-page{flex:1;min-width:0;overflow:auto;background:#e7e7e2;padding:25px 20px 45px}
+.browser-workspace{position:relative;display:flex;flex:1;min-height:0;min-width:0}.browser-page{flex:1;min-width:0;overflow:auto;background:#e7e7e2;padding:25px 20px 45px}
 .history-strip{border-bottom:1px solid #b4b5b0;background:#f9f8ef;padding:9px 15px;display:flex;align-items:center;gap:7px 18px;flex-wrap:wrap;font-size:14px;max-height:170px;overflow:auto}
 .history-strip button{background:none;border:0;text-decoration:underline;color:#405d7b;text-align:left}
 .record-pocket{width:330px;flex-shrink:0;background:#f7f3df;border-left:1px solid #b6ab8e;display:flex;flex-direction:column;color:#514d41}
 .record-pocket header{background:linear-gradient(#ede7cb,#d9cfae);display:flex;align-items:center;justify-content:space-between;padding:8px 12px;font-size:15px;border-bottom:1px solid #b6ab8e}
 .record-pocket header button{border:1px solid #aaa18a;background:#f6f3e4;line-height:1.2;font-size:18px;padding:1px 7px}
 .pocket-paper{overflow:auto;padding:12px 15px;font-size:14px;line-height:1.65}
+.pocket-review-entry{border:1px solid #aaae9d;background:#eeefe3;padding:8px 10px}.pocket-review-entry button{display:block;border:1px solid #8f9b9b;background:linear-gradient(#fff,#e4e8e5);padding:5px 10px;color:#405963;font:inherit;cursor:pointer}.pocket-review-entry small{display:block;color:#717970;margin-top:4px}
 .pocket-paper h2{font-size:16px;margin:16px 0 7px;border-bottom:1px solid #c6bea8;padding-bottom:5px}
 .record-entry{padding:12px 0;border-bottom:1px dotted #c6bea8}.record-title{display:block;text-align:left;border:0;background:none;font:inherit;color:#514d41;padding:3px 0;margin-bottom:5px;cursor:pointer}.record-title:disabled{color:#9b9688;cursor:default}.record-title[aria-pressed=true]{color:#66551f;background:#ece4c2}.record-title:not(:disabled):hover{text-decoration:underline;text-underline-offset:3px}.record-title small{font-size:13px;color:#86764e}
 .record-entry b{font-size:14px;font-weight:500}.record-entry p{margin:5px 0;color:#696558;font-size:14px;line-height:1.65}.record-entry .text-link{font-size:13px;color:#626d70;margin-right:10px}
