@@ -11,6 +11,8 @@ import { relationChoices } from './recordRelations'
 import FinalReview from './ReviewBoard'
 import { REVIEW_GATE_FACT_IDS } from './finalReview'
 import MaterialPackage from './MaterialPackage'
+import EndingView from './EndingView'
+import { ENDING_EVIDENCE_IDS, ENDING_SECTION_IDS, endingPrerequisites } from './ending'
 import { channelSourcesReady, DELIVERY_CHANNELS, finalReviewComplete, finalReviewSourceIds, MATERIAL_PACKAGE_ID } from './materialDelivery'
 import type { DeliveryChannelId, DeliveryReceipt } from './materialDelivery'
 import './App.css'
@@ -26,7 +28,8 @@ function meets(gate: UnlockConditions | undefined, save: SaveData) {
     (gate.materialPackageGenerated !== true || save.materialDelivery.generated) &&
     (gate.dualDeliveryComplete !== true || save.materialDelivery.dualDeliveryComplete) &&
     (gate.postDeliveryResponseUnlocked !== true || save.materialDelivery.postDeliveryResponseUnlocked) &&
-    (gate.wangEditorRecordUnlocked !== true || save.materialDelivery.wangEditorRecordUnlocked)
+    (gate.wangEditorRecordUnlocked !== true || save.materialDelivery.wangEditorRecordUnlocked) &&
+    (gate.endingUnlocked !== true || save.endingUnlocked)
 }
 
 export default function App() {
@@ -299,6 +302,30 @@ export default function App() {
     resetChrome()
   }
 
+  function startEnding() {
+    const target = caseData?.pages.find((item) => item.id === 'news_family_review_request')
+    if (!target) return
+    setSave((old) => {
+      if (!old || !endingPrerequisites(old)) return old
+      const progressed = { ...old, endingUnlocked: true,
+        materialDelivery: { ...old.materialDelivery, open: false } }
+      return { ...openPage(capture(progressed), target, false), visitedPageIds: add(old.visitedPageIds, [target.id]) }
+    })
+    resetChrome()
+  }
+
+  function advanceEndingSection(id: string) {
+    setSave((old) => {
+      if (!old || currentEntry(old).pageId !== 'news_case_afterword' || !old.endingUnlocked ||
+        !ENDING_EVIDENCE_IDS.every((fact) => old.discoveredEvidenceIds.includes(fact)) ||
+        ENDING_SECTION_IDS[old.endingSectionsSeen.length] !== id) return old
+      const endingSectionsSeen = [...old.endingSectionsSeen, id]
+      const caseCompleted = endingSectionsSeen.length === ENDING_SECTION_IDS.length
+      return { ...old, endingSectionsSeen, caseCompleted,
+        unlockedFactIds: caseCompleted ? add(old.unlockedFactIds, ['C45']) : old.unlockedFactIds }
+    })
+  }
+
   function returnVisit(tabId: string, entryId: string) {
     if (!caseData) return
     setSave((old) => {
@@ -317,8 +344,10 @@ export default function App() {
   const choices = relationChoices(caseData.relations, save.establishedRelationIds, [...evidence.map((item) => item.id), ...facts.map((item) => item.id)], selected)
   const toggle = (id: string) => { setSelected((old) => old.includes(id) ? old.filter((item) => item !== id) : choices.compatibleIds.includes(id) ? [...old, id] : old); setRelationMessage('') }
   const accessiblePages = caseData.pages.filter((item) => meets(item.unlockConditions, save) && canVisitPage(item, save, page.id))
+  const linkedPageIds = new Set([...(page.links || []).map((link) => link.pageId),
+    ...(page.objects || []).flatMap((object) => (object.links || []).map((link) => link.pageId))])
   const sitePages = accessiblePages.filter((item) => item.normalNavigation !== false || item.siteId === page.siteId ||
-    (page.skin === 'archive' && item.snapshot) || save.visitedPageIds.includes(item.id))
+    (page.skin === 'archive' && item.snapshot) || save.visitedPageIds.includes(item.id) || linkedPageIds.has(item.id))
   const searchPages = accessiblePages.filter((item) =>
     (!item.accessPuzzleId || save.completedPuzzleIds.includes(item.accessPuzzleId)))
   const recentVisits = [...save.tabs].sort((a, b) => b.lastUsed - a.lastUsed)
@@ -353,7 +382,8 @@ export default function App() {
       <div className="browser-page" ref={content} onMouseUp={inspectSelection} key={viewKey} onScroll={captureScroll}
         onWheel={() => { pendingRestore.current = false }} onPointerDown={() => { pendingRestore.current = false }} onKeyDown={() => { pendingRestore.current = false }} onLoadCapture={() => restoreScroll.current?.()}>
         {page.kind === 'search' ? <SearchSite page={page} pages={searchPages} pageState={entry.state} onStateChange={pageState} onNavigate={navigate} visitedPageIds={save.visitedPageIds} /> :
-          <SiteView page={page} pages={sitePages} userProfiles={caseData.userProfiles} visitedPageIds={save.visitedPageIds} onNavigate={navigate} onDiscover={discover}
+          page.id === 'news_case_afterword' ? <EndingView page={page} save={save} onAdvance={advanceEndingSection}
+            onNavigate={navigate} onOpenRecords={() => setRecordsOpen(true)} /> : <SiteView page={page} pages={sitePages} userProfiles={caseData.userProfiles} visitedPageIds={save.visitedPageIds} onNavigate={navigate} onDiscover={discover}
             recentVisits={recentVisits} onReturnVisit={returnVisit}
             pageState={entry.state} onStateChange={pageState}
             completedPuzzleIds={save.completedPuzzleIds} puzzles={caseData.puzzles} onSolve={solve} mediaCatalog={mediaCatalog}
@@ -365,21 +395,28 @@ export default function App() {
             { ...old, materialDelivery: { ...old.materialDelivery, open: true } } :
             { ...old, finalReview: { ...old.finalReview, open: true } } : old)
           setRecordsOpen(false); setSelected([]); setRelationMessage('')
-        }}>{save.materialDelivery.generated ? '案件复核材料包' : '案件复核'}</button><small>{save.materialDelivery.generated ? '查看材料与双路递交记录' : '整理已经取得的事实与结论'}</small></div>}<h2>记录</h2>
+        }}>{save.materialDelivery.generated ? '案件复核材料包' : '案件复核'}</button><small>{save.materialDelivery.generated ? '查看材料与双路递交记录' : '整理已经取得的事实与结论'}</small>
+          {save.materialDelivery.generated && <button onClick={() => {
+            setSave((old) => old ? { ...old, materialDelivery: { ...old.materialDelivery, open: false }, finalReview: { ...old.finalReview, open: true } } : old)
+            setRecordsOpen(false)
+          }}>回看案件复核板</button>}
+          {save.endingUnlocked && <button onClick={() => navigate('news_family_review_request')}>回看案件后续</button>}
+          {save.caseCompleted && <button onClick={() => navigate('news_case_afterword')}>回看结局</button>}
+        </div>}<h2>记录</h2>
           {!evidence.length && !save.clippings.length && <p className="muted">暂无记录。</p>}
           {evidence.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
           {save.clippings.map((item) => <div className="record-entry excerpt" key={item.id}><p>“{item.text}”</p><button className="text-link" onClick={() => navigate(item.pageId)}>原页</button><button className="text-link" onClick={() => setSave({ ...save, clippings: save.clippings.filter((entry) => entry.id !== item.id) })}>移除</button></div>)}
           <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button></div>)}
           {(selected.length > 0 || relationMessage) && <div className="relation-controls">{choices.complete && selected.length >= 2 && <button onClick={confirmRelation}>对照这些记录</button>}{selected.length > 0 && <button onClick={() => { setSelected([]); setRelationMessage('') }}>取消对照</button>}<p role="status">{relationMessage}</p></div>}
         </div></aside>}
-      {reviewReady && !save.materialDelivery.generated && save.finalReview.open && <FinalReview caseData={caseData} save={save}
+      {reviewReady && save.finalReview.open && <FinalReview caseData={caseData} save={save} readOnly={save.materialDelivery.generated}
         onProgress={(progress) => setSave((old) => old && !old.materialDelivery.generated ? { ...old, finalReview: progress } : old)}
         onClose={() => setSave((old) => old ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)}
         onGenerate={generateMaterialPackage} />}
       {save.materialDelivery.generated && save.materialDelivery.open && <MaterialPackage caseData={caseData} save={save}
         onClose={() => setSave((old) => old ? { ...old, materialDelivery: { ...old.materialDelivery, open: false } } : old)}
         onNavigate={navigate} onVerify={verifyDeliveryChannel} onDeliver={deliverMaterialPackage}
-        onCheckResponse={checkPostDeliveryResponse} />}
+        onCheckResponse={checkPostDeliveryResponse} onStartEnding={startEnding} />}
     </div>
     {tip && <button className="selection-tip" style={{ left: tip.x, top: tip.y }} onMouseDown={(event) => event.preventDefault()} onClick={recordSelection}>☆ 记下这段</button>}
     {feedback && <div className="record-feedback" role="status" style={{ left: feedback.x, top: feedback.y }}>{feedback.text}</div>}

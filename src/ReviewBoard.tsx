@@ -11,10 +11,11 @@ interface Props {
   onProgress: (progress: FinalReviewProgress) => void
   onClose: () => void
   onGenerate: () => void
+  readOnly?: boolean
 }
 interface AvailableRecord { id: string; title: string; summary: string; source: string; text: string }
 
-export default function FinalReview({ caseData, save, onProgress, onClose, onGenerate }: Props) {
+export default function FinalReview({ caseData, save, onProgress, onClose, onGenerate, readOnly = false }: Props) {
   const [activeId, setActiveId] = useState('E01')
   const [query, setQuery] = useState('')
   const [person, setPerson] = useState('全部人物')
@@ -47,6 +48,7 @@ export default function FinalReview({ caseData, save, onProgress, onClose, onGen
 
   function updateItem(patch: Partial<ReviewItemProgress>) {
     const updated: ReviewItemProgress = { ...progress, ...patch, reviewed: false, feedback: undefined }
+    if (readOnly) return
     onProgress({ ...save.finalReview, complete: false,
       items: { ...save.finalReview.items, [claim.id]: updated } })
   }
@@ -57,6 +59,7 @@ export default function FinalReview({ caseData, save, onProgress, onClose, onGen
       [...progress.recordIds, id] })
   }
   function reviewSection() {
+    if (readOnly) return
     const items = { ...save.finalReview.items }
     for (const item of REVIEW_CLAIMS.filter((entry) => entry.id.startsWith(section))) {
       const current = items[item.id] || emptyReviewItem()
@@ -70,10 +73,10 @@ export default function FinalReview({ caseData, save, onProgress, onClose, onGen
   return <section className="final-review-sheet" aria-label="案件复核材料整理页">
     <div className="final-review-paper">
       <header className="review-heading">
-        <div><small>调查资料 / 结论整理</small><h1>案件复核</h1><p>按已有记录给陈述分级，并注明依据。选择不会立即判定；完成一组后统一复核。</p></div>
+        <div><small>调查资料 / 结论整理</small><h1>案件复核</h1><p>{readOnly ? '已生成材料包，以下保留当时完成的判断与引用，可继续查阅。' : '按已有记录给陈述分级，并注明依据。选择不会立即判定；完成一组后统一复核。'}</p></div>
         <button type="button" onClick={onClose}>返回网页</button>
       </header>
-      {save.finalReview.complete && <div className="review-complete" role="status"><strong>复核完成。</strong>现有结论已整理。可以开始制作案件复核材料。<button type="button" onClick={onGenerate}>制作案件复核材料</button></div>}
+      {save.finalReview.complete && <div className="review-complete" role="status"><strong>复核完成。</strong>现有结论已整理。{!readOnly && <>可以开始制作案件复核材料。<button type="button" onClick={onGenerate}>制作案件复核材料</button></>}</div>}
       <div className="review-sections" role="group" aria-label="陈述分组">
         <button type="button" aria-pressed={section === 'E'} onClick={() => showClaim('E01')}>核心陈述</button>
         <button type="button" aria-pressed={section === 'X'} onClick={() => showClaim('X01')}>需要核对的说法</button>
@@ -90,7 +93,7 @@ export default function FinalReview({ caseData, save, onProgress, onClose, onGen
           <div className="review-statement"><small>{claim.id} / 待复核陈述</small><h2>{claim.statement}</h2></div>
           <fieldset className="review-levels"><legend>判断栏</legend>
             {REVIEW_LEVELS.map((item) => <label key={item.id}><input type="radio" name={`${claim.id}-level`}
-              checked={progress.level === item.id} onChange={() => chooseLevel(item.id)} />{item.label}</label>)}
+              checked={progress.level === item.id} disabled={readOnly} onChange={() => chooseLevel(item.id)} />{item.label}</label>)}
           </fieldset>
           <div className="review-evidence">
             <h3>引用已有记录</h3>
@@ -108,18 +111,19 @@ export default function FinalReview({ caseData, save, onProgress, onClose, onGen
               {!hasFilter && <p>选择筛选条件或输入关键词后显示已有记录。</p>}
               {hasFilter && matches.length === 0 && <p>当前存档中没有匹配记录。</p>}
               {matches.slice(0, 30).map((item) => <button type="button" data-testid={`review-record-${item.id}`} key={item.id}
-                aria-pressed={progress.recordIds.includes(item.id)} onClick={() => toggleRecord(item.id)}>
+                aria-pressed={progress.recordIds.includes(item.id)} disabled={readOnly} onClick={() => toggleRecord(item.id)}>
                 <b>{item.id}</b><span>{item.title}</span><small>{item.source}</small></button>)}
               {matches.length > 30 && <p>匹配记录较多，请继续缩小范围。</p>}
             </div>
             <h3>已引用</h3>
             <div className="review-selected">{selected.length ? selected.map((item) => <div key={item.id}>
-              <span><b>{item.id}</b>　{item.title}</span><button type="button" aria-label={`移除 ${item.id}`} onClick={() => toggleRecord(item.id)}>移除</button>
+              <span><b>{item.id}</b>　{item.title}</span>{!readOnly && <button type="button" aria-label={`移除 ${item.id}`} onClick={() => toggleRecord(item.id)}>移除</button>}
             </div>) : <p>尚未引用记录。</p>}</div>
           </div>
           {progress.feedback && <p className="review-feedback" role="status"><strong>【{progress.feedback.kind}】</strong>{progress.feedback.text}</p>}
-          <div className="review-actions"><button type="button" onClick={reviewSection}>复核这一组</button>
+          {!readOnly && <div className="review-actions"><button type="button" onClick={reviewSection}>复核这一组</button>
             <p>复核只检查已选的判断与已取得的材料，不会自动补齐证据。</p></div>
+          }
         </div>
       </div>
     </div>

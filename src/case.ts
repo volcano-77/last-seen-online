@@ -11,6 +11,7 @@ export interface UnlockConditions {
   evidenceIds?: string[]; relationIds?: string[]; factIds?: string[]; puzzleIds?: string[]
   materialPackageGenerated?: boolean
   dualDeliveryComplete?: boolean; postDeliveryResponseUnlocked?: boolean; wangEditorRecordUnlocked?: boolean
+  endingUnlocked?: boolean
 }
 export interface Unlocks { evidenceIds?: string[]; pageIds?: string[]; factIds?: string[] }
 export interface PageDetails {
@@ -107,7 +108,7 @@ function links(value: unknown): value is CaseLink[] {
 function gate(value: unknown): value is UnlockConditions {
   return record(value) && ['evidenceIds', 'relationIds', 'factIds', 'puzzleIds']
     .every((key) => value[key] === undefined || strings(value[key])) &&
-    ['materialPackageGenerated', 'dualDeliveryComplete', 'postDeliveryResponseUnlocked', 'wangEditorRecordUnlocked']
+    ['materialPackageGenerated', 'dualDeliveryComplete', 'postDeliveryResponseUnlocked', 'wangEditorRecordUnlocked', 'endingUnlocked']
       .every((key) => value[key] === undefined || typeof value[key] === 'boolean')
 }
 function unlocks(value: unknown): value is Unlocks {

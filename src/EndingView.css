@@ -1,0 +1,10 @@
+.ending-sheet { max-width: 760px; min-height: 100%; margin: 0 auto; padding: 28px 36px 64px; background: #f8f6ef; color: #252520; font: 16px/1.8 Georgia, 'SimSun', serif; box-shadow: 0 0 0 1px #d8d2bf; }
+.ending-sheet header { border-top: 4px double #605a4f; border-bottom: 1px solid #b7ad99; padding: 18px 0 22px; }
+.ending-sheet header small, .ending-body section small { color: #706c61; font: 12px/1.5 'Microsoft YaHei', sans-serif; letter-spacing: .1em; }
+.ending-sheet h1 { font-size: 30px; margin: 8px 0 12px; }
+.ending-sheet h2 { font-size: 21px; margin: 8px 0; }
+.ending-sheet p { margin: 10px 0; }
+.ending-body section { padding: 24px 0 26px; border-bottom: 1px solid #d8d2bf; }
+.ending-body button { margin: 20px 12px 0 0; padding: 6px 15px; border: 1px solid #777064; background: #eee9dc; color: #252520; cursor: pointer; }
+.ending-complete { margin-top: 22px; }
+@media (max-width: 650px) { .ending-sheet { padding: 18px 20px 44px; } }

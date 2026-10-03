@@ -2,6 +2,7 @@ import type { GameCase } from './case'
 import type { SaveData } from './storage'
 import { REVIEW_CLAIMS, REVIEW_LEVELS } from './finalReview'
 import { DELIVERY_CHANNELS, MATERIAL_PACKAGE_ID } from './materialDelivery'
+import { endingPrerequisites } from './ending'
 import type { DeliveryChannelId } from './materialDelivery'
 import './MaterialPackage.css'
 
@@ -13,6 +14,7 @@ interface Props {
   onVerify: (channel: DeliveryChannelId) => void
   onDeliver: (channel: DeliveryChannelId) => void
   onCheckResponse: () => void
+  onStartEnding: () => void
 }
 interface SourceRecord {
   id: string; title: string; summary: string; type: string; pageTitle: string
@@ -31,7 +33,7 @@ const UNRESOLVED = [
   '王曼离开后的具体位置及后续持续安全状态，现有材料无法确认。',
 ]
 
-export default function MaterialPackage({ caseData, save, onClose, onNavigate, onVerify, onDeliver, onCheckResponse }: Props) {
+export default function MaterialPackage({ caseData, save, onClose, onNavigate, onVerify, onDeliver, onCheckResponse, onStartEnding }: Props) {
   const progress = save.materialDelivery
   const sourceRecords = progress.sourceIds.flatMap<SourceRecord>((id) => {
     const evidence = caseData.evidence.find((item) => item.id === id)
@@ -111,7 +113,9 @@ export default function MaterialPackage({ caseData, save, onClose, onNavigate, o
           {channelRow('family')}{channelRow('media')}
           {progress.dualDeliveryComplete ? <div className="material-complete" role="status"><b>双路递交完成。</b>材料已经送出。{progress.postDeliveryResponseUnlocked ? '收到后续回应。' : '后续回应尚未出现。'}
             <button type="button" onClick={progress.postDeliveryResponseUnlocked ? () => onNavigate('news_review_followup') : onCheckResponse}>
-              {progress.postDeliveryResponseUnlocked ? '查看材料后续' : '稍后检查回应'}</button></div> :
+              {progress.postDeliveryResponseUnlocked ? '查看材料后续' : '稍后检查回应'}</button>
+            {endingPrerequisites(save) && <button type="button" onClick={onStartEnding}>{save.endingUnlocked ? '回看结局后续' : '稍后查看案件进展'}</button>}
+            </div> :
             (progress.familyDelivered || progress.mediaDelivered) && <p className="material-pending" role="status">仍有一条独立递交渠道尚未完成。</p>}
         </div>
       </div>

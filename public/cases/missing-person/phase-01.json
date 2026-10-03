@@ -10,6 +10,7 @@
   ],
   "variables": {
     "cityName": "南城",
+    "endingTimeJump": "数周后",
     "liuAge": "约二十岁",
     "zhaoAge": "约二十四岁",
     "chenAge": "约二十一至二十二岁",
@@ -4847,6 +4848,86 @@
       ]
     },
     {
+      "id": "news_family_review_request",
+      "kind": "website", "layout": "news", "skin": "news", "siteId": "news", "siteName": "{{cityName}}资讯网",
+      "title": "陈雨家属正式提出案件复核申请", "url": "ncitynews://case/family-review-request",
+      "date": "{{endingTimeJump}}", "details": { "section": "案件后续" },
+      "searchable": false, "searchIndexed": false, "normalNavigation": false,
+      "unlockConditions": { "endingUnlocked": true, "factIds": ["C42", "C43", "C44"] },
+      "body": ["{{endingTimeJump}}。案件复核材料包CY-REVIEW-01送达后，家属代理人继续核对材料来源。以下为家属方面随后公开的程序进展；此前的收件回执本身不等于这一步。"],
+      "objects": [{ "id": "family-formal-request", "type": "log-entry", "title": "家属代理人说明｜正式提出复核申请", "timestamp": "材料核对后",
+        "body": ["家属代理人确认已依据核对后的材料包及既有事故资料，代表陈雨家属正式向有关部门申请重新复核陈雨死亡相关事实及早期处置过程。", "这是一项新的程序动作，并不表示申请当时已有新的官方调查结论。"], "evidenceId": "F99" }],
+      "links": [{ "label": "南城资讯网独立核验报道", "pageId": "news_independent_investigation" }]
+    },
+    {
+      "id": "news_independent_investigation",
+      "kind": "website", "layout": "news", "skin": "news", "siteId": "news", "siteName": "{{cityName}}资讯网",
+      "title": "南城资讯网：旧寻人资料的再次核验", "url": "ncitynews://case/independent-investigation",
+      "date": "家属申请后", "details": { "section": "独立调查 / 后续报道" },
+      "searchable": false, "searchIndexed": false, "normalNavigation": false,
+      "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F99"] },
+      "body": ["陈雨死亡事件重新受到关注。资讯网收到材料包后另行联系原始保管方，查验可核的公开页、历史存档与授权副本，并就关键时间线再次询问相关人员。报道说明了核验方法，也保留无法由公开材料确认的部分。"],
+      "objects": [{ "id": "media-independent-check", "type": "log-entry", "title": "调查报道｜多条来源交叉核验", "timestamp": "家属申请后",
+        "body": ["记者独立复核了周启明与S-034客户材料、城西照相馆订单及缓存、王曼旧记者工作资料的来源链，以及相关公开页面和历史网页存档；必要时再次联系仍可核验的公开来源。部分关键材料得到独立验证。", "报道指出回声寻人网曾有未公开的特殊寻访业务，至少一项收费案例可核；公开寻人信息和网友目击曾被用于缩小成年人的位置。陈雨调查材料通过旧邮箱暴露的链条亦有可核依据，相关资料已交有关方面复核。", "报道不公布王曼位置、许宁住址或客户完整私人信息，不认定故意推落，也没有把全部S编号算作已付费订单。"], "evidenceId": "F100" }],
+      "links": [{ "label": "官方重新调查的后续记录", "pageId": "news_official_reinvestigation" }]
+    },
+    {
+      "id": "news_official_reinvestigation",
+      "kind": "website", "layout": "news", "skin": "news", "siteId": "news", "siteName": "{{cityName}}资讯网",
+      "title": "陈雨案重新调查：出现新的非公开证据", "url": "ncitynews://case/official-reinvestigation",
+      "date": "报道刊发后", "details": { "section": "案件后续 / 调查进展" },
+      "searchable": false, "searchIndexed": false, "normalNavigation": false,
+      "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F100"] },
+      "body": ["家属的正式申请、资讯网独立核验的报道、先前事故记录和后续线索一起推动了重新调查。以下是后来的调查进展摘要；这些材料在玩家整理复核板时尚不可取得。"],
+      "objects": [{ "id": "official-new-evidence", "type": "log-entry", "title": "调查进展｜依法取得此前未公开的材料", "timestamp": "重新调查期间",
+        "body": ["调查人员依法调取梁志诚相关设备、回声寻人网经营记录、部分特殊寻访业务记录、付款与通信资料、工作记录及证人证言。新增材料验证了部分特殊业务、梁对相关任务的控制及陈雨事故后的材料处置，为后续刑事审查提供了此前公开材料不足以提供的依据。", "公开摘要没有公布完整卷宗；玩家先前的结论不会被改写成当时已经看过这些新材料。"], "evidenceId": "F101" }],
+      "links": [{ "label": "回声寻人网停运说明", "pageId": "echo_closure_notice" }]
+    },
+    {
+      "id": "echo_closure_notice",
+      "kind": "website", "layout": "echo", "skin": "echo", "siteId": "echo", "siteName": "回声寻人网",
+      "title": "回声寻人网停止运营说明", "url": "echo://notice/closure",
+      "date": "重新调查后", "details": { "section": "站点公告" },
+      "searchable": false, "searchIndexed": false, "normalNavigation": false,
+      "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F101"] },
+      "body": ["本站停止运营。旧帖与相关历史页面仅保留作记录查阅，不再接收寻人投稿或征集目击线索。"],
+      "objects": [{ "id": "echo-operation-end", "type": "log-entry", "title": "运营终止与旧档案", "timestamp": "重新调查后",
+        "body": ["回声寻人网不再继续运作。梁早期确实参与正常寻人公益；正常互助与后来逐渐扩展的灰色特殊寻访曾长期并存。多数普通志愿者并不知道特殊业务，普通网友的善意目击留言也可能在错误的业务机制中被转作定位资源。", "停运不把所有旧帖判为虚假，也不让善意参与者自动承担特殊业务责任。"], "evidenceId": "F102" }],
+      "links": [{ "label": "案件处理与人物后续", "pageId": "news_case_outcomes" }]
+    },
+    {
+      "id": "news_case_outcomes",
+      "kind": "website", "layout": "news", "skin": "news", "siteId": "news", "siteName": "{{cityName}}资讯网",
+      "title": "陈雨案后续：处理结果与仍需保留的边界", "url": "ncitynews://case/outcomes",
+      "date": "重新调查后", "details": { "section": "案件后续 / 处理结果" },
+      "searchable": false, "searchIndexed": false, "normalNavigation": false,
+      "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F102"] },
+      "body": ["重新调查后，案件进入司法处理。以下只记载已经公开的结果，不推定玩家早期无法证明的具体动作。"],
+      "objects": [
+        { "id": "liang-outcome", "type": "log-entry", "title": "梁志诚｜受到刑事追诉并被判有罪", "timestamp": "后续处理",
+          "body": ["梁志诚因相关行为受到刑事追诉，后被判有罪。最终处理依赖重新调查所获的新证据与司法审查，并非仅凭玩家提交的材料直接定罪。", "公开摘要不列具体罪名、刑期、法院或判决日期；也不据此反推陈雨跌落瞬间已由旧材料证明。"], "evidenceId": "F103" },
+        { "id": "xu-outcome", "type": "log-entry", "title": "许宁｜另案接受调查", "timestamp": "后续处理",
+          "body": ["许宁仍然活着，并另行接受调查。她承认自己参与过部分现实核查、拍照、交付和事故后处理，其行为并未因曾受控制而消失。", "调查也记录了她先前作为付费追踪目标，以及长期受到梁志诚控制和胁迫的处境。现有公开摘要不替她作完全免责或主谋的结论。"], "evidenceId": "F104" }
+      ],
+      "links": [{ "label": "阅读案件后记", "pageId": "news_case_afterword" }]
+    },
+    {
+      "id": "news_case_afterword",
+      "kind": "website", "layout": "news", "skin": "news", "siteId": "news", "siteName": "{{cityName}}资讯网",
+      "title": "案件后记｜最后在线", "url": "ncitynews://case/afterword",
+      "date": "案件处理后", "details": { "section": "案件后记" },
+      "searchable": false, "searchIndexed": false, "normalNavigation": false,
+      "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F103", "F104"] },
+      "body": ["材料被递交之后，故事仍由不同的人继续。"],
+      "objects": [
+        { "id": "ending-delivery", "type": "text", "title": "递交", "body": ["陈雨家属收到了复核材料，并在代理人核对后正式提出申请；资讯网也重新核验来源，刊发后续报道。两条渠道留下了各自独立的记录。"] },
+        { "id": "ending-investigation", "type": "text", "title": "调查", "body": ["重新调查取得此前无法公开接触的设备、业务和证人材料。梁志诚受到刑事追诉并被判有罪；旧证据板上仍无法判断的陈雨跌落瞬间，不因后来结果而自动变得可见。"] },
+        { "id": "ending-echo", "type": "text", "title": "旧站", "body": ["回声寻人网停止运营。旧页仍能回看，里面既有早年的真实互助，也留下后来被利用的痕迹。多数普通志愿者并不知道特殊寻访业务。"] },
+        { "id": "ending-people", "type": "text", "title": "留下的人", "body": ["许宁另行接受调查，她做过的事与她长期受控制的处境都被记录。王曼的安全短讯只确认发出时她平安；她没有恢复公开实时位置，资讯网尊重她不公开去向的要求。家属继续面对复核和后续司法结果，报道不替他们写下情绪结论。"] },
+        { "id": "ending-last", "type": "text", "title": "最后在线", "body": ["复核后仍未公开确认：陈雨跌落瞬间的具体动作、更早求助是否会改变医疗结果、特殊寻访的完整业务规模，以及王曼后来的所在地。", "有些人失踪，是因为没人知道他们在哪里；也有人消失，是因为太多人觉得自己有权知道。", "找到一个人，与有权知道一个人在哪里，是不同的事。"] }
+      ]
+    },
+    {
       "id": "civil_public_index",
       "kind": "website",
       "siteId": "civil-public",
@@ -9127,7 +9208,13 @@
       "timestamp": "王曼离开后",
       "unlockConditions": { "dualDeliveryComplete": true, "postDeliveryResponseUnlocked": true, "wangEditorRecordUnlocked": true, "evidenceIds": ["F96", "F97"], "factIds": ["C44"] },
       "discovery": "detail"
-    }
+    },
+    { "id": "F99", "type": "log", "sourcePageId": "news_family_review_request", "sourceObjectId": "family-formal-request", "title": "家属正式提出案件复核申请", "summary": "双路递交后，家属代理人核对材料并正式提出复核申请；申请当时不等于已有官方结论。", "discovery": "detail", "unlockConditions": { "endingUnlocked": true, "factIds": ["C42", "C43", "C44"] } },
+    { "id": "F100", "type": "log", "sourcePageId": "news_independent_investigation", "sourceObjectId": "media-independent-check", "title": "资讯网独立核验并刊发后续报道", "summary": "资讯网另行核验周启明与S-034客户材料、城西影像订单缓存、王曼旧调查来源链及公开页、历史存档；不等于全部玩家结论均获证实。", "discovery": "detail", "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F99"] } },
+    { "id": "F101", "type": "log", "sourcePageId": "news_official_reinvestigation", "sourceObjectId": "official-new-evidence", "title": "官方重新调查取得此前未公开的新证据", "summary": "家属申请、独立报道、旧事故记录与新线索推动重新调查；调查人员依法取得设备、业务、付款、通信、工作和证人材料，均非玩家此前所见。", "discovery": "detail", "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F100"] } },
+    { "id": "F102", "type": "log", "sourcePageId": "echo_closure_notice", "sourceObjectId": "echo-operation-end", "title": "回声寻人网停止运营", "summary": "网站停运并保留旧页；早期真实互助与多数普通志愿者不知特殊业务的边界仍保留。", "discovery": "detail", "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F101"] } },
+    { "id": "F103", "type": "log", "sourcePageId": "news_case_outcomes", "sourceObjectId": "liang-outcome", "title": "梁志诚受刑事追诉并被判有罪", "summary": "后续司法处理结合官方新证据；不列具体罪名、刑期、法院或判决日期，不倒推旧板已证明致跌动作。", "discovery": "detail", "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F102"] } },
+    { "id": "F104", "type": "log", "sourcePageId": "news_case_outcomes", "sourceObjectId": "xu-outcome", "title": "许宁另行接受调查，参与和受控处境均被记录", "summary": "实际核查、拍照、交付及事故后处理与其先前受追踪、长期受梁控制的处境并列记录；不作完全免责或主谋定论。", "discovery": "detail", "unlockConditions": { "endingUnlocked": true, "evidenceIds": ["F102"] } }
   ],
   "facts": [
     {
@@ -9364,6 +9451,11 @@
       "id": "C44",
       "title": "案件复核材料包已通过两条独立且经核验仍有效的渠道完成游戏内递交。",
       "summary": "F90～F93分别确认家属代表与资讯网机构线索渠道及其当前有效状态，F94、F95保存同一材料包的两份递交记录。只证明游戏内双路递交完成，不代表家属、媒体或机关已采信或采取后续行动。"
+    },
+    {
+      "id": "C45",
+      "title": "案件复核材料推动了进一步核查；后续独立验证与正式调查取得新证据，回声寻人网停止运营，梁志诚承担刑事责任。",
+      "summary": "本结论在玩家读完后记后记录后续事实。官方结果依赖后来依法取得的非公开材料；王曼位置仍受保护，旧板未解决的具体致跌动作及医学反事实仍保持未知。"
     }
   ],
   "relations": [

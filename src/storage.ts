@@ -7,6 +7,7 @@ import { emptyFinalReview, emptyReviewItem, REVIEW_CLAIMS, REVIEW_GATE_FACT_IDS,
 import type { FinalReviewProgress, ReviewItemProgress, ReviewLevel } from './finalReview'
 import { channelSourcesReady, DELIVERY_CHANNELS, emptyMaterialDelivery, finalReviewComplete, finalReviewSourceIds, MATERIAL_PACKAGE_ID } from './materialDelivery'
 import type { DeliveryChannelId, DeliveryReceipt, MaterialDeliveryProgress } from './materialDelivery'
+import { ENDING_EVIDENCE_IDS, ENDING_PAGE_IDS, ENDING_SECTION_IDS, endingPrerequisites } from './ending'
 
 const CURRENT_KEY = 'last-seen-online:v0.5:current'
 const CASE_KEY = 'last-seen-online:v0.5:case:'
@@ -36,6 +37,9 @@ export interface SaveData {
   clippings: { id: string; pageId: string; text: string }[]
   finalReview: FinalReviewProgress
   materialDelivery: MaterialDeliveryProgress
+  endingUnlocked: boolean
+  endingSectionsSeen: string[]
+  caseCompleted: boolean
 }
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -52,7 +56,8 @@ export function makeSave(caseData: GameCase): SaveData {
     discoveredEvidenceIds: [], savedEvidenceIds: [], establishedRelationIds: [],
     unlockedFactIds: [], checkpointIds: [], completedPuzzleIds: [], timelineOrders: {},
     viewedMediaIds: [], learnedTools: [], clippings: [], recordDateView: false,
-    finalReview: emptyFinalReview(), materialDelivery: emptyMaterialDelivery() }
+    finalReview: emptyFinalReview(), materialDelivery: emptyMaterialDelivery(),
+    endingUnlocked: false, endingSectionsSeen: [], caseCompleted: false }
 }
 function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolean {
   const gate = page.unlockConditions
@@ -64,7 +69,8 @@ function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolea
     (gate.materialPackageGenerated !== true || save.materialDelivery.generated) &&
     (gate.dualDeliveryComplete !== true || save.materialDelivery.dualDeliveryComplete) &&
     (gate.postDeliveryResponseUnlocked !== true || save.materialDelivery.postDeliveryResponseUnlocked) &&
-    (gate.wangEditorRecordUnlocked !== true || save.materialDelivery.wangEditorRecordUnlocked)
+    (gate.wangEditorRecordUnlocked !== true || save.materialDelivery.wangEditorRecordUnlocked) &&
+    (gate.endingUnlocked !== true || save.endingUnlocked)
   const unlockers = [
     ...caseData.relations.filter((relation) => relation.unlocks?.pageIds?.includes(page.id))
       .map((relation) => save.establishedRelationIds.includes(relation.id)),
@@ -249,7 +255,6 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
     !postIds.has(id) || validPostIds.has(id))
   restored.savedEvidenceIds = restored.savedEvidenceIds.filter((id) =>
     !postIds.has(id) || validPostIds.has(id))
-  if (generated) restored.finalReview.open = false
   if (restored.materialDelivery.dualDeliveryComplete) restored.unlockedFactIds = [...new Set([...restored.unlockedFactIds, 'C44'])]
   else restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C44')
   const c42Valid = wangSafetyMessageSeen && ['F84', 'F88', 'F98', 'F89'].every((id) =>
@@ -262,7 +267,42 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
   restored.establishedRelationIds = restored.establishedRelationIds.filter((id) => id !== 'R43' || c43Valid)
   restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C43')
   if (c43Valid) restored.unlockedFactIds.push('C43')
-  const postPageIds = new Set(['news_review_followup', 'news_wang_editor_record', 'news_wang_safety_excerpt'])
+  restored.endingUnlocked = raw.endingUnlocked === true && endingPrerequisites(restored) &&
+    restored.visitedPageIds.includes('news_family_review_request')
+  const endingEvidencePages: Record<string, string> = {
+    F99: 'news_family_review_request', F100: 'news_independent_investigation',
+    F101: 'news_official_reinvestigation', F102: 'echo_closure_notice',
+    F103: 'news_case_outcomes', F104: 'news_case_outcomes',
+  }
+  const validEndingIds = new Set<string>()
+  for (const id of ENDING_EVIDENCE_IDS) {
+    const prerequisite = id === 'F104' ? 'F102' : id === 'F103' ? 'F102' :
+      id === 'F99' ? undefined : `F${Number(id.slice(1)) - 1}`
+    if (restored.endingUnlocked && restored.discoveredEvidenceIds.includes(id) &&
+      restored.visitedPageIds.includes(endingEvidencePages[id]) &&
+      (!prerequisite || validEndingIds.has(prerequisite))) validEndingIds.add(id)
+  }
+  const endingIds = new Set<string>(ENDING_EVIDENCE_IDS)
+  restored.discoveredEvidenceIds = restored.discoveredEvidenceIds.filter((id) =>
+    !endingIds.has(id) || validEndingIds.has(id))
+  restored.savedEvidenceIds = restored.savedEvidenceIds.filter((id) =>
+    !endingIds.has(id) || validEndingIds.has(id))
+  const rawSections = keptIds(raw.endingSectionsSeen, new Set<string>(ENDING_SECTION_IDS))
+  restored.endingSectionsSeen = []
+  if (validEndingIds.size === ENDING_EVIDENCE_IDS.length &&
+    restored.visitedPageIds.includes('news_case_afterword')) {
+    for (const id of ENDING_SECTION_IDS) {
+      if (rawSections[restored.endingSectionsSeen.length] !== id) break
+      restored.endingSectionsSeen.push(id)
+    }
+  }
+  restored.caseCompleted = raw.caseCompleted === true && restored.endingUnlocked &&
+    restored.endingSectionsSeen.length === ENDING_SECTION_IDS.length
+  restored.unlockedFactIds = restored.unlockedFactIds.filter((id) => id !== 'C45')
+  if (restored.caseCompleted) restored.unlockedFactIds.push('C45')
+  const postPageIds = new Set<string>([
+    'news_review_followup', 'news_wang_editor_record', 'news_wang_safety_excerpt', ...ENDING_PAGE_IDS,
+  ])
   restored.visitedPageIds = restored.visitedPageIds.filter((id) => {
     const page = caseData.pages.find((item) => item.id === id)
     return !postPageIds.has(id) || Boolean(page && allowedPage(page, restored, caseData))
