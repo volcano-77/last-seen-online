@@ -220,7 +220,17 @@
     "xuHandoverTime": "08:54",
     "xuHandoverFilename": "本周确认.xls",
     "s041PublicCaptureDate": "2009-03-10",
-    "s041PublicCaptureTime": "11:06"
+    "s041PublicCaptureTime": "11:06",
+    "xuMailboxSecurityDate": "2008-08-13",
+    "xuMailboxSecurityTime": "11:08",
+    "xuMailboxForwardDate": "2008-08-13",
+    "xuMailboxForwardTime": "11:14",
+    "xuMailboxRuleStatusDate": "2009-04-19",
+    "xuMailboxRuleStatusTime": "09:05",
+    "xuMailboxProvidedDate": "2009-10-01",
+    "xuMailboxMemoConfirmedDate": "2009-10-01",
+    "wangMailboxArchiveDate": "2009-10-02",
+    "wangMailboxArchiveTime": "10:32"
   },
   "title": "寻人启事",
   "subtitle": "旧网页档案",
@@ -3585,14 +3595,14 @@
         "日常项目：校园采访记录、本地生活选题、联系资料整理。这里只保留项目名，笔记和联系方式未收入网页副本。",
         "目录按原保存名称排列。照片、文件记录和来源说明分别保留；原邮件及其他资料未完整恢复。",
         "本次恢复的是较晚更新的目录。五月保存的旧附件沿用各自抓取记录；九月联系记录与采访节录是后来链接、分别抓取的必要副本，不由早期目录截图推定可恢复。",
-        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接；许宁材料与五月旧文件仍沿用各自独立抓取记录。"
+        "本目录的这次较晚抓取还保留{{zhouProvidedDate}}取得的客户材料链接，以及许宁后来补交的旧邮箱安全记录。旧文件仍沿用各自独立抓取记录。"
       ],
       "searchable": false,
       "normalNavigation": false,
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/materials",
-        "capturedAt": "{{s034ArchiveDate}} {{s034ArchiveTime}}"
+        "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}"
       },
       "directory": true,
       "objects": [
@@ -3816,15 +3826,18 @@
           "type": "log-entry",
           "title": "已发送截图 / 关于你以前那张寻人启事",
           "body": [
-            "陈雨留在事故前有限备份中的已发送截图：收件地址为{{xuOldMailbox}}，附既有寻人案例截图。",
-            "这里只恢复这一条必要发送字段，不提供邮箱登录、其他邮件或收件端状态。“已发送”不能证明许宁已读，也不能证明谁先看到了邮件。"
+            "陈雨 → {{xuOldMailbox}}；主题：关于你以前那张寻人启事。",
+            "我在核对几张旧寻人启事，发现有几条的发布时间和后来公开的情况对不上。你以前那张也在里面。我想问问，当时你本人真的失踪了吗？如果方便，能否告诉我那张启事是怎么回事？",
+            "附上我正在用的旧帖时间核对.xls和几张相关寻人页截图。这里只恢复这一条必要发送记录，不提供邮箱登录、其他邮件或收件端状态；已发送不等于收件人已读。"
           ],
+          "timestamp": "{{chenXuSentDate}} {{chenXuSentTime}}",
+          "evidenceId": "F72",
           "metadata": {
             "发件人": "陈雨",
             "收件地址": "{{xuOldMailbox}}",
             "主题": "关于你以前那张寻人启事",
             "发送时间": "{{chenXuSentDate}} {{chenXuSentTime}}",
-            "附件": "既有案例截图（仅保留附件说明）",
+            "附件": "旧帖时间核对.xls；既有寻人案例截图（必要部分）",
             "保存链": "陈雨自存截图 → {{chenBackupDate}}给王曼的有限备份 → 王曼必要工作副本 → 本文件历史抓取"
           }
         }
@@ -5054,9 +5067,9 @@
       "title": "许宁提供材料",
       "url": "archive://snapshot/ncitynews/wangman/xu-materials",
       "body": [
-        "来源登记 / {{xuMaterialsProvidedDate}}。许宁在会面核查后自愿提供自己留存的一小批通信、任务收件副本及费用记录，允许王曼复制用于采访核查。",
+        "来源登记 / {{xuMaterialsProvidedDate}}；旧邮箱安全记录于{{xuMailboxProvidedDate}}补交。许宁在会面核查后自愿提供自己留存的一小批通信、任务收件副本及费用记录，允许王曼复制用于采访核查。",
         "王曼按原件类别整理，遮蔽无关联系与目标实名，只把下列必要副本链接到记者工作页。这些文件各有独立抓取记录；目录并不开放许宁的电脑或邮箱。",
-        "旧通信来自许宁本人的通信 / 设备备份；任务邮件来自她实际收到并自存的旧邮件；费用截图来自她自己的入账记录。许宁说明另行核认，不能当成系统记录。",
+        "旧通信来自许宁本人的通信 / 设备备份；任务邮件来自她实际收到并自存的旧邮件；费用截图来自她自己的入账记录。后补的安全通知来自她仍独立控制的恢复邮箱。许宁说明另行核认，不能当成系统记录。",
         "目标姓名以代号保留，旧照片只用于辨认指令所指对象。这里只核经手的有限任务，不恢复目标新身份、客户资料或整套任务库。"
       ],
       "searchable": false,
@@ -5064,7 +5077,7 @@
       "requiresTool": "archive",
       "snapshot": {
         "originalUrl": "ncitynews://reporters/wangman/xu-materials",
-        "capturedAt": "{{wangContactArchiveDate}} {{wangContactArchiveTime}}"
+        "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}"
       },
       "objects": [
         {
@@ -5176,6 +5189,22 @@
             {
               "label": "局部任务交接",
               "pageId": "snapshot_xu_handover_materials"
+            }
+          ]
+        },
+        {
+          "id": "xu-material-mailbox",
+          "type": "file",
+          "title": "旧邮箱安全记录",
+          "metadata": {
+            "类型": "恢复邮箱通知 / 核认说明",
+            "保存日期": "{{xuMailboxProvidedDate}}",
+            "大小": "必要副本"
+          },
+          "links": [
+            {
+              "label": "旧邮箱安全记录",
+              "pageId": "snapshot_xu_mailbox_materials"
             }
           ]
         }
@@ -7056,6 +7085,192 @@
         "originalUrl": "oldpage://ahe/notes",
         "capturedAt": "{{s041PublicCaptureDate}} {{s041PublicCaptureTime}}"
       }
+    },
+    {
+      "id": "snapshot_xu_mailbox_materials",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "旧邮箱安全记录",
+      "url": "archive://snapshot/ncitynews/wangman/xu-mailbox-materials",
+      "body": [
+        "{{xuMailboxProvidedDate}}补充来源登记。许宁从自己仍能独立使用的恢复邮箱中导出旧邮箱服务商通知，并核认一段本人说明；王曼只保存必要截图与字段，不取得许宁旧邮箱的登录权。",
+        "王曼是在与许宁核对037、043及陈雨有限备份之后，才把这些旧通知与已核工作邮箱放在一起检查。目录本身只列文件，不替各份原件作证明。"
+      ],
+      "objects": [
+        {
+          "id": "xu-mailbox-file-security",
+          "type": "file",
+          "title": "账号安全设置变更通知",
+          "metadata": { "类型": "恢复邮箱旧通知", "保存日期": "{{xuMailboxProvidedDate}}", "大小": "必要截图" },
+          "links": [{ "label": "账号安全设置变更通知", "pageId": "snapshot_xu_mailbox_security" }]
+        },
+        {
+          "id": "xu-mailbox-file-forward",
+          "type": "file",
+          "title": "自动转发通知与状态提醒",
+          "metadata": { "类型": "恢复邮箱旧通知", "保存日期": "{{xuMailboxProvidedDate}}", "大小": "必要截图" },
+          "links": [{ "label": "自动转发通知与状态提醒", "pageId": "snapshot_xu_mailbox_forward" }]
+        },
+        {
+          "id": "xu-mailbox-file-statement",
+          "type": "file",
+          "title": "许宁关于旧邮箱的核认说明",
+          "metadata": { "类型": "本人核认节录", "保存日期": "{{xuMailboxMemoConfirmedDate}}", "大小": "必要节录" },
+          "links": [{ "label": "许宁关于旧邮箱的核认说明", "pageId": "snapshot_xu_mailbox_statement" }]
+        },
+        {
+          "id": "xu-mailbox-file-check",
+          "type": "file",
+          "title": "王曼 / 旧邮箱暴露路径核查",
+          "metadata": { "类型": "记者核查笔记", "保存日期": "{{xuMailboxProvidedDate}}", "大小": "必要节录" },
+          "links": [{ "label": "王曼 / 旧邮箱暴露路径核查", "pageId": "snapshot_wang_mailbox_check" }]
+        }
+      ],
+      "links": [{ "label": "许宁提供材料", "pageId": "snapshot_wang_xu_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-mailbox-materials", "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_mailbox_security",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "账号安全设置变更通知",
+      "url": "archive://snapshot/ncitynews/wangman/xu-mailbox-security",
+      "body": [
+        "旧邮箱服务商发送至许宁独立恢复邮箱的历史安全通知。许宁自行导出必要截图，{{xuMailboxProvidedDate}}交王曼；旧邮箱内容与密码均未提供。"
+      ],
+      "objects": [
+        {
+          "id": "xu-mailbox-security-notice",
+          "type": "log-entry",
+          "title": "安全设置变更 / 原通知字段",
+          "timestamp": "{{xuMailboxSecurityDate}} {{xuMailboxSecurityTime}}",
+          "body": ["旧账号 {{xuOldMailbox}} 的密码 / 登录安全设置已变更。", "如非本人操作，请通过恢复渠道核查账号状态。本通知没有显示操作者，也不提供密码或登录记录。"],
+          "metadata": {
+            "通知送达": "许宁仍独立控制的恢复邮箱",
+            "涉及账号": "{{xuOldMailbox}}",
+            "系统通知时间": "{{xuMailboxSecurityDate}} {{xuMailboxSecurityTime}}",
+            "原保存者": "许宁",
+            "王曼取得": "{{xuMailboxProvidedDate}} / 本人许可导出副本"
+          },
+          "evidenceId": "F73"
+        }
+      ],
+      "links": [{ "label": "旧邮箱安全记录", "pageId": "snapshot_xu_mailbox_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-mailbox-security", "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_mailbox_forward",
+      "kind": "email",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "自动转发通知与状态提醒",
+      "url": "archive://snapshot/ncitynews/wangman/xu-mailbox-forward",
+      "body": [
+        "同一旧邮箱服务商向许宁恢复邮箱发出的两条历史通知。许宁保留后自行导出，王曼只复制规则状态和必要地址字段。通知显示账号结果，不显示谁操作。"
+      ],
+      "objects": [
+        {
+          "id": "xu-mailbox-forward-notices",
+          "type": "log-entry",
+          "title": "自动转发启用 / 后续状态提醒",
+          "timestamp": "{{xuMailboxForwardDate}} {{xuMailboxForwardTime}}",
+          "body": ["旧账号 {{xuOldMailbox}} 已启用邮件自动转发，目的地址为 {{liangWorkMailbox}}。", "服务商稍后发至恢复邮箱的安全提醒保留了同一规则：截至 {{xuMailboxRuleStatusDate}} {{xuMailboxRuleStatusTime}}，自动转发仍处于启用状态。地址归属须与独立运营材料核对，通知本身不标注梁志诚。"],
+          "metadata": {
+            "启用通知": "{{xuMailboxForwardDate}} {{xuMailboxForwardTime}}",
+            "后续状态提醒": "{{xuMailboxRuleStatusDate}} {{xuMailboxRuleStatusTime}} / 仍启用",
+            "涉及账号": "{{xuOldMailbox}}",
+            "转发目的地址": "{{liangWorkMailbox}}",
+            "送达": "许宁独立恢复邮箱",
+            "来源": "许宁自存两条服务商通知 → {{xuMailboxProvidedDate}}许可王曼复制"
+          },
+          "evidenceId": "F74"
+        }
+      ],
+      "links": [{ "label": "旧邮箱安全记录", "pageId": "snapshot_xu_mailbox_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-mailbox-forward", "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_xu_mailbox_statement",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "许宁关于旧邮箱的核认说明",
+      "url": "archive://snapshot/ncitynews/wangman/xu-mailbox-statement",
+      "body": [
+        "王曼整理的采访核查文字节录，{{xuMailboxMemoConfirmedDate}}交许宁核认。说明只代表许宁对本人使用、授权和当时处境的陈述；系统设置变化另见服务商通知。"
+      ],
+      "objects": [
+        {
+          "id": "xu-mailbox-statement-confirmed",
+          "type": "log-entry",
+          "title": "许宁核认 / 旧账号已停用",
+          "timestamp": "{{xuMailboxMemoConfirmedDate}}",
+          "body": ["前男友找到我、我受伤以后，旧邮箱和公开身份绑在一起，我不再把它当正常联系方式。那阵子我忙着搬离、治疗，也怕再被找到。", "恢复邮箱一直由我自己使用。我留着旧账号的安全通知，但密码和转发变化不是我授权的；我当时只知道旧账号出了问题，没有继续用它收陈雨的信。梁那时曾先提到有人寄来旧寻人信息的核对材料，我不知道寄件人是谁，也没见到附件。", "王曼后来给我看037、043和陈雨留给她的调查备份，我才重新翻出这些通知，注意到转发地址需要与梁的工作邮箱核对。我没有在陈雨来信时故意等着不回。"],
+          "metadata": {
+            "陈述人": "许宁",
+            "核认日期": "{{xuMailboxMemoConfirmedDate}}",
+            "取得方式": "王曼采访核查节录 / 本人确认",
+            "范围": "本人使用和授权情况；不代替服务商操作记录"
+          },
+          "evidenceId": "F76"
+        }
+      ],
+      "links": [{ "label": "旧邮箱安全记录", "pageId": "snapshot_xu_mailbox_materials" }],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/xu-mailbox-statement", "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}" }
+    },
+    {
+      "id": "snapshot_wang_mailbox_check",
+      "kind": "website",
+      "siteId": "wang-work",
+      "siteName": "资料整理 - 王曼",
+      "title": "旧邮箱暴露路径核查",
+      "url": "archive://snapshot/ncitynews/wangman/mailbox-check",
+      "body": [
+        "王曼 / 工作核查备忘。旧公开声明、陈雨有限备份、许宁恢复邮箱通知及收到的威胁材料各来自不同保存链；本页按原字段排时间，不是服务商或警方鉴定。",
+        "通知中的转发地址要与公开负责人资料、普通运营实收邮件、特殊接单实收邮件三类核验后，才能确认运营归属。地址字符串本身和人工笔记均不足以单独证明梁阅读过邮件。"
+      ],
+      "objects": [
+        {
+          "id": "wang-mailbox-timeline",
+          "type": "log-entry",
+          "title": "原记录时间对照 / 通知、已发送、威胁材料",
+          "timestamp": "{{xuMailboxProvidedDate}}",
+          "body": ["旧声明公开 {{xuOldMailbox}}；安全变更通知 {{xuMailboxSecurityDate}} {{xuMailboxSecurityTime}}，转发启用 {{xuMailboxForwardDate}} {{xuMailboxForwardTime}}。", "恢复邮箱收到的状态提醒称 {{xuMailboxRuleStatusDate}} {{xuMailboxRuleStatusTime}} 同一转发规则仍启用；陈雨已发送截图为 {{chenXuSentDate}} {{chenXuSentTime}}，附旧帖时间核对.xls。", "{{chenEnvelopeDate}}的信封材料里又出现相同文件名。这里只按三处原件时间排序；没有收件端阅读回执，也看不到谁亲手改设置。"],
+          "metadata": {
+            "公开地址来源": "许宁旧安全声明",
+            "系统通知来源": "许宁恢复邮箱自存导出",
+            "发件来源": "陈雨事故前有限备份 → 王曼",
+            "威胁字段来源": "陈雨自删求助帖历史图片 / F20",
+            "核查日期": "{{xuMailboxProvidedDate}}"
+          },
+          "evidenceId": "F77"
+        }
+      ],
+      "links": [
+        { "label": "陈雨资料备份 / 已发送记录", "pageId": "snapshot_wang_chen_backup" },
+        { "label": "许宁旧公开声明", "pageId": "xuning_safety_statement" },
+        { "label": "工作邮箱三类来源索引", "pageId": "snapshot_s034_mailbox" },
+        { "label": "陈雨信封材料历史副本", "pageId": "snapshot_chenyu_envelope" },
+        { "label": "旧邮箱安全记录", "pageId": "snapshot_xu_mailbox_materials" }
+      ],
+      "searchable": false,
+      "normalNavigation": false,
+      "requiresTool": "archive",
+      "snapshot": { "originalUrl": "ncitynews://reporters/wangman/mailbox-check", "capturedAt": "{{wangMailboxArchiveDate}} {{wangMailboxArchiveTime}}" }
     }
   ],
   "evidence": [
@@ -7834,6 +8049,56 @@
       "summary": "实际少量行有缺口，编号规则未知。王曼保留局部范围说明；最大值不等于总数，缺收费字段不等于付款或未付款，跨期须原日期互证。",
       "discovery": "detail",
       "timestamp": "{{xuMaterialsProvidedDate}}"
+    },
+    {
+      "id": "F72",
+      "type": "email",
+      "sourcePageId": "snapshot_wang_chen_backup",
+      "sourceObjectId": "chen-to-xu-sent",
+      "title": "陈雨已发送｜调查邮件寄往许宁旧公开邮箱",
+      "summary": "事故前交王曼的有限备份保留陈雨{{chenXuSentDate}} {{chenXuSentTime}}已发送字段：收件{{xuOldMailbox}}，附旧帖时间核对.xls及案例截图。只证发送，不证收件人已读或梁具体阅读时间。",
+      "timestamp": "{{chenXuSentDate}} {{chenXuSentTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F73",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_mailbox_security",
+      "sourceObjectId": "xu-mailbox-security-notice",
+      "title": "旧邮箱｜密码和登录安全设置曾变更",
+      "summary": "许宁独立恢复邮箱收到旧账号{{xuOldMailbox}}的安全变更通知；系统字段只显示变更发生，不显示操作者。是否授权还须核许宁说明。",
+      "timestamp": "{{xuMailboxSecurityDate}} {{xuMailboxSecurityTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F74",
+      "type": "email",
+      "sourcePageId": "snapshot_xu_mailbox_forward",
+      "sourceObjectId": "xu-mailbox-forward-notices",
+      "title": "旧邮箱｜自动转发至一个可核对的外部地址",
+      "summary": "恢复邮箱保留{{xuMailboxForwardDate}}启用通知及{{xuMailboxRuleStatusDate}}仍启用提醒，目的地址{{liangWorkMailbox}}。通知不标注该地址持有人，须另核F59；不证明谁设置规则。",
+      "timestamp": "{{xuMailboxRuleStatusDate}} {{xuMailboxRuleStatusTime}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F76",
+      "type": "log",
+      "sourcePageId": "snapshot_xu_mailbox_statement",
+      "sourceObjectId": "xu-mailbox-statement-confirmed",
+      "title": "许宁核认｜旧邮箱停用且变更未经授权",
+      "summary": "许宁称前男友事件后不再把旧邮箱当正常联系方式；独立恢复邮箱保留通知，密码和转发变化不是她授权。她说梁曾先提旧帖核对来信，但当时不知寄件人或附件；直到王曼展示037、043及陈雨备份后才重核通知。属本人核认陈述。",
+      "timestamp": "{{xuMailboxMemoConfirmedDate}}",
+      "discovery": "detail"
+    },
+    {
+      "id": "F77",
+      "type": "other",
+      "sourcePageId": "snapshot_wang_mailbox_check",
+      "sourceObjectId": "wang-mailbox-timeline",
+      "title": "王曼核查｜转发状态、陈雨发件与威胁材料的先后",
+      "summary": "记者备忘按许宁恢复邮箱通知、陈雨已发送字段和信封照片排列：规则仍启用提醒早于邮件，邮件早于威胁材料出现文件名。需回各原件核时；无阅读回执或设置者操作日志。",
+      "timestamp": "{{xuMailboxProvidedDate}}",
+      "discovery": "detail"
     }
   ],
   "facts": [
@@ -8001,6 +8266,26 @@
       "id": "C31",
       "title": "现有跨时期材料支持：特殊寻访并非{{s034Id}}的一次性例外，而是一类被重复编号、交接、确认并交付的内部业务。",
       "summary": "许宁旧案、不同日期有限任务、一个完整收费样本及另一期部分交付状态相接。时间取原通信 / 收件 / 网页，不由编号排序推导；不能推出每个S收费、持续收费全账或任务规模。"
+    },
+    {
+      "id": "F75",
+      "title": "转发地址｜与已核验的梁志诚工作邮箱一致",
+      "summary": "将服务商通知中的{{liangWorkMailbox}}与F59所需的公开负责人、普通运营实收及特殊接单实收三类邮箱来源对照，确认目的地址归属；地址字符串本身不证明梁亲手设规则或读过邮件。"
+    },
+    {
+      "id": "C32",
+      "title": "陈雨在收到威胁前，曾将异常寻人帖调查材料发送至许宁旧公开邮箱。",
+      "summary": "陈雨事故前有限备份中的已发送记录、许宁旧声明公开地址及随后信封照片的文件名与时间相符；不证明许宁已读或邮件必然到达每一端。"
+    },
+    {
+      "id": "C33",
+      "title": "许宁旧邮箱当时处于未经她授权的控制状态，并将收到的邮件自动转发至梁志诚已核验的工作邮箱。",
+      "summary": "服务商安全变更与转发通知、后续仍启用提醒、许宁核认及F59三类邮箱归属互证；不证明梁本人亲手设置。"
+    },
+    {
+      "id": "C34",
+      "title": "现有证据强烈支持：梁通过许宁旧邮箱的控制／转发渠道提前获得陈雨的调查信息，从而知道她正在核查异常寻人帖。",
+      "summary": "转发规则在陈雨发件前仍启用，目的地为已核工作邮箱；随后威胁材料准确出现附件文件名。没有阅读回执，不能确定梁打开邮件的分钟、设置者或威胁包制作者，更不能推出预谋伤害。"
     }
   ],
   "relations": [
@@ -8413,6 +8698,22 @@
       }
     },
     {
+      "id": "R75-forward-destination",
+      "title": "核对转发目的地址与已确认的工作邮箱",
+      "evidenceIds": [
+        "F74"
+      ],
+      "factIds": [
+        "F59"
+      ],
+      "summary": "服务商通知只给地址；必须先有公开、普通运营、特殊接单三类互证得出的F59，才确认目的地属于梁的工作邮箱。",
+      "unlocks": {
+        "factIds": [
+          "F75"
+        ]
+      }
+    },
+    {
       "id": "R24",
       "title": "{{s034Id}}内部任务与公开寻人页面属于同一寻访对象。",
       "evidenceIds": [
@@ -8549,6 +8850,60 @@
           "C31"
         ]
       }
+    },
+    {
+      "id": "R32",
+      "title": "核对陈雨发件、旧公开地址与威胁出现时间",
+      "evidenceIds": [
+        "F72",
+        "F15",
+        "F20"
+      ],
+      "factIds": [],
+      "summary": "有限备份确认实际发送，旧声明核收件地址，信封照片与原时间核其早于威胁；不把已发送推成许宁已读。",
+      "unlocks": {
+        "factIds": [
+          "C32"
+        ]
+      }
+    },
+    {
+      "id": "R33",
+      "title": "核对未经授权的旧邮箱变更及工作邮箱转发目的地",
+      "evidenceIds": [
+        "F73",
+        "F74",
+        "F76"
+      ],
+      "factIds": [
+        "F75",
+        "F59"
+      ],
+      "summary": "系统通知说明设置和规则，许宁只核本人授权情况；目的地归属要求F59及F75，不据此指认实际操作人。",
+      "unlocks": {
+        "factIds": [
+          "C33"
+        ]
+      }
+    },
+    {
+      "id": "R34",
+      "title": "对照发件、有效转发与随后威胁材料中的文件名",
+      "evidenceIds": [
+        "F20",
+        "F77"
+      ],
+      "factIds": [
+        "C08",
+        "C32",
+        "C33"
+      ],
+      "summary": "记者时间核查回到系统通知、已发送及威胁照片；强支持梁经工作邮箱提前获知调查，不声称精确阅读时间或威胁包制作人。",
+      "unlocks": {
+        "factIds": [
+          "C34"
+        ]
+      }
     }
   ],
   "puzzles": [
@@ -8672,7 +9027,8 @@
       "Xu later public account identifier / nickname and public profile, Chen sent excerpt, Wang contact / meeting / confirmation / later directory capture calendar dates and times",
       "Xu old communication / protection / finite task / expense calendar dates and times, S number values and redacted target labels; no complete amounts or accounts restored",
       "S-034 number, target old public label, contact / work mailbox strings, commercial contact project label, all transaction / public sighting / verification / capture dates and times, payment amounts and account tail; no bank brand or final settlement",
-      "Third partial adult-family sample S value, redacted target code / old public nickname / username, public / mail / attachment receipt calendar dates and times; no customer identity, fee or complete transaction restored"
+      "Third partial adult-family sample S value, redacted target code / old public nickname / username, public / mail / attachment receipt calendar dates and times; no customer identity, fee or complete transaction restored",
+      "Xu old-mailbox security notice, forwarding activation and status reminder, supplementary handoff and work-page capture calendar dates and times; no operator log or read receipt restored"
     ]
   },
   "homePageId": "portal_home",
