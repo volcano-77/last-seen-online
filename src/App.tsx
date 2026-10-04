@@ -415,8 +415,8 @@ export default function App() {
             completedPuzzleIds={save.completedPuzzleIds} puzzles={caseData.puzzles} onSolve={solve} mediaCatalog={mediaCatalog}
             onViewMedia={(id) => setSave((old) => old ? { ...old, viewedMediaIds: add(old.viewedMediaIds, [id]) } : old)} onCompareImage={compareImage} />}
       </div>
-      {recordsOpen && <aside className="record-pocket" id="records" aria-label="记录夹"><header><b>记录夹</b><button aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button></header>
-        <div className="pocket-paper">{questions && <section className="current-questions" aria-label="当前疑问">
+      {recordsOpen && <aside className="record-pocket" id="records" data-testid="record-panel" aria-label="记录夹"><header><b>记录夹</b><button aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button></header>
+        <div className="pocket-paper">{questions && <section className="current-questions" data-testid="current-question" aria-label="当前疑问">
           <h2>当前疑问</h2>
           {questions.questions.map((question) => <p key={question}>{question}</p>)}
           <button className="question-hint-toggle" aria-expanded={expandedHintFor === questions.id}
@@ -438,10 +438,10 @@ export default function App() {
           {save.caseCompleted && <button onClick={() => navigate('news_case_afterword')}>回看结局</button>}
         </div>}<h2>记录</h2>
           {!evidence.length && !save.clippings.length && <p className="muted">暂无记录。</p>}
-          {evidence.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
+          {evidence.map((item) => <div className="record-entry" key={item.id}><button className="record-title" data-testid={`record-item-${item.id}`} aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button><button className="text-link" onClick={() => navigate(item.sourcePageId)}>回到原页</button></div>)}
           {save.clippings.map((item) => <div className="record-entry excerpt" key={item.id}><p>“{item.text}”</p><button className="text-link" onClick={() => navigate(item.pageId)}>原页</button><button className="text-link" onClick={() => setSave({ ...save, clippings: save.clippings.filter((entry) => entry.id !== item.id) })}>移除</button></div>)}
-          <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><button className="record-title" aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button></div>)}
-          {(selected.length > 0 || relationMessage) && <div className="relation-controls">{choices.complete && selected.length >= 2 && <button onClick={confirmRelation}>对照这些记录</button>}{selected.length > 0 && <button onClick={() => { setSelected([]); setRelationMessage('') }}>取消对照</button>}<p role="status">{relationMessage}</p></div>}
+          <h2>已确认</h2>{!facts.length && <p className="muted">暂无已确认关联。</p>}{facts.map((item) => <div className="record-entry" key={item.id}><button className="record-title" data-testid={`record-item-${item.id}`} aria-pressed={selected.includes(item.id)} disabled={!selected.includes(item.id) && !choices.compatibleIds.includes(item.id)} onClick={() => toggle(item.id)}>{item.title}{selected.includes(item.id) && <small> · 待对照</small>}</button></div>)}
+          {(selected.length > 0 || relationMessage) && <div className="relation-controls">{choices.complete && selected.length >= 2 && <button data-testid="compare-records" onClick={confirmRelation}>对照这些记录</button>}{selected.length > 0 && <button onClick={() => { setSelected([]); setRelationMessage('') }}>取消对照</button>}<p role="status">{relationMessage}</p></div>}
         </div></aside>}
       {reviewReady && save.finalReview.open && <FinalReview caseData={caseData} save={save} readOnly={save.materialDelivery.generated}
         onProgress={(progress) => setSave((old) => old && !old.materialDelivery.generated ? { ...old, finalReview: progress } : old)}
