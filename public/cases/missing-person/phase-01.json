@@ -4327,6 +4327,7 @@
     },
     {
       "id": "snapshot_wang_preview_cache",
+      "unlockConditions": { "evidenceIds": ["F34", "F35"] },
       "kind": "cache",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -5288,6 +5289,7 @@
     },
     {
       "id": "snapshot_wang_xu_meeting",
+      "unlockConditions": { "factIds": ["C17"], "evidenceIds": ["F45", "F46"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -5617,7 +5619,7 @@
           "type": "photo",
           "title": "前男友所附转账确认截图（不完整）",
           "media": {
-            "src": "/cases/missing-person/images/xu-old-payment-fragment.svg",
+            "src": "cases/missing-person/images/xu-old-payment-fragment.svg",
             "alt": "不完整转账确认，显示支付完成及找人相关用途；金额和收款信息缺失",
             "filename": "payment-fragment.svg",
             "width": "720",
@@ -5755,7 +5757,7 @@
           "type": "attachment",
           "title": "附件 / 旧照片",
           "media": {
-            "src": "/cases/missing-person/images/xu-task-reference-a.png",
+            "src": "cases/missing-person/images/xu-task-reference-a.png",
             "alt": "普通旧照片附件，指令所指对象以代号保留，不提供新身份",
             "filename": "photo-a.png",
             "width": "1448",
@@ -5877,7 +5879,7 @@
           "type": "photo",
           "title": "许宁自存入账截图（必要部分）",
           "media": {
-            "src": "/cases/missing-person/images/xu-expense-receipt.svg",
+            "src": "cases/missing-person/images/xu-expense-receipt.svg",
             "alt": "许宁的小额执行费用入账记录，交通、资料备注，金额和账户字段遮蔽",
             "filename": "expense-receipt.svg",
             "width": "720",
@@ -7465,6 +7467,7 @@
     },
     {
       "id": "snapshot_xu_mailbox_materials",
+      "unlockConditions": { "factIds": ["C31"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7512,6 +7515,7 @@
     },
     {
       "id": "snapshot_xu_mailbox_security",
+      "unlockConditions": { "factIds": ["C31"] },
       "kind": "email",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7545,6 +7549,7 @@
     },
     {
       "id": "snapshot_xu_mailbox_forward",
+      "unlockConditions": { "factIds": ["C31"] },
       "kind": "email",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7579,6 +7584,7 @@
     },
     {
       "id": "snapshot_xu_mailbox_statement",
+      "unlockConditions": { "factIds": ["C31"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7611,6 +7617,7 @@
     },
     {
       "id": "snapshot_wang_mailbox_check",
+      "unlockConditions": { "factIds": ["C31"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7651,6 +7658,7 @@
     },
     {
       "id": "snapshot_xu_risk_materials",
+      "unlockConditions": { "factIds": ["C34"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7691,6 +7699,7 @@
     },
     {
       "id": "snapshot_xu_risk_mail",
+      "unlockConditions": { "factIds": ["C34"] },
       "kind": "email",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7754,6 +7763,7 @@
     },
     {
       "id": "snapshot_xu_risk_attachment",
+      "unlockConditions": { "factIds": ["C34"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7807,6 +7817,7 @@
     },
     {
       "id": "snapshot_xu_risk_statement",
+      "unlockConditions": { "factIds": ["C34"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7844,6 +7855,7 @@
     },
     {
       "id": "snapshot_wang_risk_compare",
+      "unlockConditions": { "factIds": ["C34"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7890,6 +7902,7 @@
     },
     {
       "id": "snapshot_wang_departure_materials",
+      "unlockConditions": { "factIds": ["C38"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -7937,6 +7950,7 @@
     },
     {
       "id": "snapshot_wang_departure_notice",
+      "unlockConditions": { "factIds": ["C38"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -8011,6 +8025,7 @@
     },
     {
       "id": "snapshot_wang_hidden_backup",
+      "unlockConditions": { "factIds": ["C38"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -8050,6 +8065,7 @@
     },
     {
       "id": "snapshot_xu_risk_followup",
+      "unlockConditions": { "factIds": ["C38"] },
       "kind": "email",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -8120,6 +8136,7 @@
     },
     {
       "id": "snapshot_wang_stale_sources",
+      "unlockConditions": { "factIds": ["C38"] },
       "kind": "website",
       "siteId": "wang-work",
       "siteName": "资料整理 - 王曼",
@@ -10272,7 +10289,8 @@
       "Third partial adult-family sample S value, redacted target code / old public nickname / username, public / mail / attachment receipt calendar dates and times; no customer identity, fee or complete transaction restored",
       "Xu old-mailbox security notice, forwarding activation and status reminder, supplementary handoff and work-page capture calendar dates and times; no operator log or read receipt restored",
       "Wang R risk number, post-incident creation and Xu receipt / brief photograph / source supplement / handoff / archive dates and times; no complete R registry or customer order restored",
-      "Wang pre-departure editor notice and identity-check agreement, data-disc handoff, last public work update, hidden reporter page, old public sources, Xu R follow-up and archive calendar dates and times; later safety message and final submission remain outside this playable phase"
+      "Wang pre-departure editor notice and identity-check agreement, data-disc handoff, last public work update, hidden reporter page, old public sources, Xu R follow-up and archive calendar dates and times",
+      "Final package channel address strings, channel confirmation and delivery dates, and aftermath publication dates; the package, dual delivery, later safety message and ending are playable"
     ]
   },
   "homePageId": "portal_home",

@@ -62,7 +62,7 @@ function Time({ item, label, onDiscover }: { item: PageObject; label?: string; o
     if (!open && item.evidenceId) onDiscover(item.evidenceId, pointAt(event.currentTarget))
   }}>{label || item.timestamp}</button>{open && <Metadata values={item.metadata || { '时间': item.timestamp || '未记录' }} />}</div>
 }
-function Media({ media, initiallyOpen = false, ...props }: SiteProps & { media?: CaseMedia; initiallyOpen?: boolean }) {
+function Media({ media, initiallyOpen = false, evidenceId, ...props }: SiteProps & { media?: CaseMedia; initiallyOpen?: boolean; evidenceId?: string }) {
   const [open, setOpen] = useState(initiallyOpen), [zoom, setZoom] = useState(false)
   const [referenceId, setReferenceId] = useState(''), [compare, setCompare] = useState(false), [message, setMessage] = useState('')
   useEffect(() => {
@@ -77,6 +77,7 @@ function Media({ media, initiallyOpen = false, ...props }: SiteProps & { media?:
   const thumbnail = <img src={src(media)} alt={media.alt} loading="lazy" />
   const original = <img src={src(media)} alt={media.alt} onLoad={(event) => {
     if (initiallyOpen && media.id) props.onViewMedia(media.id)
+    if (evidenceId) props.onDiscover(evidenceId, pointAt(event.currentTarget))
     media.evidenceIds?.forEach((id) => props.onDiscover(id, pointAt(event.currentTarget)))
   }} />
   return <figure className="site-photo">
@@ -116,7 +117,7 @@ function ObjectRow({ item, ...props }: SiteProps & { item: PageObject }) {
   const link = item.type === 'attachment' ? undefined : item.links?.[0]
   return <section className="content-entry" id={item.id}><h3>{link ? <PageLink pageId={link.pageId}>{props.pages.find((page) => page.id === link.pageId)?.title || item.title}</PageLink> : item.title}</h3>
     {item.timestamp && <small>{item.timestamp}</small>}{item.body?.map((line, index) => <p key={index}>{line}</p>)}
-    <Media {...props} media={item.media} />
+    <Media {...props} media={item.media} evidenceId={item.evidenceId} />
     {item.metadata && <Metadata values={item.metadata} />}
     {item.links?.slice(link ? 1 : 0).map((link) => <PageLink key={link.pageId} pageId={link.pageId}>{link.label}</PageLink>)}
   </section>
