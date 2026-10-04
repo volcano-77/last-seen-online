@@ -40,6 +40,7 @@ export interface SaveData {
   endingUnlocked: boolean
   endingSectionsSeen: string[]
   caseCompleted: boolean
+  guidance: { firstFactTipSeen: boolean; searchTipSeen: boolean }
 }
 
 function record(value: unknown): value is Record<string, unknown> {
@@ -57,7 +58,8 @@ export function makeSave(caseData: GameCase): SaveData {
     unlockedFactIds: [], checkpointIds: [], completedPuzzleIds: [], timelineOrders: {},
     viewedMediaIds: [], learnedTools: [], clippings: [], recordDateView: false,
     finalReview: emptyFinalReview(), materialDelivery: emptyMaterialDelivery(),
-    endingUnlocked: false, endingSectionsSeen: [], caseCompleted: false }
+    endingUnlocked: false, endingSectionsSeen: [], caseCompleted: false,
+    guidance: { firstFactTipSeen: false, searchTipSeen: false } }
 }
 function allowedPage(page: CasePage, save: SaveData, caseData: GameCase): boolean {
   const gate = page.unlockConditions
@@ -162,6 +164,11 @@ export function restoreSave(raw: unknown, caseData: GameCase): SaveData {
     clippings: Array.isArray(raw.clippings) ? raw.clippings.filter((item) => record(item) &&
       typeof item.id === 'string' && typeof item.pageId === 'string' && pageIds.has(item.pageId) &&
       typeof item.text === 'string' && item.text.length > 0 && item.text.length <= 180).slice(-30) as SaveData['clippings'] : [],
+    guidance: {
+      firstFactTipSeen: (record(raw.guidance) && raw.guidance.firstFactTipSeen === true) || discoveredEvidenceIds.some((id) => /^F\d+$/.test(id)),
+      searchTipSeen: (record(raw.guidance) && raw.guidance.searchTipSeen === true) ||
+        keptIds(raw.visitedPageIds, pageIds).some((id) => caseData.pages.find((page) => page.id === id)?.kind === 'search'),
+    },
   }
   const rawReview = record(raw.finalReview) ? raw.finalReview : {}
   const rawItems = record(rawReview.items) ? rawReview.items : {}

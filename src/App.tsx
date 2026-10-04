@@ -15,6 +15,7 @@ import EndingView from './EndingView'
 import { ENDING_EVIDENCE_IDS, ENDING_SECTION_IDS, endingPrerequisites } from './ending'
 import { channelSourcesReady, DELIVERY_CHANNELS, finalReviewComplete, finalReviewSourceIds, MATERIAL_PACKAGE_ID } from './materialDelivery'
 import type { DeliveryChannelId, DeliveryReceipt } from './materialDelivery'
+import { currentQuestions } from './currentQuestions'
 import './App.css'
 
 const add = (old: string[], next: string[] = []) => [...new Set([...old, ...next])]
@@ -47,6 +48,8 @@ export default function App() {
   const [tip, setTip] = useState<(Point & { text: string; evidenceId?: string }) | null>(null)
   const [feedback, setFeedback] = useState<(Point & { text: string }) | null>(null)
   const [storageFailed, setStorageFailed] = useState(false)
+  const [guidanceNotice, setGuidanceNotice] = useState<'fact' | 'search' | null>(null)
+  const [expandedHintFor, setExpandedHintFor] = useState<string | null>(null)
   const content = useRef<HTMLDivElement>(null)
   const saveRef = useRef<SaveData | null>(null)
   const restoreScroll = useRef<(() => void) | null>(null)
@@ -55,7 +58,12 @@ export default function App() {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const resetDialog = useRef<HTMLDialogElement>(null)
   useEffect(() => {
-    loadCurrentSession().then((session) => { setCaseData(session.caseData); setSave(session.save) })
+    loadCurrentSession().then((session) => {
+      setCaseData(session.caseData); setSave(session.save)
+      setRecordsOpen(session.caseData.id === 'case-01-missing-person' &&
+        session.save.visitedPageIds.length === 1 && session.save.visitedPageIds[0] === session.caseData.startPageId &&
+        session.save.discoveredEvidenceIds.length === 0)
+    })
       .catch((reason: unknown) => setError(reason instanceof Error ? reason.message : '网页读取失败'))
   }, [])
   useEffect(() => {
@@ -70,6 +78,17 @@ export default function App() {
   const entry = save ? currentEntry(save) : null
   const page = caseData?.pages.find((item) => item.id === entry?.pageId)
   const viewKey = `${tab?.id}/${entry?.id}/${reload}`
+  useEffect(() => {
+    if (!save || caseData?.id !== 'case-01-missing-person') return
+    const firstFact = !save.guidance.firstFactTipSeen && save.discoveredEvidenceIds.some((id) => /^F\d+$/.test(id))
+    const firstSearch = !save.guidance.searchTipSeen && page?.kind === 'search'
+    if (!firstFact && !firstSearch) return
+    setSave((old) => old ? { ...old, guidance: {
+      firstFactTipSeen: old.guidance.firstFactTipSeen || firstFact,
+      searchTipSeen: old.guidance.searchTipSeen || firstSearch,
+    } } : old)
+    setGuidanceNotice(firstSearch ? 'search' : 'fact')
+  }, [save, caseData?.id, page?.kind])
   useLayoutEffect(() => { saveRef.current = save }, [save])
   useLayoutEffect(() => {
     const scroller = content.current
@@ -113,7 +132,7 @@ export default function App() {
     setSave((old) => old ? updateEntry(old, { state: { ...currentEntry(old).state, ...patch } }) : old)
   }
   function resetChrome() {
-    setAddress(null); setHistoryOpen(false); setSettingsOpen(false); setTip(null); setFeedback(null)
+    setAddress(null); setHistoryOpen(false); setSettingsOpen(false); setTip(null); setFeedback(null); setGuidanceNotice(null)
     setSave((old) => old?.finalReview.open ? { ...old, finalReview: { ...old.finalReview, open: false } } : old)
     setSave((old) => old?.materialDelivery.open ? { ...old, materialDelivery: { ...old.materialDelivery, open: false } } : old)
   }
@@ -129,7 +148,8 @@ export default function App() {
     restoreScroll.current = null
     saveRef.current = fresh
     setSave(fresh)
-    resetChrome(); setRecordsOpen(false); setSelected([]); setRelationMessage(''); setResetError(''); setStorageFailed(false)
+    resetChrome(); setRecordsOpen(caseData.id === 'case-01-missing-person'); setSelected([]); setRelationMessage(''); setResetError(''); setStorageFailed(false)
+    setExpandedHintFor(null)
     window.getSelection()?.removeAllRanges()
     resetDialog.current?.close()
   }
@@ -340,6 +360,7 @@ export default function App() {
   if (!caseData || !save || !page || !tab || !entry) return <main className="loading">{error || '正在读取网页…'}</main>
   const evidence = caseData.evidence.filter((item) => save.discoveredEvidenceIds.includes(item.id))
   const facts = caseData.facts.filter((item) => save.unlockedFactIds.includes(item.id))
+  const questions = caseData.id === 'case-01-missing-person' ? currentQuestions(save) : null
   const reviewReady = REVIEW_GATE_FACT_IDS.every((id) => save.unlockedFactIds.includes(id))
   const choices = relationChoices(caseData.relations, save.establishedRelationIds, [...evidence.map((item) => item.id), ...facts.map((item) => item.id)], selected)
   const toggle = (id: string) => { setSelected((old) => old.includes(id) ? old.filter((item) => item !== id) : choices.compatibleIds.includes(id) ? [...old, id] : old); setRelationMessage('') }
@@ -372,6 +393,11 @@ export default function App() {
         {settingsOpen && <div className="settings-menu" id="browser-settings-menu"><button onClick={() => { setSettingsOpen(false); setResetError(''); resetDialog.current?.showModal() }}>重新开始本案</button></div>}
       </div>
     </nav>
+    {guidanceNotice && <div className="guidance-notice" role="status">
+      <span>{guidanceNotice === 'fact' ? '有意义的发现会进入记录夹。多个记录之间可能存在可对照关系。' :
+        '普通浏览适合沿现有页面继续查看；南城搜索更适合寻找旧索引、用户名、文件名和已经脱离导航的页面。'}</span>
+      <button aria-label="收起提示" onClick={() => setGuidanceNotice(null)}>×</button>
+    </div>}
     <dialog className="reset-dialog" ref={resetDialog} aria-labelledby="reset-title" aria-describedby="reset-description">
       <h2 id="reset-title">重新开始本案</h2><p id="reset-description">这会清除当前案件的浏览历史、标签页、记录、已确认结论、解锁状态和谜题进度，并从案件开头重新开始。是否继续？</p>
       {resetError && <p role="alert" className="reset-error">{resetError}</p>}
@@ -390,7 +416,15 @@ export default function App() {
             onViewMedia={(id) => setSave((old) => old ? { ...old, viewedMediaIds: add(old.viewedMediaIds, [id]) } : old)} onCompareImage={compareImage} />}
       </div>
       {recordsOpen && <aside className="record-pocket" id="records" aria-label="记录夹"><header><b>记录夹</b><button aria-label="收起记录夹" onClick={() => setRecordsOpen(false)}>×</button></header>
-        <div className="pocket-paper">{reviewReady && <div className="pocket-review-entry"><button onClick={() => {
+        <div className="pocket-paper">{questions && <section className="current-questions" aria-label="当前疑问">
+          <h2>当前疑问</h2>
+          {questions.questions.map((question) => <p key={question}>{question}</p>)}
+          <button className="question-hint-toggle" aria-expanded={expandedHintFor === questions.id}
+            onClick={() => setExpandedHintFor(expandedHintFor === questions.id ? null : questions.id)}>
+            {expandedHintFor === questions.id ? '收起提示' : '需要一点提示？'}
+          </button>
+          {expandedHintFor === questions.id && <p className="question-hint">{questions.hint}</p>}
+        </section>}{reviewReady && <div className="pocket-review-entry"><button onClick={() => {
           setSave((old) => old ? old.materialDelivery.generated ?
             { ...old, materialDelivery: { ...old.materialDelivery, open: true } } :
             { ...old, finalReview: { ...old.finalReview, open: true } } : old)
